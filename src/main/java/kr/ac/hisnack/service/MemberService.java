@@ -1,0 +1,14 @@
+package kr.ac.hisnack.service;
+
+import java.util.List;
+
+import kr.ac.hisnack.model.Member;
+import kr.ac.hisnack.util.Pager;
+
+public interface MemberService {
+	void add(Member item);
+	void delete(String id);
+	void update(Member item);
+	Member item(Member item);
+	List<Member> list(Pager pager);
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="review">
+	<sql id="search">
+		<where>
+			
+		</where>
+	</sql>
+
+	<insert id="add">
+		INSERT INTO review
+		VALUES(NULL, #{id}, #{contents}, #{regDate}, #{rating})
+	</insert>
+	<select id="item" resultType="Review">
+		SELECT *
+		FROM review
+		WHERE code=#{code}
+	</select>
+	<select id="total" resultType="Integer">
+		SELECT COUNT(*)
+		FROM review
+		<include refid="search" />
+	</select>
+	<select id="list" resultType="Review">
+		SELECT *
+		FROM review
+		<include refid="search" />
+		LIMIT #{offset}, #{perPage}
+	</select>
+	<delete id="delete">
+		DELETE FROM review
+		WHERE code=#{code}
+	</delete>
+	<update id="update">
+		UPDATE review
+		SET
+		contents=#{contents},
+		rating=#{rating}
+		WHERE code=#{code}
+	</update>
+</mapper>
