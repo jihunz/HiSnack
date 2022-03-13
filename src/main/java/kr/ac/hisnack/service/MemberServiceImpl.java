@@ -40,5 +40,9 @@ public class MemberServiceImpl implements MemberService {
 		pager.setTotal(total);
 		return dao.list(pager);
 	}
-
+	
+	@Override
+	public int total(Pager pager) {
+		return dao.total(pager);
+	}
 }

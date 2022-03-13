@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,13 +32,13 @@ public class OrdersRestService {
 	}
 	
 	@PostMapping
-	public Orders add(Orders item) {
+	public Orders add(@RequestBody Orders item) {
 		service.add(item);
 		return item;
 	}
 	
 	@PutMapping
-	public Orders update(Orders item) {
+	public Orders update(@RequestBody Orders item) {
 		service.update(item);
 		return item;
 	}

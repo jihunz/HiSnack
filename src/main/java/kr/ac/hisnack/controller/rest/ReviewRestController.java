@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,13 +32,13 @@ public class ReviewRestController {
 	}
 	
 	@PostMapping
-	public Review add(Review item) {
+	public Review add(@RequestBody Review item) {
 		service.add(item);
 		return item;
 	}
 	
 	@PutMapping
-	public Review update(Review item) {
+	public Review update(@RequestBody Review item) {
 		service.update(item);
 		return item;
 	}

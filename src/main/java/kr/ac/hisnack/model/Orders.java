@@ -8,7 +8,7 @@ public class Orders {
 //	주문한 회원의 id
 	private String id;
 //	배달 받을 집 주소
-	private String addres;
+	private String address;
 //	배달 받을 사람의 이름
 	private String name;
 //	배달 받을 사람의 전화번호
@@ -30,11 +30,11 @@ public class Orders {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAddres() {
-		return addres;
+	public String getAddress() {
+		return address;
 	}
-	public void setAddres(String addres) {
-		this.addres = addres;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getName() {
 		return name;

@@ -15,7 +15,7 @@
 		VALUES(NULL, #{name}, #{price}, #{manufacture})
 	</insert>
 	<select id="item" resultType="Product">
-		SELECT *
+		SELECT code, name, price, manufacture
 		FROM product
 		WHERE code=#{code}
 	</select>
@@ -24,7 +24,7 @@
 		FROM product
 		<include refid="search" />
 	</select>
-	<select id="list" resultType="Faq">
+	<select id="list" resultType="Product">
 		SELECT *
 		FROM product
 		<include refid="search" />
@@ -39,7 +39,7 @@
 		SET
 		name=#{name},
 		price=#{price},
-		manufacture=#{manufacture},
+		manufacture=#{manufacture}
 		WHERE code=#{code}
 	</update>
 </mapper>

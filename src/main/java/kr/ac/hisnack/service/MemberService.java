@@ -11,4 +11,5 @@ public interface MemberService {
 	void update(Member item);
 	Member item(Member item);
 	List<Member> list(Pager pager);
+	int total(Pager pager);
 }

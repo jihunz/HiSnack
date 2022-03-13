@@ -6,7 +6,11 @@
 <mapper namespace="member">
 	<sql id="search">
 		<where>
-			
+			<choose>
+				<when test="search == 1">
+					id=#{keyword}
+				</when>
+			</choose>
 		</where>
 	</sql>
 
@@ -25,7 +29,7 @@
 		FROM member
 		<include refid="search" />
 	</select>
-	<select id="list" resultType="Faq">
+	<select id="list" resultType="Member">
 		SELECT *
 		FROM member
 		<include refid="search" />
