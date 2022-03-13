@@ -6,7 +6,7 @@
 <mapper namespace="orders">
 	<sql id="search">
 		<where>
-			
+			subscribe=#{keyword}
 		</where>
 	</sql>
 
