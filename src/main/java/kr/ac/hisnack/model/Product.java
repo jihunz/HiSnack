@@ -1,5 +1,7 @@
 package kr.ac.hisnack.model;
 
+import java.util.List;
+
 public class Product {
 //	제품의 일련번호
 	private int code;
@@ -9,7 +11,16 @@ public class Product {
 	private int price;
 //	제품의 제조사
 	private String manufacture;
+//	제품 이미지들
+	private List<Image> images;
 	
+	
+	public List<Image> getImages() {
+		return images;
+	}
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
 	public int getCode() {
 		return code;
 	}

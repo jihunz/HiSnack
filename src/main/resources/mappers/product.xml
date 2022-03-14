@@ -9,15 +9,33 @@
 			
 		</where>
 	</sql>
+	
+	<resultMap type="Product" id="ProductMap">
+		<id column="code" property="code"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="manufacture" property="manufacture"/>
+		<collection property="images" column="image_code" ofType="Image" javaType="ArrayList">
+			<id column="image_code" property="code"/>
+			<result column="target" property="target"/>
+			<result column="filename" property="filename"/>
+			<result column="uuid" property="uuid"/>
+		</collection>
+	</resultMap>
 
 	<insert id="add">
 		INSERT INTO product
 		VALUES(NULL, #{name}, #{price}, #{manufacture})
+		
+		<selectKey keyProperty="code" resultType="Integer" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
-	<select id="item" resultType="Product">
-		SELECT code, name, price, manufacture
+	<select id="item" resultMap="ProductMap">
+		SELECT product.*, product_image.code AS image_code, target, filename, uuid
 		FROM product
-		WHERE code=#{code}
+		LEFT JOIN product_image ON product_image.target=product.code
+		WHERE product.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
 		SELECT COUNT(*)

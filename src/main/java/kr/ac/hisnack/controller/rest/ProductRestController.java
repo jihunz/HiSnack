@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.ac.hisnack.model.Image;
 import kr.ac.hisnack.model.Product;
 import kr.ac.hisnack.service.ProductService;
+import kr.ac.hisnack.util.FileUploader;
 import kr.ac.hisnack.util.Pager;
 
 @RestController
@@ -31,8 +35,12 @@ public class ProductRestController {
 		return service.item(code);
 	}
 	
+//	이미지를 보낼때 name 속성을 image로 통일하여 보내면 됩니다 
 	@PostMapping
-	public Product add(@RequestBody Product item) {
+	public Product add(Product item, @RequestParam("image") List<MultipartFile> images) {
+		FileUploader uploader = new FileUploader();
+		List<Image> imageList = uploader.upload(images);
+		item.setImages(imageList);
 		service.add(item);
 		return item;
 	}
