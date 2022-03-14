@@ -44,11 +44,11 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	@Override
 	public void update(Product item) {
-		imageDao.delete(item.getCode());
-		List<Image> images = item.getImages();
-		
 		dao.update(item);
+		imageDao.delete(item.getCode());
 		
+		List<Image> images = item.getImages();
+				
 		if(images == null) return;
 		
 		for(Image image : images) {
