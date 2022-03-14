@@ -47,13 +47,14 @@ public class ProductServiceImpl implements ProductService {
 		imageDao.delete(item.getCode());
 		List<Image> images = item.getImages();
 		
+		dao.update(item);
+		
 		if(images == null) return;
 		
 		for(Image image : images) {
 			image.setTarget(item.getCode());
 			imageDao.add(image);
 		}
-		dao.update(item);
 	}
 
 	@Override

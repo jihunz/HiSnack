@@ -12,4 +12,9 @@
 		DELETE FROM product_image
 		WHERE target=#{code}
 	</delete>
+	<select id="list" resultType="Image">
+		SELECT *
+		FROM product_image
+		WHERE target=#{code}
+	</select>
 </mapper>
