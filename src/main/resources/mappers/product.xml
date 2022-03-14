@@ -42,9 +42,10 @@
 		FROM product
 		<include refid="search" />
 	</select>
-	<select id="list" resultType="Product">
-		SELECT *
+	<select id="list" resultMap="ProductMap">
+		SELECT product.*, product_image.code AS image_code, target, filename, uuid
 		FROM product
+		LEFT JOIN product_image ON product_image.target=product.code
 		<include refid="search" />
 		LIMIT #{offset}, #{perPage}
 	</select>
