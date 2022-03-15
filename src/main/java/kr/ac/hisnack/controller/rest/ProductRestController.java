@@ -3,6 +3,7 @@ package kr.ac.hisnack.controller.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Product;
-import kr.ac.hisnack.service.ProductImageService;
+import kr.ac.hisnack.service.ImageService;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.Pager;
 
@@ -22,7 +23,8 @@ public class ProductRestController {
 	@Autowired
 	ProductService service;
 	@Autowired
-	ProductImageService imageService;
+	@Qualifier("ProductImageService")
+	ImageService imageService;
 	
 	@GetMapping
 	public List<Product> list(Pager pager){

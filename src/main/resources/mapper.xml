@@ -18,6 +18,7 @@
 		<mapper resource="mappers/product.xml"/>
 		<mapper resource="mappers/review.xml"/>
 		<mapper resource="mappers/product_image.xml"/>
+		<mapper resource="mappers/review_image.xml"/>
 	</mappers>
 
 </configuration>

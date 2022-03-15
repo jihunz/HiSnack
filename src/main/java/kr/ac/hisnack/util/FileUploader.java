@@ -17,6 +17,7 @@ public class FileUploader {
 		
 		try {
 			for(MultipartFile file : files) {
+				if(file.getOriginalFilename().equals("")) continue;
 				Image image = new Image();
 				image.setFilename(file.getOriginalFilename());
 				UUID uuid = UUID.randomUUID();

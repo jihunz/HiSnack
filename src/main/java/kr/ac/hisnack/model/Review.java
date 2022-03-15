@@ -1,6 +1,7 @@
 package kr.ac.hisnack.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Review {
 //	리뷰의 일련번호
@@ -13,7 +14,15 @@ public class Review {
 	private Date regDate;
 //	별점 (1 ~ 5)
 	private int rating;
+//	리뷰 안에 있는 이미지들
+	private List<Image> images;
 	
+	public List<Image> getImages() {
+		return images;
+	}
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
 	public int getCode() {
 		return code;
 	}

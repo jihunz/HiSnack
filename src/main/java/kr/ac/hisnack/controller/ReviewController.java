@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hisnack.model.Image;
-import kr.ac.hisnack.model.Product;
+import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.ImageService;
-import kr.ac.hisnack.service.ProductService;
+import kr.ac.hisnack.service.ReviewService;
 import kr.ac.hisnack.util.FileUploader;
 import kr.ac.hisnack.util.Pager;
 
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/review")
+public class ReviewController {
+	final String PATH = "review/";
+	
 	@Autowired
-	ProductService service;
+	ReviewService service;
 	@Autowired
-	@Qualifier("ProductImageService")
+	@Qualifier("ReviewImageService")
 	ImageService imageService;
 	
-	final String PATH = "product/";
-	
-	
 	@GetMapping("/list")
-	public String list(Pager pager, Model model){
-		List<Product> list = service.list(pager);
+	public String list(Pager pager, Model model) {
+		List<Review> list = service.list(pager);
 		model.addAttribute("list", list);
+		
 		return PATH+"list";
 	}
 	
 	@GetMapping("/item")
 	public String item(int code, Model model) {
-		Product item = service.item(code);
+		Review item = service.item(code);
 		model.addAttribute("item", item);
 		return PATH+"item";
 	}
@@ -50,26 +50,23 @@ public class ProductController {
 		return PATH+"add";
 	}
 	
-//	이미지를 보낼때 name 속성을 image로 통일하여 보내면 됩니다 
 	@PostMapping("/add")
-	public String add(Product item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
+	public String add(Review item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
 		List<Image> imageList = uploader.upload(images);
 		item.setImages(imageList);
-		
 		service.add(item);
-		return "redirect:list";
+ 		return "redirect:list";
 	}
 	
 	@GetMapping("/update")
-	public String update(Model model, int code) {
-		Product item = service.item(code);
+	public String update(int code, Model model) {
+		Review item = service.item(code);
 		model.addAttribute("item", item);
 		return PATH+"update";
 	}
 	
 	@PostMapping("/update")
-	public String update(Product item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
-		
+	public String update(Review item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
 		imageService.delete(item.getCode());
 		
 		List<Image> imageList = uploader.upload(images);
@@ -83,7 +80,6 @@ public class ProductController {
 	public String delete(int code) {
 		imageService.delete(code);
 		service.delete(code);
-		
 		return "redirect:list";
 	}
 }

@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>임시</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
+	<p><a href="product/list">제품 목록</a></p>
+	<p><a href="review/list">리뷰 목록</a></p>
 </body>
 </html>
