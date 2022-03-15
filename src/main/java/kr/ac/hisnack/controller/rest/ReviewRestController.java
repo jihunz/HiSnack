@@ -3,6 +3,7 @@ package kr.ac.hisnack.controller.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Review;
+import kr.ac.hisnack.service.ImageService;
 import kr.ac.hisnack.service.ReviewService;
 import kr.ac.hisnack.util.Pager;
 
@@ -20,6 +22,9 @@ import kr.ac.hisnack.util.Pager;
 public class ReviewRestController {
 	@Autowired
 	ReviewService service;
+	@Autowired
+	@Qualifier("ReviewImageService")
+	ImageService imageService;
 	
 	@GetMapping
 	public List<Review> list(Pager pager){
@@ -39,12 +44,14 @@ public class ReviewRestController {
 	
 	@PutMapping
 	public Review update(@RequestBody Review item) {
+		imageService.delete(item.getCode());
 		service.update(item);
 		return item;
 	}
 	
 	@DeleteMapping
 	public int delete(int code) {
+		imageService.delete(code);
 		service.delete(code);
 		return code;
 	}
