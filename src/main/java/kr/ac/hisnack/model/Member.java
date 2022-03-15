@@ -11,7 +11,15 @@ public class Member {
 	private String name;
 //	회원의 전화번호
 	private String tel;
+//	회원 관리 레벨
+	private int level;
 	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public String getId() {
 		return id;
 	}

@@ -11,10 +11,18 @@ public class Product {
 	private int price;
 //	제품의 제조사
 	private String manufacture;
+//	제품의 설명
+	private String desc;
 //	제품 이미지들
 	private List<Image> images;
 	
 	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public List<Image> getImages() {
 		return images;
 	}

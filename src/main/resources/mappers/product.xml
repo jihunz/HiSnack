@@ -25,7 +25,7 @@
 
 	<insert id="add">
 		INSERT INTO product
-		VALUES(NULL, #{name}, #{price}, #{manufacture})
+		VALUES(NULL, #{name}, #{price}, #{manufacture}, #{desc})
 		
 		<selectKey keyProperty="code" resultType="Integer" order="AFTER">
 			SELECT LAST_INSERT_ID()
