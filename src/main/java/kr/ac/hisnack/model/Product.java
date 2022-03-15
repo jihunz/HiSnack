@@ -12,16 +12,15 @@ public class Product {
 //	제품의 제조사
 	private String manufacture;
 //	제품의 설명
-	private String desc;
+	private String info;
 //	제품 이미지들
 	private List<Image> images;
 	
-	
-	public String getDesc() {
-		return desc;
+	public String getInfo() {
+		return info;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	public List<Image> getImages() {
 		return images;

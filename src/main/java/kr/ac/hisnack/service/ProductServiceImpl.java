@@ -28,16 +28,15 @@ public class ProductServiceImpl implements ProductService {
 		
 		if(images == null) return;
 		
+//		DB에 이미지 등록하는 코드
 		for(Image image : images) {
 			image.setTarget(item.getCode());
 			imageDao.add(image);
 		}
 	}
 	
-	@Transactional
 	@Override
 	public void delete(int code) {
-		imageDao.delete(code);
 		dao.delete(code);
 	}
 	
@@ -45,12 +44,12 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void update(Product item) {
 		dao.update(item);
-		imageDao.delete(item.getCode());
 		
 		List<Image> images = item.getImages();
 				
 		if(images == null) return;
 		
+//		DB에 이미지 등록하는 코드
 		for(Image image : images) {
 			image.setTarget(item.getCode());
 			imageDao.add(image);

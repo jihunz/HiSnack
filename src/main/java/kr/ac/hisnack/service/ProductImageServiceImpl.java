@@ -23,6 +23,8 @@ public class ProductImageServiceImpl implements ProductImageService {
 		for(Image image : list) {
 			uploader.delete(image.getFullfilename());
 		}
+		
+		dao.delete(code);
 	}
 
 }

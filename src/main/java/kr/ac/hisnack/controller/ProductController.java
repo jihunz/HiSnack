@@ -78,7 +78,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/delete")
-	public String delete(int code, FileUploader uploader) {
+	public String delete(int code) {
 		imageService.delete(code);
 		service.delete(code);
 		

@@ -49,6 +49,7 @@ public class ProductRestController {
 	
 	@DeleteMapping
 	public int delete(int code) {
+		imageService.delete(code);
 		service.delete(code);
 		return code;
 	}
