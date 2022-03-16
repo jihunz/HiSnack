@@ -9,6 +9,7 @@
 	<title>리뷰 목록</title>
 </head>
 <body>
+<%-- git branch 생성 시험중 --%>
 	<c:forEach items="${list}" var="item">
 		<div>
 			<p>번호 : ${item.code}</p>
