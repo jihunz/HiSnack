@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.hisnack.dao.TagDao;
 import kr.ac.hisnack.model.Tag;
-import kr.ac.hisnack.util.Pager;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -15,10 +14,8 @@ public class TagServiceImpl implements TagService {
 	TagDao dao;
 	
 	@Override
-	public List<Tag> list(Pager pager) {
-		int total = dao.total(pager);
-		pager.setTotal(total);
-		return dao.list(pager);
+	public List<Tag> list() {
+		return dao.list();
 	}
 
 	@Override

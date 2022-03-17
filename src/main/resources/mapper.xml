@@ -20,6 +20,7 @@
 		<mapper resource="mappers/product_image.xml"/>
 		<mapper resource="mappers/review_image.xml"/>
 		<mapper resource="mappers/tag.xml"/>
+		<mapper resource="mappers/product_tag.xml"/>
 	</mappers>
 
 </configuration>

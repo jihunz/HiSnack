@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Tag;
 import kr.ac.hisnack.service.TagService;
-import kr.ac.hisnack.util.Pager;
 
 @RestController
 @RequestMapping("/rest/tag")
@@ -22,8 +21,8 @@ public class TagRestController {
 	TagService service;
 	
 	@GetMapping
-	public List<Tag> list(Pager pager){
-		List<Tag> list = service.list(pager);
+	public List<Tag> list(){
+		List<Tag> list = service.list();
 		return list;
 	}
 	

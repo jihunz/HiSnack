@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.ProductDao;
 import kr.ac.hisnack.dao.ProductImageDao;
+import kr.ac.hisnack.dao.ProductTagDao;
 import kr.ac.hisnack.model.Image;
 import kr.ac.hisnack.model.Product;
+import kr.ac.hisnack.model.ProductTag;
 import kr.ac.hisnack.util.Pager;
 
 @Service
@@ -18,6 +20,8 @@ public class ProductServiceImpl implements ProductService {
 	ProductDao dao;
 	@Autowired
 	ProductImageDao imageDao;
+	@Autowired
+	ProductTagDao tagDao;
 	
 	@Transactional
 	@Override
@@ -25,18 +29,30 @@ public class ProductServiceImpl implements ProductService {
 		dao.add(item);
 		
 		List<Image> images = item.getImages();
+		List<ProductTag> tags = item.getTags();
 		
-		if(images == null) return;
+		if(images != null) {
+//			DB에 이미지 등록하는 코드
+			for(Image image : images) {
+				image.setTarget(item.getCode());
+				imageDao.add(image);
+			}	
+		}
 		
-//		DB에 이미지 등록하는 코드
-		for(Image image : images) {
-			image.setTarget(item.getCode());
-			imageDao.add(image);
+		
+		if(tags != null) {
+//			제품의 태그 등록
+			for(ProductTag tag : tags) {
+				tag.setPcode(item.getCode());
+				tagDao.add(tag);
+			}	
 		}
 	}
 	
+	@Transactional
 	@Override
 	public void delete(int code) {
+		tagDao.delete(code);
 		dao.delete(code);
 	}
 	
@@ -46,14 +62,25 @@ public class ProductServiceImpl implements ProductService {
 		dao.update(item);
 		
 		List<Image> images = item.getImages();
+		List<ProductTag> tags = item.getTags();
 				
-		if(images == null) return;
-		
-//		DB에 이미지 등록하는 코드
-		for(Image image : images) {
-			image.setTarget(item.getCode());
-			imageDao.add(image);
+		if(images != null) {
+//			DB에 이미지 등록하는 코드
+			for(Image image : images) {
+				image.setTarget(item.getCode());
+				imageDao.add(image);
+			}	
 		}
+		
+		tagDao.delete(item.getCode());
+		
+		if(tags != null) {
+			for(ProductTag tag : tags) {
+				tag.setPcode(item.getCode());
+				tagDao.add(tag);
+			}
+		}
+		
 	}
 
 	@Override

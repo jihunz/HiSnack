@@ -9,7 +9,7 @@ public interface TagDao {
 
 	int total(Pager pager);
 
-	List<Tag> list(Pager pager);
+	List<Tag> list();
 
 	Tag item(int code);
 
