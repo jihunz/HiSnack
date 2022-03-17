@@ -14,8 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hisnack.model.Image;
 import kr.ac.hisnack.model.Product;
+import kr.ac.hisnack.model.Tag;
 import kr.ac.hisnack.service.ImageService;
 import kr.ac.hisnack.service.ProductService;
+import kr.ac.hisnack.service.TagService;
 import kr.ac.hisnack.util.FileUploader;
 import kr.ac.hisnack.util.Pager;
 
@@ -27,6 +29,8 @@ public class ProductController {
 	@Autowired
 	@Qualifier("ProductImageService")
 	ImageService imageService;
+	@Autowired
+	TagService tagService;
 	
 	final String PATH = "product/";
 	
@@ -46,15 +50,20 @@ public class ProductController {
 	}
 	
 	@GetMapping("/add")
-	public String add() {
+	public String add(Model model) {
+		List<Tag> tagList = tagService.list();
+		model.addAttribute("tagList", tagList);
 		return PATH+"add";
 	}
 	
 //	이미지를 보낼때 name 속성을 image로 통일하여 보내면 됩니다 
 	@PostMapping("/add")
-	public String add(Product item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
+	public String add(Product item, @RequestParam("image") List<MultipartFile> images, 
+			@RequestParam("tcode") List<Integer> tcodes, FileUploader uploader) {
 		List<Image> imageList = uploader.upload(images);
 		item.setImages(imageList);
+		
+		item.setTagsWithTcode(tcodes);
 		
 		service.add(item);
 		return "redirect:list";
@@ -63,17 +72,22 @@ public class ProductController {
 	@GetMapping("/update")
 	public String update(Model model, int code) {
 		Product item = service.item(code);
+		List<Tag> tagList = tagService.list();
 		model.addAttribute("item", item);
+		model.addAttribute("tagList", tagList);
 		return PATH+"update";
 	}
 	
 	@PostMapping("/update")
-	public String update(Product item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
+	public String update(Product item, @RequestParam("image") List<MultipartFile> images,
+			@RequestParam("tcode") List<Integer> tcodes, FileUploader uploader) {
 		
 		imageService.delete(item.getCode());
 		
 		List<Image> imageList = uploader.upload(images);
 		item.setImages(imageList);
+		
+		item.setTagsWithTcode(tcodes);
 		
 		service.update(item);
 		return "redirect:list";

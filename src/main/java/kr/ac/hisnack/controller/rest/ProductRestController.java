@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Product;
@@ -37,14 +38,16 @@ public class ProductRestController {
 	}
 	
 	@PostMapping
-	public Product add(@RequestBody Product item) {
+	public Product add(@RequestBody Product item, @RequestParam("tcode") List<Integer> tcodes) {
+		item.setTagsWithTcode(tcodes);
 		service.add(item);
 		return item;
 	}
 	
 	@PutMapping
-	public Product update(@RequestBody Product item) {
+	public Product update(@RequestBody Product item, @RequestParam("tcode") List<Integer> tcodes) {
 		imageService.delete(item.getCode());
+		item.setTagsWithTcode(tcodes);
 		service.update(item);
 		return item;
 	}

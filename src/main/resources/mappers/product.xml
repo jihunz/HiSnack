@@ -22,6 +22,12 @@
 			<result column="filename" property="filename"/>
 			<result column="uuid" property="uuid"/>
 		</collection>
+		<collection property="tags" column="product_tag" ofType="ProductTag" javaType="ArrayList">
+			<id column="tag_code" property="code"/>
+			<result column="tcode" property="tcode"/>
+			<result column="pcode" property="pcode"/>
+			<result column="content" property="content"/>
+		</collection>
 	</resultMap>
 
 	<insert id="add">
@@ -33,9 +39,13 @@
 		</selectKey>
 	</insert>
 	<select id="item" resultMap="ProductMap">
-		SELECT product.*, product_image.code AS image_code, target, filename, uuid
+		SELECT product.*, 
+		product_image.code AS image_code, target, filename, uuid,
+		product_tag.code AS tag_code, tcode, pcode, content
 		FROM product
-		LEFT JOIN product_image ON product_image.target=product.code
+		LEFT OUTER JOIN product_image ON product_image.target=product.code
+		LEFT OUTER JOIN product_tag ON product_tag.pcode=product.code
+		LEFT JOIN tag ON tag.code = product_tag.tcode
 		WHERE product.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -44,9 +54,13 @@
 		<include refid="search" />
 	</select>
 	<select id="list" resultMap="ProductMap">
-		SELECT product.*, product_image.code AS image_code, target, filename, uuid
+		SELECT product.*, 
+		product_image.code AS image_code, target, filename, uuid,
+		product_tag.code AS tag_code, tcode, pcode, content
 		FROM product
-		LEFT JOIN product_image ON product_image.target=product.code
+		LEFT OUTER JOIN product_image ON product_image.target=product.code
+		LEFT OUTER JOIN product_tag ON product_tag.pcode=product.code
+		LEFT JOIN tag ON tag.code = product_tag.tcode
 		<include refid="search" />
 		LIMIT #{offset}, #{perPage}
 	</select>

@@ -1,5 +1,6 @@
 package kr.ac.hisnack.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
@@ -15,7 +16,24 @@ public class Product {
 	private String info;
 //	제품 이미지들
 	private List<Image> images;
+//	제품의 태그
+	private List<ProductTag> tags;
 	
+	public List<ProductTag> getTags() {
+		return tags;
+	}
+	public void setTags(List<ProductTag> tags) {
+		this.tags = tags;
+	}
+	public void setTagsWithTcode(List<Integer> tcodes) {
+		List<ProductTag> tagList = new ArrayList<ProductTag>();
+		for(Integer tcode : tcodes) {
+			ProductTag productTag = new ProductTag();
+			productTag.setTcode(tcode);
+			tagList.add(productTag);
+		}
+		setTags(tagList);
+	}
 	public String getInfo() {
 		return info;
 	}
