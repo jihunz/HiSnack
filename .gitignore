@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 mybatis-config.xml
 log4j.xml
 
@@ -109,3 +110,6 @@ hs_err_pid*
 =======
 /target/
 >>>>>>> refs/remotes/origin/jjh
+=======
+/target/
+>>>>>>> 2cedddb2b91cb2161e94d43d57446ad344ba49cd
