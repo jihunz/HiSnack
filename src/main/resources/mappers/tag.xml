@@ -12,7 +12,7 @@
 
 	<insert id="add">
 		INSERT INTO tag
-		VALUES(NULL, ${content})
+		VALUES(NULL, #{content})
 	</insert>
 	<select id="item" resultType="Tag">
 		SELECT *
@@ -37,7 +37,7 @@
 	<update id="update">
 		UPDATE tag
 		SET
-		content={content}
+		content=#{content}
 		WHERE code=#{code}
 	</update>
 </mapper>
