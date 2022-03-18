@@ -31,17 +31,32 @@ public class OrdersRestService {
 		return service.item(code);
 	}
 
-//	formData를 사용해야 하는 메소드
+//	주문 시 pcodes(제품의 기본키)와 amount의 개수가 같아야한다
 	@PostMapping
-	public Orders add(Orders item, @RequestParam("pcode") List<Integer> pcodes) {
+	public Orders add(Orders item, @RequestParam("pcode") List<Integer> pcodes, 
+			@RequestParam("amount") List<Integer> amounts) {
+		try {
+			item.setProducts(pcodes, amounts);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		service.add(item);
 		return item;
 	}
 	
-//	formData를 사용해야 하는 메소드
+//	pcodes(제품의 기본키)와 amount의 개수가 같아야한다
 	@PostMapping("/{code}")
-	public Orders update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes) {
+	public Orders update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
+			@RequestParam("amount") List<Integer> amounts) {
 		item.setCode(code);
+		
+		try {
+			item.setProducts(pcodes, amounts);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		service.update(item);
 		return item;
 	}

@@ -57,6 +57,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.item(code);
 	}
 
+	@Transactional
 	@Override
 	public List<Review> list(Pager pager) {
 		int total = dao.total(pager);

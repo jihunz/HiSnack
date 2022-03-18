@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.MemberDao;
 import kr.ac.hisnack.model.Member;
@@ -29,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
 		dao.update(item);
 	}
 
+	@Transactional
 	@Override
 	public List<Member> list(Pager pager) {
 		int total = dao.total(pager);
