@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -22,15 +22,16 @@
 	<div class="container">
 
         <div class="header wrapper">
-            <img src="../../logo.svgz" alt="logo">
+        	<!-- svgz 랜더링 방법을 찾아야 함 -->
+            <object data="re/img/logo.svgz" type="image/svg+xml"></object>
             <a href="sub/detail">구독</a>
             <a href="shopping/list">쇼핑몰</a>
             <a href="orders/cart">장바구니</a>
-            <c:if test="${sessionScope.user != null})">
+            <c:if test="${sessionScope.user != null}">
             	<a href=`member/${userId}`>마이페이지</a>
             </c:if>
             <a href="review/list">리뷰 목록</a>
-            <c:if test="${sesssionScope.user.level == 1})">
+            <c:if test="${sessionScope.user.level == 1}">
             	<a href="admin">관리자 페이지</a>
             </c:if>
             <a href="cs">고객센터</a>
