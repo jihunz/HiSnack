@@ -22,8 +22,8 @@ import kr.ac.hisnack.util.FileUploader;
 import kr.ac.hisnack.util.Pager;
 
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/shopping")
+public class ShoppingController {
 	@Autowired
 	ProductService service;
 	@Autowired
@@ -32,7 +32,7 @@ public class ProductController {
 	@Autowired
 	TagService tagService;
 	
-	final String PATH = "product/";
+	final String PATH = "shopping/";
 	
 	
 	@GetMapping("/list")
