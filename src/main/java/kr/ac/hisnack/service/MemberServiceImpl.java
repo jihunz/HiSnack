@@ -30,11 +30,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member item(Member item) {
-		return dao.item(item);
-	}
-
-	@Override
 	public List<Member> list(Pager pager) {
 		int total = dao.total(pager);
 		pager.setTotal(total);
@@ -44,5 +39,15 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int total(Pager pager) {
 		return dao.total(pager);
+	}
+
+	@Override
+	public Member item(String id) {
+		return dao.item(id);
+	}
+
+	@Override
+	public Member login(Member item) {
+		return dao.login(item);
 	}
 }

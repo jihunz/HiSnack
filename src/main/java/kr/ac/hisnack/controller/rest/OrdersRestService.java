@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Orders;
@@ -26,25 +26,28 @@ public class OrdersRestService {
 		return service.list(pager);
 	}
 	
-	@GetMapping("/item")
-	public Orders item(int code) {
+	@GetMapping("/{code}")
+	public Orders item(@PathVariable int code) {
 		return service.item(code);
 	}
-	
+
+//	formData를 사용해야 하는 메소드
 	@PostMapping
-	public Orders add(@RequestBody Orders item) {
+	public Orders add(Orders item, @RequestParam("pcode") List<Integer> pcodes) {
 		service.add(item);
 		return item;
 	}
 	
-	@PutMapping
-	public Orders update(@RequestBody Orders item) {
+//	formData를 사용해야 하는 메소드
+	@PostMapping("/{code}")
+	public Orders update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes) {
+		item.setCode(code);
 		service.update(item);
 		return item;
 	}
 	
-	@DeleteMapping
-	public int delete(int code) {
+	@DeleteMapping("/{code}")
+	public int delete(@PathVariable int code) {
 		service.delete(code);
 		return code;
 	}

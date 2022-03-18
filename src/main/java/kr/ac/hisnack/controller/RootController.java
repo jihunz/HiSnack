@@ -28,7 +28,7 @@ public class RootController {
 	
 	@PostMapping("/login")
 	public String login(Member item, HttpSession session) {
-		Member user = ms.item(item);
+		Member user = ms.login(item);
 		
 		if(user == null) {
 			return "redirect:login";
