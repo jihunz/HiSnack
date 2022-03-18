@@ -17,6 +17,24 @@ public class Review {
 //	리뷰 안에 있는 이미지들
 	private List<Image> images;
 	
+	private String name;
+	
+	public String getMaskname() {
+		String result = "";
+		String first = name.substring(0, 1);
+		String mask = "";
+		for(int i = 0; i < name.length() - 1; i++) {
+			mask += "*";
+		}
+		result = first + mask;
+		return result;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public List<Image> getImages() {
 		return images;
 	}

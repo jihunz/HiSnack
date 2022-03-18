@@ -16,6 +16,7 @@
 		<result column="contents" property="contents"/>
 		<result column="reg_date" property="regDate"/>
 		<result column="rating" property="rating"/>
+		<result column="name" property="name"/>
 		<collection property="images" javaType="ArrayList" ofType="Image">
 			<id column="image_code" property="code"/>
 			<result column="target" property="target"/>
@@ -33,9 +34,12 @@
 		</selectKey>
 	</insert>
 	<select id="item" resultMap="ReviewMap">
-		SELECT review.*, review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid
+		SELECT review.*, 
+		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
+		member.name
 		FROM review
 		LEFT JOIN review_image ON review_image.target=review.code
+		JOIN member ON member.id=review.id
 		WHERE review.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -44,9 +48,12 @@
 		<include refid="search" />
 	</select>
 	<select id="list" resultMap="ReviewMap">
-		SELECT review.*, review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid
+		SELECT review.*, 
+		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
+		member.name
 		FROM review
 		LEFT JOIN review_image ON review_image.target=review.code
+		JOIN member ON member.id=review.id
 		<include refid="search" />
 		LIMIT #{offset}, #{perPage}
 	</select>
