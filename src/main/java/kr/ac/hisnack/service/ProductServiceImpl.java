@@ -88,6 +88,7 @@ public class ProductServiceImpl implements ProductService {
 		return dao.item(code);
 	}
 
+	@Transactional
 	@Override
 	public List<Product> list(Pager pager) {
 		int total = dao.total(pager);
