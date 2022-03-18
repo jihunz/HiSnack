@@ -9,7 +9,7 @@
 <body>
 	<h4>LOGIN</h4>
     <hr>
-    <form method="GET" action="/rest/member" class="loginForm">
+    <form method="post" action="login" class="loginForm">
         <div>
             <input type="text" name="id" id="userId" placeholder="ID">
         </div>
