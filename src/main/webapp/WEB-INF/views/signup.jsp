@@ -24,7 +24,7 @@
         </div>
         <div>
             <label for="name">이름</label>
-            <input type="text" name="name" id="name" placeholder="Name">
+            <input type="text" name="name" id="userName" placeholder="Name">
         </div>
         <div>
             <label for="addr">주소</label>
