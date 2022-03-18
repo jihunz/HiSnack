@@ -30,11 +30,6 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public Member item(Member item) {
-		return sql.selectOne("member.item", item);
-	}
-
-	@Override
 	public List<Member> list(Pager pager) {
 		return sql.selectList("member.list", pager);
 	}
@@ -42,6 +37,16 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public int total(Pager pager) {
 		return sql.selectOne("member.total", pager);
+	}
+
+	@Override
+	public Member item(String id) {
+		return sql.selectOne("member.item", id);
+	}
+
+	@Override
+	public Member login(Member item) {
+		return sql.selectOne("member.login", item);
 	}
 	
 	

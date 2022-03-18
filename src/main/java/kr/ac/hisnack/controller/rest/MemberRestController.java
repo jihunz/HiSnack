@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,25 +26,26 @@ public class MemberRestController {
 		return list;
 	}
 	
-	@GetMapping("/item")
-	public Member item(Member item) {
-		return service.item(item);
+	@GetMapping("/{id}")
+	public Member item(@PathVariable String id) {
+		return service.item(id);
 	}
 	
 	@PostMapping
-	public Member add(@RequestBody Member item) {
+	public Member add(Member item) {
 		service.add(item);
 		return item;
 	}
 	
-	@PutMapping
-	public Member update(@RequestBody Member item) {
+	@PostMapping("/{id}")
+	public Member update(@PathVariable String id, Member item) {
+		item.setId(id);
 		service.update(item);
 		return item;
 	}
 	
-	@DeleteMapping
-	public String delete(String id) {
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable String id) {
 		service.delete(id);
 		return id;
 	}

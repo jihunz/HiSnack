@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ordered_product">
+	<sql id="search">
+		<where>
+			<if test="search == 1">
+				ocode = CAST(#{keyword} AS UNSIGNED)
+			</if>
+		</where>
+	</sql>
+
+	<insert id="add">
+		INSERT INTO ordered_product
+		VALUES(NULL, #{pcode}, #{ocode}, #{amount})
+	</insert>
+	<select id="item" resultType="OrderedProduct">
+		SELECT *
+		FROM ordered_product
+		WHERE code=#{code}
+	</select>
+	<select id="total" resultType="Integer">
+		SELECT COUNT(*)
+		FROM ordered_product
+		<include refid="search" />
+	</select>
+	<select id="list" resultType="OrderedProduct">
+		SELECT *
+		FROM ordered_product
+		<include refid="search"></include>
+		LIMIT #{offset}, {perPage}
+	</select>
+	<delete id="delete">
+		DELETE FROM ordered_product
+		WHERE ocode=#{code}
+	</delete>
+	<update id="update">
+		UPDATE ordered_product
+		SET
+		pcode=#{pcode},
+		amount=#{amount}
+		WHERE code=#{code}
+	</update>
+</mapper>

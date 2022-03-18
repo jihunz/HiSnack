@@ -16,10 +16,13 @@ public class Review {
 	private int rating;
 //	리뷰 안에 있는 이미지들
 	private List<Image> images;
-	
+//	리뷰를 쓴 회원의 이름
 	private String name;
 	
 	public String getMaskname() {
+		if(name == null) {
+			return "name is null";
+		}
 		String result = "";
 		String first = name.substring(0, 1);
 		String mask = "";

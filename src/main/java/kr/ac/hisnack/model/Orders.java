@@ -1,6 +1,8 @@
 package kr.ac.hisnack.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Orders {
 //	주문의 일련번호
@@ -17,7 +19,31 @@ public class Orders {
 	private Date orderDate;
 //	주문이 구독인지 여부 (y or n)
 	private char subscribe;
+//	주문된 제품들
+	private List<OrderedProduct> products;
 	
+	public void setProducts(List<Integer> pcodes, List<Integer> amounts) throws Exception{
+		if(pcodes.size() != amounts.size()) {
+			throw new Exception("제품과 수량이 맞지 않습니다.");
+		}
+		
+		List<OrderedProduct> list = new ArrayList<OrderedProduct>();
+		
+		for(int i = 0; i < pcodes.size(); i++) {
+			OrderedProduct item = new OrderedProduct();
+			item.setPcode(pcodes.get(i));
+			item.setAmount(amounts.get(i));
+			list.add(item);
+		}
+		
+		products = list;
+	}
+	public List<OrderedProduct> getProducts() {
+		return products;
+	}
+	public void setProducts(List<OrderedProduct> products) {
+		this.products = products;
+	}
 	public int getCode() {
 		return code;
 	}
