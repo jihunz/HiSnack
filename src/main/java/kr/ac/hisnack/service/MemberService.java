@@ -9,7 +9,8 @@ public interface MemberService {
 	void add(Member item);
 	void delete(String id);
 	void update(Member item);
-	Member item(Member item);
+	Member item(String id);
 	List<Member> list(Pager pager);
 	int total(Pager pager);
+	Member login(Member item);
 }

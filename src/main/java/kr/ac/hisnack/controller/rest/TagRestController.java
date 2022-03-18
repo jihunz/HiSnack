@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,26 +25,27 @@ public class TagRestController {
 		return list;
 	}
 	
-	@GetMapping("/item")
-	public Tag item(int code) {
+	@GetMapping("/{code}")
+	public Tag item(@PathVariable int code) {
 		Tag item = service.item(code);
 		return item;
 	}
 	
 	@PostMapping
-	public Tag add(@RequestBody Tag item) {
+	public Tag add(Tag item) {
 		service.add(item);
 		return item;
 	}
 	
-	@PutMapping
-	public Tag update(@RequestBody Tag item) {
+	@PostMapping("/{code}")
+	public Tag update(@PathVariable int code, Tag item) {
+		item.setCode(code);
 		service.update(item);
 		return item;
 	}
 	
-	@DeleteMapping
-	public int delete(int code) {
+	@DeleteMapping("/{code}")
+	public int delete(@PathVariable int code) {
 		service.delete(code);
 		return code;
 	}

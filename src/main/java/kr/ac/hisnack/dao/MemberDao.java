@@ -13,10 +13,12 @@ public interface MemberDao {
 
 	void update(Member item);
 
-	Member item(Member item);
+	Member item(String id);
 
 	List<Member> list(Pager pager);
 
 	int total(Pager pager);
+
+	Member login(Member item);
 
 }

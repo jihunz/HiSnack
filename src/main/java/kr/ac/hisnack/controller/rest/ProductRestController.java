@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,11 +34,12 @@ public class ProductRestController {
 		return service.list(pager);
 	}
 	
-	@GetMapping("/item")
-	public Product item(int code) {
+	@GetMapping("/{code}")
+	public Product item(@PathVariable int code) {
 		return service.item(code);
 	}
 	
+//	formData를 사용해야 하는 메소드
 	@PostMapping
 	public Product add(Product item, @RequestParam("tcode") List<Integer> tcodes, 
 			@RequestParam("image") List<MultipartFile> images) {
@@ -51,9 +53,11 @@ public class ProductRestController {
 		return item;
 	}
 	
-	@PostMapping("/update")
-	public Product update(Product item, @RequestParam("tcode") List<Integer> tcodes,
+//	formData를 사용해야 하는 메소드
+	@PostMapping("/{code}")
+	public Product update(@PathVariable int code, Product item, @RequestParam("tcode") List<Integer> tcodes,
 			@RequestParam("image") List<MultipartFile> images) {
+		item.setCode(code);
 		imageService.delete(item.getCode());
 		
 		FileUploader uploader = new FileUploader();
@@ -66,8 +70,8 @@ public class ProductRestController {
 		return item;
 	}
 	
-	@DeleteMapping
-	public int delete(int code) {
+	@DeleteMapping("/{code}")
+	public int delete(@PathVariable int code) {
 		imageService.delete(code);
 		service.delete(code);
 		return code;
