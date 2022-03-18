@@ -7,5 +7,7 @@
 <body>
 	<p><a href="product/list">제품 목록</a></p>
 	<p><a href="review/list">리뷰 목록</a></p>
+	<p><a href="login">로그인</a></p>
+	<p><a href="signup">회원가입</a></p>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <body>
 	<h4>Sign up</h4>
     <hr>
-    <form method="POST" action="/rest/member" class="signupForm">
+    <form method="post" class="signupForm">
         <div>
             <label for="userId">아이디</label>
             <input type="text" name="id" id="userId" placeholder="ID">
