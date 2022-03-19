@@ -22,6 +22,7 @@
 		<mapper resource="mappers/tag.xml"/>
 		<mapper resource="mappers/product_tag.xml"/>
 		<mapper resource="mappers/ordered_product.xml"/>
+		<mapper resource="mappers/member_tag.xml"/>
 	</mappers>
 
 </configuration>

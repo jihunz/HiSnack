@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member_tag">
+	<select id="list" resultType="MemberTag">
+		SELECT member_tag.*, tag.content
+		FROM member_tag
+		JOIN tag ON tag.code=member_tag.tcode
+		WHERE id=#{id}
+	</select>
+	<insert id="add">
+		INSERT INTO member_tag
+		VALUES(NULL, #{id}, #{tcode})
+	</insert>
+	<delete id="delete">
+		DELETE FROM member_tag
+		WHERE code=#{code}
+	</delete>
+	<delete id="delete_with_id">
+		DELETE FROM member_tag
+		WHERE id=#{id}
+	</delete>
+</mapper>
