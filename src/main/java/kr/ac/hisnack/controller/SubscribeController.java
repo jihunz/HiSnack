@@ -18,13 +18,14 @@ import kr.ac.hisnack.service.TagService;
 @Controller
 @RequestMapping("/sub")
 public class SubscribeController {
+	final String PATH = "sub/";
 	@Autowired
 	TagService ts;
 	
 //	구독 상세 페이지로 유도
 	@GetMapping("/detail")
 	public String deltail() {
-		return "detail";
+		return PATH+"detail";
 	}
 	
 //	구독 시 선호 태그를 선택하는 페이지로 유도
@@ -32,7 +33,7 @@ public class SubscribeController {
 	public String tag(Model model) {
 		List<Tag> list = ts.list();
 		model.addAttribute("list", list);
-		return "tag";
+		return PATH+"tag";
 	}
 	
 //	선택한 태그를 세션에 저장하고 결제 페이지로 유도
