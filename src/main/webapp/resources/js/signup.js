@@ -17,7 +17,7 @@ function chkNull(e) {
 
         if(typeof $(nthInput).val() == "undefined"|| $(nthInput).val() == null || $(nthInput).val() == "") {
             e.preventDefault();
-            alert(`${inputType}를 입력해주세요`);
+            alert(`${inputType}를(을) 입력해주세요`);
             nthInput.focus();
             return;
         }
