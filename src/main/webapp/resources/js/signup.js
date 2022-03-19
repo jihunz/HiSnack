@@ -5,6 +5,8 @@ $(function() {
     });
 
     $("#userId").focusout(() => chkId());
+
+    $("#password").change(() => pwdRegx());
 });
 
 function chkNull(e) {
@@ -35,6 +37,20 @@ function chkPwd(e) {
         pwd.val("").focus();
         pwdConfirm.val("");
         return;
+    }
+}
+
+function pwdRegx() {
+    const pwd = $("#password");
+    const regx = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
+	if (!regx.test(pwd.val())) {
+        // alert("비밀번호 형식을 확인해주세요 \n 비밀번호는 최소 8~15자, 하나 이상의 숫자와 문자, 특수기호를 포함해야합니다")
+        pwd.val("").attr("placeholder", "비밀번호 형식을 확인해주세요");
+        pwd.focus();
+        return;
+	} else {
+        pwd.attr("placeholder", "Password");
     }
 }
 
