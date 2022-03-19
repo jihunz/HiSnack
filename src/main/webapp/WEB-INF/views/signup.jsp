@@ -34,7 +34,12 @@
             <label for="tel">전화번호</label>
             <input type="text" name="tel" id="tel" placeholder="Tel">
         </div>
-        <button>회원가입</button>
+        <button id="signupBtn">회원가입</button>
     </form>
-</body>
+    
+    <!-- jQuery -->
+    <script src="re/js/jquery.js" type="text/javascript"></script>
+    
+    <script src="re/js/signup.js" type="text/javascript"></script>
+    </body>
 </html>
