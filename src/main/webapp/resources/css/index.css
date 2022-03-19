@@ -4,10 +4,25 @@ body {
     height: 100%;
 }
 
+/* css 적용 전 컨텐츠 구분을 위한 스타일(추후 삭제 가능) 시작*/
+.wrapper {
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+#hLogo, #fLogo {
+	width: 400px;
+	height: 200px;
+}
+
+footer {
+	background: gray;
+}
+
 /* swiper 스타일 시작*/
 .swiper {
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 500px;
   }
 
   .swiper-slide {
