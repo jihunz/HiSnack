@@ -90,7 +90,7 @@
             <!-- ${list.maskName} -->
 
         </div>
-        <div class="footer wrapper">
+        <footer class="wrapper">
             <object data="re/img/logo2.svg" type="image/svg+xml" id="fLogo"></object>
             <h4>Team Members</h4>
             <p>장지훈 : jjh351@naver.com</p>
@@ -103,8 +103,10 @@
             <a href="https://github.com/jihunz" target="_blank"><img src="#" alt="github-jjh"><p>Jihun Jang</p></a>
             <a href="https://github.com/tivmzk" target="_blank"><img src="#" alt="github-ojt"><p>O Jong Taek</p></a>
             <a href="https://github.com/JJ001002" target="_blank"><img src="#" alt="github-ljj"><p>LeeJunJe</p></a>
-            <p>COPYRIGHT 2022 BY HI SNACK TEAM. ALL RIGHTS RESERVED.</p>
-        </div>
+            <div>
+            	<p>COPYRIGHT 2022 BY HI SNACK TEAM. ALL RIGHTS RESERVED.</p>
+            </div>
+        </footer>
     </div>
 
     <!-- Swiper JS -->
