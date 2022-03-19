@@ -6,24 +6,14 @@
 	<!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <!-- index 페이지 css Link -->
-    <link rel="stylesheet" href="re/css/index.css">
-
-    <!-- css 적용 전 컨텐츠 구분을 위한 스타일(추후 삭제 가능) -->
-    <style>
-        .wrapper {
-            border: 1px solid black;
-            margin-top: 10px;
-        }
-    </style>
-    
+    <link rel="stylesheet" href="re/css/index.css">    
     <title>Hi Snack!</title>
 </head>
 <body>
 	<div class="container">
 
         <div class="header wrapper">
-        	<!-- svgz 랜더링 방법을 찾아야 함 -->
-            <object data="re/img/logo.svgz" type="image/svg+xml"></object>
+            <object data="re/img/logo.svg" type="image/svg+xml" id="hLogo"></object>
             <a href="sub/detail">구독</a>
             <a href="shopping/list">쇼핑몰</a>
             <a href="orders/cart">장바구니</a>
@@ -101,7 +91,7 @@
 
         </div>
         <div class="footer wrapper">
-            <img src="" alt="">
+            <object data="re/img/logo2.svg" type="image/svg+xml" id="fLogo"></object>
             <h4>Team Members</h4>
             <p>장지훈 : jjh351@naver.com</p>
             <p>오종택 : tivmzk5@gmail.com</p>
