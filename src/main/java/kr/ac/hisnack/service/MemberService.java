@@ -13,4 +13,5 @@ public interface MemberService {
 	List<Member> list(Pager pager);
 	int total(Pager pager);
 	Member login(Member item);
+	boolean confirm(String id);
 }

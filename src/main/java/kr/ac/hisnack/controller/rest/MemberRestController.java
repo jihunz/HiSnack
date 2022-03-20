@@ -52,11 +52,7 @@ public class MemberRestController {
 	
 	@GetMapping("/confirm")
 	public String confirm(String id) {
-		Pager pager = new Pager();
-		pager.setKeyword(id);
-		pager.setSearch(1);
-		int total = service.total(pager);
-		if(total == 0) {
+		if(service.confirm(id)) {
 			return "ok";	
 		}
 		else {

@@ -52,4 +52,18 @@ public class MemberServiceImpl implements MemberService {
 	public Member login(Member item) {
 		return dao.login(item);
 	}
+	
+	@Override
+	public boolean confirm(String id) {
+		Pager pager = new Pager();
+		pager.setKeyword(id);
+		pager.setSearch(1);
+		int total = total(pager);
+		if(total == 0) {
+			return true;	
+		}
+		else {
+			return false;
+		}
+	}
 }
