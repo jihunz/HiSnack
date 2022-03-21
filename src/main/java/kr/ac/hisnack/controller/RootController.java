@@ -86,6 +86,9 @@ public class RootController {
 		if(ms.confirm(user.getId())) {
 			ms.add(user);
 		}
+		else {
+			user = ms.item(user.getId());
+		}
 		
 		session.setAttribute("user", user);
 		
