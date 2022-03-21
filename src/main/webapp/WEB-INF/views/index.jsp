@@ -21,7 +21,7 @@
             	<a href=`member/${userId}`>마이페이지</a>
             </c:if>
             <a href="review/list">리뷰 목록</a>
-            <c:if test="${sessionScope.user.level == 1}">
+            <c:if test="${sessionScope.user.grade == 1}">
             	<a href="admin">관리자 페이지</a>
             </c:if>
             <a href="cs">고객센터</a>
