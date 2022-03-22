@@ -36,10 +36,10 @@ public class RootController {
 //	메인 페이지로 유도
 	@RequestMapping("/")
 	public String index(Model model) {
-		Pager pager = new Pager();
-		pager.setPerPage(8);
-		List<Review> list = rs.list(pager);
-		model.addAttribute("list", list);
+//		Pager pager = new Pager();
+//		pager.setPerPage(8);
+//		List<Review> list = rs.list(pager);
+//		model.addAttribute("list", list);
 		return "index";
 	}
 	
