@@ -19,9 +19,18 @@ public class Orders {
 	private Date orderDate;
 //	주문이 구독인지 여부 (y or n)
 	private char subscribe;
+//	주문의 총 가격
+	private int total;
 //	주문된 제품들
 	private List<OrderedProduct> products;
 	
+	
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	public void setProducts(List<Integer> pcodes, List<Integer> amounts) throws Exception{
 		if(pcodes.size() != amounts.size()) {
 			throw new Exception("제품과 수량이 맞지 않습니다.");

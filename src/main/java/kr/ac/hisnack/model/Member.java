@@ -12,13 +12,13 @@ public class Member {
 //	회원의 전화번호
 	private String tel;
 //	회원 관리 레벨
-	private int level;
+	private int grade;
 	
-	public int getLevel() {
-		return level;
+	public int getGrade() {
+		return grade;
 	}
-	public void setLevel(int level) {
-		this.level = level;
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 	public String getId() {
 		return id;

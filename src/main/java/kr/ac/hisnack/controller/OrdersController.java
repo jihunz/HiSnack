@@ -44,18 +44,21 @@ public class OrdersController {
 		if(user != null) {
 			model.addAttribute("user", user);
 		}
+		Object tags = session.getAttribute("tags");
 		
-		Object cart = session.getAttribute("cart");
-		
-		if(cart != null && cart instanceof Collection) {
-			List<?> list = new ArrayList<>((Collection<?>)cart);
+		if(tags == null) {
+			Object cart = session.getAttribute("cart");
 			
-			List<Product> products = list.stream()
-			.filter(elem -> elem instanceof Product)
-			.map(elem -> (Product)elem)
-			.collect(Collectors.toList());
-			
-			model.addAttribute("list", products);
+			if(cart != null && cart instanceof Collection) {
+				List<?> list = new ArrayList<>((Collection<?>)cart);
+				
+				List<Product> products = list.stream()
+				.filter(elem -> elem instanceof Product)
+				.map(elem -> (Product)elem)
+				.collect(Collectors.toList());
+				
+				model.addAttribute("list", products);
+			}	
 		}
 		
 		return PATH+"payment";
