@@ -1,11 +1,13 @@
 package kr.ac.hisnack.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +16,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import kr.ac.hisnack.model.Member;
+import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.MemberService;
+import kr.ac.hisnack.service.ReviewService;
+import kr.ac.hisnack.util.Pager;
 import kr.ac.hisnack.util.SiteLoginer;
 
 @Controller
 public class RootController {
 	@Autowired
 	MemberService ms;
+	@Autowired
+	ReviewService rs;
 	
 //	메인 페이지로 유도
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		Pager pager = new Pager();
+		pager.setPerPage(8);
+		List<Review> list = rs.list(pager);
+		model.addAttribute("list", list);
 		return "index";
 	}
 	
