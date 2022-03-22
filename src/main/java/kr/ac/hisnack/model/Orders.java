@@ -19,12 +19,20 @@ public class Orders {
 	private Date orderDate;
 //	주문이 구독인지 여부 (y or n)
 	private char subscribe;
-//	주문의 총 가격
+//	주문의 총 가격, 구독의 가격
 	private int total;
 //	주문된 제품들
 	private List<OrderedProduct> products;
+//	구독의 태그들
+	private List<Tag> tags;
 	
 	
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
 	public int getTotal() {
 		return total;
 	}
