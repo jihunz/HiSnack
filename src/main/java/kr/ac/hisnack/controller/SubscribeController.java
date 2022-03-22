@@ -94,6 +94,7 @@ public class SubscribeController {
 	
 /**
  * 유저의 정보를 jsp로 넘겨주고 결제 페이지로 이동한다
+ * @author 오종택
  */
 	@GetMapping("/payment")
 	public String payment(Model model, HttpSession session) {
@@ -105,6 +106,7 @@ public class SubscribeController {
 /**
  * 결제 페이지에서 입력한 구독의 정보와 detail, tag에서 입력한 정보를 합쳐서 Service에게 넘긴다
  * @param item : 회원이 입력한 정보가 들어있는 변수, 아이디, 주소, 이름, 전화번호가 입력되어 있어야한다
+ * @author 오종택
  */
 	@PostMapping("/payment")
 	public String payment(Orders item, HttpSession session) {

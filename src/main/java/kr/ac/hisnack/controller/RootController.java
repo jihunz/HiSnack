@@ -22,6 +22,10 @@ import kr.ac.hisnack.service.ReviewService;
 import kr.ac.hisnack.util.Pager;
 import kr.ac.hisnack.util.SiteLoginer;
 
+/**
+ * 로그인, 회원가입, 고객센터, 관리자 페이지로 이동시키는 일을 하는 Controller 
+ * @author 오종택
+ */
 @Controller
 public class RootController {
 	@Autowired
