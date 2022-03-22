@@ -33,7 +33,7 @@
           		<div class="dropdown">
                 	<button class="btn btn-warning" id="loginBtn" onclick="location.href='login'" data-bs-toggle="dropdown" aria-expanded="false">로그인</button>
                 	<ul class="dropdown-menu" id="dropdwn" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href=`member/${sessionScope.user.id}`>마이페이지</a></li>
+					    <li><a class="dropdown-item" href="member/${sessionScope.user.id}">마이페이지</a></li>
 					    <c:if test="${sessionScope.user.grade == 1}">
 					    	<li><a class="dropdown-item" href="admin">관리자</a></li>
 					    </c:if>
@@ -72,7 +72,6 @@
             <h3>편리 간단하게 구독</h3>
         </div>
 
-        <!-- 스와이퍼 내부에 사용자 별 날짜, 별점, 리뷰 내용, 닉네임 들어가야함 -->
         <div class="review wrapper">
             <h2>리뷰</h2>
             <a href="review/list">더보기</a>
