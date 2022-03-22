@@ -14,7 +14,7 @@
 	<script>
 		const user = {
 			userId: `${sessionScope.user.id}`,
-			grade: ${sessionScope.user.level}
+			grade: ${sessionScope.user.grade}
 		};
 	</script>
     <title>Hi Snack!</title>
@@ -34,7 +34,7 @@
                 	<button class="btn btn-warning" id="loginBtn" onclick="location.href='login'" data-bs-toggle="dropdown" aria-expanded="false">로그인</button>
                 	<ul class="dropdown-menu" id="dropdwn" aria-labelledby="dropdownMenuButton1">
 					    <li><a class="dropdown-item" href=`member/${sessionScope.user.id}`>마이페이지</a></li>
-					    <c:if test="${sessionScope.user.level == 1}">
+					    <c:if test="${sessionScope.user.grade == 1}">
 					    	<li><a class="dropdown-item" href="admin">관리자</a></li>
 					    </c:if>
 					    <li><a class="dropdown-item" href="logout">로그아웃</a></li>
