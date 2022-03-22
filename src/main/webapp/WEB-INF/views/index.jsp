@@ -89,17 +89,13 @@
                 <div class="swiper-pagination"></div>
             </div>
             <p>2022-10-10</p>
-            <!-- ${list.reg_date} -->
             <span>
                 <img src="" alt="rating">
                 <p>5.0</p>
-                <!-- ${list.rating} -->
             </span>
             <p>나한테 맞는 과자만 추천해주니까 너무 좋아요!</p>
-            <!-- ${list.contents} -->
             <hr>
             <h4>회원 이름</h4>
-            <!-- ${list.maskName} -->
 
         </div>
         <footer class="wrapper">
