@@ -4,7 +4,10 @@ $(function() {
         chkPwd(e);
     });
 
-    $("#userId").focusout(() => chkId());
+    $("#userId").on({
+        "keyup" : () => restrictId(),
+        "focusout" : () => chkId()
+    });
 
     $("#password").change(() => pwdRegx());
 });
@@ -64,6 +67,7 @@ function chkId() {
 		success: result => {
 			console.log(result);
 			idMsg(result);
+            return;
 		},
 		error: xhr => {
 			idErrMsg(xhr);
@@ -73,14 +77,32 @@ function chkId() {
 	function idErrMsg(xhr) {
 		alert(`아이디 중복확인 중 오류 발생: ${xhr.statusText}`);
 		$("#userId").val("");
+        return;
 	}
 
 	function idMsg(result) {
-		if (result.length < 1)
+		if (result.length < 1) {
 			alert("사용 가능한 아이디입니다");
+        }
 		else {
 			alert("사용 중인 아이디입니다");
 			$("#userId").val("");
 		}
 	}
+}
+
+// 특수문자와 공백에 대한 정규식으로
+// 아이디 input에 이메일 형식의 값이 입력되는 것을 제한
+function restrictId() {
+    //특수문자 정규식
+    const spacial = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+    //모든 공백 체크 정규식
+    const blank = /\s/g;
+    const userId = $("#userId").val();
+
+    if(spacial.test(userId) || blank.test(userId)) {
+        alert("특수문자, 공백은 입력할 수 없습니다");
+        $("#userId").val("");
+        return;
+    }
 }

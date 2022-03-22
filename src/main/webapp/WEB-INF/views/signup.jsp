@@ -12,27 +12,27 @@
     <form method="post" action="signup" class="signupForm">
         <div>
             <label for="userId">아이디</label>
-            <input type="text" name="id" id="userId" placeholder="ID">
+            <input type="text" name="id" id="userId" placeholder="ID" maxlength="32">
         </div>
         <div>
             <label for="pwd">비밀번호</label>
-            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="password" id="password" placeholder="Password" maxlength="15">
         </div>
         <div>
             <label for="pwdConfirm">비밀번호 확인</label>
-            <input type="password" name="pwdConfirm" id="pwdConfirm" placeholder="Confirm Password">
+            <input type="password" name="pwdConfirm" id="pwdConfirm" placeholder="Confirm Password" maxlength="15">
         </div>
         <div>
             <label for="name">이름</label>
-            <input type="text" name="name" id="userName" placeholder="Name">
+            <input type="text" name="name" id="userName" placeholder="Name" maxlength="8">
         </div>
         <div>
             <label for="addr">주소</label>
-            <input type="text" name="address" id="address" placeholder="Address">
+            <input type="text" name="address" id="address" placeholder="Address" maxlength="64">
         </div>
         <div>
             <label for="tel">전화번호</label>
-            <input type="text" name="tel" id="tel" placeholder="Tel">
+            <input type="text" name="tel" id="tel" placeholder="Tel" maxlength="16">
         </div>
         <button id="signupBtn">회원가입</button>
     </form>
