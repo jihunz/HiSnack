@@ -12,7 +12,7 @@
 
 	<insert id="add">
 		INSERT INTO orders
-		VALUES(NULL, #{id}, #{address}, #{name}, #{tel}, NOW(), #{subscribe})
+		VALUES(NULL, #{id}, #{address}, #{name}, #{tel}, NOW(), #{subscribe}, ${total})
 		
 		<selectKey keyProperty="code" order="AFTER" resultType="Integer">
 			SELECT LAST_INSERT_ID()
@@ -43,7 +43,8 @@
 		SET
 		address=#{address},
 		name=#{name},
-		tel=#{tel}
+		tel=#{tel},
+		total=#{total}
 		WHERE code=#{code}
 	</update>
 </mapper>
