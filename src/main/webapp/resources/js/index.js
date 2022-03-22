@@ -1,3 +1,7 @@
+$(function() {
+    showId();
+});
+
 // swiper 동작 설정을 위한 객체
 var swiper = new Swiper(".mySwiper", {
     pagination: {
@@ -10,5 +14,16 @@ var swiper = new Swiper(".mySwiper", {
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
-    },
+    }
 });
+
+function showId() {
+    const loginBtn = $("#loginBtn");
+    
+    if(user.userId != '') {
+        loginBtn.removeAttr("onClick").text(`${user.userId} 님`);
+    } else {
+        loginBtn.attr("oncClick", "location.href='login'")
+        $(".dropdown-menu").css("display", "none");
+    }
+}

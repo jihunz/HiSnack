@@ -3,10 +3,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<!-- Link Swiper's CSS -->
+	<!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- index 페이지 css Link -->
-    <link rel="stylesheet" href="re/css/index.css">    
+    <link rel="stylesheet" href="/re/css/index.css">  
+      
+    <!-- sessionScope를 저장하기 위한 script 태그 -->
+	<script>
+		const user = {
+			userId: `${sessionScope.user.id}`,
+			grade: ${sessionScope.user.level}
+		};
+	</script>
     <title>Hi Snack!</title>
 </head>
 <body>
@@ -17,16 +27,19 @@
             <a href="sub/detail">구독</a>
             <a href="shopping/list">쇼핑몰</a>
             <a href="orders/cart">장바구니</a>
-            <c:if test="${sessionScope.user != null}">
-            	<a href=`member/${sessionScope.user.id}`>마이페이지</a>
-            </c:if>
-            <a href="review/list">리뷰 목록</a>
-            <c:if test="${sessionScope.user.level == 1}">
-            	<a href="admin">관리자 페이지</a>
-            </c:if>
+            <a href="review/list">리뷰 목록</a>            
             <a href="cs">고객센터</a>
-            <div id="loginBtn">
-                <a href="login">로그인</a>
+            <div>
+          		<div class="dropdown">
+                	<button class="btn btn-warning" id="loginBtn" onclick="location.href='login'" data-bs-toggle="dropdown" aria-expanded="false">로그인</button>
+                	<ul class="dropdown-menu" id="dropdwn" aria-labelledby="dropdownMenuButton1">
+					    <li><a class="dropdown-item" href=`member/${sessionScope.user.id}`>마이페이지</a></li>
+					    <c:if test="${sessionScope.user.level == 1}">
+					    	<li><a class="dropdown-item" href="admin">관리자</a></li>
+					    </c:if>
+					    <li><a class="dropdown-item" href="logout">로그아웃</a></li>
+				  	</ul>
+			  	</div>
             </div>
         </div>
 
@@ -108,10 +121,15 @@
             </div>
         </footer>
     </div>
-
+    
+    <!-- jQuery -->
+    <script src="/re/js/jquery.js"></script>
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- index 페이지 js src -->
-    <script src="re/js/index.js"></script>
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<!-- index 페이지 js src -->
+    <script src="/re/js/index.js"></script>
+    
 </body>
 </html>
