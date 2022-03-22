@@ -4,11 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="google-signin-client_id" content="154631232160-ms9nmt9aggc9dgl6625fb0dij3sdhsb2.apps.googleusercontent.com">
 <!-- jQuery -->
 <script src="re/js/jquery.js"></script>
-<!-- Google Platform 라이브러리 -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="re/js/google_login.js"></script>
 <title>Hi Snack!</title>
 </head>
@@ -29,5 +26,5 @@
         <a href="../">아이디 찾기</a>
         <a href="../">비밀번호 찾기</a>
     </div>
-    <div id="googleBtn" class="g-signin2" ></div>
+    <div id="googleBtn"><img src="#">Google 계정으로 로그인하기</div>
 </body>
