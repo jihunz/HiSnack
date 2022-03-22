@@ -1,5 +1,6 @@
 package kr.ac.hisnack.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import kr.ac.hisnack.dao.ProductDao;
 import kr.ac.hisnack.dao.ProductImageDao;
 import kr.ac.hisnack.dao.ProductTagDao;
 import kr.ac.hisnack.model.Image;
+import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Product;
 import kr.ac.hisnack.model.ProductTag;
 import kr.ac.hisnack.util.Pager;
@@ -94,6 +96,28 @@ public class ProductServiceImpl implements ProductService {
 		int total = dao.total(pager);
 		pager.setTotal(total);
 		return dao.list(pager);
+	}
+	
+	@Transactional
+	@Override
+	public int priceTotal(List<OrderedProduct> products) {
+		int total = 0;
+		for(OrderedProduct product : products) {
+			Product item = dao.item(product.getPcode());
+			total += item.getPrice() * product.getAmount();
+		}
+		return total;
+	}
+	
+	@Transactional
+	@Override
+	public List<Product> list(List<OrderedProduct> products) {
+		List<Product> list = new ArrayList<>();
+		for(OrderedProduct product : products) {
+			Product item = dao.item(product.getPcode());
+			list.add(item);
+		}
+		return list;
 	}
 
 }

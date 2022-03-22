@@ -15,27 +15,50 @@ import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.util.Pager;
 
+/**
+ * ajax로 orders 테이블을 CRUD를 하기 위한 RestController
+ * @author 오종택
+ *
+ */
 @RestController
 @RequestMapping("/rest/orders")
 public class OrdersRestService {
 	@Autowired
 	OrdersService service;
 	
+/**
+ * 주문 리스트를 얻는 메서드
+ * @param pager : perPage로 몇개 가져오는지 정하고, page로 몇 페이지째 인지를 정한다
+ * @return 주문 리스트
+ */
 	@GetMapping
 	public List<Orders> list(Pager pager){
+		pager.setKeyword("n");
 		return service.list(pager);
 	}
 	
+/**
+ * 특정 주문을 가져오는 메서드
+ * @param code : 주문의 기본키
+ * @return 키본키에 해당하는 주문
+ */
 	@GetMapping("/{code}")
 	public Orders item(@PathVariable int code) {
 		return service.item(code);
 	}
 
-//	주문 시 pcodes(제품의 기본키)와 amount의 개수가 같아야한다
+/**
+ * 주문을 DB에 저장하는 메서드
+ * @param item : 아이디, 주소, 이름, 전화번호를 입력된 주문 정보
+ * @param pcodes : 주문하는 상품의 기본키 리스트
+ * @param amounts : 주문한 상품의 수량 리스트 pcodes와 길이가 같아야 한다
+ * @return 입력한 주문 정보를 다시 반환한다
+ */
 	@PostMapping
 	public Orders add(Orders item, @RequestParam("pcode") List<Integer> pcodes, 
 			@RequestParam("amount") List<Integer> amounts) {
 		try {
+			item.setSubscribe('n');
 			item.setProducts(pcodes, amounts);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,11 +67,19 @@ public class OrdersRestService {
 		return item;
 	}
 	
-//	pcodes(제품의 기본키)와 amount의 개수가 같아야한다
+/**
+ * 주문 정보를 수정하는 메서드
+ * @param code : 수정하려고 하는 주문의 기본키
+ * @param item : 수정하려고 하는 주문 정보, 주소, 이름, 전화번호가 입력되어 있어야한다
+ * @param pcodes : 다시 입력하려고 하는 상품의 기본키
+ * @param amounts : 다시 입력하려고 하는 상품의 수량, pcodes 리스트의 길이가 같아야 한다
+ * @return 입력했던 주문 정보를 다시 반환한다
+ */
 	@PostMapping("/{code}")
 	public Orders update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
 			@RequestParam("amount") List<Integer> amounts) {
 		item.setCode(code);
+		item.setSubscribe('n');
 		
 		try {
 			item.setProducts(pcodes, amounts);
@@ -61,6 +92,11 @@ public class OrdersRestService {
 		return item;
 	}
 	
+/**
+ * 주문을 삭제하는 메서드
+ * @param code : 삭제하려고 하는 주문의 기본키
+ * @return 입력한 기본키를 반환
+ */
 	@DeleteMapping("/{code}")
 	public int delete(@PathVariable int code) {
 		service.delete(code);
