@@ -24,7 +24,7 @@
 
         <div class="header wrapper">
             <object data="re/img/logo.svg" type="image/svg+xml" id="hLogo"></object>
-            <a href="sub/detail">구독</a>
+            <a href="/re/html/admin.html">구독</a>
             <a href="shopping/list">쇼핑몰</a>
             <a href="orders/cart">장바구니</a>
             <a href="review/list">리뷰 목록</a>            
@@ -35,7 +35,7 @@
                 	<ul class="dropdown-menu dropdown-menu-end" id="dropdwn" aria-labelledby="dropdownMenuButton1">
 					    <li><a class="dropdown-item" href="member/${sessionScope.user.id}">마이페이지</a></li>
 					    <c:if test="${sessionScope.user.grade == 1}">
-					    	<li><a class="dropdown-item" href="admin">관리자</a></li>
+					    	<li><a class="dropdown-item" href="/re/html/admin.html">관리자</a></li>
 					    </c:if>
 					    <li><a class="dropdown-item" href="logout">로그아웃</a></li>
 				  	</ul>

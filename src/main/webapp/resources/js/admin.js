@@ -28,7 +28,7 @@ class Sidebar extends React.Component {
         return (
             <div>
                 <div className="sbHeader">
-                    <img src="img/logo2.svg" id="logo"></img>
+                    <img src="../img/logo2.svg" id="logo"></img>
                 </div>
                 <Menu/>
             </div>
