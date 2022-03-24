@@ -29,8 +29,8 @@ class Section extends React.Component {
         return (
             <div>
                 <Search/>
-                {/* <Btns/>
-                <DataTable/> */}
+                <Btns/>
+                {/* <DataTable/> */}
             </div>
         );
     }
@@ -44,6 +44,21 @@ class Search extends React.Component {
                     <input type="text" name="keyword" placeHolder="제품 번호, 제품명, 제조사 등"/>
                     <button><img src=""/>검색</button>
                 </form>
+            </div>
+        );
+    }
+}
+
+class Btns extends React.Component {
+    render() {
+        return (
+            <div>
+                <div>
+                    <button>등록<img src=""/></button>
+                </div>
+                <div>
+                    <button>삭제<img src=""/></button>
+                </div>
             </div>
         );
     }
