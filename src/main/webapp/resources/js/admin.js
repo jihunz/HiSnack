@@ -1,5 +1,6 @@
 'use strict'
 
+// 관리자 페이지의 모든 컴포넌트들의 부모 컴포넌트 
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -24,18 +25,22 @@ class Dashboard extends React.Component {
     }
 }
 
+// 섹션 컴포넌트 -> 검색창, 버튼, 테이블, 페이지네이션을 삽입
 class Section extends React.Component {
     render() {
         return (
             <div>
                 <Search/>
                 <Btns/>
-                {/* <DataTable/> */}
+                <DataTable/>
+                <Pagenation/>
             </div>
         );
     }
 }
 
+
+//검색창 컴포넌트
 class Search extends React.Component {
     render() {
         return (
@@ -49,6 +54,7 @@ class Search extends React.Component {
     }
 }
 
+// 버튼 컴포넌트 -> 등록, 삭제 반환
 class Btns extends React.Component {
     render() {
         return (
@@ -64,6 +70,65 @@ class Btns extends React.Component {
     }
 }
 
+// 테이블 컴포넌트 -> table 태그를 반환
+class DataTable extends React.Component {
+    render() {
+        return (
+            <div>
+                {/* css 작업 시작 시 border 속성 삭제해도 됨 */}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            {/* thead의 checkbox는 tbody의 checkbox를 제어할 props를 가지고 있어야 함 -> chk={chkAll} */}
+                            <td><input type="checkbox"/></td>
+                            <td>제품 번호</td>
+                            <td>사진</td>
+                            <td>제품명</td>
+                            <td>가격</td>
+                            <td>제조사</td>
+                            <td>관리</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <List/>
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+}
+
+//테이블의 자식 컴포넌트 -> DB의 각 table에 저장된 정보의 list를 반환
+class List extends React.Component {
+    render() {
+        return (
+            <tr>
+                {/* {list.length > 1 ? list.map(() => <td>{list.code}</td>) : <td>"등록된 제품이 없습니다"</td>}  */}
+            </tr>
+        );
+    }
+}
+
+//페이지네이션 컴포넌트
+class Pagenation extends React.Component {
+    render() {
+        // let pager = ${pager.list}
+        return (
+            <div>
+                <div><a href="">이전</a></div>
+                <div>
+                    {/* {pager.map(() => 
+                        <div><a href=""></a><div/>
+                    )} */}
+                </div>
+                <div><a href="">다음</a></div>
+            </div>
+            
+        );
+    }
+}
+
+// 사이드바 컴포넌트 -> 메뉴를 삽입
 class Sidebar extends React.Component {
     render() {
         return (
@@ -77,6 +142,7 @@ class Sidebar extends React.Component {
     }
 }
 
+//메뉴 컴포넌트
 class Menu extends React.Component {
     render() {
         return (
@@ -91,6 +157,7 @@ class Menu extends React.Component {
     }
 }
 
+//메뉴의 자식 컴포넌트 -> 메뉴 목록 반환
 class MenuList extends React.Component {
     render() {
         return (
