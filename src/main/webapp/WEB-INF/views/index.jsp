@@ -35,7 +35,7 @@
                 	<ul class="dropdown-menu dropdown-menu-end" id="dropdwn" aria-labelledby="dropdownMenuButton1">
 					    <li><a class="dropdown-item" href="member/${sessionScope.user.id}">마이페이지</a></li>
 					    <c:if test="${sessionScope.user.grade == 1}">
-					    	<li><a class="dropdown-item" href="/re/html/admin.html">관리자</a></li>
+					    	<li><a class="dropdown-item" href="admin">관리자</a></li>
 					    </c:if>
 					    <li><a class="dropdown-item" href="logout">로그아웃</a></li>
 				  	</ul>

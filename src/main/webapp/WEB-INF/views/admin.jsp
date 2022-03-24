@@ -1,14 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/admin.css">
-    <title>Hi Snack!</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="re/css/admin.css">
+<title>Hi Snack!</title>
 </head>
 <body>
-    <!-- admin.js에서 React를 이용하여 아래의 div에 페이지를 render -->
+	<!-- admin.js에서 React를 이용하여 아래의 div에 페이지를 render -->
     <div id="app"></div>
 
     <!-- Load React, React-dom -->
@@ -16,6 +16,6 @@
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <!-- Load Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel" src="../js/admin.js"></script>
+    <script type="text/babel" src="re/js/admin.js"></script>
 </body>
 </html>
