@@ -18,6 +18,32 @@ class Dashboard extends React.Component {
                 </span>
                 <h2>제품</h2>
                 <Sidebar/>
+                <Section/>
+            </div>
+        );
+    }
+}
+
+class Section extends React.Component {
+    render() {
+        return (
+            <div>
+                <Search/>
+                {/* <Btns/>
+                <DataTable/> */}
+            </div>
+        );
+    }
+}
+
+class Search extends React.Component {
+    render() {
+        return (
+            <div>
+                <form>
+                    <input type="text" name="keyword" placeHolder="제품 번호, 제품명, 제조사 등"/>
+                    <button><img src=""/>검색</button>
+                </form>
             </div>
         );
     }
