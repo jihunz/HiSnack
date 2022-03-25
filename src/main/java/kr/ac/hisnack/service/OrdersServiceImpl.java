@@ -60,7 +60,13 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public Orders item(int code) {
-		return dao.item(code);
+		Orders item = dao.item(code);
+		Pager pager = new Pager();
+		pager.setKeyword(item.getCode()+"");
+		pager.setSearch(1);
+		List<OrderedProduct> oProducts = productDao.list(pager);
+		item.setProducts(oProducts);
+		return item;
 	}
 
 	@Transactional
@@ -68,7 +74,17 @@ public class OrdersServiceImpl implements OrdersService {
 	public List<Orders> list(Pager pager) {
 		int total = dao.total(pager);
 		pager.setTotal(total);
-		return dao.list(pager);
+		
+		List<Orders> list = dao.list(pager);
+		
+		for(Orders item : list) {
+			pager.setKeyword(item.getCode()+"");
+			pager.setSearch(1);
+			List<OrderedProduct> oProducts = productDao.list(pager);
+			item.setProducts(oProducts);
+		}
+		
+		return list;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.service.OrdersService;
+import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.Pager;
 
 /**
@@ -25,6 +26,8 @@ import kr.ac.hisnack.util.Pager;
 public class SubscribeRestController {
 	@Autowired
 	OrdersService service;
+	@Autowired
+	ProductService pService;
 	
 /**
  * 구독 리스트를 얻는 메서드

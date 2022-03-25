@@ -9,7 +9,7 @@
 			subscribe=#{keyword}
 		</where>
 	</sql>
-
+	
 	<insert id="add">
 		INSERT INTO orders
 		VALUES(NULL, #{id}, #{address}, #{name}, #{tel}, NOW(), #{subscribe}, ${total})

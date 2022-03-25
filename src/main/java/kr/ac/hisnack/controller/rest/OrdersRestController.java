@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.service.OrdersService;
+import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.Pager;
 
 /**
@@ -25,7 +26,8 @@ import kr.ac.hisnack.util.Pager;
 public class OrdersRestController {
 	@Autowired
 	OrdersService service;
-	
+	@Autowired
+	ProductService pService;
 /**
  * 주문 리스트를 얻는 메서드
  * @param pager : perPage로 몇개 가져오는지 정하고, page로 몇 페이지째 인지를 정한다
@@ -60,6 +62,7 @@ public class OrdersRestController {
 		try {
 			item.setSubscribe('n');
 			item.setProducts(pcodes, amounts);
+			item.setTotal(pService.priceTotal(item.getProducts()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,6 +86,7 @@ public class OrdersRestController {
 		
 		try {
 			item.setProducts(pcodes, amounts);
+			item.setTotal(pService.priceTotal(item.getProducts()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
