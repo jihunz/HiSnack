@@ -1,6 +1,5 @@
 package kr.ac.hisnack.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import kr.ac.hisnack.model.Member;
-import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.MemberService;
 import kr.ac.hisnack.service.ReviewService;
-import kr.ac.hisnack.util.Pager;
 import kr.ac.hisnack.util.SiteLoginer;
 
 /**
