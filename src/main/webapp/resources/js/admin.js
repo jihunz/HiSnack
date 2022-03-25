@@ -6,20 +6,35 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
-            
-        }
+            title: "제품",
+            list: [
+                // {code: 1, img: 1, name: '오징어볼'},
+            ],
+            pagenation: [],
+        };
+
+        this.init = this.init.bind(this);
+    }
+
+    init() {
+        this.setState(
+            (state, props) => {
+                state.list.push({code: 1, img: 1, name: "오징어볼", price: 2000, manufacture: "농심"});
+                state.list.push({code: 2, img: 2, name: "홈런볼", price: 1500, manufacture: "롯데"});
+                state.list.push({code: 3, img: 3, name: "허쉬초콜릿", price: 3000, manufacture: "허쉬"});
+
+                return state;
+            }
+        );
     }
 
     render() {
+        const {title, list, pagenation} = this.state;
+
         return (
             <div className="container">
-                <span>
-                    <h4>제품 데이터 관리</h4>
-                    <h4>제품을 쉽게 관리할 수 있도록 도움을 주는 페이지</h4>
-                </span>
-                <h2>제품</h2>
                 <Sidebar/>
-                <Section/>
+                <Section title={title} list={list} pagenation={pagenation}/>
             </div>
         );
     }
@@ -27,18 +42,38 @@ class Dashboard extends React.Component {
 
 // 섹션 컴포넌트 -> 검색창, 버튼, 테이블, 페이지네이션을 삽입
 class Section extends React.Component {
+    
     render() {
+        const {title, list, pagenation} = this.props;
+
         return (
             <div>
+                <Title title={title}/>
                 <Search/>
                 <Btns/>
-                <DataTable/>
-                <Pagenation/>
+                <DataTable list={list}/>
+                <Pagenation pagenation={pagenation}/>
             </div>
         );
     }
 }
 
+// title 컴포넌트 -> 메뉴 별 title 표시
+class Title extends React.Component {
+    render() {
+        const {title} = this.props;
+
+        return (
+            <div>
+                <span>
+                    <h4>{title} 데이터 관리</h4>
+                    <h4>{title}을 쉽게 관리할 수 있도록 도움을 주는 페이지</h4>
+                </span>
+                <h2>{title}</h2>
+            </div>
+        );
+    }
+}
 
 //검색창 컴포넌트
 class Search extends React.Component {
@@ -73,6 +108,8 @@ class Btns extends React.Component {
 // 테이블 컴포넌트 -> table 태그를 반환
 class DataTable extends React.Component {
     render() {
+        const {list} = this.props;
+
         return (
             <div>
                 {/* css 작업 시작 시 border 속성 삭제해도 됨 */}
@@ -89,9 +126,7 @@ class DataTable extends React.Component {
                             <td>관리</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <List/>
-                    </tbody>
+                    <List list={list}/>
                 </table>
             </div>
         );
@@ -100,11 +135,14 @@ class DataTable extends React.Component {
 
 //테이블의 자식 컴포넌트 -> DB의 각 table에 저장된 정보의 list를 반환
 class List extends React.Component {
+    
     render() {
+        const {list} = this.props;
+
         return (
-            <tr>
-                {/* {list.length > 1 ? list.map(() => <td>{list.code}</td>) : <td>"등록된 제품이 없습니다"</td>}  */}
-            </tr>
+            <tbody>
+                {list.length ? list.map((item) => <tr key={item.code}><td>{item.code}</td></tr>) : <tr><td colspan="7">등록된 제품이 없습니다</td></tr>}
+            </tbody>
         );
     }
 }
