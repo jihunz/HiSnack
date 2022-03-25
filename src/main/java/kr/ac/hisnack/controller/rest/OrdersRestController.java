@@ -16,13 +16,13 @@ import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.util.Pager;
 
 /**
- * ajax로 orders 테이블을 CRUD를 하기 위한 RestController
+ * ajax로 orders 테이블에서 주문을 CRUD를 하기 위한 RestController
  * @author 오종택
  *
  */
 @RestController
 @RequestMapping("/rest/orders")
-public class OrdersRestService {
+public class OrdersRestController {
 	@Autowired
 	OrdersService service;
 	
