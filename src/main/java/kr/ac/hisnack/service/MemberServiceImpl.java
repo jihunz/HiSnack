@@ -14,6 +14,8 @@ import kr.ac.hisnack.util.Pager;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao dao;
+	@Autowired
+	MemberTagService mts;
 	
 	@Override
 	public void add(Member item) {
@@ -35,7 +37,14 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> list(Pager pager) {
 		int total = dao.total(pager);
 		pager.setTotal(total);
-		return dao.list(pager);
+		
+		List<Member> list = dao.list(pager); 
+		
+		for(Member item : list) {
+			item.setTags(mts.list(item.getId()));
+		}
+		
+		return list;
 	}
 	
 	@Override
@@ -43,9 +52,12 @@ public class MemberServiceImpl implements MemberService {
 		return dao.total(pager);
 	}
 
+	@Transactional
 	@Override
 	public Member item(String id) {
-		return dao.item(id);
+		Member item = dao.item(id);
+		item.setTags(mts.list(id));
+		return item;
 	}
 
 	@Override

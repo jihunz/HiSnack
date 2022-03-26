@@ -12,7 +12,7 @@
 	</select>
 	<insert id="add">
 		INSERT INTO member_tag
-		VALUES(NULL, #{id}, #{tcode})
+		VALUES(NULL, #{id}, #{tcode}, ${recom})
 	</insert>
 	<delete id="delete">
 		DELETE FROM member_tag

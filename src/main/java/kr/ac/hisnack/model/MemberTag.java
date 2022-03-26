@@ -4,9 +4,16 @@ public class MemberTag {
 	private int code;
 	private String id;
 	private int tcode;
+	private char recom;
 	
 	private String content;
 	
+	public char getRecom() {
+		return recom;
+	}
+	public void setRecom(char recom) {
+		this.recom = recom;
+	}
 	public String getContent() {
 		return content;
 	}

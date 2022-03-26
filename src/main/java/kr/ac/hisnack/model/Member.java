@@ -1,5 +1,7 @@
 package kr.ac.hisnack.model;
 
+import java.util.List;
+
 public class Member {
 //	회원의 id
 	private String id;
@@ -13,7 +15,15 @@ public class Member {
 	private String tel;
 //	회원 관리 레벨
 	private int grade;
+//	멤버가 선택한 태그들
+	private List<MemberTag> tags;
 	
+	public List<MemberTag> getTags() {
+		return tags;
+	}
+	public void setTags(List<MemberTag> tags) {
+		this.tags = tags;
+	}
 	public int getGrade() {
 		return grade;
 	}

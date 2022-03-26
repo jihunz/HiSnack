@@ -30,7 +30,11 @@ public class RootController {
 	@Autowired
 	ReviewService rs;
 	
-//	메인 페이지로 유도
+/**
+ * 메인 페이지
+ * @param model
+ * @return
+ */
 	@RequestMapping("/")
 	public String index(Model model) {
 //		Pager pager = new Pager();
@@ -40,14 +44,20 @@ public class RootController {
 		return "index";
 	}
 	
-//	로그인 페이지로 유도
+/**
+ * 로그인 페이지로 유도
+ */
 	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
-	
-//	로그인 페이지에서 회원의 정보을 받아 DB에 저장되어있는지 확인하고
-//	확인이 되어 로그인에 성공면 메인페이지로 유도하고 실패하면 로그인 페이지로 다시 유도
+/**
+ * 로그인 페이지에서 회원의 정보을 받아 DB에 저장되어있는지 확인하고,
+ * 확인이 되어 로그인에 성공면 메인페이지로 유도하고 실패하면 로그인 페이지로 다시 유도
+ * @param item : 검증하고 싶은 회원 정보, id, password가 입력되 있어야 됨
+ * @param session : 회원 정보를 저장하는 세션
+ * @return 실패시 login 페이지로 redirect, 성공시 index로 redirect
+ */
 	@PostMapping("/login")
 	public String login(Member item, HttpSession session) {
 		Member user = ms.login(item);
@@ -60,33 +70,53 @@ public class RootController {
 		return "redirect:/";
 	}
 	
-//	회원가입 페이지로 유도
+/**
+ * 회원가입 페이지로 유도
+ */
 	@GetMapping("/signup")
 	public String signup() {
 		return "signup";
 	}
 	
-//	회원의 정보를 DB에 저장하고 로그인페이지로 유도
+/**
+ * 회원가입 페이지, 
+ * 회원의 정보를 DB에 저장하고 로그인페이지로 유도
+ * @param item : id, password, address, name, tel이 입력되 있어야 된다
+ * @return login 페이지로 redirect
+ */
 	@PostMapping("/signup")
 	public String signup(Member item) {
 		ms.add(item);
 		return "redirect:login";
 	}
 	
-//	고객센터 페이지로 유도
+/**
+ * 고객센터 페이지로 유도
+ */
 	@GetMapping("/cs")
 	public String customerService() {
 		return "cs";
 	}
 	
-//	관리자 페이지로 유도
+/**
+ * 관리자 페이지로 유도
+ */
 	@GetMapping("/admin")
 	public String admin() {
 		return "admin";
 	}
 	
-//	소셜 로그인 로그인하기 위한 주소 ↓↓
-//	https://accounts.google.com/o/oauth2/v2/auth?client_id=154631232160-ms9nmt9aggc9dgl6625fb0dij3sdhsb2.apps.googleusercontent.com&redirect_uri=http://localhost:9080/login/google&response_type=code&scope=email%20profile%20openid&access_type=offline
+/**
+ * 소셜 로그인 로그인하기 위한 주소, 소셜 로그인을 위한 URL ->
+ * https://accounts.google.com/o/oauth2/v2/auth?client_id=154631232160-ms9nmt9aggc9dgl6625fb0dij3sdhsb2.apps.googleusercontent.com&redirect_uri=http://localhost:9080/login/google&response_type=code&scope=email%20profile%20openid&access_type=offline
+ * 
+ * 구글에서 보내주는 구글 회원정보를 DB에 저장하거나 Session 저장한다
+ * @param authCode : 구글에서 보내주는 정보
+ * @param session : 회원 정보를 저장하는 세션
+ * @return index 페이지로 redirect
+ * @throws JsonProcessingException : 구글에서 보낸 정보를 추출하다 실패하면 나오는 예외
+ */
+//	
 	@GetMapping("/login/google")
 	public String google(@RequestParam(value = "code") String authCode, HttpSession session) throws JsonProcessingException{
 		Map<String, String> map = SiteLoginer.google(authCode);
