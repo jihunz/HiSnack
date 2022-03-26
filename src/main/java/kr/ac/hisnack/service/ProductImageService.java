@@ -15,6 +15,9 @@ public class ProductImageService implements ImageService {
 	@Autowired
 	ProductImageDao dao;
 	
+/**
+ * 상품 이미지들 삭제
+ */
 	@Transactional
 	@Override
 	public void delete(int code) {

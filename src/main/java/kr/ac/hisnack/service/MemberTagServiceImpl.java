@@ -16,11 +16,17 @@ public class MemberTagServiceImpl implements MemberTagService{
 	@Autowired
 	MemberTagDao dao;
 	
+/**
+ * 회원이 선택한 태그 리스트
+ */
 	@Override
 	public List<MemberTag> list(String id) {
 		return dao.list(id);
 	}
 
+/**
+ * 회원이 선택한 태그 추가
+ */
 	@Transactional
 	@Override
 	public void add(List<MemberTag> list) {
@@ -29,16 +35,25 @@ public class MemberTagServiceImpl implements MemberTagService{
 		}
 	}
 
+/**
+ * 회원이 선택한 태그 삭제
+ */
 	@Override
 	public void delete(int code) {
 		dao.delete(code);
 	}
 
+/**
+ * 회원이 선택한 태그 전부 삭제
+ */
 	@Override
 	public void delete(String id) {
 		dao.delete(id);
 	}
 	
+/**
+ * 회원이 선택한 태그들 추가
+ */
 	@Transactional
 	@Override
 	public void add(List<Tag> tagList, Member user) {

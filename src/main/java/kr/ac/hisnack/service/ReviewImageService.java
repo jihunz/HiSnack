@@ -15,6 +15,9 @@ public class ReviewImageService implements ImageService {
 	@Autowired
 	ReviewImageDao dao;
 	
+/**
+ * 리뷰 이미지들 삭제
+ */
 	@Transactional
 	@Override
 	public void delete(int code) {

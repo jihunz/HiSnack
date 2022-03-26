@@ -25,6 +25,10 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductTagDao tagDao;
 	
+/**
+ * 상품 추가
+ * 상품의 태그와 이미지를 등록한다
+ */
 	@Transactional
 	@Override
 	public void add(Product item) {
@@ -51,6 +55,11 @@ public class ProductServiceImpl implements ProductService {
 		}
 	}
 	
+/**
+ * 상품 삭제
+ * 상품의 태그와 상품을 삭제
+ * 이미지는 Controller가 다른 service에게 시키고 있다
+ */
 	@Transactional
 	@Override
 	public void delete(int code) {
@@ -58,6 +67,10 @@ public class ProductServiceImpl implements ProductService {
 		dao.delete(code);
 	}
 	
+/**
+ * 상품 수정
+ * 기존의 태그와 이미지는 삭제하고 입력된 값으로 다시 등록
+ */
 	@Transactional
 	@Override
 	public void update(Product item) {
@@ -85,11 +98,17 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
+/**
+ * 상품 1개 정보
+ */
 	@Override
 	public Product item(int code) {
 		return dao.item(code);
 	}
 
+/**
+ * 상품 리스트
+ */
 	@Transactional
 	@Override
 	public List<Product> list(Pager pager) {
@@ -97,7 +116,10 @@ public class ProductServiceImpl implements ProductService {
 		pager.setTotal(total);
 		return dao.list(pager);
 	}
-	
+
+/**
+ * 입력된 주문된 상품들의 총 가격을 구한다
+ */
 	@Transactional
 	@Override
 	public int priceTotal(List<OrderedProduct> products) {
@@ -109,6 +131,9 @@ public class ProductServiceImpl implements ProductService {
 		return total;
 	}
 	
+/**
+ * 입력된 주문된 상품들을 상품 리스트를 구한다
+ */
 	@Transactional
 	@Override
 	public List<Product> list(List<OrderedProduct> products) {

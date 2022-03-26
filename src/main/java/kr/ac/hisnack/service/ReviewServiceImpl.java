@@ -19,6 +19,9 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	ReviewImageDao imageDao;
 	
+/**
+ * 리뷰 추가
+ */
 	@Transactional
 	@Override
 	public void add(Review item) {
@@ -33,11 +36,17 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 	}
 
+/**
+ * 리뷰 삭제
+ */
 	@Override
 	public void delete(int code) {
 		dao.delete(code);
 	}
 	
+/**
+ * 리뷰 수정
+ */
 	@Transactional
 	@Override
 	public void update(Review item) {
@@ -52,11 +61,17 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 	}
 
+/**
+ * 리뷰 한개 검색
+ */
 	@Override
 	public Review item(int code) {
 		return dao.item(code);
 	}
 
+/**
+ * 리뷰 리스트 검색
+ */
 	@Transactional
 	@Override
 	public List<Review> list(Pager pager) {
