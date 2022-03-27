@@ -3,7 +3,7 @@ package kr.ac.hisnack.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
+public class Product implements Comparable<Product>{
 //	제품의 일련번호
 	private int code;
 //	제품의 이름
@@ -19,6 +19,14 @@ public class Product {
 //	제품의 태그
 	private List<ProductTag> tags;
 	
+	private int score;
+	
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
 	public List<ProductTag> getTags() {
 		return tags;
 	}
@@ -69,5 +77,17 @@ public class Product {
 	}
 	public void setManufacture(String manufacture) {
 		this.manufacture = manufacture;
+	}
+	@Override
+	public int compareTo(Product product) {
+		
+		if(score > product.getScore()) {
+			return 1;
+		}
+		else if(score < product.getScore()) {
+			return -1;
+		}
+		
+		return 0;
 	}
 }

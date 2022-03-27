@@ -38,7 +38,7 @@ public class MemberTagRestController {
 /**
  * id의 회원이 선택한 태그들을 DB에 저장하는 메서드
  * @param id : 회원의 id
- * @param list : 회원이 선택한 태그, tcode가 입력되어 있어야 한다
+ * @param list : 회원이 선택한 태그, tcode, recom이 입력되어 있어야 한다
  * @return 입력한 태그 리스트를 반환
  */
 	@PostMapping("/{id}")

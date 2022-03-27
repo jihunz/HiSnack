@@ -8,6 +8,21 @@ public class MemberTag {
 	
 	private String content;
 	
+	private int score;
+	private int recomVal;
+	
+	public int getRecomVal() {
+		return recomVal;
+	}
+	public void setRecomVal(int recomVal) {
+		this.recomVal = recomVal;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
 	public char getRecom() {
 		return recom;
 	}

@@ -53,14 +53,9 @@
 		FROM product
 		<include refid="search" />
 	</select>
-	<select id="list" resultMap="ProductMap">
-		SELECT product.*, 
-		product_image.code AS image_code, target, filename, uuid,
-		product_tag.code AS tag_code, tcode, pcode, content
+	<select id="list" resultType="Product">
+		SELECT *
 		FROM product
-		LEFT OUTER JOIN product_image ON product_image.target=product.code
-		LEFT OUTER JOIN product_tag ON product_tag.pcode=product.code
-		LEFT JOIN tag ON tag.code = product_tag.tcode
 		<include refid="search" />
 		LIMIT #{offset}, #{perPage}
 	</select>

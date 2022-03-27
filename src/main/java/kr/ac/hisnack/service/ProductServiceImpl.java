@@ -11,10 +11,12 @@ import kr.ac.hisnack.dao.ProductDao;
 import kr.ac.hisnack.dao.ProductImageDao;
 import kr.ac.hisnack.dao.ProductTagDao;
 import kr.ac.hisnack.model.Image;
+import kr.ac.hisnack.model.MemberTag;
 import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Product;
 import kr.ac.hisnack.model.ProductTag;
 import kr.ac.hisnack.util.Pager;
+import kr.ac.hisnack.util.ProductRecommender;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -24,6 +26,8 @@ public class ProductServiceImpl implements ProductService {
 	ProductImageDao imageDao;
 	@Autowired
 	ProductTagDao tagDao;
+	@Autowired
+	MemberTagService mts;
 	
 /**
  * 상품 추가
@@ -114,7 +118,15 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> list(Pager pager) {
 		int total = dao.total(pager);
 		pager.setTotal(total);
-		return dao.list(pager);
+		
+		List<Product> list = dao.list(pager); 
+		
+		for(Product item : list) {
+			item.setImages(imageDao.list(item.getCode()));
+			item.setTags(tagDao.list(item.getCode()));
+		}
+		
+		return list;
 	}
 
 /**
@@ -143,6 +155,31 @@ public class ProductServiceImpl implements ProductService {
 			list.add(item);
 		}
 		return list;
+	}
+/**
+ * 입력된 파라미터를 사용해서 회원에게 추천하는 상품 리스트를 반환
+ * @param id : 회원의 id
+ * @param randomRange : 추천 순으로 정렬된 상품 리스트에서 어느정도 범위에서 상품을 선택할지 설정. 10 -> 상위 10%
+ * @param basePrice : 기준이 되는 금액으로 상품들의 총 가격이 적어도 이 금액 보다 크게 된다.
+ * @param weightPrice 가격의 가중치로 basePrice에서 weightPrice를 더 한 금액이 기준이 된다.
+ */
+	@Transactional
+	@Override
+	public List<OrderedProduct> recommend(String id, int randomRange, int basePrice, int weightPrice) {
+		ProductRecommender recommender = new ProductRecommender(randomRange);
+		
+		Pager pager = new Pager();
+		int total = dao.total(pager);
+		pager.setTotal(total);
+		pager.setPerPage(total);
+		
+		List<Product> productList = list(pager);
+		List<MemberTag> tagList =  mts.list(id);
+		
+		System.out.println("상품 리스트 크기 : "+productList.size());
+		System.out.println("total : " + total);
+		
+		return recommender.recommend(productList, tagList, basePrice + weightPrice);
 	}
 
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.MemberTagDao;
-import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.MemberTag;
 import kr.ac.hisnack.model.Tag;
 
@@ -56,11 +55,12 @@ public class MemberTagServiceImpl implements MemberTagService{
  */
 	@Transactional
 	@Override
-	public void add(List<Tag> tagList, Member user) {
+	public void add(List<Tag> tagList, String id) {
 		for(Tag tag : tagList) {
 			MemberTag item = new MemberTag();
 			item.setTcode(tag.getCode());
-			item.setId(user.getId());
+			item.setId(id);
+			item.setRecom('y');
 			dao.add(item);
 		}
 	}
