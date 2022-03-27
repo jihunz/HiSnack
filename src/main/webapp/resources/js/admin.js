@@ -7,9 +7,7 @@ class Dashboard extends React.Component {
 
         this.state = {
             title: "제품",
-            list: [
-                // {code: 1, img: 1, name: '오징어볼'},
-            ],
+            list: [],
             pagenation: [],
         };
 
@@ -17,15 +15,20 @@ class Dashboard extends React.Component {
     }
 
     init() {
-        this.setState(
-            (state, props) => {
-                state.list.push({code: 1, img: 1, name: "오징어볼", price: 2000, manufacture: "농심"});
-                state.list.push({code: 2, img: 2, name: "홈런볼", price: 1500, manufacture: "롯데"});
-                state.list.push({code: 3, img: 3, name: "허쉬초콜릿", price: 3000, manufacture: "허쉬"});
+        fetch("./rest/product", {
+            method: "GET",
+            headers: {"Content-type": "application/json"}
+        }).then(res => res.json()).then(result => {
+            this.setState(
+                (state, props) => {
+                    state.list = result;
+                    return state;
+            });
+        }).catch(err => console.log(err));
+    }
 
-                return state;
-            }
-        );
+    add() {
+        return null;
     }
 
     render() {
@@ -81,7 +84,7 @@ class Search extends React.Component {
         return (
             <div>
                 <form>
-                    <input type="text" name="keyword" placeHolder="제품 번호, 제품명, 제조사 등"/>
+                    <input type="text" name="keyword" placeholder="제품 번호, 제품명, 제조사 등"/>
                     <button><img src=""/>검색</button>
                 </form>
             </div>
@@ -141,7 +144,18 @@ class List extends React.Component {
 
         return (
             <tbody>
-                {list.length ? list.map((item) => <tr key={item.code}><td>{item.code}</td></tr>) : <tr><td colspan="7">등록된 제품이 없습니다</td></tr>}
+                {list.length ? list.map(item =>
+                    <tr key={item.code}>
+                        <td><input type="checkbox"/></td>
+                        <td>{item.code}</td>
+                        <td>{item.img}</td>
+                        <td><a href="" onClick={null}>{item.name}</a></td>
+                        <td>{item.price}</td>
+                        <td>{item.manufacture}</td>
+                        <td><button>변경</button> <button>삭제</button></td>
+                    </tr>
+                    ) : <tr><td colSpan="7">등록된 제품이 없습니다</td></tr>}
+                     
             </tbody>
         );
     }
