@@ -14,26 +14,13 @@
 			<p>이름 : ${item.name}</p>
 			<p>가격 : ${item.price}</p>
 			<p>제조사 : ${item.manufacture}</p>
-			<p>
-				<c:forEach items="${item.tags}" var="tag">
-					${tag.content}, 
-				</c:forEach>
-			</p>
 			
 			<c:forEach items="${item.images}" var="image">
 				<div>
-					<a href="item?code=${item.code}"><img src="/upload/${image.fullfilename}" alt="${image.filename}" /></a>
+					<a href="${item.code}"><img src="${image.fullfilename}" alt="${image.filename}" /></a>
 				</div>
 			</c:forEach>
-			<p>
-				<a href="update?code=${item.code}">수정</a>
-				<a href="delete?code=${item.code}">삭제</a>
-			</p>
 		</div>
 	</c:forEach>
-	
-	<div>
-		<a href="add">등록</a>
-	</div>
 </body>
 </html>

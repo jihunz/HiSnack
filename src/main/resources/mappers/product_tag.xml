@@ -13,8 +13,9 @@
 		WHERE pcode=#{code}
 	</delete>
 	<select id="list" resultType="ProductTag">
-		SELECT *
+		SELECT product_tag.*, tag.content
 		FROM product_tag
+		JOIN tag ON product_tag.tcode=tag.code
 		WHERE pcode=#{code}
 	</select>
 	<update id="update">

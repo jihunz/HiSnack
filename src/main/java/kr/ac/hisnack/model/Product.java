@@ -20,7 +20,14 @@ public class Product implements Comparable<Product>{
 	private List<ProductTag> tags;
 	
 	private int score;
+	private int amount;
 	
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	public int getScore() {
 		return score;
 	}
@@ -77,6 +84,9 @@ public class Product implements Comparable<Product>{
 	}
 	public void setManufacture(String manufacture) {
 		this.manufacture = manufacture;
+	}
+	public String getThumbnail() {
+		return images.get(0).getFullfilename();
 	}
 	@Override
 	public int compareTo(Product product) {

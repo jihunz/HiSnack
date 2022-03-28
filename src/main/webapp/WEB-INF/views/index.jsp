@@ -24,7 +24,7 @@
 
         <div class="header wrapper">
             <object data="re/img/logo.svg" type="image/svg+xml" id="hLogo"></object>
-            <a href="/re/html/admin.html">구독</a>
+            <a href="sub/detail">구독</a>
             <a href="shopping/list">쇼핑몰</a>
             <a href="orders/cart">장바구니</a>
             <a href="review/list">리뷰 목록</a>            
