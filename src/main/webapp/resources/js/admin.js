@@ -12,6 +12,10 @@ class Dashboard extends React.Component {
         };
 
         this.init = this.init.bind(this);
+        this.add = this.add.bind(this);
+        this.update = this.update.bind(this);
+        this.delete = this.delete.bind(this);
+        
     }
 
     init() {
@@ -30,8 +34,18 @@ class Dashboard extends React.Component {
     add() {
         return null;
     }
+    
+    update() {
+        return null;
+    }
+
+    delete() {
+        return null;
+    }
 
     render() {
+        this.init();
+
         const {title, list, pagenation} = this.state;
 
         return (
