@@ -16,6 +16,6 @@
 	<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <!-- Load Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel" src="re/js/admin.js"></script>
+    <script type="text/babel" src="re/js/admin/admin.js"></script>
 </body>
 </html>

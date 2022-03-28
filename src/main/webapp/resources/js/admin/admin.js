@@ -230,6 +230,7 @@ class Pagenation extends React.Component {
                 </div>
                 <div><a href="">다음</a></div>
             </div>
+            
         );
     }
 }
