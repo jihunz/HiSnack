@@ -1,5 +1,7 @@
 package kr.ac.hisnack.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,6 +26,11 @@ public class ProductTagDaoImpl implements ProductTagDao {
 	@Override
 	public void delete(int code) {
 		sql.delete("product_tag.delete", code);
+	}
+
+	@Override
+	public List<ProductTag> list(int code) {
+		return sql.selectList("product_tag.list", code);
 	}
 
 }

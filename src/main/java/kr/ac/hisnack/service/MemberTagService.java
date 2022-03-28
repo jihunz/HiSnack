@@ -2,7 +2,6 @@ package kr.ac.hisnack.service;
 
 import java.util.List;
 
-import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.MemberTag;
 import kr.ac.hisnack.model.Tag;
 
@@ -16,6 +15,6 @@ public interface MemberTagService {
 
 	void delete(String id);
 
-	void add(List<Tag> tagList, Member user);
+	void add(List<Tag> tagList, String id);
 
 }

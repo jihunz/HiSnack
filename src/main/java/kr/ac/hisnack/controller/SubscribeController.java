@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.ac.hisnack.model.Member;
+import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.model.Tag;
+import kr.ac.hisnack.service.MemberTagService;
 import kr.ac.hisnack.service.OrdersService;
+import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.service.TagService;
 
 /**
@@ -31,6 +34,10 @@ public class SubscribeController {
 	TagService ts;
 	@Autowired
 	OrdersService os;
+	@Autowired
+	ProductService ps;
+	@Autowired
+	MemberTagService mts;
 	
 /**
  * 구독 상세 페이지로 이동시키는 메서드
@@ -100,7 +107,8 @@ public class SubscribeController {
 	}
 	
 /**
- * 결제 페이지에서 입력한 구독의 정보와 detail, tag에서 입력한 정보를 합쳐서 Service에게 넘긴다
+ * 결제 페이지에서 입력한 구독의 정보와 detail, tag에서 입력한 정보를 합쳐서 Service에게 넘긴다.
+ * 추천 알고리즘으로 선정한 상품들을 주문한다
  * @param item : 회원이 입력한 정보가 들어있는 변수, 아이디, 주소, 이름, 전화번호가 입력되어 있어야한다
  */
 	@PostMapping("/payment")
@@ -109,6 +117,13 @@ public class SubscribeController {
 		item.setTotal(sub.getTotal()); 
 		item.setTags(sub.getTags());
 		item.setSubscribe('y');
+		
+		mts.add(item.getTags(), item.getId());
+		
+//		여기서 추천 범위를 설정할 수 있다
+		List<OrderedProduct> list = ps.recommend(item.getId(), 30, item.getTotal(), (int)(item.getTotal() * 0.2));
+		item.setProducts(list);
+		
 		os.add(item);
 		session.removeAttribute("sub");
 		return "redirect:/orders/confirm";

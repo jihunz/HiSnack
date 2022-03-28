@@ -14,7 +14,7 @@ import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.util.ObjectConverter;
 
 /**
- * 장바구니에 관련된 일을 하는 RestController
+ * 장바구니에 관련된 일을 AJAX로하는 RestController
  * @author 오종택
  *
  */

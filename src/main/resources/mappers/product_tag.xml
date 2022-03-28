@@ -17,4 +17,11 @@
 		FROM product_tag
 		WHERE pcode=#{code}
 	</select>
+	<update id="update">
+		UPDATE product_tag
+		SET
+		tcode=#{tcode},
+		pcode=#{pcode}
+		WHERE code=#{code}
+	</update>
 </mapper>

@@ -10,49 +10,90 @@ import kr.ac.hisnack.dao.MemberDao;
 import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.util.Pager;
 
+/**
+ * 회원 dao에게 일을 시키는 service
+ * @author 오종택
+ *
+ */
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDao dao;
+	@Autowired
+	MemberTagService mts;
 	
+/**
+ * 회원 추가
+ */
 	@Override
 	public void add(Member item) {
 		dao.add(item);
 	}
 
+/**
+ * 회원 삭제
+ */
 	@Override
 	public void delete(String id) {
 		dao.delete(id);
 	}
 
+/**
+ * 회원 수정
+ */
 	@Override
 	public void update(Member item) {
 		dao.update(item);
 	}
 
+/**
+ * 회원 리스트 얻기
+ */
 	@Transactional
 	@Override
 	public List<Member> list(Pager pager) {
 		int total = dao.total(pager);
 		pager.setTotal(total);
-		return dao.list(pager);
+		
+		List<Member> list = dao.list(pager); 
+		
+		for(Member item : list) {
+			item.setTags(mts.list(item.getId()));
+		}
+		
+		return list;
 	}
 	
+/**
+ * 회원 수 얻기
+ */
 	@Override
 	public int total(Pager pager) {
 		return dao.total(pager);
 	}
 
+/**
+ * 회원 정보 얻기
+ */
+	@Transactional
 	@Override
 	public Member item(String id) {
-		return dao.item(id);
+		Member item = dao.item(id);
+		item.setTags(mts.list(id));
+		return item;
 	}
 
+/**
+ * 회원 로그인
+ */
 	@Override
 	public Member login(Member item) {
 		return dao.login(item);
 	}
-	
+
+/**
+ * 회원 id 확인
+ */
 	@Override
 	public boolean confirm(String id) {
 		Pager pager = new Pager();

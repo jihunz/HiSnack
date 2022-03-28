@@ -14,4 +14,5 @@ public interface ProductService {
 	List<Product> list(Pager pager);
 	int priceTotal(List<OrderedProduct> products);
 	List<Product> list(List<OrderedProduct> products);
+	List<OrderedProduct> recommend(String id, int randomRange, int basePrice,int weightPrice);
 }

@@ -19,6 +19,9 @@ public class OrdersServiceImpl implements OrdersService {
 	@Autowired
 	OrderedProductDao productDao;
 	
+/**
+ * 주문 추가
+ */
 	@Transactional
 	@Override
 	public void add(Orders item) {
@@ -34,6 +37,9 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 	}
 	
+/**
+ * 주문 삭제
+ */
 	@Transactional
 	@Override
 	public void delete(int code) {
@@ -41,6 +47,9 @@ public class OrdersServiceImpl implements OrdersService {
 		dao.delete(code);
 	}
 
+/**
+ * 주문 수정
+ */
 	@Transactional
 	@Override
 	public void update(Orders item) {
@@ -58,6 +67,9 @@ public class OrdersServiceImpl implements OrdersService {
 		}
 	}
 
+/**
+ * 주문 얻기
+ */
 	@Override
 	public Orders item(int code) {
 		Orders item = dao.item(code);
@@ -69,6 +81,9 @@ public class OrdersServiceImpl implements OrdersService {
 		return item;
 	}
 
+/**
+ * 주문 리스트 얻기
+ */
 	@Transactional
 	@Override
 	public List<Orders> list(Pager pager) {
