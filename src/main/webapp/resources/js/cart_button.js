@@ -4,7 +4,7 @@ $(function(){
 		const amount = $('#item input[type="number"]').val();
 
 		const formData = new FormData();
-		formData.append('code', code);
+		formData.append('pcode', code);
 		formData.append('amount', amount);
 
 		$.ajax("/rest/cart", {

@@ -152,6 +152,7 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> list = new ArrayList<>();
 		for(OrderedProduct product : products) {
 			Product item = dao.item(product.getPcode());
+			item.setAmount(product.getAmount());
 			list.add(item);
 		}
 		return list;

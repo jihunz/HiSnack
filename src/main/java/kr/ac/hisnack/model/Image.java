@@ -35,6 +35,6 @@ public class Image {
 		this.uuid = uuid;
 	}
 	public String getFullfilename() {
-		return uuid+"_"+filename;
+		return "/upload/"+uuid+"_"+filename;
 	}
 }
