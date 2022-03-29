@@ -41,11 +41,7 @@
 		</table>
 		<div>
 			<form method="post">
-				<div>
-					<label>아이디</label>
-					<input type="text" name="id"/>
-				</div>
-				
+				<input type="hidden" name="id" value="${user.id}"/>
 				<div>
 					<label>주소</label>
 					<input type="text" name="address" value="${user.address}"/>
