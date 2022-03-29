@@ -57,11 +57,11 @@ function pwdRegx() {
 }
 
 function chkId() {
-    let userId = $("#userId").val();
+    const userId = $("#userId").val();
 
-    if (userId == "") return;
+    if (userId === "") return;
 
-    $.ajax(`rest/member/${userId}`, {
+    $.ajax(`rest/member/confirm?id=${userId}`, {
         method: "GET",
         success: result => {
             console.log(result);
@@ -80,7 +80,7 @@ function chkId() {
     }
 
     function idMsg(result) {
-        if (result.length < 1) {
+        if (result === "ok") {
             alert("사용 가능한 아이디입니다");
         } else {
             alert("사용 중인 아이디입니다");
