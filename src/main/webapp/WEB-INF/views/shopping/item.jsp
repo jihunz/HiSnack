@@ -10,22 +10,25 @@
 <script src="/re/js/cart_button.js"></script>
 </head>
 <body>
-	<div id="item" data-code="${item.code}">
-		<c:forEach items="${item.images}" var="image">
+	<div>
+		<h1>제품 상세</h1>
+		<div id="item" data-code="${item.code}">
+			<c:forEach items="${item.images}" var="image">
+				<div>
+					<img src="${image.fullpath}" alt="${image.filename}" />
+				</div>
+			</c:forEach>
+			<p>번호 : ${item.code}</p>
+			<p>이름 : ${item.name}</p>
+			<p>가격 : ${item.price}</p>
+			<p>제조사 : ${item.manufacture}</p>
 			<div>
-				<img src="${image.fullpath}" alt="${image.filename}" />
+				<input type="number" />
+				<button id="cart-btn">장바구니에 추가</button>
 			</div>
-		</c:forEach>
-		<p>번호 : ${item.code}</p>
-		<p>이름 : ${item.name}</p>
-		<p>가격 : ${item.price}</p>
-		<p>제조사 : ${item.manufacture}</p>
-		<div>
-			<input type="number" />
-			<button id="cart-btn">장바구니에 추가</button>
-		</div>
-		<div>
-			<a href="/orders/cart">주문하기</a>
+			<div>
+				<a href="/orders/cart">주문하기</a>
+			</div>
 		</div>
 	</div>
 </body>

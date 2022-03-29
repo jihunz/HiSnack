@@ -8,7 +8,6 @@
 <title>장바구니</title>
 </head>
 <body>
-	<c:set var="total" value="${0}" scope="page"></c:set>
 	<div>
 		<div>
 			<h1>장바구니</h1>
@@ -37,6 +36,11 @@
 						</tr>
 					</c:forEach>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6">총 가격 : ${total}</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 		<div><a href="/orders/payment">결제하기</a></div>

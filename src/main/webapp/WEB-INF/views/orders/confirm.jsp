@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제 확인</title>
 </head>
 <body>
-
+	<div>
+		<h1>결제 확인</h1>
+		<p>결제가 정상적으로 완료되었습니다</p>
+	</div>
 </body>
 </html>

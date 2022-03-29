@@ -86,7 +86,7 @@ public class Product implements Comparable<Product>{
 		this.manufacture = manufacture;
 	}
 	public String getThumbnail() {
-		return images.get(0).getFullfilename();
+		return images.get(0).getFullpath();
 	}
 	@Override
 	public int compareTo(Product product) {

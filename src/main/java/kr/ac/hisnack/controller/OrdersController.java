@@ -57,8 +57,10 @@ public class OrdersController {
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
 		
 		if(products != null) {
+			int total = ps.priceTotal(products);
 			List<Product> productList = ps.list(products);
 			model.addAttribute("list", productList);
+			model.addAttribute("total", total);
 		}
 		else {
 //			장바구니에 상품이 없으면 결제페이지에 오늘 걸 막는다
@@ -118,8 +120,10 @@ public class OrdersController {
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
 		
 		if(products != null) {
+			int total = ps.priceTotal(products);
 			List<Product> productList = ps.list(products);
-			model.addAttribute("list", productList);	
+			model.addAttribute("list", productList);
+			model.addAttribute("total", total);
 		}
 		
 		return PATH+"cart";
