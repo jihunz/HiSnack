@@ -16,7 +16,7 @@
 
 	<insert id="add">
 		INSERT INTO member
-		VALUES(#{id}, PASSWORD(#{password}), #{address}, #{name}, #{tel}, 0)
+		VALUES(#{id}, PASSWORD(#{password}), #{address}, #{name}, #{tel}, 0, #{email})
 	</insert>
 	<select id="item" resultType="Member">
 		SELECT *
@@ -50,7 +50,8 @@
 		address=#{address},
 		name=#{name},
 		tel=#{tel},
-		grade=#{grade}
+		grade=#{grade},
+		email=#{email}
 		WHERE id=#{id}
 	</update>
 </mapper>

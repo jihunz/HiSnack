@@ -48,15 +48,15 @@
 				
 				<div>
 					<label>주소</label>
-					<input type="text" name="address"/>
+					<input type="text" name="address" value="${user.address}"/>
 				</div>
 				<div>
 					<label>수령인</label>
-					<input type="text" name="name"/>
+					<input type="text" name="name" value="${user.name}"/>
 				</div>
 				<div>
 					<label>전화번호</label>
-					<input type="tel" name="tel"/>
+					<input type="tel" name="tel" value="${user.tel}"/>
 				</div>
 				<div>
 					<button>확인</button>

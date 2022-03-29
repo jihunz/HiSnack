@@ -15,9 +15,17 @@ public class Member {
 	private String tel;
 //	회원 관리 레벨
 	private int grade;
+//	이메일
+	private String email;
 //	멤버가 선택한 태그들
 	private List<MemberTag> tags;
 	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public List<MemberTag> getTags() {
 		return tags;
 	}

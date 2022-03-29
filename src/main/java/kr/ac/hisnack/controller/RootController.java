@@ -133,6 +133,7 @@ public class RootController {
 		Member user = new Member();
 		user.setId(map.get("email"));
 		user.setName(map.get("name"));
+		user.setEmail(map.get("email"));
 
 		if(ms.confirm(user.getId())) {
 			ms.add(user);
