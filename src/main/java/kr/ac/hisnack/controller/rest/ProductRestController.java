@@ -52,7 +52,7 @@ public class ProductRestController {
 		if(list == null)
 			map.put("msg", "product list : list is null");
 		else
-			map.put("msg", "product list ok");
+			map.put("msg", "product list : ok");
 		
 		return map; 
 	}
