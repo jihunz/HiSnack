@@ -1,6 +1,8 @@
 package kr.ac.hisnack.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,9 +33,14 @@ public class MemberRestController {
  * @return
  */
 	@GetMapping
-	public List<Member> list(Pager pager){
+	public Map<String, Object> list(Pager pager){
 		List<Member> list = service.list(pager);
-		return list;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("msg", String.format("member list ok"));
+		
+		return map;
 	}
 	
 /**

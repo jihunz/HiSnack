@@ -1,6 +1,8 @@
 package kr.ac.hisnack.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,8 +42,15 @@ public class ProductRestController {
  * @return 상품 리스트를 반환
  */
 	@GetMapping
-	public List<Product> list(Pager pager){
-		return service.list(pager);
+	public Map<String, Object> list(Pager pager){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Product> list = service.list(pager);
+		
+		map.put("list", list);
+		map.put("pager", pager);
+		map.put("msg", "product list ok");
+		
+		return map; 
 	}
 	
 /**
@@ -50,8 +59,13 @@ public class ProductRestController {
  * @return 상품 정보를 반환
  */
 	@GetMapping("/{code}")
-	public Product item(@PathVariable int code) {
-		return service.item(code);
+	public Map<String, Object> item(@PathVariable int code) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("item", service.item(code));
+		map.put("msg", "product "+ code + " : item ok");
+		
+		return map;
 	}
 	
 /**
@@ -62,7 +76,7 @@ public class ProductRestController {
  * @return 입력한 상품 정보를 반환
  */
 	@PostMapping
-	public Product add(Product item, @RequestParam("tcode") List<Integer> tcodes, 
+	public Map<String, Object> add(Product item, @RequestParam("tcode") List<Integer> tcodes, 
 			@RequestParam("image") List<MultipartFile> images) {
 		FileUploader uploader = new FileUploader();
 		List<Image> imageList = uploader.upload(images);
@@ -71,7 +85,12 @@ public class ProductRestController {
 		item.setTagsWithTcode(tcodes);
 		
 		service.add(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", "product add ok");
+		
+		return map;
 	}
 	
 /**
@@ -83,7 +102,7 @@ public class ProductRestController {
  * @return 입력한 상품의 정보가 반환된다
  */
 	@PostMapping("/{code}")
-	public Product update(@PathVariable int code, Product item, @RequestParam("tcode") List<Integer> tcodes,
+	public Map<String, Object> update(@PathVariable int code, Product item, @RequestParam("tcode") List<Integer> tcodes,
 			@RequestParam("image") List<MultipartFile> images) {
 		item.setCode(code);
 		imageService.delete(item.getCode());
@@ -95,7 +114,12 @@ public class ProductRestController {
 		item.setTagsWithTcode(tcodes);
 		
 		service.update(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", "product " + code + " : update ok");
+		
+		return map;
 	}
 	
 	/**
@@ -104,9 +128,12 @@ public class ProductRestController {
 	 * @return 기본키를 다시 반환
 	 */
 	@DeleteMapping("/{code}")
-	public int delete(@PathVariable int code) {
+	public Map<String, Object> delete(@PathVariable int code) {
 		imageService.delete(code);
 		service.delete(code);
-		return code;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("msg", "product " + code + " : delete ok");
+		return map;
 	}
 }
