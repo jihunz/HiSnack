@@ -23,10 +23,10 @@ class Dashboard extends React.Component {
         
     }
 
-    init() {
+    init = () => {
         fetch("./rest/product", {
             method: "GET",
-            headers: {"Content-type": "application/json"}
+            headers: {"Content-type": "application/json"},
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
@@ -51,22 +51,23 @@ class Dashboard extends React.Component {
     //     return null;
     // }
 
-    //페이지네이션 클릭 시 호출되도록 설정할 예정
-    movePage() {
-        fetch("./rest/product", {
-            method: "GET",
-            headers: {
-                "data": this.state.pager.page,
-                "Content-type": "application/json"
-            }
-        }).then(res => res.json()).then(result => {
-            this.setState(
-                (state, props) => {
-                    state.list = result.list;
-                    return state;
-            });
-        }).catch(err => console.log(err));
-    }
+    //페이지네이션 클릭 시 호출되도록 설정할 예정 -> 무한 호출됨 -> 이벤트리스터와 별개로 아래의 선언 부분 문제
+    // movePage = () => {
+    //     const page = 3;
+    //     fetch("./rest/product", {
+    //         method: "GET",
+    //         headers: {
+    //             // "data": page,
+    //             "Content-type": "application/json"
+    //         },
+    //     }).then(res => res.json()).then(result => {
+    //         this.setState(
+    //             (state, props) => {
+    //                 state.list = result.list;
+    //                 return state;
+    //         });
+    //     }).catch(err => console.log(err));
+    // }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
@@ -74,7 +75,7 @@ class Dashboard extends React.Component {
     }
 
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         
     }
 
@@ -219,13 +220,14 @@ class Pagenation extends React.Component {
     
     render() {
         const {pageList, query, onPageMove} = this.props;
+        const currPage = pageList.page;
 
         return (
             <div>
                 <div><a href="">이전</a></div>
                 <div>
                     <ul>
-                        {pageList.map(page => <div key={page} data-page={page} data-query={query} onClick={onPageMove}>{page}</div> )}
+                        {pageList.map(page => <div key={page} data-page={page} data-query={query} onClick={onPageMove(currPage)}>{page}</div> )}
                     </ul>
                 </div>
                 <div><a href="">다음</a></div>
