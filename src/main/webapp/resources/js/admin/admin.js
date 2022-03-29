@@ -8,11 +8,10 @@ class Dashboard extends React.Component {
         this.state = {
             title: "제품",
             list: [],
-            pager: {
-                pageList: [],
-                page: "",
-                query: "",
-            }
+            pageList: [],
+            prev: "",
+            next: "",
+            query: "",
         };
 
         this.init = this.init.bind(this);
@@ -23,7 +22,7 @@ class Dashboard extends React.Component {
         
     }
 
-    init = () => {
+    init() {
         fetch("./rest/product", {
             method: "GET",
             headers: {"Content-type": "application/json"},
@@ -31,9 +30,11 @@ class Dashboard extends React.Component {
             this.setState(
                 (state, props) => {
                     state.list = result.list;
-                    const pager = result.pager;
-                    state.pager.pageList = pager.list;
-                    state.pager.query = pager.query;
+                    state.pageList = result.pager.list;
+                    state.prev = result.pager.prev;
+                    state.next = result.pager.next;
+                    state.query = result.pager.query;
+                    console.log(result.list);
                     return state;
             });
         }).catch(err => console.log(err));
@@ -52,22 +53,20 @@ class Dashboard extends React.Component {
     // }
 
     //페이지네이션 클릭 시 호출되도록 설정할 예정 -> 무한 호출됨 -> 이벤트리스터와 별개로 아래의 선언 부분 문제
-    // movePage = () => {
-    //     const page = 3;
-    //     fetch("./rest/product", {
-    //         method: "GET",
-    //         headers: {
-    //             // "data": page,
-    //             "Content-type": "application/json"
-    //         },
-    //     }).then(res => res.json()).then(result => {
-    //         this.setState(
-    //             (state, props) => {
-    //                 state.list = result.list;
-    //                 return state;
-    //         });
-    //     }).catch(err => console.log(err));
-    // }
+    movePage(page, query) {
+        fetch(`./rest/product?page=${page}&${query}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json"
+            }
+        }).then(res => res.json()).then(result => {
+            this.setState(
+                (state, props) => {
+                    state.list = result.list;
+                    return state;
+            });
+        }).catch(err => console.log(err));
+    }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
@@ -86,12 +85,12 @@ class Dashboard extends React.Component {
 
     render() {
 
-        const {title, list, pager, query} = this.state;
+        const {title, list, pageList, prev, next, query} = this.state;
 
         return (
             <div className="container">
                 <Sidebar/>
-                <Section title={title} list={list} pageList={pager.pageList} query={query} onPageMove={this.movePage}/>
+                <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.movePage}/>
             </div>
         );
     }
@@ -101,7 +100,7 @@ class Dashboard extends React.Component {
 class Section extends React.Component {
     
     render() {
-        const {title, list, pageList, query, onPageMove} = this.props;
+        const {title, list, pageList, prev, next, query, onPageMove} = this.props;
 
         return (
             <div>
@@ -109,7 +108,7 @@ class Section extends React.Component {
                 <Search/>
                 <Btns/>
                 <DataTable list={list}/>
-                <Pagenation pageList={pageList} query={query} onPageMove={onPageMove}/>
+                <Pagenation pageList={pageList} query={query} onPageMove={onPageMove} prev={prev} next={next}/>
             </div>
         );
     }
@@ -202,8 +201,9 @@ class List extends React.Component {
                     <tr key={item.code}>
                         <td><input type="checkbox"/></td>
                         <td>{item.code}</td>
-                        <td>{item.img}</td>
-                        <td><a href="" onClick={null}>{item.name}</a></td>
+                        {/* 등록된 이미지가 있을 때만 src 설정 */}
+                        <td><img src={item.images[item] ? item.images[item].fullpath : ''}></img></td>
+                        <td><b onClick={null}>{item.name}</b></td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
                         <td><button>변경</button> <button>삭제</button></td>
@@ -219,18 +219,15 @@ class List extends React.Component {
 class Pagenation extends React.Component {
     
     render() {
-        const {pageList, query, onPageMove} = this.props;
-        const currPage = pageList.page;
+        const {pageList, prev, next, query, onPageMove} = this.props;
 
         return (
             <div>
-                <div><a href="">이전</a></div>
+                <div onClick={() => onPageMove(prev, query)} >이전</div>
                 <div>
-                    <ul>
-                        {pageList.map(page => <div key={page} data-page={page} data-query={query} onClick={onPageMove(currPage)}>{page}</div> )}
-                    </ul>
+                    {pageList.map(page => <div key={page} onClick={() => onPageMove(page, query)}>{page}</div> )}
                 </div>
-                <div><a href="">다음</a></div>
+                <div onClick={() => onPageMove(next, query)}>다음</div>
             </div>
             
         );
