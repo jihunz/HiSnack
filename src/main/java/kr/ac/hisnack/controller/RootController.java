@@ -107,6 +107,15 @@ public class RootController {
 	}
 	
 /**
+ * 로그아웃
+ */
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+/**
  * 소셜 로그인 로그인하기 위한 주소, 소셜 로그인을 위한 URL ->
  * https://accounts.google.com/o/oauth2/v2/auth?client_id=154631232160-ms9nmt9aggc9dgl6625fb0dij3sdhsb2.apps.googleusercontent.com&redirect_uri=http://localhost:9080/login/google&response_type=code&scope=email%20profile%20openid&access_type=offline
  * 
