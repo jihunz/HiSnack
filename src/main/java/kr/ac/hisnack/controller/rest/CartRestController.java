@@ -1,7 +1,9 @@
 package kr.ac.hisnack.controller.rest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -30,7 +32,7 @@ public class CartRestController {
 	 * @return 입력했던 상품을 반환한다
 	 */
 	@PostMapping
-	public OrderedProduct add(OrderedProduct item, HttpSession session, ObjectConverter<OrderedProduct> converter) {
+	public Map<String, Object> add(OrderedProduct item, HttpSession session, ObjectConverter<OrderedProduct> converter) {
 		Object cart = session.getAttribute("cart");
 		
 		List<OrderedProduct> list = converter.list(cart, OrderedProduct.class);
@@ -42,8 +44,11 @@ public class CartRestController {
 		list.add(item);
 		
 		session.setAttribute("cart", list);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("cart add : product %d ok", item.getPcode()));
 		
-		return item;
+		return map;
 	}
 	
 	/**
@@ -53,9 +58,16 @@ public class CartRestController {
 	 * @return Session에 저장되있는 상품을 반환
 	 */
 	@GetMapping
-	public List<OrderedProduct> list(HttpSession session, ObjectConverter<OrderedProduct> converter){		
+	public Map<String, Object> list(HttpSession session, ObjectConverter<OrderedProduct> converter){		
 		Object cart = session.getAttribute("cart");
 		List<OrderedProduct> list = converter.list(cart, OrderedProduct.class);
-		return list;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		if(list != null)
+			map.put("msg", String.format("cart list ok"));
+		else
+			map.put("msg", String.format("cart list is null"));
+		return map;
 	}
 }

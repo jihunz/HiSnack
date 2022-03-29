@@ -1,6 +1,8 @@
 package kr.ac.hisnack.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,9 +36,15 @@ public class OrdersRestController {
  * @return 주문 리스트
  */
 	@GetMapping
-	public List<Orders> list(Pager pager){
+	public Map<String, Object> list(Pager pager){
 		pager.setKeyword("n");
-		return service.list(pager);
+		List<Orders> list = service.list(pager);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("pager", pager);
+		map.put("msg", String.format("member list : ok"));
+		return map;
 	}
 	
 /**
@@ -45,8 +53,12 @@ public class OrdersRestController {
  * @return 키본키에 해당하는 주문
  */
 	@GetMapping("/{code}")
-	public Orders item(@PathVariable int code) {
-		return service.item(code);
+	public Map<String, Object> item(@PathVariable int code) {
+		Orders item = service.item(code);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("member %d : item ok", code));
+		return map;
 	}
 
 /**
@@ -57,7 +69,7 @@ public class OrdersRestController {
  * @return 입력한 주문 정보를 다시 반환한다
  */
 	@PostMapping
-	public Orders add(Orders item, @RequestParam("pcode") List<Integer> pcodes, 
+	public Map<String, Object> add(Orders item, @RequestParam("pcode") List<Integer> pcodes, 
 			@RequestParam("amount") List<Integer> amounts) {
 		try {
 			item.setSubscribe('n');
@@ -67,7 +79,12 @@ public class OrdersRestController {
 			e.printStackTrace();
 		}
 		service.add(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("member add : ok"));
+		
+		return map;
 	}
 	
 /**
@@ -79,7 +96,7 @@ public class OrdersRestController {
  * @return 입력했던 주문 정보를 다시 반환한다
  */
 	@PostMapping("/{code}")
-	public Orders update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
+	public Map<String, Object> update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
 			@RequestParam("amount") List<Integer> amounts) {
 		item.setCode(code);
 		item.setSubscribe('n');
@@ -93,7 +110,12 @@ public class OrdersRestController {
 		}
 		
 		service.update(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("member %d update : ok", code));
+		
+		return map;
 	}
 	
 /**
@@ -102,8 +124,13 @@ public class OrdersRestController {
  * @return 입력한 기본키를 반환
  */
 	@DeleteMapping("/{code}")
-	public int delete(@PathVariable int code) {
+	public Map<String, Object> delete(@PathVariable int code) {
 		service.delete(code);
-		return code;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("msg", String.format("member %d delete : ok", code));
+		
+		return map;
 	}
 }
