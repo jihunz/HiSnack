@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.util.ObjectConverter;
+import kr.ac.hisnack.util.Pager;
 
 /**
  * 장바구니에 관련된 일을 AJAX로하는 RestController
@@ -58,16 +59,17 @@ public class CartRestController {
 	 * @return Session에 저장되있는 상품을 반환
 	 */
 	@GetMapping
-	public Map<String, Object> list(HttpSession session, ObjectConverter<OrderedProduct> converter){		
+	public Map<String, Object> list(HttpSession session, ObjectConverter<OrderedProduct> converter, Pager pager){		
 		Object cart = session.getAttribute("cart");
 		List<OrderedProduct> list = converter.list(cart, OrderedProduct.class);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
+		map.put("pager", pager);
 		if(list != null)
-			map.put("msg", String.format("cart list ok"));
+			map.put("msg", String.format("cart list : ok"));
 		else
-			map.put("msg", String.format("cart list is null"));
+			map.put("msg", String.format("cart list : cart is null"));
 		return map;
 	}
 }

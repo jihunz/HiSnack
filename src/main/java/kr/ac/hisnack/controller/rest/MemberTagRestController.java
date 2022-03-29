@@ -1,6 +1,8 @@
 package kr.ac.hisnack.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +33,18 @@ public class MemberTagRestController {
  * @return 회원이 선택한 태그들 반환
  */
 	@GetMapping("/{id}")
-	public List<MemberTag> list(@PathVariable String id){
-		return service.list(id);
+	public Map<String, Object> list(@PathVariable String id){
+		List<MemberTag> list = service.list(id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		
+		if(list == null)
+			map.put("msg", String.format("member %s tag list : list is null", id));
+		else 
+			map.put("msg", String.format("member %s tag list : ok", id));
+		
+		return map; 
 	}
 	
 /**
@@ -42,12 +54,17 @@ public class MemberTagRestController {
  * @return 입력한 태그 리스트를 반환
  */
 	@PostMapping("/{id}")
-	public List<MemberTag> add(@PathVariable String id, @RequestBody List<MemberTag> list){
+	public Map<String, Object> add(@PathVariable String id, @RequestBody List<MemberTag> list){
 		for(MemberTag tag : list) {
 			tag.setId(id);
 		}
 		service.add(list);
-		return list;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("msg", String.format("member %s tag add : ok", id));
+		
+		return map;
 	}
 	
 /**
@@ -56,9 +73,14 @@ public class MemberTagRestController {
  * @return code를 다시 반환
  */
 	@DeleteMapping
-	public int delete(int code) {
+	public Map<String, Object> delete(int code) {
 		service.delete(code);
-		return code;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("msg", String.format("member tag %d delete : ok", code));
+		
+		return map;
 	}
 	
 /**
@@ -67,8 +89,13 @@ public class MemberTagRestController {
  * @return id를 다시 반환
  */
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable String id) {
+	public Map<String, Object> delete(@PathVariable String id) {
 		service.delete(id);
-		return id;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("msg", String.format("member %s tags delete : ok", id));
+		
+		return map;
 	}
 }

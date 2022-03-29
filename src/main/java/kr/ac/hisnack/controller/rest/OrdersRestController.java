@@ -43,7 +43,12 @@ public class OrdersRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("pager", pager);
-		map.put("msg", String.format("member list : ok"));
+		
+		if(list == null)
+			map.put("msg", String.format("orders list : list is null"));
+		else
+			map.put("msg", String.format("orders list : ok"));
+		
 		return map;
 	}
 	
@@ -57,7 +62,11 @@ public class OrdersRestController {
 		Orders item = service.item(code);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);
-		map.put("msg", String.format("member %d : item ok", code));
+		if(item == null)
+			map.put("msg", String.format("orders %d item : item is null", code));
+		else
+			map.put("msg", String.format("orders %d item : ok", code));
+		
 		return map;
 	}
 
@@ -82,7 +91,7 @@ public class OrdersRestController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);
-		map.put("msg", String.format("member add : ok"));
+		map.put("msg", String.format("orders add : ok"));
 		
 		return map;
 	}
@@ -113,7 +122,7 @@ public class OrdersRestController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);
-		map.put("msg", String.format("member %d update : ok", code));
+		map.put("msg", String.format("orders %d update : ok", code));
 		
 		return map;
 	}
@@ -129,7 +138,7 @@ public class OrdersRestController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", code);
-		map.put("msg", String.format("member %d delete : ok", code));
+		map.put("msg", String.format("orders %d delete : ok", code));
 		
 		return map;
 	}

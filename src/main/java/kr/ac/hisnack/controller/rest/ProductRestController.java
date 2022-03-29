@@ -48,7 +48,11 @@ public class ProductRestController {
 		
 		map.put("list", list);
 		map.put("pager", pager);
-		map.put("msg", "product list ok");
+		
+		if(list == null)
+			map.put("msg", "product list : list is null");
+		else
+			map.put("msg", "product list ok");
 		
 		return map; 
 	}
@@ -61,9 +65,13 @@ public class ProductRestController {
 	@GetMapping("/{code}")
 	public Map<String, Object> item(@PathVariable int code) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		Product item = service.item(code);
 		
-		map.put("item", service.item(code));
-		map.put("msg", "product "+ code + " : item ok");
+		map.put("item",item);
+		if(item == null)
+			map.put("msg", String.format("product %d item : item is null", code));
+		else
+			map.put("msg", String.format("product %d item : ok", code));
 		
 		return map;
 	}
@@ -88,7 +96,7 @@ public class ProductRestController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);
-		map.put("msg", "product add ok");
+		map.put("msg", "product add : ok");
 		
 		return map;
 	}
@@ -117,7 +125,7 @@ public class ProductRestController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);
-		map.put("msg", "product " + code + " : update ok");
+		map.put("msg", String.format("product %d update : ok", code));
 		
 		return map;
 	}
@@ -133,7 +141,7 @@ public class ProductRestController {
 		service.delete(code);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", code);
-		map.put("msg", "product " + code + " : delete ok");
+		map.put("msg", String.format("product %d delete : ok", code));
 		return map;
 	}
 }

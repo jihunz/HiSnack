@@ -38,7 +38,11 @@ public class MemberRestController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("msg", String.format("member list ok"));
+		map.put("pager", pager);
+		if(list == null)
+			map.put("msg", String.format("member list : list is null"));
+		else
+			map.put("msg", String.format("member list : ok"));
 		
 		return map;
 	}
@@ -49,8 +53,18 @@ public class MemberRestController {
  * @return
  */
 	@GetMapping("/{id}")
-	public Member item(@PathVariable String id) {
-		return service.item(id);
+	public Map<String, Object> item(@PathVariable String id) {
+		Member item = service.item(id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		
+		if(item == null)
+			map.put("msg", String.format("member %s item : ok", id));
+		else
+			map.put("msg", String.format("member %s item : member is null", id));
+		
+		return map; 
 	}
 	
 /**
@@ -61,6 +75,11 @@ public class MemberRestController {
 	@PostMapping
 	public Member add(Member item) {
 		service.add(item);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("member %s add : ok", item.getId()));
+		
 		return item;
 	}
 	
@@ -71,10 +90,15 @@ public class MemberRestController {
  * @return 입력한 정보를 다시 반환
  */
 	@PostMapping("/{id}")
-	public Member update(@PathVariable String id, Member item) {
+	public Map<String, Object> update(@PathVariable String id, Member item) {
 		item.setId(id);
 		service.update(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("member %s update : ok", id));
+		
+		return map;
 	}
 	
 /**
@@ -83,9 +107,14 @@ public class MemberRestController {
  * @return id를 다시 반환
  */
 	@DeleteMapping("/{id}")
-	public String delete(@PathVariable String id) {
+	public Map<String, Object> delete(@PathVariable String id) {
 		service.delete(id);
-		return id;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("msg", String.format("member %s delete : ok", id));
+		
+		return map;
 	}
 	
 /**

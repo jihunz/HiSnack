@@ -1,6 +1,8 @@
 package kr.ac.hisnack.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,9 +31,17 @@ public class TagRestController {
  * @return 태그 리스트를 반환
  */
 	@GetMapping
-	public List<Tag> list(){
+	public Map<String, Object> list(){
 		List<Tag> list = service.list();
-		return list;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		
+		if(list == null)
+			map.put("msg", "tag list : list is null");
+		else
+			map.put("msg", "tag list : ok");
+		
+		return map;
 	}
 	
 /**
@@ -40,9 +50,18 @@ public class TagRestController {
  * @return 태그 정보를 반환
  */
 	@GetMapping("/{code}")
-	public Tag item(@PathVariable int code) {
+	public Map<String, Object> item(@PathVariable int code) {
 		Tag item = service.item(code);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		
+		if(item == null)
+			map.put("msg", String.format("tag %d item : item is null", code));
+		else
+			map.put("msg", String.format("tag %d item : ok", code));
+		
+		return map;
 	}
 	
 /**
@@ -51,9 +70,14 @@ public class TagRestController {
  * @return 입력한 태그가 반환
  */
 	@PostMapping
-	public Tag add(Tag item) {
+	public Map<String, Object> add(Tag item) {
 		service.add(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("tag add : ok"));
+		
+		return map;
 	}
 	
 /**
@@ -63,10 +87,15 @@ public class TagRestController {
  * @return 입력한 태그가 반환
  */
 	@PostMapping("/{code}")
-	public Tag update(@PathVariable int code, Tag item) {
+	public Map<String, Object> update(@PathVariable int code, Tag item) {
 		item.setCode(code);
 		service.update(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("tag %d update : ok", code));
+		
+		return map;
 	}
 	
 /**
@@ -75,8 +104,13 @@ public class TagRestController {
  * @return 입력한 기본키를 다시 반환
  */
 	@DeleteMapping("/{code}")
-	public int delete(@PathVariable int code) {
+	public Map<String, Object> delete(@PathVariable int code) {
 		service.delete(code);
-		return code;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("msg", String.format("tag %d delete : ok", code));
+		
+		return map;
 	}
 }

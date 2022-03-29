@@ -1,6 +1,8 @@
 package kr.ac.hisnack.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,8 +42,19 @@ public class ReviewRestController {
  * @return 리뷰 리스트를 반환
  */
 	@GetMapping
-	public List<Review> list(Pager pager){
-		return service.list(pager);
+	public Map<String, Object> list(Pager pager){
+		List<Review> list = service.list(pager);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", list);
+		map.put("pager", pager);
+		
+		if(list == null)
+			map.put("msg", String.format("reivew list : list is null"));
+		else
+			map.put("msg", String.format("reivew list : ok"));
+		
+		return map; 
 	}
 	
 /**
@@ -50,8 +63,18 @@ public class ReviewRestController {
  * @return 리뷰 정보를 반환
  */
 	@GetMapping("/{code}")
-	public Review item(@PathVariable int code) {
-		return service.item(code);
+	public Map<String, Object> item(@PathVariable int code) {
+		Review item = service.item(code);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		
+		if(item == null)
+			map.put("msg", String.format("reivew %d item : item is null", code));
+		else
+			map.put("msg", String.format("reivew %d item : ok", code));
+		
+		return map;
 	}
 	
 /**
@@ -61,12 +84,17 @@ public class ReviewRestController {
  * @return 입력한 리뷰 정보가 반환된다
  */
 	@PostMapping
-	public Review add(Review item, @RequestParam("image") List<MultipartFile> images) {
+	public Map<String, Object> add(Review item, @RequestParam("image") List<MultipartFile> images) {
 		FileUploader uploader = new FileUploader();
 		List<Image> imageList = uploader.upload(images);
 		item.setImages(imageList);
 		service.add(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("reivew add : ok"));
+		
+		return map;
 	}
 	
 /**
@@ -77,7 +105,7 @@ public class ReviewRestController {
  * @return 입력한 리뷰 정보가 반환된다
  */
 	@PostMapping("/{code}")
-	public Review update(@PathVariable int code, Review item, @RequestParam("image") List<MultipartFile> images) {
+	public Map<String, Object> update(@PathVariable int code, Review item, @RequestParam("image") List<MultipartFile> images) {
 		item.setCode(code);
 		imageService.delete(item.getCode());
 		
@@ -86,7 +114,12 @@ public class ReviewRestController {
 		item.setImages(imageList);
 		
 		service.update(item);
-		return item;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item", item);
+		map.put("msg", String.format("reivew %d update : ok", code));
+		
+		return map;
 	}
 
 /**
@@ -95,9 +128,14 @@ public class ReviewRestController {
  * @return 기본키를 다시 반환한다
  */
 	@DeleteMapping("/{code}")
-	public int delete(@PathVariable int code) {
+	public Map<String, Object> delete(@PathVariable int code) {
 		imageService.delete(code);
 		service.delete(code);
-		return code;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("msg", String.format("reivew %d delete : ok", code));
+		
+		return map;
 	}
 }
