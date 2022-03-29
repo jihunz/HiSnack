@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.MemberTagDao;
 import kr.ac.hisnack.model.MemberTag;
+import kr.ac.hisnack.model.ProductTag;
 import kr.ac.hisnack.model.Tag;
 
 @Service
@@ -51,17 +52,30 @@ public class MemberTagServiceImpl implements MemberTagService{
 	}
 	
 /**
- * 회원이 선택한 태그들 추가
+ * 회원이 선택한 태그들 추가, ?가 Tag, ProductTag일 경우만 사용 가능
  */
 	@Transactional
 	@Override
-	public void add(List<Tag> tagList, String id) {
-		for(Tag tag : tagList) {
-			MemberTag item = new MemberTag();
-			item.setTcode(tag.getCode());
-			item.setId(id);
-			item.setRecom('y');
-			dao.add(item);
+	public void add(List<?> tagList, String id) {
+		if(tagList.get(0) instanceof Tag) {
+			for(Object tag : tagList) {
+				Tag t = (Tag) tag;
+				MemberTag item = new MemberTag();
+				item.setTcode(t.getCode());
+				item.setId(id);
+				item.setRecom('y');
+				dao.add(item);
+			}
+		}
+		else if(tagList.get(0) instanceof ProductTag) {
+			for(Object tag : tagList) {
+				ProductTag t = (ProductTag) tag;
+				MemberTag item = new MemberTag();
+				item.setTcode(t.getTcode());
+				item.setId(id);
+				item.setRecom('y');
+				dao.add(item);
+			}
 		}
 	}
 }

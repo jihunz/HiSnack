@@ -102,6 +102,12 @@ public class OrdersController {
 		item.setSubscribe('n');
 		
 		service.add(item);
+		List<Product> productList = ps.list(products);
+		
+		for(Product p : productList) {
+			mts.add(p.getTags(), item.getId());
+		}
+		
 		session.removeAttribute("cart");
 		return "redirect:confirm";
 	}

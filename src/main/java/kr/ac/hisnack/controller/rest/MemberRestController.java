@@ -122,8 +122,8 @@ public class MemberRestController {
  * @param id : 확인하고 싶은 문자열
  * @return 입력한 id가 사용할 수 있으면 ok, 이미 있으면 no가 반환
  */
-	@GetMapping("/confirm/{id}")
-	public String confirm(@PathVariable String id) {
+	@GetMapping("/confirm")
+	public String confirm(String id) {
 		if(service.confirm(id)) {
 			return "ok";	
 		}
