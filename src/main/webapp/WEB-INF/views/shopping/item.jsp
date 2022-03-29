@@ -13,7 +13,7 @@
 	<div id="item" data-code="${item.code}">
 		<c:forEach items="${item.images}" var="image">
 			<div>
-				<img src="${image.fullfilename}" alt="${image.filename}" />
+				<img src="${image.fullpath}" alt="${image.filename}" />
 			</div>
 		</c:forEach>
 		<p>번호 : ${item.code}</p>

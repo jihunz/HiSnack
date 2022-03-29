@@ -17,7 +17,7 @@
 			
 			<c:forEach items="${item.images}" var="image">
 				<div>
-					<a href="${item.code}"><img src="${image.fullfilename}" alt="${image.filename}" /></a>
+					<a href="${item.code}"><img src="${image.fullpath}" alt="${image.filename}" /></a>
 				</div>
 			</c:forEach>
 		</div>
