@@ -64,7 +64,6 @@ function chkId() {
     $.ajax(`rest/member/confirm?id=${userId}`, {
         method: "GET",
         success: result => {
-            console.log(result);
             idMsg(result);
             return;
         },
@@ -79,6 +78,8 @@ function chkId() {
         return;
     }
 
+    //서버에서 id 중복을 확인하여 id 개수가 0일 경우 "ok"를 전송하고
+    //이를 통해 아래의 함수에서 id의 중복여부를 확인
     function idMsg(result) {
         if (result === "ok") {
             alert("사용 가능한 아이디입니다");
