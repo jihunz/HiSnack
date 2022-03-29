@@ -101,8 +101,12 @@ public class SubscribeController {
  */
 	@GetMapping("/payment")
 	public String payment(Model model, HttpSession session) {
-		Member item = (Member) session.getAttribute("user");
-		model.addAttribute("item", item);
+		Member user = (Member) session.getAttribute("user");
+		Orders sub = (Orders) session.getAttribute("sub");
+		 
+		model.addAttribute("user", user);
+		model.addAttribute("sub", sub);
+		
 		return PATH+"payment";
 	}
 	

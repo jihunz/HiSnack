@@ -60,9 +60,9 @@ public class MemberRestController {
 		map.put("item", item);
 		
 		if(item == null)
-			map.put("msg", String.format("member %s item : ok", id));
-		else
 			map.put("msg", String.format("member %s item : member is null", id));
+		else
+			map.put("msg", String.format("member %s item : ok", id));
 		
 		return map; 
 	}
@@ -122,8 +122,8 @@ public class MemberRestController {
  * @param id : 확인하고 싶은 문자열
  * @return 입력한 id가 사용할 수 있으면 ok, 이미 있으면 no가 반환
  */
-	@GetMapping("/confirm")
-	public String confirm(String id) {
+	@GetMapping("/confirm/{id}")
+	public String confirm(@PathVariable String id) {
 		if(service.confirm(id)) {
 			return "ok";	
 		}
