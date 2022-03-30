@@ -23,7 +23,7 @@ class Dashboard extends React.Component {
     }
 
     init() {
-        fetch("./rest/product", {
+        fetch("/rest/product", {
             method: "GET",
             headers: { "Content-type": "application/json" },
         }).then(res => res.json()).then(result => {
@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
     add() {
         var formData = new FormData(document.getElementById("addForm"));
 
-        fetch("./rest/product", {
+        fetch("/rest/product", {
             method: "POST",
             headers: { "Content-type": "application/x-www-form-urlencoded" },
             body: formData,
@@ -299,7 +299,7 @@ class AddModal extends React.Component {
                                 <h5 className="modal-title" id="staticBackdropLabel">제품 등록</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <form id="addForm">
+                            <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
                                     <div className="mb-3">
                                         <label className="form-label">제품 이름</label>
