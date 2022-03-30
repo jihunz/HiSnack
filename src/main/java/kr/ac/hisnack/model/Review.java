@@ -75,6 +75,8 @@ public class Review {
 		this.rating = rating;
 	}
 	public String getThumbnail() {
+		if(images == null) return "";
+		else if(images.size() < 1) return "";
 		return images.get(0).getFullpath();
 	}
 }

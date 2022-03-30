@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,8 @@ import kr.ac.hisnack.util.Pager;
 @RestController
 @RequestMapping("/rest/cart")
 public class CartRestController {
-	
+	@Autowired
+	ObjectConverter<OrderedProduct> converter;
 	/**
 	 * 장바구니에 추가하고 싶은 상품의 기본키(pcode)와 수량(amount)를 입력하면 장바구니에 추가한다
 	 * @param item : 장바구니에 추가하고 싶은 상품, pcode와 amount가 입력 되있어야 한다
@@ -33,7 +35,7 @@ public class CartRestController {
 	 * @return 입력했던 상품을 반환한다
 	 */
 	@PostMapping
-	public Map<String, Object> add(OrderedProduct item, HttpSession session, ObjectConverter<OrderedProduct> converter) {
+	public Map<String, Object> add(OrderedProduct item, HttpSession session) {
 		Object cart = session.getAttribute("cart");
 		
 		List<OrderedProduct> list = converter.list(cart, OrderedProduct.class);
@@ -59,7 +61,7 @@ public class CartRestController {
 	 * @return Session에 저장되있는 상품을 반환
 	 */
 	@GetMapping
-	public Map<String, Object> list(HttpSession session, ObjectConverter<OrderedProduct> converter, Pager pager){		
+	public Map<String, Object> list(HttpSession session, Pager pager){		
 		Object cart = session.getAttribute("cart");
 		List<OrderedProduct> list = converter.list(cart, OrderedProduct.class);
 		

@@ -5,6 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ObjectConverter<T> {
 	public List<T> list(Object item, Class<T> c){
 		if(item == null || !(item instanceof Collection)) return null;
