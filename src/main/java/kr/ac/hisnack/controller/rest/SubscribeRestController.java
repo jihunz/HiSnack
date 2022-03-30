@@ -3,6 +3,7 @@ package kr.ac.hisnack.controller.rest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Orders;
+import kr.ac.hisnack.model.Tag;
+import kr.ac.hisnack.service.MemberTagService;
 import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.Pager;
@@ -30,6 +34,8 @@ public class SubscribeRestController {
 	OrdersService service;
 	@Autowired
 	ProductService pService;
+	@Autowired
+	MemberTagService mts;
 	
 /**
  * 구독 리스트를 얻는 메서드
@@ -79,19 +85,29 @@ public class SubscribeRestController {
 /**
  * 구독을 DB에 저장하는 메서드
  * @param item : 아이디, 주소, 이름, 전화번호를 입력된 구독 정보
- * @param pcodes : 구독하는 상품의 기본키 리스트
- * @param amounts : 구독한 상품의 수량 리스트 pcodes와 길이가 같아야 한다
+ * @param tcodes : tcode가 여러개 있으면 된다, 태그의 기본키
  * @return 입력한 구독 정보를 다시 반환한다
  */
 	@PostMapping
-	public Map<String, Object> add(Orders item, @RequestParam("pcode") List<Integer> pcodes, 
-			@RequestParam("amount") List<Integer> amounts) {
+	public Map<String, Object> add(Orders item, @RequestParam("tcode") List<Integer> tcodes) {
 		try {
 			item.setSubscribe('y');
-			item.setProducts(pcodes, amounts);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		List<Tag> tags = tcodes.stream().map(t -> {
+			Tag tag = new Tag();
+			tag.setCode(t);
+			return tag;
+		}).collect(Collectors.toList());
+		 
+		item.setTags(tags);
+		mts.add(item.getTags(), item.getId());
+		
+		List<OrderedProduct> list = pService.recommend(item.getId(), 30, item.getTotal(), (int)(item.getTotal() * 0.2));
+		item.setProducts(list);
+		
 		service.add(item);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -111,17 +127,9 @@ public class SubscribeRestController {
  * @return 입력했던 구독 정보를 다시 반환한다
  */
 	@PostMapping("/{code}")
-	public Map<String, Object> update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
-			@RequestParam("amount") List<Integer> amounts) {
+	public Map<String, Object> update(@PathVariable int code, Orders item) {
 		item.setCode(code);
 		item.setSubscribe('y');
-		
-		try {
-			item.setProducts(pcodes, amounts);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		service.update(item);
 		

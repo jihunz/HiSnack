@@ -54,17 +54,6 @@ public class OrdersServiceImpl implements OrdersService {
 	@Override
 	public void update(Orders item) {
 		dao.update(item);
-		
-		productDao.delete(item.getCode());
-		
-		List<OrderedProduct> list = item.getProducts();
-		
-		if(list == null) return;
-		
-		for(OrderedProduct p : list) {
-			p.setOcode(item.getCode());
-			productDao.add(p);
-		}
 	}
 
 /**

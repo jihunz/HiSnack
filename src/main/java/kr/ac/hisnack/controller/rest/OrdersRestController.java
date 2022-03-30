@@ -115,18 +115,9 @@ public class OrdersRestController {
  * @return 입력했던 주문 정보를 다시 반환한다
  */
 	@PostMapping("/{code}")
-	public Map<String, Object> update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
-			@RequestParam("amount") List<Integer> amounts) {
+	public Map<String, Object> update(@PathVariable int code, Orders item) {
 		item.setCode(code);
 		item.setSubscribe('n');
-		
-		try {
-			item.setProducts(pcodes, amounts);
-			item.setTotal(pService.priceTotal(item.getProducts()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		service.update(item);
 		
