@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Orders;
+import kr.ac.hisnack.model.Product;
+import kr.ac.hisnack.service.MemberTagService;
 import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.Pager;
@@ -30,6 +32,8 @@ public class OrdersRestController {
 	OrdersService service;
 	@Autowired
 	ProductService pService;
+	@Autowired
+	MemberTagService mts;
 /**
  * 주문 리스트를 얻는 메서드
  * @param pager : perPage로 몇개 가져오는지 정하고, page로 몇 페이지째 인지를 정한다
@@ -88,6 +92,12 @@ public class OrdersRestController {
 			e.printStackTrace();
 		}
 		service.add(item);
+		
+		List<Product> productList = pService.list(item.getProducts());
+		
+		for(Product p : productList) {
+			mts.add(p.getTags(), item.getId());
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);

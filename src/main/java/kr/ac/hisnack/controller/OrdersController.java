@@ -36,6 +36,8 @@ public class OrdersController {
 	MemberTagService mts;
 	@Autowired
 	ProductService ps;
+	@Autowired
+	ObjectConverter<OrderedProduct> converter;
 	
 /**
  * 주문 바구니에 넣어둔 상품 리스트를 결재하기 위한 페이지,
@@ -46,7 +48,7 @@ public class OrdersController {
  * @return 결재 페이지의 경로를 반환
  */
 	@GetMapping("/payment")
-	public String payment(Model model, HttpSession session, ObjectConverter<OrderedProduct> converter) {
+	public String payment(Model model, HttpSession session) {
 		Member user = (Member) session.getAttribute("user");
 		
 		if(user != null) {
@@ -82,7 +84,7 @@ public class OrdersController {
  * @return 결제 확인 페이지의 경로
  */
 	@PostMapping("/payment")
-	public String payment(Orders item, HttpSession session, ObjectConverter<OrderedProduct> converter) {
+	public String payment(Orders item, HttpSession session) {
 		Object cart = session.getAttribute("cart");
 		
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
@@ -120,7 +122,7 @@ public class OrdersController {
  * @return 장바구니 페이지의 경로를 반환
  */
 	@GetMapping("/cart")
-	public String cart(Model model, HttpSession session, ObjectConverter<OrderedProduct> converter) {
+	public String cart(Model model, HttpSession session) {
 		Object cart = session.getAttribute("cart");
 		
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);

@@ -38,6 +38,8 @@ public class ReviewController {
 	@Autowired
 	@Qualifier("ReviewImageService")
 	ImageService imageService;
+	@Autowired
+	FileUploader uploader;
 	
 /**
  * 리뷰 리스트 페이지
@@ -81,7 +83,7 @@ public class ReviewController {
  * @return list 페이지로 redirect
  */
 	@PostMapping("/add")
-	public String add(Review item, @RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
+	public String add(Review item, @RequestParam("image") List<MultipartFile> images) {
 		List<Image> imageList = uploader.upload(images);
 		item.setImages(imageList);
 		service.add(item);
@@ -111,7 +113,7 @@ public class ReviewController {
  */
 	@PostMapping("/update/{code}")
 	public String update(@PathVariable int code, Review item,
-			@RequestParam("image") List<MultipartFile> images, FileUploader uploader) {
+			@RequestParam("image") List<MultipartFile> images) {
 		item.setCode(code);
 		imageService.delete(item.getCode());
 		

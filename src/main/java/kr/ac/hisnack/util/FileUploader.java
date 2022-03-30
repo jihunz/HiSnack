@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hisnack.model.Image;
 
+@Component
 public class FileUploader {
 	public static String UPLOAD_PATH = "D:/hisnack_upload_image/";
 	
