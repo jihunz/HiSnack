@@ -8,6 +8,7 @@
 	<title>제품 수정</title>
 </head>
 <body>
+	<h1>리뷰 수정</h1>
 	<form method="post" enctype="multipart/form-data">
 		<input type="hidden" name="code" value="${item.code}"/>
 		
@@ -15,12 +16,12 @@
 			<div><img src="/upload/${image.fullfilename}" alt="" /></div>
 		</c:forEach>
 		
-		<div><input type="text" name="id" value="${item.id}"/></div>
+		<input type="hidden" name="id" value="${item.id}"/>
 		<div><input type="text" name="contents" value="${item.contents}"/></div>
 		<div><input type="number" name="rating" value="${item.rating}"/></div>
 		<div><input type="file" name="image"/></div>
 		<div><input type="file" name="image"/></div>
-		<button>보내기</button>
+		<button>확인</button>
 	</form>
 </body>
 </html>

@@ -74,4 +74,7 @@ public class Review {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
+	public String getThumbnail() {
+		return images.get(0).getFullpath();
+	}
 }

@@ -2,6 +2,8 @@ package kr.ac.hisnack.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hisnack.model.Image;
+import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.ImageService;
 import kr.ac.hisnack.service.ReviewService;
@@ -65,7 +68,9 @@ public class ReviewController {
  * 리뷰 작성 페이지
  */
 	@GetMapping("/add")
-	public String add() {
+	public String add(Model model, HttpSession session) {
+		Member user = (Member)session.getAttribute("user");
+		model.addAttribute("user", user);
 		return PATH+"add";
 	}
 /**
