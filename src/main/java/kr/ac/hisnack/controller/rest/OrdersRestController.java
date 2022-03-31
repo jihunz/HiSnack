@@ -90,7 +90,6 @@ public class OrdersRestController {
 		try {
 			item.setSubscribe('n');
 			item.setProducts(pcodes, amounts);
-			item.setTotal(pService.priceTotal(item.getProducts()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

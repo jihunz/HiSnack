@@ -21,6 +21,8 @@ public class OrdersServiceImpl implements OrdersService {
 	OrderedProductDao opd;
 	@Autowired
 	ProductDao pd;
+	@Autowired
+	ProductService ps;
 	
 /**
  * 주문 추가
@@ -28,9 +30,12 @@ public class OrdersServiceImpl implements OrdersService {
 	@Transactional
 	@Override
 	public void add(Orders item) {
-		dao.add(item);
-		
 		List<OrderedProduct> list = item.getProducts();
+		
+		if(item.getSubscribe() == 'n')
+			item.setTotal(ps.priceTotal(list));
+		
+		dao.add(item);
 		
 		if(list == null) return;
 		
