@@ -43,5 +43,9 @@ public class OrdersDaoImpl implements OrdersDao {
 	public int total(Pager pager) {
 		return sql.selectOne("orders.total", pager);
 	}
-
+	
+	@Override
+	public Orders latestSubscribe(String id) {
+		return sql.selectOne("orders.latest_sub", id);
+	}
 }

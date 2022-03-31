@@ -18,5 +18,12 @@ public interface ProductDao {
 	int total(Pager pager);
 
 	List<Product> list(Pager pager);
+	
+	/**
+	 * 회원이 구독하고 받은 모든 상품 리스트를 반환
+	 * @param id : 회원의 id
+	 * @return 회원이 구독하고 받은 상품 리스트
+	 */
+	List<Product> subscribeList(String id);
 
 }

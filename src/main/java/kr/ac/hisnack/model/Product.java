@@ -1,6 +1,7 @@
 package kr.ac.hisnack.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Product implements Comparable<Product>{
@@ -22,6 +23,14 @@ public class Product implements Comparable<Product>{
 	private int score;
 	private int amount;
 	
+	private Date date;
+	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	public int getAmount() {
 		return amount;
 	}

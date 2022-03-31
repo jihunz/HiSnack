@@ -137,7 +137,8 @@ public class ProductRecommender {
 		System.out.println("기준 가격 : " + basePrice);
 		
 		while(total < basePrice) {
-			int idx = rand.nextInt((int)(productList.size() * (randomRange / 100.0f)));
+			int range = (int)(productList.size() * (randomRange / 100.0f));
+			int idx = rand.nextInt(range < 1 ? 1 : range);
 			OrderedProduct item = new OrderedProduct();
 			item.setPcode(productList.get(idx).getCode());
 			item.setAmount(1);

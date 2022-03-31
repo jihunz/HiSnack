@@ -26,7 +26,6 @@ public class Orders {
 //	구독의 태그들
 	private List<Tag> tags;
 	
-	
 	public List<Tag> getTags() {
 		return tags;
 	}

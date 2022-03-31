@@ -44,4 +44,8 @@ public class ProductDaoImpl implements ProductDao {
 		return sql.selectList("product.list", pager);
 	}
 
+	@Override
+	public List<Product> subscribeList(String id) {
+		return sql.selectList("product.sub_list", id);
+	}
 }
