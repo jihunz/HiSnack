@@ -18,5 +18,11 @@ public interface OrdersDao {
 	List<Orders> list(Pager pager);
 
 	int total(Pager pager);
+/**
+ * 회원의 구독 정보 중 가장 최신 정보를 가져옴
+ * @param id : 회원의 아이디
+ * @return 회원의 구독 정보들 중 가장 최신만 반환
+ */
+	Orders latestSubscribe(String id);
 
 }

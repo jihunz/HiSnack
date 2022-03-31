@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.OrderedProductDao;
 import kr.ac.hisnack.dao.OrdersDao;
+import kr.ac.hisnack.dao.ProductDao;
 import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.util.Pager;
@@ -17,7 +18,11 @@ public class OrdersServiceImpl implements OrdersService {
 	@Autowired
 	OrdersDao dao;
 	@Autowired
-	OrderedProductDao productDao;
+	OrderedProductDao opd;
+	@Autowired
+	ProductDao pd;
+	@Autowired
+	ProductService ps;
 	
 /**
  * 주문 추가
@@ -25,15 +30,18 @@ public class OrdersServiceImpl implements OrdersService {
 	@Transactional
 	@Override
 	public void add(Orders item) {
-		dao.add(item);
-		
 		List<OrderedProduct> list = item.getProducts();
+		
+		if(item.getSubscribe() == 'n')
+			item.setTotal(ps.priceTotal(list));
+		
+		dao.add(item);
 		
 		if(list == null) return;
 		
 		for(OrderedProduct p : list) {
 			p.setOcode(item.getCode());
-			productDao.add(p);
+			opd.add(p);
 		}
 	}
 	
@@ -43,7 +51,7 @@ public class OrdersServiceImpl implements OrdersService {
 	@Transactional
 	@Override
 	public void delete(int code) {
-		productDao.delete(code);
+		opd.delete(code);
 		dao.delete(code);
 	}
 
@@ -65,7 +73,7 @@ public class OrdersServiceImpl implements OrdersService {
 		Pager pager = new Pager();
 		pager.setKeyword(item.getCode()+"");
 		pager.setSearch(1);
-		List<OrderedProduct> oProducts = productDao.list(pager);
+		List<OrderedProduct> oProducts = opd.list(pager);
 		item.setProducts(oProducts);
 		return item;
 	}
@@ -84,11 +92,23 @@ public class OrdersServiceImpl implements OrdersService {
 		for(Orders item : list) {
 			pager.setKeyword(item.getCode()+"");
 			pager.setSearch(1);
-			List<OrderedProduct> oProducts = productDao.list(pager);
+			List<OrderedProduct> oProducts = opd.list(pager);
 			item.setProducts(oProducts);
 		}
 		
 		return list;
 	}
-
+	
+	@Override
+	public Orders latestSubscribe(String id) {
+		Pager pager = new Pager();
+		pager.setPerPage(1);
+		pager.setOrder(1);
+		pager.setSearch(1);
+		pager.setKeyword(id);
+		
+		List<Orders> list = list(pager);
+		
+		return list.get(0);
+	}
 }

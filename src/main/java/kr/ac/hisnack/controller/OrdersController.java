@@ -90,11 +90,7 @@ public class OrdersController {
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
 		item.setProducts(products);
 		
-		if(products != null) {
-			int total = ps.priceTotal(products);
-			item.setTotal(total);
-		}
-		else {
+		if(products == null) {
 //			장바구니에 상품이 없으면 결제페이지에 오늘 걸 막는다
 //			intercepter에 이 기능을 추가할 가능성 있음
 			System.out.println("주문한 상품이 없습니다.");

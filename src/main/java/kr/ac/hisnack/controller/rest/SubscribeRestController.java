@@ -76,8 +76,9 @@ public class SubscribeRestController {
 		
 		if(item == null)
 			map.put("msg", String.format("subscribe %d item : item is null", code));
-		else
+		else {
 			map.put("msg", String.format("subscribe %d item : ok", code));
+		}
 		
 		return map;
 	}
@@ -154,6 +155,17 @@ public class SubscribeRestController {
 		
 		map.put("code", code);
 		map.put("msg", String.format("subscribe %d delete : ok", code));
+		
+		return map;
+	}
+	
+	@GetMapping("/detail")
+	public Map<String, Object> detail(String id){
+		Orders item = service.latestSubscribe(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("item", item);
+		map.put("msg", String.format("%s's latest subscribe : ok", id));
 		
 		return map;
 	}

@@ -6,8 +6,18 @@
 <mapper namespace="orders">
 	<sql id="search">
 		<where>
-			subscribe=#{keyword}
+			<if test="search == 0">
+				subscribe=#{keyword}
+			</if>
+			<if test="search == 1">
+				subscribe='y' AND id=#{keyword}
+			</if>
 		</where>
+	</sql>
+	<sql id="order">
+		<if test="order == 1">
+			ORDER BY order_date DESC
+		</if>
 	</sql>
 	
 	<insert id="add">
@@ -32,6 +42,7 @@
 		SELECT *
 		FROM orders
 		<include refid="search" />
+		<include refid="order"/>
 		LIMIT #{offset}, #{perPage}
 	</select>
 	<delete id="delete">
