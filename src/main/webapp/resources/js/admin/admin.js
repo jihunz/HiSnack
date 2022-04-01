@@ -45,7 +45,6 @@ class Dashboard extends React.Component {
 
         fetch("/rest/product", {
             method: "POST",
-            headers: { "Content-type": "application/x-www-form-urlencoded" },
             body: formData,
         }).then(res => res.json()).then(result => {
             alert(result.msg);
@@ -315,7 +314,7 @@ class AddModal extends React.Component {
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
-                                        <input type="text" className="form-control" name="tcode" maxLength="10"/>
+                                        <input type="number" className="form-control" name="tcode" maxLength="10"/>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
