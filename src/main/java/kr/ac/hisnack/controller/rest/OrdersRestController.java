@@ -65,11 +65,14 @@ public class OrdersRestController {
 	public Map<String, Object> item(@PathVariable int code) {
 		Orders item = service.item(code);
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("item", item);
+		
 		if(item == null)
 			map.put("msg", String.format("orders %d item : item is null", code));
-		else
+		else {
 			map.put("msg", String.format("orders %d item : ok", code));
+		}
 		
 		return map;
 	}
@@ -87,7 +90,6 @@ public class OrdersRestController {
 		try {
 			item.setSubscribe('n');
 			item.setProducts(pcodes, amounts);
-			item.setTotal(pService.priceTotal(item.getProducts()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -115,18 +117,9 @@ public class OrdersRestController {
  * @return 입력했던 주문 정보를 다시 반환한다
  */
 	@PostMapping("/{code}")
-	public Map<String, Object> update(@PathVariable int code, Orders item, @RequestParam("pcode") List<Integer> pcodes,
-			@RequestParam("amount") List<Integer> amounts) {
+	public Map<String, Object> update(@PathVariable int code, Orders item) {
 		item.setCode(code);
 		item.setSubscribe('n');
-		
-		try {
-			item.setProducts(pcodes, amounts);
-			item.setTotal(pService.priceTotal(item.getProducts()));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		service.update(item);
 		

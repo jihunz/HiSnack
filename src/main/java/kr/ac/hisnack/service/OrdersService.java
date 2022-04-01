@@ -11,4 +11,5 @@ public interface OrdersService {
 	void update(Orders item);
 	Orders item(int code);
 	List<Orders> list(Pager pager);
+	Orders latestSubscribe(String id);
 }

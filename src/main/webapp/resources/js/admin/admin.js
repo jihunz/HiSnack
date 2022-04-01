@@ -209,7 +209,7 @@ class List extends React.Component {
                         <td><input type="checkbox" /></td>
                         <td>{item.code}</td>
                         {/* 등록된 이미지가 있을 때만 src 설정 */}
-                        <td><img src={item.images[item] ? item.images[item].fullpath : ''}></img></td>
+                        <td><img src={item.thubnail}></img></td>
                         <td><b onClick={null}>{item.name}</b></td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
