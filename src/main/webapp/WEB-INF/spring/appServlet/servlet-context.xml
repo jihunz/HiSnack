@@ -26,6 +26,10 @@
 	
 	<context:component-scan base-package="kr.ac.hisnack" />
 	
-	
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:bean class="kr.ac.hisnack.util.intercepter.LoginIntercepter"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

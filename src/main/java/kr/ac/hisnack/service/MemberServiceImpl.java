@@ -105,4 +105,14 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 	}
+
+	@Override
+	public void keepLogin(String sessionId, String id) {
+		dao.keepLogin(sessionId, id);
+	}
+	
+	@Override
+	public Member checkMemberWithSessionId(String sessionId) {
+		return dao.checkMemberWithSessionId(sessionId);
+	}
 }

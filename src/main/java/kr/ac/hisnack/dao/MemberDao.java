@@ -21,4 +21,8 @@ public interface MemberDao {
 
 	Member login(Member item);
 
+	void keepLogin(String sessionId, String id);
+
+	Member checkMemberWithSessionId(String sessionId);
+
 }

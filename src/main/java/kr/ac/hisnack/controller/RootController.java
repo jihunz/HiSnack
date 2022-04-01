@@ -2,6 +2,9 @@ package kr.ac.hisnack.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -59,7 +63,7 @@ public class RootController {
  * @return 실패시 login 페이지로 redirect, 성공시 index로 redirect
  */
 	@PostMapping("/login")
-	public String login(Member item, HttpSession session) {
+	public String login(Member item, HttpSession session, HttpServletResponse response) {
 		Member user = ms.login(item);
 		
 		if(user == null) {
@@ -67,6 +71,19 @@ public class RootController {
 		}
 		
 		session.setAttribute("user", user);
+		
+//		세션의 아이디를 DB에 저장
+		String sessionId = session.getId();
+		ms.keepLogin(sessionId, user.getId());
+		
+//		세션의 아이디를 쿠키에 넣고 클라이언트에게 보내기
+		Cookie cookie = new Cookie("loginCookie", sessionId);
+		cookie.setPath("/");
+//		7주일 유지
+		cookie.setMaxAge(60 * 60 * 24 * 7);
+		response.addCookie(cookie);
+		
+		
 		return "redirect:/";
 	}
 	
@@ -110,7 +127,16 @@ public class RootController {
  * 로그아웃
  */
 	@GetMapping("/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+		Cookie cookie = WebUtils.getCookie(request, "loginCookie");
+		
+		if(cookie != null) {
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
+			Member user = (Member) session.getAttribute("user");
+			ms.keepLogin(null, user.getId());
+		}
+		
 		session.invalidate();
 		return "redirect:/";
 	}
@@ -127,22 +153,20 @@ public class RootController {
  */
 //	
 	@GetMapping("/login/google")
-	public String google(@RequestParam(value = "code") String authCode, HttpSession session) throws JsonProcessingException{
+	public String google(@RequestParam(value = "code") String authCode, HttpSession session, HttpServletResponse response) throws JsonProcessingException{
 		Map<String, String> map = SiteLoginer.google(authCode);
 		
 		Member user = new Member();
 		user.setId(map.get("email"));
 		user.setName(map.get("name"));
 		user.setEmail(map.get("email"));
+		user.setPassword(map.get("email"));
 
 		if(ms.confirm(user.getId())) {
 			ms.add(user);
 		}
-		else {
-			user = ms.item(user.getId());
-		}
 		
-		session.setAttribute("user", user);
+		login(user, session, response);
 		
 		return "redirect:/";
 	}

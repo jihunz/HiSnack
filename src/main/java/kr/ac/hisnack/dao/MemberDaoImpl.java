@@ -1,6 +1,8 @@
 package kr.ac.hisnack.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,17 @@ public class MemberDaoImpl implements MemberDao{
 	public Member login(Member item) {
 		return sql.selectOne("member.login", item);
 	}
+
+	@Override
+	public void keepLogin(String sessionId, String id) {
+		Map<String, String> map = new HashMap<>();
+		map.put("sessionId", sessionId);
+		map.put("id", id);
+		sql.update("member.keep_login", map);
+	}
 	
-	
+	@Override
+	public Member checkMemberWithSessionId(String sessionId) {
+		return sql.selectOne("member.check", sessionId);
+	}
 }

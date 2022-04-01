@@ -33,7 +33,7 @@
 
 	<insert id="add">
 		INSERT INTO member
-		VALUES(#{id}, PASSWORD(#{password}), #{address}, #{name}, #{tel}, 0, #{email})
+		VALUES(#{id}, PASSWORD(#{password}), #{address}, #{name}, #{tel}, 0, #{email}, NULL)
 	</insert>
 	<select id="item" resultMap="MemberMap">
 		SELECT member.*,
@@ -75,4 +75,15 @@
 		email=#{email}
 		WHERE id=#{id}
 	</update>
+	<update id="keep_login">
+		UPDATE member
+		SET
+		session_id=#{sessionId}
+		WHERE id=#{id}
+	</update>
+	<select id="check" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE session_id = #{sessionId}
+	</select>
 </mapper>
