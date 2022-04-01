@@ -14,4 +14,6 @@ public interface MemberService {
 	int total(Pager pager);
 	Member login(Member item);
 	boolean confirm(String id);
+	void keepLogin(String sessionId, String id);
+	Member checkMemberWithSessionId(String sessionId);
 }
