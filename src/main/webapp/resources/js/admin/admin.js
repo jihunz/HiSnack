@@ -318,7 +318,7 @@ class AddModal extends React.Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="staticBackdropLabel">제품 등록</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+                                <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
                             <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
