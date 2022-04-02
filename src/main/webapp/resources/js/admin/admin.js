@@ -275,6 +275,41 @@ class MenuList extends React.Component {
 
 //bootstrap modal -> id="staticBackdrop", id="staticBackdropLabel"을 임의로 수정 혹은 삭제하면 모달이 동작하지 않음
 class AddModal extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: "",
+            price: "",
+            manufacture: "",
+            tcode: "",
+            info: "",
+            image: ""
+        }
+
+        this.change = this.change.bind(this);
+        this.reset = this.reset.bind(this);
+    }
+
+    change(event) {
+        const inputName = event.target.name;
+
+      this.setState({
+            [inputName]: event.target.value,
+        });
+    }
+
+    reset() {
+        this.setState({
+            name: "",
+            price: "",
+            manufacture: "",
+            tcode: "",
+            info: "",
+            image: ""
+        })
+    }
+
     render() {
         return (
             <div>
@@ -289,31 +324,31 @@ class AddModal extends React.Component {
                                 <div className="modal-body">
                                     <div className="mb-3">
                                         <label className="form-label">제품 이름</label>
-                                        <input type="text" className="form-control" name="name" maxLength="32"/>
+                                        <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.change} maxLength="32"/>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">가격</label>
-                                        <input type="text" className="form-control" name="price"/>
+                                        <input type="text" className="form-control" name="price" value={this.state.price} onChange={this.change}/>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">제조사</label>
-                                        <input type="text" className="form-control" name="manufacture" maxLength="32"/>
+                                        <input type="text" className="form-control" name="manufacture" value={this.state.manufacture} onChange={this.change} maxLength="32"/>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
-                                        <input type="number"  className="form-control" name="tcode" maxLength="10"/>
+                                        <input type="number" className="form-control" name="tcode" value={this.state.tcode} onChange={this.change} maxLength="10"/>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
-                                        <textarea type="text" className="form-control" name="info"></textarea>
+                                        <textarea type="text" className="form-control" name="info" value={this.state.info} onChange={this.change}></textarea>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">이미지 등록</label>
-                                        <input type="file" className="form-control" name="image" multiple/>
+                                        <input type="file" className="form-control" name="image" value={this.state.image} onChange={this.change} multiple/>
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" id="cancel" className="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" id="cancel" className="btn btn-secondary" onClick={this.reset} data-bs-dismiss="modal">취소</button>
                                     <button type="button" className="btn btn-primary" onClick={this.props.onAdd}>등록</button>
                                 </div>
                             </form>
