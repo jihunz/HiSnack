@@ -18,14 +18,15 @@ class Dashboard extends React.Component {
         this.add = this.add.bind(this);
         // this.update = this.update.bind(this);
         // this.delete = this.delete.bind(this);
-        this.movePage = this.movePage.bind(this);
-
     }
 
-    init() {
-        fetch("/rest/product", {
+    init(p, q) {
+        const page = p;
+        fetch( (!page ? "/rest/product" : `/rest/product?page=${page}&${q}`), {
             method: "GET",
-            headers: { "Content-type": "application/json" },
+            headers: {
+                "Content-type": "application/json"
+            }
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
@@ -34,7 +35,6 @@ class Dashboard extends React.Component {
                     state.prev = result.pager.prev;
                     state.next = result.pager.next;
                     state.query = result.pager.query;
-                    console.log(result.list);
                     return state;
                 });
         }).catch(err => console.log(err));
@@ -48,6 +48,8 @@ class Dashboard extends React.Component {
             body: formData,
         }).then(res => res.json()).then(result => {
             alert(result.msg);
+            this.init();
+            document.getElementById("cancel").click();
         }).catch(err => console.log(err));
     }
 
@@ -59,21 +61,6 @@ class Dashboard extends React.Component {
     //     return null;
     // }
 
-    //페이지네이션 클릭 시 해당 페이지의 순서에 해당하는 데이터를 조회
-    movePage(page, query) {
-        fetch(`./rest/product?page=${page}&${query}`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json"
-            }
-        }).then(res => res.json()).then(result => {
-            this.setState(
-                (state, props) => {
-                    state.list = result.list;
-                    return state;
-                });
-        }).catch(err => console.log(err));
-    }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
@@ -82,7 +69,7 @@ class Dashboard extends React.Component {
 
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        
     }
 
     //컴포넌트가 마운트 해제되어 제거되기 직전에 호출
@@ -97,7 +84,7 @@ class Dashboard extends React.Component {
             <div className="container">
                 <AddModal onAdd={this.add} />
                 <Sidebar />
-                <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.movePage} />
+                <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.init} />
             </div>
         );
     }
@@ -314,7 +301,7 @@ class AddModal extends React.Component {
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
-                                        <input type="number" className="form-control" name="tcode" maxLength="10"/>
+                                        <input type="number"  className="form-control" name="tcode" maxLength="10"/>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
@@ -326,7 +313,7 @@ class AddModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" id="cancel" className="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                                     <button type="button" className="btn btn-primary" onClick={this.props.onAdd}>등록</button>
                                 </div>
                             </form>
