@@ -6,8 +6,47 @@
 <mapper namespace="product">
 	<sql id="search">
 		<where>
-			
+			<if test="search == 1">
+				<!-- 쇼핑몰 페이지에서 사용하는 where 문 -->
+				product.name LIKE CONCAT('%', #{keyword}, '%')
+				<if test="option == 1">
+					<!-- 가격이 1000원 이하 -->
+					<![CDATA[AND price <= 1000]]>
+				</if>
+				<if test="option == 2">
+					<!-- 가격이 2000원 이하 -->
+					<![CDATA[AND price <= 2000]]>
+				</if>
+				<if test="option == 3">
+					<!-- 가격이 3000원 이하 -->
+					<![CDATA[AND price <= 3000]]>
+				</if>
+				<if test="option == 4">
+					<!-- 가격이 3000원 이상 -->
+					<![CDATA[AND price >= 3000]]>
+				</if>
+				<if test="option == 5">
+					<!-- 가격이 4000원 이상 -->
+					<![CDATA[AND price >= 4000]]>
+				</if>
+			</if>
+			<if test="search == 2">
+				<!-- 관리자 페이지에서 사용하는 where 문 -->
+				product.code LIKE CONCAT('%', #{keyword}, '%')
+				OR product.name LIKE CONCAT('%', #{keyword}, '%')
+				OR product.manufacture LIKE CONCAT('%', #{keyword}, '%')
+			</if>
 		</where>
+	</sql>
+	<sql id="order">
+		<if test="order == 1">
+			<!-- 가격이 낮은 순 -->
+			ORDER BY price
+		</if>
+		<if test="order == 2">
+			<!-- 가격이 높은 순 -->
+			ORDER BY price DESC
+		</if>
 	</sql>
 	
 	<resultMap type="Product" id="ProductMap">
@@ -57,6 +96,7 @@
 		SELECT *
 		FROM product
 		<include refid="search" />
+		<include refid="order"/>
 		LIMIT #{offset}, #{perPage}
 	</select>
 	<delete id="delete">

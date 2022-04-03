@@ -30,7 +30,14 @@ public class Pager {
 	private String keyword;
 	private String keyword2;
 	private int order = 0;
+	private int option = 0;
 	
+	public int getOption() {
+		return option;
+	}
+	public void setOption(int option) {
+		this.option = option;
+	}
 	public int getSearch() {
 		return search;
 	}
