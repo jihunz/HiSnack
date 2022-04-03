@@ -44,7 +44,7 @@ public class SubscribeRestController {
  */
 	@GetMapping
 	public Map<String, Object> list(Pager pager){
-		pager.setKeyword("y");
+		pager.setKeyword2("y");
 		
 		List<Orders> list = service.list(pager);
 		

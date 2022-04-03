@@ -41,7 +41,7 @@ public class OrdersRestController {
  */
 	@GetMapping
 	public Map<String, Object> list(Pager pager){
-		pager.setKeyword("n");
+		pager.setKeyword2("n");
 		List<Orders> list = service.list(pager);
 		
 		Map<String, Object> map = new HashMap<String, Object>();

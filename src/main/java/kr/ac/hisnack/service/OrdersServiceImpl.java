@@ -104,7 +104,7 @@ public class OrdersServiceImpl implements OrdersService {
 		Pager pager = new Pager();
 		pager.setPerPage(1);
 		pager.setOrder(1);
-		pager.setSearch(1);
+		pager.setSearch(2);
 		pager.setKeyword(id);
 		
 		List<Orders> list = list(pager);

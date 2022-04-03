@@ -9,8 +9,8 @@
 			<if test="search == 1">
 				<!-- 관리자 페이지에서 사용하는 where 문 -->
 				product.code LIKE CONCAT('%', #{keyword}, '%')
-				OR product.name LIKE CONCAT('%', #{keyword}, '%')
-				OR product.manufacture LIKE CONCAT('%', #{keyword}, '%')
+				OR UPPER(product.name) LIKE CONCAT('%', UPPER(#{keyword}), '%')
+				OR UPPER(product.manufacture) LIKE CONCAT('%', UPPER(#{keyword}), '%')
 			</if>
 			<if test="search == 2">
 				<!-- 쇼핑몰 페이지에서 사용하는 where 문 -->

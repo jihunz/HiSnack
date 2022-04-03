@@ -7,9 +7,17 @@
 	<sql id="search">
 		<where>
 			<if test="search == 0">
-				subscribe=#{keyword}
+				<!-- 그냥 list를 할 때 사용, 주문과 구독을 구분할 때 사용 -->
+				subscribe=#{keyword2}
 			</if>
 			<if test="search == 1">
+				<!-- 관리자 페이지에서 검색할 때 사용 -->
+				(code LIKE CONCAT('%', #{keyword}, '%')
+				OR UPPER(id) LIKE CONCAT('%', UPPER(#{keyword}), '%'))
+				AND subscribe=#{keyword2} 
+			</if>
+			<if test="search == 2">
+				<!-- 마이페이지에서 회원의 구독 정보를 볼 때 사용 -->
 				subscribe='y' AND id=#{keyword}
 			</if>
 		</where>
