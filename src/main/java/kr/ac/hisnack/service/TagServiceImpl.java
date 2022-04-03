@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.TagDao;
 import kr.ac.hisnack.model.Tag;
+import kr.ac.hisnack.util.Pager;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -16,9 +18,12 @@ public class TagServiceImpl implements TagService {
 /**
  * 태그 리스트 검색
  */
+	@Transactional
 	@Override
-	public List<Tag> list() {
-		return dao.list();
+	public List<Tag> list(Pager pager) {
+		int total = dao.total(pager);
+		pager.setTotal(total);
+		return dao.list(pager);
 	}
 
 /**

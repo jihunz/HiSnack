@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ac.hisnack.model.Tag;
 import kr.ac.hisnack.service.TagService;
+import kr.ac.hisnack.util.Pager;
 
 /**
  * 태그를 CRUD하는 RestController
@@ -31,10 +32,11 @@ public class TagRestController {
  * @return 태그 리스트를 반환
  */
 	@GetMapping
-	public Map<String, Object> list(){
-		List<Tag> list = service.list();
+	public Map<String, Object> list(Pager pager){
+		List<Tag> list = service.list(pager);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
+		map.put("pager", pager);
 		
 		if(list == null)
 			map.put("msg", "tag list : list is null");

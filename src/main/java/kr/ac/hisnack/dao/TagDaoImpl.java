@@ -20,8 +20,8 @@ public class TagDaoImpl implements TagDao {
 	}
 
 	@Override
-	public List<Tag> list() {
-		return sql.selectList("tag.list");
+	public List<Tag> list(Pager pager) {
+		return sql.selectList("tag.list", pager);
 	}
 
 	@Override
