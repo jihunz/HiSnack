@@ -8,6 +8,13 @@
 		<where>
 			<choose>
 				<when test="search == 1">
+					<!-- 관리자 페이지에서 검색할 때 사용 -->
+					UPPER(id) LIKE CONCAT('%', UPPER(#{keyword}), '%')
+					OR UPPER(name) LIKE CONCAT('%', UPPER(#{keyword}), '%')
+					OR grade LIKE CONCAT('%', #{keyword}, '%')
+				</when>
+				<when test="search == 2">
+					<!-- confirm에서 사용 -->
 					id=#{keyword}
 				</when>
 			</choose>
