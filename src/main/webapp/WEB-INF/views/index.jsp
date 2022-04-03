@@ -79,7 +79,7 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                 <div class="swiper-slide">Slide 1</div>  
-                <!-- ${list.reg_date} -->
+                <!-- list.reg_date -->
                 <div class="swiper-slide">Slide 2</div>
                 <div class="swiper-slide">Slide 3</div>
                 <div class="swiper-slide">Slide 4</div>
