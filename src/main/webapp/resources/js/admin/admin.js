@@ -164,7 +164,7 @@ class DataTable extends React.Component {
             <div>
                 {/* css 작업 시작 시 border 속성 삭제해도 됨 */}
                 <table border="1">
-                    <thead>
+                    <thead id="th">
                         <tr>
                             {/* thead의 checkbox는 tbody의 checkbox를 제어할 props를 가지고 있어야 함 -> chk={chkAll} */}
                             <td><input type="checkbox" /></td>
@@ -194,8 +194,7 @@ class List extends React.Component {
                     <tr key={item.code}>
                         <td><input type="checkbox" /></td>
                         <td>{item.code}</td>
-                        {/* 등록된 이미지가 있을 때만 src 설정 */}
-                        <td><img src={item.thubnail}></img></td>
+                        <td><img src={item.thumbnail} id="thumbnail"></img></td>
                         <td><b onClick={null}>{item.name}</b></td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>

@@ -8,3 +8,13 @@
     height: 90px;
     background: rgb(243, 223, 39);
 }
+
+#th {
+    text-align: center;
+}
+
+#thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
