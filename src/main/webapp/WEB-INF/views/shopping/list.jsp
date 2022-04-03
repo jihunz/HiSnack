@@ -21,7 +21,7 @@
 					<label><input type="radio" name="option" value="5" ${pager.option == 5 ? 'checked' : ''}/>4000원 이상</label>
 				</div>
 				<div>
-					<input type="hidden" name="search" value="1">
+					<input type="hidden" name="search" value="2">
 					<input type="text" name="keyword" value="${pager.keyword}">
 					<button>검색</button>
 				</div>
