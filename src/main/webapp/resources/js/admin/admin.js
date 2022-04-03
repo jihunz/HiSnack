@@ -8,6 +8,7 @@ class Dashboard extends React.Component {
         this.state = {
             title: "제품",
             list: [],
+            item: {},
             pageList: [],
             prev: "",
             next: "",
@@ -16,8 +17,10 @@ class Dashboard extends React.Component {
 
         this.init = this.init.bind(this);
         this.add = this.add.bind(this);
-        // this.update = this.update.bind(this);
-        // this.delete = this.delete.bind(this);
+        this.update = this.update.bind(this);
+        this.item = this.item.bind(this);
+        this.delete = this.delete.bind(this);
+        this.change = this.change.bind(this);
     }
 
     init(p, q) {
@@ -53,13 +56,55 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    // update() {
-    //     return null;
-    // }
+    update() {
+        var formData = new FormData(document.getElementById("updateForm"));
+        var code = document.getElementById("updateForm").getAttribute("data-code");
+        console.log(code);
 
-    // delete() {
-    //     return null;
-    // }
+        // fetch(`/rest/product/${code}`, {
+        //     method: "PUT",
+        //     body: formData,
+        // }).then(res => res.json()).then(result => {
+        //     alert(result.msg);
+        //     this.init();
+        //     document.getElementById("cancel").click();
+        // }).catch(err => console.log(err));
+    }
+    
+
+    item(event) {
+        fetch( (`/rest/product/${event.target.id}`), {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json"
+            }
+        }).then(res => res.json()).then(result => {
+            this.setState(
+                (state, props) => {
+                    state.item = result.item;
+                    return state;
+                });
+        }).catch(err => console.log(err));
+    }
+
+    change(event) {
+        const inputName = event.target.name;
+
+        this.setState({
+            item: {
+                [inputName]: event.target.value,
+            }
+        });
+    }
+
+    delete(event) {
+        fetch(`/rest/product/${event.target.id}`, {
+            method: "DELETE",
+        }).then(res => res.json()).then(result => {
+            alert(result.msg);
+            this.init();
+        }).catch(err => console.log(err));
+    }
 
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
@@ -78,13 +123,14 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { title, list, pageList, prev, next, query } = this.state;
+        const { title, list, item, pageList, prev, next, query } = this.state;
 
         return (
             <div className="container">
                 <AddModal onAdd={this.add} />
+                <UpdateModal item={item} onChange={this.change} onUpdate={this.update}/>
                 <Sidebar />
-                <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.init} />
+                <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.init} onDelete={this.delete} onItem={this.item}/>
             </div>
         );
     }
@@ -94,14 +140,14 @@ class Dashboard extends React.Component {
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, onPageMove, onAdd } = this.props;
+        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onItem } = this.props;
 
         return (
             <div>
                 <Title title={title} />
                 <Search />
                 <Btns />
-                <DataTable list={list} />
+                <DataTable list={list} onDelete={onDelete} onItem={onItem}/>
                 <Pagenation pageList={pageList} query={query} onPageMove={onPageMove} prev={prev} next={next} />
             </div>
         );
@@ -145,7 +191,7 @@ class Btns extends React.Component {
         return (
             <div>
                 <div>
-                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">등록<img src="" /></button>
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
                 </div>
                 <div>
                     <button>삭제<img src="" /></button>
@@ -158,7 +204,7 @@ class Btns extends React.Component {
 // 테이블 컴포넌트 -> table 태그를 반환
 class DataTable extends React.Component {
     render() {
-        const { list } = this.props;
+        const { list, onDelete, onItem } = this.props;
 
         return (
             <div>
@@ -176,7 +222,7 @@ class DataTable extends React.Component {
                             <td>관리</td>
                         </tr>
                     </thead>
-                    <List list={list} />
+                    <List list={list} onDelete={onDelete} onItem={onItem}/>
                 </table>
             </div>
         );
@@ -186,7 +232,7 @@ class DataTable extends React.Component {
 //테이블의 자식 컴포넌트 -> DB의 각 table에 저장된 정보의 list를 반환
 class List extends React.Component {
     render() {
-        const { list } = this.props;
+        const { list, onDelete, onItem } = this.props;
 
         return (
             <tbody>
@@ -198,7 +244,7 @@ class List extends React.Component {
                         <td><b onClick={null}>{item.name}</b></td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
-                        <td><button>변경</button> <button>삭제</button></td>
+                        <td><button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" id={item.code} onClick={onItem}>변경</button> <button id={item.code} onClick={onDelete}>삭제</button></td>
                     </tr>
                 ) : <tr><td colSpan="7">등록된 제품이 없습니다</td></tr>}
 
@@ -272,7 +318,7 @@ class MenuList extends React.Component {
     }
 }
 
-//bootstrap modal -> id="staticBackdrop", id="staticBackdropLabel"을 임의로 수정 혹은 삭제하면 모달이 동작하지 않음
+//bootstrap을 사용한 addModal
 class AddModal extends React.Component {
     constructor(props) {
         super(props);
@@ -293,7 +339,7 @@ class AddModal extends React.Component {
     change(event) {
         const inputName = event.target.name;
 
-      this.setState({
+        this.setState({
             [inputName]: event.target.value,
         });
     }
@@ -312,11 +358,11 @@ class AddModal extends React.Component {
     render() {
         return (
             <div>
-                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
+                <div className="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="staticBackdropLabel">제품 등록</h5>
+                                <h5 className="modal-title" id="addModalLabel">제품 등록</h5>
                                 <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
                             <form id="addForm" encType="multipart/form-data">
@@ -349,6 +395,61 @@ class AddModal extends React.Component {
                                 <div className="modal-footer">
                                     <button type="button" id="cancel" className="btn btn-secondary" onClick={this.reset} data-bs-dismiss="modal">취소</button>
                                     <button type="button" className="btn btn-primary" onClick={this.props.onAdd}>등록</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+class UpdateModal extends React.Component {
+
+    render() {
+        const {item, onChange, onUpdate} = this.props;
+
+        return (
+            <div>
+                <div className="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="updateModalLabel">제품 정보 변경</h5>
+                                <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
+                            </div>
+                            <form id="updateForm" encType="multipart/form-data" data-code={item.code}>
+                                <div className="modal-body">
+                                    <div className="mb-3">
+                                        <label className="form-label">제품 이름</label>
+                                        <input type="text" className="form-control" name="name" value={item.name} onChange={onChange} maxLength="32"/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">가격</label>
+                                        <input type="text" className="form-control" name="price" value={item.price} onChange={onChange}/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">제조사</label>
+                                        <input type="text" className="form-control" name="manufacture" value={item.manufacture} onChange={onChange} maxLength="32"/>
+                                    </div>
+                                    {/* 태그 코드 map으로 출력? */}
+                                    <div className="mb-3">
+                                        <label className="form-label">태그 코드</label>
+                                        <input type="number" className="form-control" name="tcode" value={item.tags} onChange={onChange} maxLength="10"/>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">설명</label>
+                                        <textarea type="text" className="form-control" name="info" value={item.info} onChange={onChange}></textarea>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">이미지 등록</label>
+                                        <input type="file" className="form-control" name="image" multiple/>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" id="cancel" className="btn btn-secondary" onClick={this.reset} data-bs-dismiss="modal">취소</button>
+                                    <button type="button" className="btn btn-primary" onClick={onUpdate}>변경</button>
                                 </div>
                             </form>
                         </div>
