@@ -9,6 +9,7 @@ class Dashboard extends React.Component {
             title: "제품",
             list: [],
             item: {},
+            tags: [],
             pageList: [],
             prev: "",
             next: "",
@@ -57,12 +58,13 @@ class Dashboard extends React.Component {
     }
 
     update() {
-        var formData = new FormData(document.getElementById("updateForm"));
-        var code = document.getElementById("updateForm").getAttribute("data-code");
+        const formData = new FormData(document.getElementById("updateForm"));
+        const code = document.getElementById("codeInput").value;
+
         console.log(code);
 
         // fetch(`/rest/product/${code}`, {
-        //     method: "PUT",
+        //     method: "POST",
         //     body: formData,
         // }).then(res => res.json()).then(result => {
         //     alert(result.msg);
@@ -82,6 +84,7 @@ class Dashboard extends React.Component {
             this.setState(
                 (state, props) => {
                     state.item = result.item;
+                    state.tags = result.item.tags;
                     return state;
                 });
         }).catch(err => console.log(err));
@@ -123,12 +126,12 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { title, list, item, pageList, prev, next, query } = this.state;
+        const { title, list, item, tags, pageList, prev, next, query } = this.state;
 
         return (
             <div className="container">
                 <AddModal onAdd={this.add} />
-                <UpdateModal item={item} onChange={this.change} onUpdate={this.update}/>
+                <UpdateModal item={item} onChange={this.change} onUpdate={this.update} tags={tags}/>
                 <Sidebar />
                 <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.init} onDelete={this.delete} onItem={this.item}/>
             </div>
@@ -406,9 +409,8 @@ class AddModal extends React.Component {
 }
 
 class UpdateModal extends React.Component {
-
     render() {
-        const {item, onChange, onUpdate} = this.props;
+        const {item, tags, onChange, onUpdate} = this.props;
 
         return (
             <div>
@@ -419,8 +421,9 @@ class UpdateModal extends React.Component {
                                 <h5 className="modal-title" id="updateModalLabel">제품 정보 변경</h5>
                                 <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
-                            <form id="updateForm" encType="multipart/form-data" data-code={item.code}>
+                            <form id="updateForm" encType="multipart/form-data">
                                 <div className="modal-body">
+                                    <input type="hidden" id="codeInput" name="code" value={item.code}/>
                                     <div className="mb-3">
                                         <label className="form-label">제품 이름</label>
                                         <input type="text" className="form-control" name="name" value={item.name} onChange={onChange} maxLength="32"/>
@@ -433,10 +436,10 @@ class UpdateModal extends React.Component {
                                         <label className="form-label">제조사</label>
                                         <input type="text" className="form-control" name="manufacture" value={item.manufacture} onChange={onChange} maxLength="32"/>
                                     </div>
-                                    {/* 태그 코드 map으로 출력? */}
+                                    {/* item이 실행되어야 props 전달됨 */}
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
-                                        <input type="number" className="form-control" name="tcode" value={item.tags} onChange={onChange} maxLength="10"/>
+                                        {tags.length ? tags.map(tag => <input type="number" className="form-control" name="tcode" value={tag.code} maxLength="10" key={tag.code}/>) : ''}
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
