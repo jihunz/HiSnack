@@ -34,6 +34,10 @@
             <label for="tel">전화번호</label>
             <input type="text" name="tel" id="tel" placeholder="Tel" maxlength="16">
         </div>
+        <div>
+            <label for="email">이메일</label>
+            <input type="email" name="email" id="email" placeholder="Email" maxlength="32">
+        </div>
         <button id="signupBtn">회원가입</button>
     </form>
     

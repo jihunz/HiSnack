@@ -23,6 +23,6 @@ public interface MemberDao {
 
 	void keepLogin(String sessionId, String id);
 
-	Member checkMemberWithSessionId(String sessionId);
+	List<Member> checkMemberWithSessionId(String sessionId);
 
 }
