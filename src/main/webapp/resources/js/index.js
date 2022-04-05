@@ -14,18 +14,9 @@ $(function() {
 		}
 	});
 
-	showId();
+	$('#user-dropdown').hide();
+
+	$('#user-btn').click(function(){
+		$('#user-dropdown').toggle();
+	});
 });
-
-
-
-// 로그인을 하지 않았을 경우 dropdown 숨김,
-// 로그인 완료 시 loginBtn의 text를 id로 교체
-function showId() {
-	const loginBtn = $("#loginBtn");
-	if (user.userId != '') {
-		loginBtn.removeAttr("onClick").text(`${user.userId} 님`);
-	} else {
-		loginBtn.attr("onClick", "location.href='login'").removeAttr("data-bs-toggle");
-	}
-}

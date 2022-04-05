@@ -5,8 +5,12 @@
 	display: flex;
 	left: 0;
 	right: 0;
-	position: fixed;
+	top: 0;
+    position: sticky;
 	align-items: center;
+	justify-content: center;
+	box-shadow: 2px 2px 3px var(--color-light-gray);
+	z-index: 10;
 }
 
 .headercontent {
@@ -22,4 +26,68 @@
 #logoimgsize {
 	width: 400px;
 	height: 200px;
+}
+.logosize {
+	width: 140px;
+	height: 45px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.logoimg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	
+}
+.menefont {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 500;
+	font-size: 1rem;
+	color: black;
+}
+.menupadding {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.btn { 
+	text-decoration: none;
+	font-size:1rem;
+	padding:10px 35px 10px 35px;
+	border-radius: 25px;
+	border-style: solid;
+	border-width: 2px;
+	border-color:var(--logo-color);
+	transition:all 0.1s;
+	font-family: var(--noto);
+}
+
+#user-menu{
+	position: relative;
+}
+#user-dropdown{
+	top: 30px;
+	left: -10px;
+	position: absolute;
+	background-color: white;
+	box-shadow: 2px 2px 3px var(--color-light-gray);
+}
+#user-dropdown a{
+	width: 90px;
+	
+	padding: 10px 0px 10px 0px;
+	display: block;
+	text-align: center;
+}
+#user-dropdown li:not(:last-child){
+	border-bottom: 1px solid var(--color-light-gray);
+	
+}
+
+#user-btn{
+	user-select: none;
+	cursor: pointer;
+	padding: 10px 0px 10px 0px;
 }
