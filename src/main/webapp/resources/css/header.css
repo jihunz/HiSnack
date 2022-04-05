@@ -1,0 +1,25 @@
+.headerstart {
+	height: 100px;
+	color: black;
+	background: white;
+	display: flex;
+	left: 0;
+	right: 0;
+	position: fixed;
+	align-items: center;
+}
+
+.headercontent {
+	display: flex;
+	width: 1200px;
+	align-items: center;
+	justify-content: space-between;
+
+}
+.flex {
+	display: flex;
+}
+#logoimgsize {
+	width: 400px;
+	height: 200px;
+}

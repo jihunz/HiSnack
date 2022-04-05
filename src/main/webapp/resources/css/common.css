@@ -1,0 +1,14 @@
+:root{
+	--color-gray : '#555555';
+	--color-light-gray : '#e8e8e8';
+	--color-black : '#000000';
+	--color-white : '#ffffff';
+	--logo-color : '#ffdf82';
+	--button-color : '#1d1d1d';
+	--button-size : '170px 50px';
+	--button-font-size : '16px color #ffffff, medium'
+}
+
+body{
+	color : var(--color-main);
+}
