@@ -8,7 +8,7 @@
 		<where>
 			<if test="search == 1">
 				<!-- 관리자 페이지에서 검색 할 때 사용 -->
-				code = #{keyword}
+				code LIKE CONCAT('%', UPPER(#{keyword}), '%')
 				OR UPPER(content) LIKE CONCAT('%', UPPER(#{keyword}), '%')
 			</if>
 		</where>
