@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.MemberService;
 import kr.ac.hisnack.service.ReviewService;
+import kr.ac.hisnack.util.EmailSender;
 import kr.ac.hisnack.util.Pager;
 import kr.ac.hisnack.util.SiteLoginer;
 
@@ -36,6 +38,8 @@ public class RootController {
 	MemberService ms;
 	@Autowired
 	ReviewService rs;
+	@Autowired
+	EmailSender mailSender;
 	
 /**
  * 메인 페이지
@@ -107,6 +111,14 @@ public class RootController {
 	@PostMapping("/signup")
 	public String signup(Member item) {
 		ms.add(item);
+		try {
+			String subject = "HiSnack! 가입을 환영합니다";
+			String content = "HiSnack! 가입을 환영합니다! 알고리즘으로 추천된 여러가지 과자를 만나보세요!";
+			mailSender.sendSimpleEmail("hisnack2022@gmail.com", item.getEmail(), subject, content);
+		} catch (EmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "redirect:login";
 	}
 	
