@@ -97,10 +97,10 @@ class List extends React.Component {
 //각 행에 삽입되는 체크박스
 class Chkbox extends React.Component {
     render() {
-        const { code, chked, onEachCheck, onPushCodes } = this.props;
+        const { code, chked, onEachCheck } = this.props;
 
         return (
-            <input type="checkbox" className="chk" value={code} checked={chked} onChange={onPushCodes}/>
+            <input type="checkbox" className="chk" value={code} checked={chked} />
         );
     }
 }
