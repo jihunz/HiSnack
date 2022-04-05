@@ -11,6 +11,7 @@ class Dashboard extends React.Component {
             item: {},
             tags: [],
             pageList: [],
+            codes: [],
             prev: "",
             next: "",
             query: "",
@@ -22,6 +23,8 @@ class Dashboard extends React.Component {
         this.delete = this.delete.bind(this);
         this.change = this.change.bind(this);
         this.tagChange = this.tagChange.bind(this);
+        this.getCodes = this.getCodes.bind(this);
+        this.deleteList = this.deleteList.bind(this);
     }
 
     init(p, q) {
@@ -116,6 +119,38 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    getCodes() {
+        const cboxes = document.querySelectorAll(".chk");
+        
+        for(let i = 0; i <= cboxes.length - 1; i++) {
+            if(!cboxes[i].checked) {
+                this.setState(
+                    (state, props) => {
+                        state.codes = [...state.codes, cboxes[i].value];
+                        return state;
+                });
+            } else {
+                this.setState(
+                    (state, props) => {
+                        state.codes = "";
+                        return state;
+                });
+            }
+        }  
+    }
+
+    deleteList() {
+        const c = this.state.codes;
+
+        for(let i = 0; i <= c.length - 1; i++) {
+            fetch(`/rest/product/${c[i]}`, {
+                method: "DELETE",
+            }).then(res => res.json()).then(result => {
+                this.init();
+            }).catch(err => console.log(err));
+        }
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
         this.init();
@@ -137,7 +172,8 @@ class Dashboard extends React.Component {
         return (
             <div className="container">
                 <AddModal 
-                    onModify={this.modify} />
+                    onModify={this.modify}
+                />
                 <UpdateModal 
                     item={item} 
                     tags={tags} 
@@ -154,9 +190,10 @@ class Dashboard extends React.Component {
                     query={query}
                     onPageMove={this.init}
                     onDelete={this.delete}
-                    onDeleteList={this.deleteList}
                     onItem={this.item}
-                    onChked={this.onChked} />
+                    onGetCodes={this.getCodes}
+                    onDeleteList={this.deleteList}
+                />
             </div>
         );
     }

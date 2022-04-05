@@ -2,7 +2,7 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onDeleteList, onItem } = this.props;
+        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onItem, onGetCodes, onDeleteList } = this.props;
 
         return (
             <div>
@@ -10,13 +10,12 @@ class Section extends React.Component {
                     title={title} 
                 />
                 <Search />
-                <Btns 
-                    onDeleteList={onDeleteList}
-                />
+                <Btns onDeleteList={onDeleteList}/>
                 <DataTable 
                     list={list} 
                     onDelete={onDelete} 
-                    onItem={onItem} 
+                    onItem={onItem}
+                    onGetCodes={onGetCodes} 
                 />
                 <Pagenation 
                     pageList={pageList} 
@@ -70,7 +69,9 @@ class Btns extends React.Component {
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
                 </div>
                 <div>
-                    <button onClick={this.props.onDeleteList}>삭제<img src="" /></button>
+                    <button 
+                        onClick={this.props.onDeleteList}
+                    >삭제<img src="" /></button>
                 </div>
             </div>
         );
