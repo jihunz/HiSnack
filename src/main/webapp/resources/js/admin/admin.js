@@ -17,11 +17,11 @@ class Dashboard extends React.Component {
         };
 
         this.init = this.init.bind(this);
-        this.add = this.add.bind(this);
-        this.update = this.update.bind(this);
         this.item = this.item.bind(this);
+        this.modify = this.modify.bind(this);
         this.delete = this.delete.bind(this);
         this.change = this.change.bind(this);
+        this.tagChange = this.tagChange.bind(this);
     }
 
     init(p, q) {
@@ -42,37 +42,7 @@ class Dashboard extends React.Component {
                     return state;
                 });
         }).catch(err => console.log(err));
-    }
-
-    add() {
-        var formData = new FormData(document.getElementById("addForm"));
-
-        fetch("/rest/product", {
-            method: "POST",
-            body: formData,
-        }).then(res => res.json()).then(result => {
-            alert(result.msg);
-            this.init();
-            document.getElementById("cancel").click();
-        }).catch(err => console.log(err));
-    }
-
-    update() {
-        const formData = new FormData(document.getElementById("updateForm"));
-        const code = document.getElementById("codeInput").value;
-
-        console.log(code);
-
-        // fetch(`/rest/product/${code}`, {
-        //     method: "POST",
-        //     body: formData,
-        // }).then(res => res.json()).then(result => {
-        //     alert(result.msg);
-        //     this.init();
-        //     document.getElementById("cancel").click();
-        // }).catch(err => console.log(err));
-    }
-    
+    }  
 
     item(event) {
         fetch( (`/rest/product/${event.target.id}`), {
@@ -90,14 +60,51 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    change(event) {
+    change(event, i) {     
         const inputName = event.target.name;
-
         this.setState({
             item: {
+                ...this.state.item,
                 [inputName]: event.target.value,
+            },
+        });
+    }
+  
+    tagChange(event, index) {
+        this.setState({
+            tags: {
+                [index]: {
+                    ...this.state.tags[index],
+                    tcode: event.target.value,
+                }
             }
         });
+    }
+
+    modify(type) {
+        let url;
+        let formData;
+        var cancel;
+
+        if(type == "add") {
+            url = "/rest/product";
+            formData = new FormData(document.getElementById("addForm"));
+            cancel = document.querySelector(".aCancel");
+        } else if(type == "update") {
+            const code = document.getElementById("codeInput").value;
+            url = `/rest/product/${code}`;
+            formData = new FormData(document.getElementById("updateForm"));
+            cancel = document.querySelector(".uCancel");
+        }
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+        }).then(res => res.json()).then(result => {
+            alert(result.msg);
+            this.init();
+            cancel.click();
+        }).catch(err => console.log(err));
     }
 
     delete(event) {
@@ -108,7 +115,6 @@ class Dashboard extends React.Component {
             this.init();
         }).catch(err => console.log(err));
     }
-
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
@@ -130,8 +136,8 @@ class Dashboard extends React.Component {
 
         return (
             <div className="container">
-                <AddModal onAdd={this.add} />
-                <UpdateModal item={item} onChange={this.change} onUpdate={this.update} tags={tags}/>
+                <AddModal onModify={this.modify} />
+                <UpdateModal item={item} tags={tags} onChange={this.change} onTagChange={this.tagChange} onModify={this.modify}/>
                 <Sidebar />
                 <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.init} onDelete={this.delete} onItem={this.item}/>
             </div>
@@ -361,7 +367,7 @@ class AddModal extends React.Component {
     render() {
         return (
             <div>
-                <div className="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
+                <div className="modal fade mWrapper" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -396,8 +402,8 @@ class AddModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" id="cancel" className="btn btn-secondary" onClick={this.reset} data-bs-dismiss="modal">취소</button>
-                                    <button type="button" className="btn btn-primary" onClick={this.props.onAdd}>등록</button>
+                                    <button type="button" className="btn btn-secondary aCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => this.props.onModify("add")}>등록</button>
                                 </div>
                             </form>
                         </div>
@@ -410,7 +416,7 @@ class AddModal extends React.Component {
 
 class UpdateModal extends React.Component {
     render() {
-        const {item, tags, onChange, onUpdate} = this.props;
+        const {item, tags, onChange, onTagChange, onModify} = this.props;
 
         return (
             <div>
@@ -436,10 +442,12 @@ class UpdateModal extends React.Component {
                                         <label className="form-label">제조사</label>
                                         <input type="text" className="form-control" name="manufacture" value={item.manufacture} onChange={onChange} maxLength="32"/>
                                     </div>
-                                    {/* item이 실행되어야 props 전달됨 */}
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
-                                        {tags.length ? tags.map(tag => <input type="number" className="form-control" name="tcode" value={tag.code} maxLength="10" key={tag.code}/>) : ''}
+                                        {tags.length ?
+                                            tags.map(tag =>
+                                                 <input type="number" className="form-control" key={tag.tcode} name="tcode" value={tag.tcode} onChange={() => onTagChange(event, tags.indexOf(tag))}/>)
+                                            : <input type="number" className="form-control" key={item.code} name="tcode" placeholder="등록된 태그가 없습니다"/>}
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
@@ -451,8 +459,8 @@ class UpdateModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" id="cancel" className="btn btn-secondary" onClick={this.reset} data-bs-dismiss="modal">취소</button>
-                                    <button type="button" className="btn btn-primary" onClick={onUpdate}>변경</button>
+                                    <button type="button" className="btn btn-secondary uCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => onModify("update")}>변경</button>
                                 </div>
                             </form>
                         </div>
