@@ -4,11 +4,7 @@ body {
     height: 100%;
 }
 
-/* css 적용 전 컨텐츠 구분을 위한 스타일(추후 삭제 가능) 시작*/
-.wrapper {
-    border: 1px solid black;
-    margin-top: 10px;
-}
+
 
 #hLogo, #fLogo {
 	width: 400px;
@@ -55,7 +51,4 @@ footer {
   }
 /* swiper 스타일 끝*/
 
-.wrapper {
-    border: 1px solid black;
-    margin-top: 10px;
-}
+
