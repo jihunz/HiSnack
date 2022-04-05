@@ -49,27 +49,55 @@ class AddModal extends React.Component {
                                 <div className="modal-body">
                                     <div className="mb-3">
                                         <label className="form-label">제품 이름</label>
-                                        <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.change} maxLength="32"/>
+                                        <input type="text" className="form-control" 
+                                            name="name" 
+                                            value={this.state.name} 
+                                            onChange={this.change} 
+                                            maxLength="32"
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">가격</label>
-                                        <input type="text" className="form-control" name="price" value={this.state.price} onChange={this.change}/>
+                                        <input type="text" className="form-control" 
+                                            name="price" 
+                                            value={this.state.price} 
+                                            onChange={this.change}
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">제조사</label>
-                                        <input type="text" className="form-control" name="manufacture" value={this.state.manufacture} onChange={this.change} maxLength="32"/>
+                                        <input type="text" className="form-control" 
+                                            name="manufacture" 
+                                            value={this.state.manufacture} 
+                                            onChange={this.change} 
+                                            maxLength="32"
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
-                                        <input type="number" className="form-control" name="tcode" value={this.state.tcode} onChange={this.change} maxLength="10"/>
+                                        <input type="number" className="form-control" 
+                                            name="tcode" 
+                                            value={this.state.tcode} 
+                                            onChange={this.change} 
+                                            maxLength="10"
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
-                                        <textarea type="text" className="form-control" name="info" value={this.state.info} onChange={this.change}></textarea>
+                                        <textarea type="text" className="form-control" 
+                                            name="info" 
+                                            value={this.state.info} 
+                                            onChange={this.change}
+                                        ></textarea>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">이미지 등록</label>
-                                        <input type="file" className="form-control" name="image" value={this.state.image} onChange={this.change} multiple/>
+                                        <input type="file" className="form-control" 
+                                            name="image" 
+                                            value={this.state.image} 
+                                            onChange={this.change} 
+                                            multiple
+                                        />
                                     </div>
                                 </div>
                                 <div className="modal-footer">

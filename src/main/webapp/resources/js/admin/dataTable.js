@@ -1,7 +1,7 @@
 // 테이블 컴포넌트 -> table 태그를 반환
 class DataTable extends React.Component {
     render() {
-        const { list, onDelete, onItem } = this.props;
+        const { list, onDelete, onItem, } = this.props;
 
         return (
             <div>
@@ -9,7 +9,6 @@ class DataTable extends React.Component {
                 <table border="1">
                     <thead id="th">
                         <tr>
-                            {/* thead의 checkbox는 tbody의 checkbox를 제어할 props를 가지고 있어야 함 -> chk={chkAll} */}
                             <td><input type="checkbox" /></td>
                             <td>제품 번호</td>
                             <td>사진</td>
@@ -19,7 +18,11 @@ class DataTable extends React.Component {
                             <td>관리</td>
                         </tr>
                     </thead>
-                    <List list={list} onDelete={onDelete} onItem={onItem}/>
+                    <List 
+                        list={list} 
+                        onDelete={onDelete} 
+                        onItem={onItem}
+                    />
                 </table>
             </div>
         );
@@ -35,13 +38,16 @@ class List extends React.Component {
             <tbody>
                 {list.length ? list.map(item =>
                     <tr key={item.code}>
-                        <td><input type="checkbox" /></td>
+                        <td><input type="checkbox" className="chk"value={item.code}/></td>
                         <td>{item.code}</td>
                         <td><img src={item.thumbnail} id="thumbnail"></img></td>
                         <td><b onClick={null}>{item.name}</b></td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
-                        <td><button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" id={item.code} onClick={onItem}>변경</button> <button id={item.code} onClick={onDelete}>삭제</button></td>
+                        <td>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" id={item.code} onClick={onItem}>변경</button> 
+                            <button id={item.code} onClick={onDelete}>삭제</button>
+                        </td>
                     </tr>
                 ) : <tr><td colSpan="7">등록된 제품이 없습니다</td></tr>}
 

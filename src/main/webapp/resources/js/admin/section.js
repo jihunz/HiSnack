@@ -2,15 +2,29 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onItem } = this.props;
+        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onDeleteList, onItem } = this.props;
 
         return (
             <div>
-                <Title title={title} />
+                <Title 
+                    title={title} 
+                />
                 <Search />
-                <Btns />
-                <DataTable list={list} onDelete={onDelete} onItem={onItem}/>
-                <Pagenation pageList={pageList} query={query} onPageMove={onPageMove} prev={prev} next={next} />
+                <Btns 
+                    onDeleteList={onDeleteList}
+                />
+                <DataTable 
+                    list={list} 
+                    onDelete={onDelete} 
+                    onItem={onItem} 
+                />
+                <Pagenation 
+                    pageList={pageList} 
+                    query={query} 
+                    onPageMove={onPageMove} 
+                    prev={prev} 
+                    next={next} 
+                />
             </div>
         );
     }
@@ -47,7 +61,7 @@ class Search extends React.Component {
     }
 }
 
-// 버튼 컴포넌트 -> 등록, 삭제 반환
+// 버튼 컴포넌트 -> 등록, 삭제 버튼 반환
 class Btns extends React.Component {
     render() {
         return (
@@ -56,7 +70,7 @@ class Btns extends React.Component {
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
                 </div>
                 <div>
-                    <button>삭제<img src="" /></button>
+                    <button onClick={this.props.onDeleteList}>삭제<img src="" /></button>
                 </div>
             </div>
         );

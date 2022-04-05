@@ -136,10 +136,27 @@ class Dashboard extends React.Component {
 
         return (
             <div className="container">
-                <AddModal onModify={this.modify} />
-                <UpdateModal item={item} tags={tags} onChange={this.change} onTagChange={this.tagChange} onModify={this.modify}/>
+                <AddModal 
+                    onModify={this.modify} />
+                <UpdateModal 
+                    item={item} 
+                    tags={tags} 
+                    onChange={this.change} 
+                    onTagChange={this.tagChange} 
+                    onModify={this.modify}/>
                 <Sidebar />
-                <Section title={title} list={list} pageList={pageList} prev={prev} next={next} query={query} onPageMove={this.init} onDelete={this.delete} onItem={this.item}/>
+                <Section 
+                    title={title}
+                    list={list}
+                    pageList={pageList}
+                    prev={prev}
+                    next={next}
+                    query={query}
+                    onPageMove={this.init}
+                    onDelete={this.delete}
+                    onDeleteList={this.deleteList}
+                    onItem={this.item}
+                    onChked={this.onChked} />
             </div>
         );
     }

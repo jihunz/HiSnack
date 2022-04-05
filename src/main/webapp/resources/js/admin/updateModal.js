@@ -13,33 +13,67 @@ class UpdateModal extends React.Component {
                             </div>
                             <form id="updateForm" encType="multipart/form-data">
                                 <div className="modal-body">
-                                    <input type="hidden" id="codeInput" name="code" value={item.code}/>
+                                    <input type="hidden" id="codeInput" 
+                                        name="code" 
+                                        value={item.code}
+                                    />
                                     <div className="mb-3">
                                         <label className="form-label">제품 이름</label>
-                                        <input type="text" className="form-control" name="name" value={item.name} onChange={onChange} maxLength="32"/>
+                                        <input type="text" className="form-control" 
+                                            name="name" 
+                                            value={item.name}
+                                            onChange={onChange}
+                                            maxLength="32"
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">가격</label>
-                                        <input type="text" className="form-control" name="price" value={item.price} onChange={onChange}/>
+                                        <input type="text" className="form-control" 
+                                            name="price" 
+                                            value={item.price}
+                                            onChange={onChange}
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">제조사</label>
-                                        <input type="text" className="form-control" name="manufacture" value={item.manufacture} onChange={onChange} maxLength="32"/>
+                                        <input type="text" className="form-control" 
+                                            name="manufacture" 
+                                            value={item.manufacture}
+                                            onChange={onChange} 
+                                            maxLength="32"
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">태그 코드</label>
                                         {tags.length ?
                                             tags.map(tag =>
-                                                 <input type="number" className="form-control" key={tag.tcode} name="tcode" value={tag.tcode} onChange={() => onTagChange(event, tags.indexOf(tag))}/>)
-                                            : <input type="number" className="form-control" key={item.code} name="tcode" placeholder="등록된 태그가 없습니다"/>}
+                                                 <input type="number" className="form-control" 
+                                                    key={tag.tcode} 
+                                                    name="tcode" 
+                                                    value={tag.tcode} 
+                                                    onChange={() => onTagChange(event, tags.indexOf(tag))}
+                                                />)
+                                            : <input type="number" className="form-control" 
+                                                key={item.code} 
+                                                name="tcode" 
+                                                placeholder="등록된 태그가 없습니다"
+                                            />
+                                        }
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">설명</label>
-                                        <textarea type="text" className="form-control" name="info" value={item.info} onChange={onChange}></textarea>
+                                        <textarea type="text" className="form-control" 
+                                            name="info" 
+                                            value={item.info} 
+                                            onChange={onChange}
+                                        ></textarea>
                                     </div>
                                     <div className="mb-3">
                                         <label className="form-label">이미지 등록</label>
-                                        <input type="file" className="form-control" name="image" multiple/>
+                                        <input type="file" className="form-control" 
+                                            name="image" 
+                                            multiple
+                                        />
                                     </div>
                                 </div>
                                 <div className="modal-footer">
