@@ -2,7 +2,7 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onItem, onGetCodes, onDeleteList } = this.props;
+        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onItem, onGetCode, onGetCodes, onDeleteList } = this.props;
 
         return (
             <div>
@@ -15,7 +15,8 @@ class Section extends React.Component {
                     list={list} 
                     onDelete={onDelete} 
                     onItem={onItem}
-                    onGetCodes={onGetCodes} 
+                    onGetCode={onGetCode} 
+                    onGetCodes={onGetCodes}
                 />
                 <Pagenation 
                     pageList={pageList} 

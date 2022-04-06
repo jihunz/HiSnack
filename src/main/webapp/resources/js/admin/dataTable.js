@@ -5,34 +5,50 @@ class DataTable extends React.Component {
 
         this.state = {
             allchked: false,
-            chked: false,
+            chkList: [],
         }
 
         this.allCheck = this.allCheck.bind(this);
-        // this.eachCheck = this.eachCheck.bind(this);
+        this.eachCheck = this.eachCheck.bind(this);
     }
 
+    // 전체 체크 박스의 상태를 변경하는 함수
     allCheck() {
-        const { allchked } = this.state;
+        const { allchked, chkList } = this.state;
+        const changeChk = chkList.map((chk, idx) => {
+            chk = !allchked;
+            return chk;
+        });
 
         this.setState({
             allchked: !allchked,
-            chked: !allchked,
+            chkList: changeChk
+
         })
     }
 
-    // eachCheck() {
-    //     const { allchked } = this.state;
+    // 개별 체크 박스의 상태를 변경하는 함수
+    eachCheck(boxIdx) {
+        const { chkList } = this.state;
+        const changeChk = chkList.map((chk, idx) => {
+            if(idx === boxIdx) chk = !chk;
+            return chk;
+        });
+        this.setState({chkList: changeChk});
+    };
 
-    //     this.setState({
-    //         allchked: !allchked,
-    //         chked: !allchked,
-    //     })
-    // }
+    //해당 컴포넌트가 list props를 받으면 list.length만큼 체크 박스들의 상태(false) 생성
+    componentDidUpdate(prevProps) {
+        if(this.props.list !== prevProps.list) {
+            const { list } = this.props;
+            this.setState({ chkList: new Array(list.length).fill(false)})
+        }
+    }
 
     render() {
-        const { list, onDelete, onItem, onGetCodes } = this.props;
-
+        const { list, onDelete, onItem, onGetCode, onGetCodes } = this.props;
+        const { chkList } = this.state;
+        
         return (
             <div>
                 {/* css 작업 시작 시 border 속성 삭제해도 됨 */}
@@ -57,8 +73,9 @@ class DataTable extends React.Component {
                         list={list} 
                         onDelete={onDelete} 
                         onItem={onItem}
-                        chked={this.state.chked}
+                        chkList={chkList}
                         onEachCheck={this.eachCheck}
+                        onGetCode={onGetCode}
                     />
                 </table>
             </div>
@@ -70,17 +87,19 @@ class DataTable extends React.Component {
 class List extends React.Component {
     
     render() {
-        const { list, onDelete, onItem, chked, onEachCheck } = this.props;
+        const { list, chkList, onEachCheck, onGetCode, onDelete, onItem } = this.props;
 
         return (
             <tbody>
-                {list.length ? list.map(item =>
+                {list.length ? list.map((item, idx) =>
                     <tr key={item.code}>
                         <td>
                             <Chkbox 
                                 code={item.code} 
-                                chked={chked} 
-                                onEachCheck={onEachCheck} 
+                                index={idx}
+                                chkList={chkList[idx]}
+                                onEachCheck={onEachCheck}
+                                onGetCode={onGetCode}
                             />
                         </td>
                         <td>{item.code}</td>
@@ -105,11 +124,17 @@ class List extends React.Component {
 
 //각 행에 삽입되는 체크박스
 class Chkbox extends React.Component {
+
     render() {
-        const { code, chked, onEachCheck } = this.props;
+        const { code, index, chkList, onEachCheck, onGetCodes } = this.props;
 
         return (
-            <input type="checkbox" className="chk" value={code} checked={chked} />
+            <input type="checkbox" className="chk"
+                value={code} 
+                checked={chkList ? chkList : false}
+                onChange={() => {onEachCheck(index)}}
+                // onClick={onGetCodes}
+            />
         );
     }
 }

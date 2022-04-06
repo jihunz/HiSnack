@@ -25,6 +25,7 @@ class Dashboard extends React.Component {
         this.delete = this.delete.bind(this);
         this.change = this.change.bind(this);
         this.tagChange = this.tagChange.bind(this);
+        this.getCode = this.getCode.bind(this);
         this.getCodes = this.getCodes.bind(this);
         this.deleteList = this.deleteList.bind(this);
     }
@@ -121,23 +122,27 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    getCode(event) {
+        if(event.target.checked) {
+            this.setState(
+                (state) => {
+                    state.codes = [...state.codes, event.target.value];
+                    return state;
+            });
+        } else {this.setState( {codes: ""});}
+    }
+
     getCodes() {
         const cboxes = document.querySelectorAll(".chk");
         
         for(let i = 0; i <= cboxes.length - 1; i++) {
             if(!cboxes[i].checked) {
                 this.setState(
-                    (state, props) => {
+                    (state) => {
                         state.codes = [...state.codes, cboxes[i].value];
                         return state;
                 });
-            } else {
-                this.setState(
-                    (state, props) => {
-                        state.codes = "";
-                        return state;
-                });
-            }
+            } else {this.setState( {codes: ""});}
         }  
     }
 
@@ -193,6 +198,7 @@ class Dashboard extends React.Component {
                     onPageMove={this.init}
                     onDelete={this.delete}
                     onItem={this.item}
+                    onGetCode={this.getCode}
                     onGetCodes={this.getCodes}
                     onDeleteList={this.deleteList}
                 />
