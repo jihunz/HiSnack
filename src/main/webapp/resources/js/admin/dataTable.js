@@ -76,14 +76,23 @@ class List extends React.Component {
             <tbody>
                 {list.length ? list.map(item =>
                     <tr key={item.code}>
-                        <td><Chkbox code={item.code} chked={chked} onEachCheck={onEachCheck} /></td>
+                        <td>
+                            <Chkbox 
+                                code={item.code} 
+                                chked={chked} 
+                                onEachCheck={onEachCheck} 
+                            />
+                        </td>
                         <td>{item.code}</td>
                         <td><img src={item.thumbnail} id="thumbnail"></img></td>
                         <td><b onClick={null}>{item.name}</b></td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
                         <td>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" id={item.code} onClick={onItem}>변경</button> 
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" 
+                                id={item.code} 
+                                onClick={onItem}
+                            >변경</button> 
                             <button id={item.code} onClick={onDelete}>삭제</button>
                         </td>
                     </tr>
