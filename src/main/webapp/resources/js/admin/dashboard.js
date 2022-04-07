@@ -1,6 +1,6 @@
-//선택 삭제, 검색, 상세 정보 모달
-
 'use strict'
+
+//검색, 상세 정보 모달
 
 // 관리자 페이지의 모든 컴포넌트들의 부모 컴포넌트 
 class Dashboard extends React.Component {
@@ -89,19 +89,15 @@ class Dashboard extends React.Component {
     }
 
     modify(type) {
-        let url;
-        let formData;
-        let cancel;
+        let url;         
+        const formData = new FormData(document.getElementById(`${type}Form`));
+        const cancel = document.querySelector(`.${type}Cancel`);
 
         if(type == "add") {
             url = "/rest/product";
-            formData = new FormData(document.getElementById("addForm"));
-            cancel = document.querySelector(".aCancel");
         } else if(type == "update") {
             const code = document.getElementById("codeInput").value;
             url = `/rest/product/${code}`;
-            formData = new FormData(document.getElementById("updateForm"));
-            cancel = document.querySelector(".uCancel");
         }
 
         fetch(url, {
@@ -150,7 +146,7 @@ class Dashboard extends React.Component {
         } else {
             const updateCodes = this.state.codes.filter((code) => {
                 if(code !== event.target.value) return code;
-            })
+            });
             this.setState( {codes: updateCodes} );
         }
     }

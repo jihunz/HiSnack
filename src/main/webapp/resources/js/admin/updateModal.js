@@ -77,7 +77,7 @@ class UpdateModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary uCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
+                                    <button type="button" className="btn btn-secondary updateCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
                                     <button type="button" className="btn btn-primary" onClick={() => onModify("update")}>변경</button>
                                 </div>
                             </form>

@@ -101,7 +101,7 @@ class AddModal extends React.Component {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary aCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
+                                    <button type="button" className="btn btn-secondary addCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
                                     <button type="button" className="btn btn-primary" onClick={() => this.props.onModify("add")}>등록</button>
                                 </div>
                             </form>
