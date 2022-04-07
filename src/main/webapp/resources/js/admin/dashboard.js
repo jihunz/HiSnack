@@ -137,7 +137,7 @@ class Dashboard extends React.Component {
     }
 
     initCodes() {
-        this.setState({codes: ""});
+        this.setState({ codes: [] });
     }
 
     getCode(event) {
@@ -157,8 +157,7 @@ class Dashboard extends React.Component {
 
     getCodes(event) {
         const cboxes = document.querySelectorAll(".chk");
-        
-        // this.setState({codes: ""});
+
         for(let i = 0; i <= cboxes.length - 1; i++) {
             if(!cboxes[i].checked) {
                 this.setState(
@@ -166,7 +165,7 @@ class Dashboard extends React.Component {
                         state.codes = [...state.codes, cboxes[i].value];
                         return state;
                 });
-            } else {this.setState( {codes: ""} );}
+            } else {this.setState( {codes: [] });}
         }  
     }
 
