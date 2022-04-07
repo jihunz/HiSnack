@@ -111,14 +111,17 @@ public class RootController {
 	@PostMapping("/signup")
 	public String signup(Member item) {
 		ms.add(item);
-		try {
-			String subject = "HiSnack! 가입을 환영합니다";
-			String content = "HiSnack! 가입을 환영합니다! 알고리즘으로 추천된 여러가지 과자를 만나보세요!";
-			mailSender.sendSimpleEmail("hisnack2022@gmail.com", item.getEmail(), subject, content);
-		} catch (EmailException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(item.getEmail() != null && !item.getEmail().equals("")) {
+			try {
+				String subject = "HiSnack! 가입을 환영합니다";
+				String content = "HiSnack! 가입을 환영합니다! 알고리즘으로 추천된 여러가지 과자를 만나보세요!";
+				mailSender.sendSimpleEmail("hisnack2022@gmail.com", item.getEmail(), subject, content);
+			} catch (EmailException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 		}
+		
 		return "redirect:login";
 	}
 	
