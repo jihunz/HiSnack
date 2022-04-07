@@ -40,14 +40,20 @@ class DataTable extends React.Component {
     //해당 컴포넌트가 list props를 받으면 list.length만큼 체크 박스들의 상태(false) 생성
     componentDidUpdate(prevProps) {
         if(this.props.list !== prevProps.list) {
-            const { list } = this.props;
-            this.setState({ chkList: new Array(list.length).fill(false)})
+            const { list, onInitCodes } = this.props;
+
+            this.setState({ 
+                allchked : false,
+                chkList: new Array(list.length).fill(false)
+            });
+
+            onInitCodes();
         }
     }
 
     render() {
         const { list, onDelete, onItem, onGetCode, onGetCodes } = this.props;
-        const { chkList } = this.state;
+        const { allchked, chkList } = this.state;
         
         return (
             <div>
@@ -57,6 +63,7 @@ class DataTable extends React.Component {
                         <tr>
                             <td>
                                 <input type="checkbox"
+                                        checked={allchked}
                                         onChange={this.allCheck}
                                         onClick={onGetCodes}
                                 />
@@ -126,14 +133,14 @@ class List extends React.Component {
 class Chkbox extends React.Component {
 
     render() {
-        const { code, index, chkList, onEachCheck, onGetCodes } = this.props;
+        const { code, index, chkList, onEachCheck, onGetCode } = this.props;
 
         return (
             <input type="checkbox" className="chk"
                 value={code} 
                 checked={chkList ? chkList : false}
                 onChange={() => {onEachCheck(index)}}
-                // onClick={onGetCodes}
+                onClick={() => {onGetCode(event, index)}}
             />
         );
     }

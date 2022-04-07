@@ -23,11 +23,12 @@ class Dashboard extends React.Component {
         this.item = this.item.bind(this);
         this.modify = this.modify.bind(this);
         this.delete = this.delete.bind(this);
+        this.deleteList = this.deleteList.bind(this);
+        this.initCodes = this.initCodes.bind(this);
         this.change = this.change.bind(this);
         this.tagChange = this.tagChange.bind(this);
         this.getCode = this.getCode.bind(this);
         this.getCodes = this.getCodes.bind(this);
-        this.deleteList = this.deleteList.bind(this);
     }
 
     init(p, q) {
@@ -122,30 +123,6 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    getCode(event) {
-        if(event.target.checked) {
-            this.setState(
-                (state) => {
-                    state.codes = [...state.codes, event.target.value];
-                    return state;
-            });
-        } else {this.setState( {codes: ""});}
-    }
-
-    getCodes() {
-        const cboxes = document.querySelectorAll(".chk");
-        
-        for(let i = 0; i <= cboxes.length - 1; i++) {
-            if(!cboxes[i].checked) {
-                this.setState(
-                    (state) => {
-                        state.codes = [...state.codes, cboxes[i].value];
-                        return state;
-                });
-            } else {this.setState( {codes: ""});}
-        }  
-    }
-
     deleteList() {
         const c = this.state.codes;
 
@@ -153,9 +130,44 @@ class Dashboard extends React.Component {
             fetch(`/rest/product/${c[i]}`, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
+                this.initCodes();
                 this.init();
             }).catch(err => console.log(err));
         }
+    }
+
+    initCodes() {
+        this.setState({codes: ""});
+    }
+
+    getCode(event) {
+        if(event.target.checked) {
+            this.setState(
+                (state) => {
+                    state.codes = [...state.codes, event.target.value];
+                    return state;
+            });
+        } else {
+            const updateCodes = this.state.codes.filter((code) => {
+                if(code !== event.target.value) return code;
+            })
+            this.setState( {codes: updateCodes} );
+        }
+    }
+
+    getCodes(event) {
+        const cboxes = document.querySelectorAll(".chk");
+        
+        // this.setState({codes: ""});
+        for(let i = 0; i <= cboxes.length - 1; i++) {
+            if(!cboxes[i].checked) {
+                this.setState(
+                    (state) => {
+                        state.codes = [...state.codes, cboxes[i].value];
+                        return state;
+                });
+            } else {this.setState( {codes: ""} );}
+        }  
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
@@ -201,6 +213,7 @@ class Dashboard extends React.Component {
                     onGetCode={this.getCode}
                     onGetCodes={this.getCodes}
                     onDeleteList={this.deleteList}
+                    onInitCodes={this.initCodes}
                 />
             </div>
         );
