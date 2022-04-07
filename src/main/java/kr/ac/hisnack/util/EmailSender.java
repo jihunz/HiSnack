@@ -1,33 +1,66 @@
 package kr.ac.hisnack.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EmailSender {
-	public void sendSimpleEmail(String form, String to, String subject, String content) throws EmailException {
-		Email email = new SimpleEmail();
-		email.setHostName("smtp.googlemail.com");
-		email.setSmtpPort(465);
+	@Autowired
+	MailSender sender;
+	@Autowired
+	JavaMailSender jmSender;
+	
+	public void sendSimpleEmail(String to, String subject, String content) {
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setTo(to);
+				message.setSubject(subject);
+				message.setText(content);
+				sender.send(message);		
+			}
+		});
 		
-		List<String> list = new ArrayList<>();
-		list.add("ciin");
-		list.add("ourc");
-		list.add("vyrm");
-		list.add("mnjo");
+		t.start();
+	}
+	
+	public void sendHtmlEmail(String to, String name, String subject, String htmlStr){
+			Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				MimeMessage message = jmSender.createMimeMessage();
+			    try {
+			    	MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			    	helper.setSubject(subject);
+					
+			        //내용설정 
+			        helper.setText(htmlStr, true);
+
+			        //TO 설정 
+			        helper.setTo(new InternetAddress(to, name+"님", "utf-8"));
+
+			        jmSender.send(message);
+			    } catch (MessagingException e) {
+			        e.printStackTrace();
+			    } catch (UnsupportedEncodingException e) {
+			        e.printStackTrace();
+			    }	
+			}
+		});
 		
-		email.setAuthenticator(new DefaultAuthenticator("hisnack2022@gmail.com", list.get(3)+list.get(1)+list.get(2)+list.get(0)));
-		email.setSSLOnConnect(true);
-		email.setFrom(form);
-		email.setSubject(subject);
-		email.setMsg(content);
-		email.addTo(to);
-		email.send();
+		t.start();
 	}
 }

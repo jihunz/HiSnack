@@ -17,10 +17,12 @@ import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.model.Tag;
+import kr.ac.hisnack.service.MemberService;
 import kr.ac.hisnack.service.MemberTagService;
 import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.service.TagService;
+import kr.ac.hisnack.util.EmailSender;
 import kr.ac.hisnack.util.Pager;
 
 /**
@@ -39,6 +41,10 @@ public class SubscribeController {
 	ProductService ps;
 	@Autowired
 	MemberTagService mts;
+	@Autowired
+	MemberService ms;
+	@Autowired
+	EmailSender mailSender;
 	
 /**
  * 구독 상세 페이지로 이동시키는 메서드
@@ -132,6 +138,51 @@ public class SubscribeController {
 		
 		os.add(item);
 		session.removeAttribute("sub");
+		
+		Member user = ms.item(item.getId());
+		
+//		구독을 하면 이메일을 보낸다
+		if(user.getEmail() != null && !user.getEmail().equals("")) {
+			
+			
+//			MimeMessage message = jmSender.createMimeMessage();
+//		    try {
+//		    	MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+//		    	helper.setSubject("Hi Snack 구독하셨습니다");
+//		        //html메일내용
+//		        String htmlStr = "";
+//		        
+//		        htmlStr += "<p>안녕하세요. Hi Snack입니다</p>";
+//		        htmlStr += "<p>구독해 주셔서 감사합니다!</p>";
+//		        htmlStr += "<div>";
+//		        htmlStr += "<img src=\"http://localhost:9080/re/img/logo.svg\">";
+//		        htmlStr += "</div>";
+//		        htmlStr += "<p><a href=\"http://localhost:9080\">Hi Snack 바로가기</a></p>";
+//				
+//		        //내용설정 
+//		        helper.setText(htmlStr, true);
+//
+//		        //TO 설정 
+//		        helper.setTo(new InternetAddress(user.getEmail(), user.getName()+"님", "utf-8"));
+//
+//		        jmSender.send(message);
+//		    } catch (MessagingException e) {
+//		        e.printStackTrace();
+//		    } catch (UnsupportedEncodingException e) {
+//		        e.printStackTrace();
+//		    }
+		    String htmlStr = "";
+	        
+	        htmlStr += "<p>안녕하세요. Hi Snack입니다</p>";
+	        htmlStr += "<p>구독해 주셔서 감사합니다!</p>";
+	        htmlStr += "<div>";
+	        htmlStr += "<img src=\"http://localhost:9080/re/img/logo.svg\">";
+	        htmlStr += "</div>";
+	        htmlStr += "<p><a href=\"http://localhost:9080\">Hi Snack 바로가기</a></p>";
+	        
+		    mailSender.sendHtmlEmail(user.getEmail(), user.getName(), "Hi Snack 구독하셨습니다", htmlStr);
+		}
+		
 		return "redirect:/orders/confirm";
 	}
 }

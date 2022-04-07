@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +39,7 @@ public class RootController {
 	ReviewService rs;
 	@Autowired
 	EmailSender mailSender;
+	
 	
 /**
  * 메인 페이지
@@ -111,15 +111,15 @@ public class RootController {
 	@PostMapping("/signup")
 	public String signup(Member item) {
 		ms.add(item);
-		if(item.getEmail() != null && !item.getEmail().equals("")) {
-			try {
-				String subject = "HiSnack! 가입을 환영합니다";
-				String content = "HiSnack! 가입을 환영합니다! 알고리즘으로 추천된 여러가지 과자를 만나보세요!";
-				mailSender.sendSimpleEmail("hisnack2022@gmail.com", item.getEmail(), subject, content);
-			} catch (EmailException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+		if(item.getEmail() != null && !item.getEmail().equals("")) {			
+//			SimpleMailMessage message = new SimpleMailMessage();
+//			message.setTo(item.getEmail());
+//			message.setSubject("Hi Snack!의 가입을 환영합니다!");
+//			message.setText(item.getName()+"님 환영합니다. \n알고리즘이 추천한 여러 과자들을 즐겨주세요!");
+//			sender.send(message);
+			
+			mailSender.sendSimpleEmail(item.getEmail(), "Hi Snack!의 가입을 환영합니다!", 
+					item.getName()+"님 환영합니다. \n알고리즘이 추천한 여러 과자들을 즐겨주세요!");
 		}
 		
 		return "redirect:login";

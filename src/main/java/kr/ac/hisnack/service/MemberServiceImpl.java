@@ -115,6 +115,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member checkMemberWithSessionId(String sessionId) {
 		List<Member> list = dao.checkMemberWithSessionId(sessionId);
+		
+		if(list == null) return null;
+		
 //		session_id가 같은 회원이 있을 경우
 		if(list.size() == 1) {
 //			한명이면 정상이고 반환한다
