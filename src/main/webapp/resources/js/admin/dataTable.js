@@ -101,9 +101,6 @@ class List extends React.Component {
                     <tr 
                         key={idx} 
                         data-code={item.code} 
-                        onClick={onItem} 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#infoModal"
                     >
                         <td>
                             <Chkbox 
@@ -116,7 +113,14 @@ class List extends React.Component {
                         </td>
                         <td>{item.code}</td>
                         <td data-code={item.code}><img src={item.thumbnail} id="thumbnail"></img></td>
-                        <td>{item.name}</td>
+                        <td
+                            className="pointer"
+                            onClick={onItem}
+                            data-bs-toggle="modal" 
+                            data-bs-target="#infoModal"
+                        >
+                            <b>{item.name}</b>
+                        </td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
                         <td data-code={item.code}>

@@ -24,3 +24,7 @@
     height: 130px;
     object-fit: cover;
 }
+
+.pointer {
+    cursor: pointer;
+}
