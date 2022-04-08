@@ -57,8 +57,7 @@ class DataTable extends React.Component {
         
         return (
             <div>
-                {/* css 작업 시작 시 border 속성 삭제해도 됨 */}
-                <table border="1">
+                <table className="table table-hover">
                     <thead id="th">
                         <tr>
                             <td>
@@ -99,7 +98,13 @@ class List extends React.Component {
         return (
             <tbody>
                 {list.length ? list.map((item, idx) =>
-                    <tr key={item.code}>
+                    <tr 
+                        key={idx} 
+                        data-code={item.code} 
+                        onClick={onItem} 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#infoModal"
+                    >
                         <td>
                             <Chkbox 
                                 code={item.code} 
@@ -110,13 +115,13 @@ class List extends React.Component {
                             />
                         </td>
                         <td>{item.code}</td>
-                        <td><img src={item.thumbnail} id="thumbnail"></img></td>
-                        <td><b onClick={null}>{item.name}</b></td>
+                        <td data-code={item.code}><img src={item.thumbnail} id="thumbnail"></img></td>
+                        <td>{item.name}</td>
                         <td>{item.price}</td>
                         <td>{item.manufacture}</td>
-                        <td>
+                        <td data-code={item.code}>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal" 
-                                id={item.code} 
+                                data-code={item.code} 
                                 onClick={onItem}
                             >변경</button> 
                             <button id={item.code} onClick={onDelete}>삭제</button>

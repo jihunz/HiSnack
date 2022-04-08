@@ -11,6 +11,7 @@ class Dashboard extends React.Component {
             title: "제품",
             list: [],
             item: {},
+            images: [],
             tags: [],
             pageList: [],
             codes: [],
@@ -62,7 +63,7 @@ class Dashboard extends React.Component {
     }  
 
     item(event) {
-        fetch( (`/rest/product/${event.target.id}`), {
+        fetch( (`/rest/product/${event.target.parentNode.dataset.code}`), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -71,6 +72,7 @@ class Dashboard extends React.Component {
             this.setState(
                 (state, props) => {
                     state.item = result.item;
+                    state.images = result.item.images;
                     state.tags = result.item.tags;
                     return state;
                 });
@@ -123,6 +125,7 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
     delete(event) {
         fetch(`/rest/product/${event.target.id}`, {
             method: "DELETE",
@@ -132,6 +135,7 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    // 전체 삭제 시 사용하는 함수
     deleteList() {
         const c = this.state.codes;
 
@@ -194,16 +198,21 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { title, list, item, tags, pageList, prev, next, query } = this.state;
+        const { title, list, item, tags, pageList, prev, next, query, images } = this.state;
 
         return (
             <div className="container">
+                <InfoModal
+                    item={item}
+                    tags={tags}
+                    images={images}
+                />
                 <AddModal 
                     onModify={this.modify}
                 />
                 <UpdateModal 
                     item={item} 
-                    tags={tags} 
+                    tags={tags}
                     onChange={this.change} 
                     onTagChange={this.tagChange} 
                     onModify={this.modify}/>

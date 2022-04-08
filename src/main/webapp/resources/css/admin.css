@@ -18,3 +18,9 @@
     height: 100px;
     object-fit: cover;
 }
+
+#infoImg {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+}
