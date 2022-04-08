@@ -2,15 +2,13 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, onPageMove, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes } = this.props;
+        const { title, list, pageList, prev, next, query, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
 
         return (
             <div>
-                <Title 
-                    title={title} 
-                />
-                <Search />
-                <Btns onDeleteList={onDeleteList}/>
+                <Title title={title} />
+                <Search onList={onList} />
+                <Btns onDeleteList={onDeleteList} />
                 <DataTable 
                     list={list} 
                     onDelete={onDelete} 
@@ -22,7 +20,7 @@ class Section extends React.Component {
                 <Pagenation 
                     pageList={pageList} 
                     query={query} 
-                    onPageMove={onPageMove} 
+                    onList={onList} 
                     prev={prev} 
                     next={next} 
                 />
@@ -51,11 +49,13 @@ class Title extends React.Component {
 //검색창 컴포넌트
 class Search extends React.Component {
     render() {
+        const { onInit } = this.props;
+
         return (
             <div>
                 <form>
                     <input type="text" name="keyword" placeholder="제품 번호, 제품명, 제조사 등" />
-                    <button><img src="" />검색</button>
+                    <button type="button" onClick={onInit}><img src="" />검색</button>
                 </form>
             </div>
         );

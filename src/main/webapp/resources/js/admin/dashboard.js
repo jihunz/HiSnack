@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
             query: "",
         };
 
-        this.init = this.init.bind(this);
+        this.list = this.list.bind(this);
         this.item = this.item.bind(this);
         this.modify = this.modify.bind(this);
         this.delete = this.delete.bind(this);
@@ -31,9 +31,8 @@ class Dashboard extends React.Component {
         this.getCodes = this.getCodes.bind(this);
     }
 
-    init(p, q) {
-        const page = p;
-        fetch( (!page ? "/rest/product" : `/rest/product?page=${page}&${q}`), {
+    list(p, q) {
+        fetch( (!p ? "/rest/product" : `/rest/product?page=${p}&${q}`), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -105,7 +104,7 @@ class Dashboard extends React.Component {
             body: formData,
         }).then(res => res.json()).then(result => {
             alert(result.msg);
-            this.init();
+            this.list();
             cancel.click();
         }).catch(err => console.log(err));
     }
@@ -115,7 +114,7 @@ class Dashboard extends React.Component {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             alert(result.msg);
-            this.init();
+            this.list();
         }).catch(err => console.log(err));
     }
 
@@ -127,7 +126,7 @@ class Dashboard extends React.Component {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
                 this.initCodes();
-                this.init();
+                this.list();
             }).catch(err => console.log(err));
         }
     }
@@ -167,7 +166,7 @@ class Dashboard extends React.Component {
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
-        this.init();
+        this.list();
     }
 
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
@@ -202,7 +201,7 @@ class Dashboard extends React.Component {
                     prev={prev}
                     next={next}
                     query={query}
-                    onPageMove={this.init}
+                    onList={this.list}
                     onDelete={this.delete}
                     onItem={this.item}
                     onGetCode={this.getCode}

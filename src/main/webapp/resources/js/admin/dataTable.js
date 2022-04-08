@@ -145,23 +145,3 @@ class Chkbox extends React.Component {
         );
     }
 }
-
-
-
-//페이지네이션 컴포넌트
-class Pagenation extends React.Component {
-    render() {
-        const { pageList, prev, next, query, onPageMove } = this.props;
-
-        return (
-            <div>
-                <div onClick={() => onPageMove(prev, query)} >이전</div>
-                <div>
-                    {pageList.map(page => <div key={page} onClick={() => onPageMove(page, query)}>{page}</div>)}
-                </div>
-                <div onClick={() => onPageMove(next, query)}>다음</div>
-            </div>
-
-        );
-    }
-}

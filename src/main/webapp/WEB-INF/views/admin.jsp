@@ -23,6 +23,7 @@
     <!-- React components -->
     <script type="text/babel" src="re/js/admin/addModal.js"></script>
     <script type="text/babel" src="re/js/admin/updateModal.js"></script>
+    <script type="text/babel" src="re/js/admin/pagenation.js"></script>
     <script type="text/babel" src="re/js/admin/dataTable.js"></script>
     <script type="text/babel" src="re/js/admin/section.js"></script>
     <script type="text/babel" src="re/js/admin/sidebar.js"></script>
