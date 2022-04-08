@@ -48,14 +48,18 @@ class Title extends React.Component {
 
 //검색창 컴포넌트
 class Search extends React.Component {
+    handleSubmit(event)  {
+        event.preventDefault();
+    }
+
     render() {
-        const { onInit } = this.props;
+        const { onList } = this.props;
 
         return (
             <div>
-                <form>
-                    <input type="text" name="keyword" placeholder="제품 번호, 제품명, 제조사 등" />
-                    <button type="button" onClick={onInit}><img src="" />검색</button>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="text" name="keyword" id="searchBox" placeholder="제품 번호, 제품명, 제조사 등" />
+                    <button onClick={() => onList(null, null, 1)}><img src="" />검색</button>
                 </form>
             </div>
         );

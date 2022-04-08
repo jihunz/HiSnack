@@ -1,6 +1,6 @@
 'use strict'
 
-//검색, 상세 정보 모달
+//상세 정보 모달
 
 // 관리자 페이지의 모든 컴포넌트들의 부모 컴포넌트 
 class Dashboard extends React.Component {
@@ -31,8 +31,19 @@ class Dashboard extends React.Component {
         this.getCodes = this.getCodes.bind(this);
     }
 
-    list(p, q) {
-        fetch( (!p ? "/rest/product" : `/rest/product?page=${p}&${q}`), {
+    list(page, query, search, order) {
+        let url = "/rest/product";
+
+        if(page != null) {
+            //페이지네이션 시 요청할 uri
+            url = `/rest/product?page=${page}&${query}`
+        } else if(search != null) {
+            //검색 시 요청할 uri
+            const keyword = document.querySelector("#searchBox").value;
+            url = `/rest/product?search=${search}&keyword=${keyword}`
+        }
+
+        fetch(url, {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
