@@ -23,7 +23,7 @@
           			
                 	<c:if test="${sessionScope.user != null}">
 	                	<ul id="user-dropdown">
-						    <li><a class="" href="member/${sessionScope.user.id}">마이페이지</a></li>
+						    <li><a class="" href="member">마이페이지</a></li>
 						    <c:if test="${sessionScope.user.grade == 1}">
 						    	<li><a class="" href="admin">관리자</a></li>
 						    </c:if>
