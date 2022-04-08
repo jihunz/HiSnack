@@ -77,6 +77,7 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    //UpdateModal에 있는 input('태그 코드', '이미지 등록' 제외)들의 state를 관리하는 함수
     change(event) {     
         const inputName = event.target.name;
         this.setState({
@@ -87,6 +88,7 @@ class Dashboard extends React.Component {
         });
     }
   
+    //UpdateModal에 있는 태그 코드 input의 state를 관리하는 함수 
     tagChange(event, index) {
         this.setState({
             tags: {
@@ -98,6 +100,7 @@ class Dashboard extends React.Component {
         });
     }
 
+    //add 혹은 update 요청을 실행하는 함수 -> type 파라미터로 add와 update 구분
     modify(type) {
         let url;         
         const formData = new FormData(document.getElementById(`${type}Form`));
