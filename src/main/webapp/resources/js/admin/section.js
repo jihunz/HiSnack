@@ -56,8 +56,34 @@ class Title extends React.Component {
 
 //검색창 컴포넌트
 class Search extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            t: "제품 번호, 제품명, 제조사",
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
+    }
+
+    componentDidUpdate(prevProps) {
+        const { category } = this.props;
+
+        if (category !== prevProps.category) {
+            if (category === 'product') {
+                this.setState({ t: "제품 번호, 제품명, 제조사" })
+            } else if (category === 'sub' || category === 'orders') {
+                this.setState({ t: "주문 번호, 아이디, 주문 날짜" })
+            } else if (category === 'member') {
+                this.setState({ t: "아이디, 이름, 관리 등급" })
+            } else if (category === 'review') {
+                this.setState({ t: "리뷰 번호, 아이디, 작성 날짜" })
+            } else {
+                this.setState({ t: "태그 번호, 태그 내용" })
+            }
+        }
     }
 
     render() {
@@ -66,7 +92,7 @@ class Search extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="keyword" id="searchBox" placeholder="제품 번호, 제품명, 제조사 등" />
+                    <input type="text" name="keyword" id="searchBox" placeholder={this.state.t} />
                     <button onClick={() => onList(category, null, null, 1)}><img src="" />검색</button>
                 </form>
             </div>
@@ -78,8 +104,6 @@ class Search extends React.Component {
 class Btns extends React.Component {
     render() {
         const { category, onDeleteList } = this.props;
-        console.log(category);
-
         return (
             <div>
                 <div>
@@ -87,7 +111,7 @@ class Btns extends React.Component {
                 </div>
                 <div>
                     <button
-                        onClick={() => {onDeleteList(category)}}
+                        onClick={() => { onDeleteList(category) }}
                     >삭제<img src="" /></button>
                 </div>
             </div>
