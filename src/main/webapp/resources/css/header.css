@@ -72,8 +72,14 @@
 	left: -10px;
 	position: absolute;
 	background-color: white;
+	
 	box-shadow: 2px 2px 3px var(--color-light-gray);
 }
+
+#user-dropdown li:hover {background: var(--color-light-gray);}
+
+#user-dropdown a:hover {color:black; text-decoration: none;}
+
 #user-dropdown a{
 	width: 90px;
 	

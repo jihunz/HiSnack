@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="/re/css/index.css">  
   <!-- header 페이지 css Link -->
 <link rel="stylesheet" href="/re/css/header.css">
+<!-- footer 페이지 css Link -->
+<link rel="stylesheet" href="/re/css/footer.css">
 
 <!-- sessionScope를 저장하기 위한 script 태그 -->
 <script>

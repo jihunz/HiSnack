@@ -85,27 +85,7 @@
 			<h4>회원 이름</h4>
 
 		</div>
-		<footer class="wrapper">
-			<object data="re/img/logo2.svg" type="image/svg+xml" id="fLogo"></object>
-			<h4>Team Members</h4>
-			<p>장지훈 : jjh351@naver.com</p>
-			<p>오종택 : tivmzk5@gmail.com</p>
-			<p>이준제 : leejunje1002@gmail.com</p>
-			<h4>Project</h4>
-			<p>Demonstration Video</p>
-			<img src="" alt="demoVidQr">
-			<h4>Team Members Github</h4>
-			<a href="https://github.com/jihunz" target="_blank"><img src="#"
-				alt="github-jjh">
-			<p>Jihun Jang</p></a> <a href="https://github.com/tivmzk" target="_blank"><img
-				src="#" alt="github-ojt">
-			<p>O Jong Taek</p></a> <a href="https://github.com/JJ001002"
-				target="_blank"><img src="#" alt="github-ljj">
-			<p>LeeJunJe</p></a>
-			<div>
-				<p>COPYRIGHT 2022 BY HI SNACK TEAM. ALL RIGHTS RESERVED.</p>
-			</div>
-		</footer>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>
 
 	
