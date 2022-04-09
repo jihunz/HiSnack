@@ -70,14 +70,18 @@
 				</c:forEach>
 			</div>
 			<ul class="flex justify-center">
-				<li><a class="px-10" href="?page=${pager.prev}&${pager.query}">이전</a></li>
+				<c:if test="${pager.page != 1}">
+					<li><a class="px-10" href="?page=${pager.prev}&${pager.query}">이전</a></li>
+				</c:if>
 				<c:forEach items="${pager.list}" var="page">
 					<li>
 						<a class="px-10 py-10 ${pager.page == page ? 'curr-page' : ''}" 
 						href="?page=${page}&${pager.query}">${page}</a>
 					</li>
 				</c:forEach>
-				<li><a class="px-10" href="?page=${pager.next}&${pager.query}">다음</a></li>
+				<c:if test="${pager.page != pager.end}">
+					<li><a class="px-10" href="?page=${pager.next}&${pager.query}">다음</a></li>
+				</c:if>
 			</ul>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
