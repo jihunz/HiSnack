@@ -8,16 +8,18 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
+            //메뉴에 따라서 변경되는 핵심 state
             category: "product",
             title: "제품",
-
+            // CRUD를 위한 state
             list: [],
             item: {},
             images: [],
             tags: [],
-            pageList: [],
             codes: [],
+            //pager용 state
             prev: "",
+            pageList: [],
             next: "",
             query: "",
         };
@@ -36,7 +38,7 @@ class Dashboard extends React.Component {
     }
 
     list(category, page, query, search, order) {
- 
+
         let url = `rest/${category}`;
 
         if(page != null) {
