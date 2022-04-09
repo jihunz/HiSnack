@@ -8,7 +8,9 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
+            category: "product",
             title: "제품",
+
             list: [],
             item: {},
             images: [],
@@ -30,18 +32,20 @@ class Dashboard extends React.Component {
         this.tagChange = this.tagChange.bind(this);
         this.getCode = this.getCode.bind(this);
         this.getCodes = this.getCodes.bind(this);
+        this.setCategory = this.setCategory.bind(this);
     }
 
-    list(page, query, search, order) {
-        let url = "/rest/product";
+    list(category, page, query, search, order) {
+ 
+        let url = `rest/${category}`;
 
         if(page != null) {
             //페이지네이션 시 요청할 uri
-            url = `/rest/product?page=${page}&${query}`
+            url += `?page=${page}&${query}`
         } else if(search != null) {
             //검색 시 요청할 uri
             const keyword = document.querySelector("#searchBox").value;
-            url = `/rest/product?search=${search}&keyword=${keyword}`
+            url += `?search=${search}&keyword=${keyword}`
         }
 
         fetch(url, {
@@ -62,8 +66,8 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }  
 
-    item(event) {
-        fetch( (`/rest/product/${event.target.parentNode.dataset.code}`), {
+    item(event, category) {
+        fetch( (`/rest/${category}/${event.target.parentNode.dataset.code}`), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -103,16 +107,16 @@ class Dashboard extends React.Component {
     }
 
     //add 혹은 update 요청을 실행하는 함수 -> type 파라미터로 add와 update 구분
-    modify(type) {
+    modify(type, category) {
         let url;         
         const formData = new FormData(document.getElementById(`${type}Form`));
         const cancel = document.querySelector(`.${type}Cancel`);
 
         if(type == "add") {
-            url = "/rest/product";
+            url = `/rest/${category}`;
         } else if(type == "update") {
             const code = document.getElementById("codeInput").value;
-            url = `/rest/product/${code}`;
+            url = `/rest/${category}/${code}`;
         }
 
         fetch(url, {
@@ -120,31 +124,31 @@ class Dashboard extends React.Component {
             body: formData,
         }).then(res => res.json()).then(result => {
             alert(result.msg);
-            this.list();
+            this.list(category);
             cancel.click();
         }).catch(err => console.log(err));
     }
 
     //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
-    delete(event) {
-        fetch(`/rest/product/${event.target.id}`, {
+    delete(event, category) {
+        fetch(`/rest/${category}/${event.target.id}`, {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             alert(result.msg);
-            this.list();
+            this.list(category);
         }).catch(err => console.log(err));
     }
 
     // 전체 삭제 시 사용하는 함수
-    deleteList() {
+    deleteList(category) {
         const c = this.state.codes;
 
         for(let i = 0; i <= c.length - 1; i++) {
-            fetch(`/rest/product/${c[i]}`, {
+            fetch(`/rest/${category}/${c[i]}`, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
                 this.initCodes();
-                this.list();
+                this.list(category);
             }).catch(err => console.log(err));
         }
     }
@@ -182,9 +186,19 @@ class Dashboard extends React.Component {
         }  
     }
 
+    setCategory(category, title) {
+        this.setState(
+            (state) => {
+                state.category = category;
+                state.title = title;
+                return state;
+        });
+        this.list(category);
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
-        this.list();
+        this.list("product");
     }
 
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
@@ -198,7 +212,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { title, list, item, tags, pageList, prev, next, query, images } = this.state;
+        const { title, list, item, tags, pageList, prev, next, query, images, category } = this.state;
 
         return (
             <div className="container">
@@ -208,15 +222,19 @@ class Dashboard extends React.Component {
                     images={images}
                 />
                 <AddModal 
+                    category={category}
                     onModify={this.modify}
                 />
                 <UpdateModal 
                     item={item} 
                     tags={tags}
+                    category={category}
                     onChange={this.change} 
                     onTagChange={this.tagChange} 
                     onModify={this.modify}/>
-                <Sidebar />
+                <Sidebar 
+                    onSetCategory={this.setCategory}
+                />
                 <Section 
                     title={title}
                     list={list}
@@ -224,6 +242,7 @@ class Dashboard extends React.Component {
                     prev={prev}
                     next={next}
                     query={query}
+                    category={category}
                     onList={this.list}
                     onDelete={this.delete}
                     onItem={this.item}

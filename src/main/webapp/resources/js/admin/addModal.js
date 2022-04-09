@@ -36,6 +36,8 @@ class AddModal extends React.Component {
     }
 
     render() {
+        const { category, onModify } = this.props;
+
         return (
             <div>
                 <div className="modal fade mWrapper" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1">
@@ -102,7 +104,7 @@ class AddModal extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary addCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
-                                    <button type="button" className="btn btn-primary" onClick={() => this.props.onModify("add")}>등록</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => onModify("add", category)}>등록</button>
                                 </div>
                             </form>
                         </div>

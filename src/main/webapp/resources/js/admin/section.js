@@ -2,27 +2,35 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
+        const { title, list, pageList, prev, next, query, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
 
         return (
             <div>
                 <Title title={title} />
-                <Search onList={onList} />
-                <Btns onDeleteList={onDeleteList} />
-                <DataTable 
-                    list={list} 
-                    onDelete={onDelete} 
+                <Search
+                    category={category}
+                    onList={onList}
+                />
+                <Btns
+                    onDeleteList={onDeleteList}
+                    category={category}
+                />
+                <DataTable
+                    list={list}
+                    category={category}
+                    onDelete={onDelete}
                     onItem={onItem}
-                    onGetCode={onGetCode} 
+                    onGetCode={onGetCode}
                     onGetCodes={onGetCodes}
                     onInitCodes={onInitCodes}
                 />
-                <Pagenation 
-                    pageList={pageList} 
-                    query={query} 
-                    onList={onList} 
-                    prev={prev} 
-                    next={next} 
+                <Pagenation
+                    pageList={pageList}
+                    prev={prev}
+                    next={next}
+                    query={query}
+                    category={category}
+                    onList={onList}
                 />
             </div>
         );
@@ -48,7 +56,7 @@ class Title extends React.Component {
 
 //검색창 컴포넌트
 class Search extends React.Component {
-    handleSubmit(event)  {
+    handleSubmit(event) {
         event.preventDefault();
     }
 
@@ -59,7 +67,7 @@ class Search extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="keyword" id="searchBox" placeholder="제품 번호, 제품명, 제조사 등" />
-                    <button onClick={() => onList(null, null, 1)}><img src="" />검색</button>
+                    <button onClick={() => onList(null, null, null, 1)}><img src="" />검색</button>
                 </form>
             </div>
         );
@@ -69,14 +77,17 @@ class Search extends React.Component {
 // 버튼 컴포넌트 -> 등록, 삭제 버튼 반환
 class Btns extends React.Component {
     render() {
+        const { category, onDeleteList } = this.props;
+        console.log(category);
+
         return (
             <div>
                 <div>
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
                 </div>
                 <div>
-                    <button 
-                        onClick={this.props.onDeleteList}
+                    <button
+                        onClick={() => {onDeleteList(category)}}
                     >삭제<img src="" /></button>
                 </div>
             </div>
