@@ -58,7 +58,7 @@ class DataTable extends React.Component {
         return (
             <div>
                 <table className="table table-hover">
-                    <thead id="th">
+                    <thead>
                         <tr>
                             <td>
                                 <input type="checkbox"
