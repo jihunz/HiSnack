@@ -61,13 +61,13 @@ class Search extends React.Component {
     }
 
     render() {
-        const { onList } = this.props;
+        const { category, onList } = this.props;
 
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="keyword" id="searchBox" placeholder="제품 번호, 제품명, 제조사 등" />
-                    <button onClick={() => onList(null, null, null, 1)}><img src="" />검색</button>
+                    <button onClick={() => onList(category, null, null, 1)}><img src="" />검색</button>
                 </form>
             </div>
         );
