@@ -6,10 +6,10 @@
            		<img alt="" src="/re/img/logo.svg" id ="logoimgsize logoimg">
             </div>
             <div class = "menefont">
-	            <a href="sub/detail" class = "menupadding">구독</a>
-	            <a href="shopping/list" class = "menupadding">쇼핑몰</a>
-	            <a href="orders/cart" class = "menupadding">장바구니</a>
-	            <a href="review/list" class = "menupadding">리뷰 목록</a>            
+	            <a href="/sub/detail" class = "menupadding">구독</a>
+	            <a href="/shopping/list" class = "menupadding">쇼핑몰</a>
+	            <a href="/orders/cart" class = "menupadding">장바구니</a>
+	            <a href="/review/list" class = "menupadding">리뷰 목록</a>            
             </div>
           		<div id="user-menu" class= "menefont">
           			<c:choose>

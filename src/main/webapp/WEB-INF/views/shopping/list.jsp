@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>제품 목록</title>
+	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
 	<div>
-		<h1>쇼핑</h1>
+		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 		<div>
 			<form>
 				<div>
@@ -47,6 +46,7 @@
 				</c:forEach>
 			</div>
 		</c:forEach>	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>

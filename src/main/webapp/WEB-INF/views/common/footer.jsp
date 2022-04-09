@@ -2,7 +2,7 @@
 <footer class="footer">
 	<div class = "footerall">
 			<div class = "logosize logoh maringtop">
-           		<img alt="" src="re/img/logo2.svg" id ="logoimgsize logoimg">
+           		<img alt="" src="/re/img/logo2.svg" id ="logoimgsize logoimg">
             </div>
 			<div class = "">
 				<h4 class = "menu-center">Team Members</h4>
@@ -16,7 +16,7 @@
 					<p>Demonstration Video</p>
 				</div>
 				<div class ="qrsize">
-					<img src="re/img/qr.png" class = "qrimg" alt="demoVidQr">
+					<img src="/re/img/qr.png" class = "qrimg" alt="demoVidQr">
 				</div>
 			</div>
 			<div class= "">
@@ -24,17 +24,17 @@
 				<div class= "textflex">
 					<div class = "flexcenter">
 						<a href="https://github.com/jihunz" class= "footerimgsize" target="_blank">
-						<img src="re/img/github.png" class = "footerimg"alt="github-jjh"></a>
+						<img src="/re/img/github.png" class = "footerimg"alt="github-jjh"></a>
 						<p>Jihun Jang</p> 
 					</div>
 					<div class = "flexcenter">
 						<a href="https://github.com/tivmzk" class= "footerimgsize" target="_blank">
-						<img src="re/img/github.png" class = "footerimg" alt="github-ojt"></a>
+						<img src="/re/img/github.png" class = "footerimg" alt="github-ojt"></a>
 						<p>O Jong Taek</p>
 					</div>
 					<div class = "flexcenter">
 						<a href="https://github.com/JJ001002" class= "footerimgsize" target="_blank">
-						<img src="re/img/github.png" class = "footerimg" alt="github-ljj"></a>
+						<img src="/re/img/github.png" class = "footerimg" alt="github-ljj"></a>
 						<p>Lee Jun Je</p>
 					</div>
 				</div>
