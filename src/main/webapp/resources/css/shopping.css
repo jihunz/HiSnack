@@ -152,6 +152,10 @@ body{
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.py-5{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
 .px-20{
   padding-right: 20px;
@@ -162,8 +166,22 @@ body{
   padding-left: 10px;
 }
 
+.pt-20{
+  padding-top: 20px;
+}
+
 .pb-60{
   padding-bottom: 60px;
+}
+.pb-40{
+  padding-bottom: 40px;
+}
+.pb-30{
+  padding-bottom: 30px;
+}
+
+.p-10{
+  padding: 10;
 }
 
 .mr-20{

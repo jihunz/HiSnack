@@ -61,7 +61,7 @@
 							<a class="shopping_img_border" href="${item.code}">
 								<img src="${item.thumbnail}" alt="${image.thumbnail}" />
 							</a>
-							<p class="manufacture">${item.manufacture}</p>
+							<p class="manufacture py-5">${item.manufacture}</p>
 							<div class="flex justify-between">
 								<span class="name">${item.name}</span>
 								<span class="price"><fmt:formatNumber value="${item.price}" pattern="###,###,###원"/></span>
@@ -69,13 +69,13 @@
 						</div>
 				</c:forEach>
 			</div>
-			<ul class="flex justify-center">
+			<ul class="flex justify-center pb-30 pt-20">
 				<c:if test="${pager.page != 1}">
 					<li><a class="px-10" href="?page=${pager.prev}&${pager.query}">이전</a></li>
 				</c:if>
 				<c:forEach items="${pager.list}" var="page">
 					<li>
-						<a class="px-10 py-10 ${pager.page == page ? 'curr-page' : ''}" 
+						<a class="block p-10 ${pager.page == page ? 'curr-page' : ''}" 
 						href="?page=${page}&${pager.query}">${page}</a>
 					</li>
 				</c:forEach>
