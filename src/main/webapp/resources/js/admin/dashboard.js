@@ -141,7 +141,7 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    // 전체 삭제 시 사용하는 함수
+    // 전체 및 선택 삭제 시 사용하는 함수
     deleteList(category) {
         const c = this.state.codes;
 
