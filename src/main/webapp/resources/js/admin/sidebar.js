@@ -43,7 +43,7 @@ class MenuList extends React.Component {
 
         return (
             <div>
-                <ul>
+                <ul className="pointer">
                     <li onClick={ () => onSetCategory("product", "제품") }>제품 관리</li>
                     <li onClick={ () => onSetCategory("sub", "구독") }>구독 관리</li>
                     <li onClick={ () => onSetCategory("orders", "주문") }>주문 관리</li>
