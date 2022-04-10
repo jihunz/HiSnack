@@ -60,13 +60,15 @@ class DataTable extends React.Component {
                 <table className="table table-hover">
                     <thead>
                         <tr>
-                            <td>
-                                <input type="checkbox"
-                                    checked={allchked}
-                                    onChange={this.allCheck}
-                                    onClick={onGetCodes}
-                                />
-                            </td>
+                            {category === 'sub' || category === 'orders' ? null
+                                : <td>
+                                    <input type="checkbox"
+                                        checked={allchked}
+                                        onChange={this.allCheck}
+                                        onClick={onGetCodes}
+                                    />
+                                </td>
+                            }
                             {category === 'product' ? <ProductTh /> : ''}
                             {category === 'sub' || category === 'orders' ? <OrdersTh /> : ''}
                             {category === 'member' ? <MemberTh /> : ''}

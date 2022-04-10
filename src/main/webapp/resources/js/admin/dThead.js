@@ -22,7 +22,6 @@ class OrdersTh extends React.Component {
                 <td>전화번호</td>
                 <td>주문 날짜</td>
                 <td>총 가격</td>
-                <td>관리</td>
             </>
         );
     }

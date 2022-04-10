@@ -11,28 +11,35 @@ class DTbody extends React.Component {
                         key={idx}
                         data-code={item.code}
                     >
-                        <td>
-                            <Chkbox
-                                code={item.code}
-                                index={idx}
-                                chkList={chkList[idx]}
-                                onEachCheck={onEachCheck}
-                                onGetCode={onGetCode}
-                            />
-                        </td>
+                        {/* 체크박스 */}
+                        {category === 'sub' || category === 'orders' ? null
+                            : <td>
+                                <Chkbox
+                                    code={item.code}
+                                    index={idx}
+                                    chkList={chkList[idx]}
+                                    onEachCheck={onEachCheck}
+                                    onGetCode={onGetCode}
+                                />
+                            </td>
+                        }
+                        {/* 데이터 td */}
                         {category === 'product' ? <ProductList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'sub' || category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'tag' ? <TagList item={item} category={category} onItem={onItem} /> : ''}
+                        {/* 변경, 삭제 버튼 */}
                         <td data-code={item.code}>
                             {category === 'product' || category === 'tag' ?
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal"
-                                data-code={item.code}
-                                onClick={() => onItem(event, category)}
+                                    data-code={item.code}
+                                    onClick={() => onItem(event, category)}
                                 >변경</button>
                                 : null
                             }
-                            <button id={item.code} onClick={() => onDelete(event, category)}>삭제</button>
+                            {category === 'sub' || category === 'orders' ? null
+                                : <button id={item.code} onClick={() => onDelete(event, category)}>삭제</button>
+                            }
                         </td>
                     </tr>
                 ) : <tr><td colSpan="7">등록된 정보가 없습니다</td></tr>}

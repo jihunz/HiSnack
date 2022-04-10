@@ -106,17 +106,19 @@ class Btns extends React.Component {
         const { category, onDeleteList } = this.props;
         return (
             <div>
-                {category === 'product' || category === 'tag' ? 
+                {category === 'product' || category === 'tag' ?
                     <div>
                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
                     </div>
                     : null
                 }
-                <div>
-                    <button
-                        onClick={() => { onDeleteList(category) }}
-                    >삭제<img src="" /></button>
-                </div>
+                {category === 'sub' || category === 'orders' ? null
+                    : <div>
+                        <button
+                            onClick={() => { onDeleteList(category) }}
+                        >삭제<img src="" /></button>
+                    </div>
+                }
             </div>
         );
     }
