@@ -25,10 +25,13 @@ class DTbody extends React.Component {
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'tag' ? <TagList item={item} category={category} onItem={onItem} /> : ''}
                         <td data-code={item.code}>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal"
+                            {category === 'product' || category === 'tag' ?
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal"
                                 data-code={item.code}
                                 onClick={() => onItem(event, category)}
-                            >변경</button>
+                                >변경</button>
+                                : null
+                            }
                             <button id={item.code} onClick={() => onDelete(event, category)}>삭제</button>
                         </td>
                     </tr>
