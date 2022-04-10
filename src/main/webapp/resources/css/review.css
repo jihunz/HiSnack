@@ -1,0 +1,67 @@
+body {
+	font-family: var(--noto);
+}
+
+.review-list-visual {
+	height: 440px;
+	background: #bcbcbc;
+}
+
+.review-container {
+	width: 1200px;
+	margin: 0 auto;
+	padding: 200px 0 45px 0;
+}
+
+.review-item{
+	width: 265px;
+	border-radius: 20px;
+	overflow: hidden;
+	background: #fcfcfc;
+	margin: 15px;
+}
+
+.review-item:hover{
+	background: var(--color-light-gray);
+}
+
+.review-img-border{
+  width: 265px;
+  height: 280px;
+  overflow: hidden;
+  display: block;
+  background: #feedc2;
+}
+.review-img-border img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.review-item .rating{
+	border-bottom: 1px solid #d4d4d4;
+	padding-top: 30px;
+	padding-bottom: 10px;
+}
+.review-item .contents{
+	padding: 15px 10px 5px;
+	margin-bottom: 45px;
+	font-size: var(--font-size-xsmall);
+	color: var(--color-gray);
+	height: 30px;
+	text-overflow: ellipsis;
+	display: block;
+	overflow: hidden;
+	display: -webkit-box;
+
+	-webkit-line-clamp: 2; /* 라인수 */	
+	-webkit-box-orient: vertical; 
+	word-wrap:break-word;
+}
+
+.review-item .info{
+	display: flex;
+	justify-content: space-between;
+	color: var(--color-gray);
+	font-size: var(--font-size-small);
+	padding: 10px;
+}

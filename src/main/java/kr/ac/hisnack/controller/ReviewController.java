@@ -48,6 +48,7 @@ public class ReviewController {
  */
 	@GetMapping("/list")
 	public String list(Pager pager, Model model) {
+		pager.setPerPage(20);
 		List<Review> list = service.list(pager);
 		model.addAttribute("list", list);
 		

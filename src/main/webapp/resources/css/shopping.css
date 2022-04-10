@@ -2,11 +2,11 @@ body{
   font-family: var(--noto);
 }
 
-.shopping_list_visual{
+.shopping-list-visual{
 	height: 440px;
 	background: #bcbcbc;
 }
-.shopping_container{
+.shopping-container{
 	width: 1200px;
   margin: 0 auto;
   padding: 35px 0;
@@ -62,128 +62,49 @@ body{
   padding: 2px 10px;
 }
 
-.shopping_img_border{
+.shopping-img-border{
   width: 280px;
   height: 280px;
   overflow: hidden;
   border-radius: 10px;
   display: block;
   border: 1px solid var(--color-light-gray);
+  background: var(--color-white);
+
+  transition-property: width height;
+  transition-duration: 0.5s;
 }
-.shopping_img_border img{
+.shopping-img-border img{
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
-.shopping_item{
+.shopping-item{
   width: 280px;
   margin-right: 10px;
   margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.shopping_item .manufacture{
+.shopping-item .info{
+  width: 100%;
+}
+
+.shopping-item:hover .shopping-img-border{
+  width: 300px;
+  height: 300px;
+}
+
+.shopping-item .manufacture{
   font-size: 14px;
   color: var(--color-gray);
 }
-.shopping_item .price{
+.shopping-item .price{
   font-weight: 500;
 }
-.shopping_item .name{
+.shopping-item .name{
   font-weight: 500;
-}
-
-.underline{
-  text-decoration: underline;
-}
-.font-black{
-  color:var(--color-black);
-}
-.font-gray{
-  color:var(--color-gray);
-}
-.curr-page{
-  background: var(--color-light-gray);
-  border-radius: 5px;
-}
-
-.block{
-  display: block;
-}
-
-.flex.justify-between{
-  justify-content: space-between;
-}
-.flex.item-center{
-  align-items: center;
-}
-.flex.wrap{
-  flex-wrap: wrap;
-}
-.flex > .flex-basis-25{
-  flex-basis: 25%;
-}
-
-.p-10{
-  padding: 10px;
-}
-
-.pr-20{
-  padding-right: 20px;
-}
-
-.py-40{
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-.py-30{
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.py-25{
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-.py-15{
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-.py-10{
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.py-5{
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.px-20{
-  padding-right: 20px;
-  padding-left: 20px;
-}
-.px-10{
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.pt-20{
-  padding-top: 20px;
-}
-
-.pb-60{
-  padding-bottom: 60px;
-}
-.pb-40{
-  padding-bottom: 40px;
-}
-.pb-30{
-  padding-bottom: 30px;
-}
-
-.p-10{
-  padding: 10;
-}
-
-.mr-20{
-  margin-right: 20px;
 }
