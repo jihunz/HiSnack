@@ -223,14 +223,16 @@ class Dashboard extends React.Component {
                     tags={tags}
                     images={images}
                 />
-                <AddModal 
+                <AddModal
                     category={category}
+                    title={title}
                     onModify={this.modify}
                 />
                 <UpdateModal 
                     item={item} 
                     tags={tags}
                     category={category}
+                    title={title}
                     onChange={this.change} 
                     onTagChange={this.tagChange} 
                     onModify={this.modify}/>
