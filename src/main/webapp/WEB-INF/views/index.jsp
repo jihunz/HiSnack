@@ -18,43 +18,67 @@
 	
 	<div class="container">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	
+		<div class= "boxmaincolor flex justify-center">
+			<div class="boxsize flex items-center">
+				<div class = "flex justify-between" style ="width: 100%">
+					<div class = "org40 flex justify-center column">
+						<div class = "margin-bottom20"><h3 class = "maintext">달콤한 구독 사이트<br>하이스낵</h3></div>
+						<div class = "margin-bottom20">
+							<p class = "contentfont">알고리즘이 찾아주는 간식 조합
+							<br>알고리즘이 찾아주는 간식 조합
+							<br>알고리즘이 찾아주는 간식 조합</p>
+						</div>
+						<div class = "margin-top20">
+							<a class = "mainBtn" href="sub/detail">구독 시작하기</a>
+						</div>
+					</div>
+						<div class = "org60 flex items-center justify-center">
+							<div class = "imgsize img-border"><img src="/re/img/box.png" alt="sub-img"></div>
+						</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="boxcolor flex justify-center">
+			<div class="boxsize flex items-center justify-between">
+				<div class = "flex justify-between" style ="width: 100%">
+					<div class = "org60 flex">
+						<div class = "imgsize img-border"><img src="/re/img/calendar.png" alt="sub-desc-img"></div>
+					</div>
+					<div class = "text-right org40 flex justify-center column"">
+						<div class = "margin-bottom20"><h3 class = "maintext">1달에 한 번<br>선물 받는 느낌</h3></div>
+						<div>
+							<p class = "contentfont">알고리즘이 찾아주는 간식 조합
+							<br>알고리즘이 찾아주는 간식 조합
+							<br>알고리즘이 찾아주는 간식 조합</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-		<div class="sub wrapper">
-			<h3>
-				달콤한 구독 사이트<br>하이스낵
-			</h3>
-			<p>
-				알고리즘이 찾아주는 간식 조합<br>알고리즘이 찾아주는 간식 조합<br>알고리즘이 찾아주는 간식 조합
-			</p>
-			<div id="subBtn">
-				<a href="sub/detail">구독 시작하기</a>
+		<div class= "boxcolor flex justify-center">
+			<div class="boxsize flex items-center">
+				<div class = "flex justify-between" style ="width: 100%">
+					<div class = "org40 flex justify-center column">
+						<div class = "margin-bottom20"><h3 class = "maintext">달콤한 쇼핑 사이트<br>쇼핑몰</h3></div>
+						<div class = "margin-bottom20">
+							<p class = "contentfont">알고리즘이 찾아주는 간식 조합
+							<br>알고리즘이 찾아주는 간식 조합
+							<br>알고리즘이 찾아주는 간식 조합</p>
+						</div>
+						<div class = "margin-top20">
+							<a class = "mainBtn" href="sub/detail">쇼핑 시작하기</a>
+						</div>
+					</div>
+					<div class = "org60 flex items-center justify-center">
+						<div class = "imgsize img-border"><img src="/re/img/box.png" alt="sub-img"></div>
+					</div>
+				</div>
 			</div>
-			<img src="" alt="sub-img">
 		</div>
-
-		<div class="sub-desc wrapper">
-			<h3>
-				1달에 한 번<br>선물 받는 느낌
-			</h3>
-			<p>
-				알고리즘이 찾아주는 간식 조합<br>알고리즘이 찾아주는 간식 조합<br>알고리즘이 찾아주는 간식 조합
-			</p>
-			<img src="" alt="sub-desc-img">
-		</div>
-
-		<div class="shopping wrapper">
-			<h3>
-				달콤한 구독 사이트<br>쇼핑몰
-			</h3>
-			<p>
-				알고리즘이 찾아주는 간식 조합<br>알고리즘이 찾아주는 간식 조합<br>알고리즘이 찾아주는 간식 조합
-			</p>
-			<div id="shopping-btn">
-				<a href="shopping/list">쇼핑하러 가기</a>
-			</div>
-			<img src="" alt="shopping-img">
-		</div>
-
+		
 		<div id="">
 			<h3>소소하지만 달콤한 행복</h3>
 			<h3>편리 간단하게 구독</h3>

@@ -25,17 +25,17 @@
 					<div class = "flexcenter">
 						<a href="https://github.com/jihunz" class= "footerimgsize" target="_blank">
 						<img src="re/img/github.png" class = "footerimg"alt="github-jjh"></a>
-						<p>Jihun Jang</p> 
+						<p class = "gitname">Jihun Jang</p> 
 					</div>
 					<div class = "flexcenter">
 						<a href="https://github.com/tivmzk" class= "footerimgsize" target="_blank">
 						<img src="re/img/github.png" class = "footerimg" alt="github-ojt"></a>
-						<p>O Jong Taek</p>
+						<p class = "gitname">O Jong Taek</p>
 					</div>
 					<div class = "flexcenter">
 						<a href="https://github.com/JJ001002" class= "footerimgsize" target="_blank">
 						<img src="re/img/github.png" class = "footerimg" alt="github-ljj"></a>
-						<p>Lee Jun Je</p>
+						<p class = "gitname">Lee Jun Je</p>
 					</div>
 				</div>
 			</div>

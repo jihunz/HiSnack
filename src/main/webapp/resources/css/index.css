@@ -49,4 +49,61 @@ body {
   }
 /* swiper 스타일 끝*/
 
+.boxsize {
+  width: 1200px;
+  height: 720px;
+  
+}
+.boxmaincolor {
+  background-color: antiquewhite;
+  left: 0;
+  right: 0;
+  align-items: center
+}
+.boxcolor {
+  background-color: white;
+  left: 0;
+  right: 0;
+  align-items: center
+}
+.org40 {
+  flex-basis: 50%;
+}
+.org60 {
+  flex-basis: 50%;
+}
+.maintext {
+  font-family: var(--noto);
+  font-size: 2.625rem;
+  font-weight: 600;
+  line-height: 50px;
+  
+}
+.contentfont {
+  font-family: var(--noto);
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 22px;
+}
+.mainBtn {
+  background-color: var(--button-color);
+  padding:12px 32px 12px 32px;
+  border-radius: 25px;
+  font-family: var(--noto);
+  font-size : 1.125rem;
+  font-weight: 500;
+}
+.mainBtn:link {color:white; text-decoration: none;}
+.mainBtn:visited {color:white; text-decoration: none;}
+.mainBtn:hover {background-color:var(--logo-color); text-decoration: none;}
 
+
+
+.imgsize{
+  width: 550px;
+  height: 550px;
+}
+.margin-right60 {
+  margin-right: 60px;
+}

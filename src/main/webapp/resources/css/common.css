@@ -37,3 +37,36 @@ a:hover {color:var(--logo-color); text-decoration: none;}
 .flex.justify-center {
 	justify-content: center;
 }
+.flex.justify-between {
+	justify-content: space-between;
+}
+.flex.items-center {
+	align-items: center;
+}
+.flex.column {
+	flex-direction: column;
+}
+.margin-bottom20 {
+	margin-bottom: 20px;
+}
+.margin-top20 {
+	margin-top: 20px;
+}
+.text-right {
+	text-align: right;
+	
+}
+.img-border{
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.img-border img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.img-shadow {
+	box-shadow: 2px 2px 3px var(--color-light-gray);
+} 
