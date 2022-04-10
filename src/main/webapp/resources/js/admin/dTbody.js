@@ -34,11 +34,15 @@ class DTbody extends React.Component {
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal"
                                     data-code={item.code}
                                     onClick={() => onItem(event, category)}
-                                >변경</button>
+                                >변경
+                                </button>
                                 : null
                             }
                             {category === 'sub' || category === 'orders' ? null
-                                : <button id={item.code} onClick={() => onDelete(event, category)}>삭제</button>
+                                : <button 
+                                    id={item.code} 
+                                    onClick={() => onDelete(event, category)}>삭제
+                                    </button>
                             }
                         </td>
                     </tr>

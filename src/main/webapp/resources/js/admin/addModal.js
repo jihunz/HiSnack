@@ -67,8 +67,8 @@ class AddModal extends React.Component {
                             <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
                                     {category === 'product' ? 
-                                        <ProductInputs product={product} onChange={this.change} /> 
-                                        : <TagInput content={content} onChange={this.change} />
+                                        <PAddInputs product={product} onChange={this.change} /> : 
+                                        <TAddInput content={content} onChange={this.change} />
                                     }
                                     
                                 </div>
@@ -85,7 +85,7 @@ class AddModal extends React.Component {
     }
 }
 
-class ProductInputs extends React.Component {
+class PAddInputs extends React.Component {
     render() {
         const { product, onChange } = this.props;
 
@@ -148,10 +148,9 @@ class ProductInputs extends React.Component {
     }
 }
 
-class TagInput extends React.Component {
+class TAddInput extends React.Component {
     render() {
         const { content, onChange } = this.props;
-
         return (
             <>
                 <div className="mb-3">
@@ -162,7 +161,6 @@ class TagInput extends React.Component {
                         onChange={onChange}
                     />
                 </div>
-
             </>
         );
     }
