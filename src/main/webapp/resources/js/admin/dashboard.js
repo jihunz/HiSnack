@@ -219,6 +219,8 @@ class Dashboard extends React.Component {
         return (
             <div className="container">
                 <InfoModal
+                    category={category}
+                    title={title}
                     item={item}
                     tags={tags}
                     images={images}
@@ -229,10 +231,10 @@ class Dashboard extends React.Component {
                     onModify={this.modify}
                 />
                 <UpdateModal 
-                    item={item} 
-                    tags={tags}
                     category={category}
                     title={title}
+                    item={item} 
+                    tags={tags}
                     onChange={this.change} 
                     onTagChange={this.tagChange} 
                     onModify={this.modify}/>
@@ -240,18 +242,18 @@ class Dashboard extends React.Component {
                     onSetCategory={this.setCategory}
                 />
                 <Section 
+                    category={category}
                     title={title}
                     list={list}
                     pageList={pageList}
                     prev={prev}
                     next={next}
                     query={query}
-                    category={category}
                     onList={this.list}
-                    onDelete={this.delete}
                     onItem={this.item}
                     onGetCode={this.getCode}
                     onGetCodes={this.getCodes}
+                    onDelete={this.delete}
                     onDeleteList={this.deleteList}
                     onInitCodes={this.initCodes}
                 />
