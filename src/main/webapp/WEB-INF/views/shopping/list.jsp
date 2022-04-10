@@ -7,12 +7,16 @@
 <head>
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 	<link rel="stylesheet" href="/re/css/shopping.css" />
+	<script>
+		const path = '/shopping';
+	</script>
+	<script src="/re/js/block_link.js"></script>
 </head>
 <body>
 	<div>
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-		<div class="shopping_list_visual"></div>
-		<div class="shopping_container">
+		<div class="shopping-list-visual"></div>
+		<div class="shopping-container">
 			<form>
 				<div class="py-25">
 					<ul class="input-radio-wrapper">
@@ -57,16 +61,18 @@
 			</form>
 			<div class="flex wrap">
 				<c:forEach items="${list}" var="item">
-					<div class="shopping_item pb-60">
-							<a class="shopping_img_border" href="${item.code}">
-								<img src="${item.thumbnail}" alt="${image.thumbnail}" />
-							</a>
-							<p class="manufacture py-5">${item.manufacture}</p>
-							<div class="flex justify-between">
+					<div class="shopping-item mb-60 block-link" data-code="${item.code}">
+						<div class="shopping-img-border">
+							<img src="${item.thumbnail}" alt="${image.thumbnail}" />
+						</div>
+						<div class="info">
+							<p class="manufacture py-5 px-5">${item.manufacture}</p>
+							<div class="flex justify-between px-5">
 								<span class="name">${item.name}</span>
 								<span class="price"><fmt:formatNumber value="${item.price}" pattern="###,###,###원"/></span>
 							</div>
 						</div>
+					</div>
 				</c:forEach>
 			</div>
 			<ul class="flex justify-center pb-30 pt-20">
