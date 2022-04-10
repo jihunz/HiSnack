@@ -76,7 +76,7 @@ class PUpateInputs extends React.Component {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">태그 코드</label>
-                    {tags.length ?
+                    {tags ?
                         tags.map(tag =>
                             <input type="number" className="form-control"
                                 key={tag.tcode}
