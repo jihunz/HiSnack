@@ -98,7 +98,7 @@ class PInfo extends React.Component {
                     <td>제품 번호</td>
                     <td>{item.code}</td>
                     <td>사진</td>
-                    <td rowSpan="3">{images.length ? <img id="infoImg" src={images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
+                    <td rowSpan="3">{images ? <img id="infoImg" src={images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
                 </tr>
                 <tr>
                     <td>제품명</td>
@@ -119,9 +119,10 @@ class PInfo extends React.Component {
                 <tr>
                     <td>태그</td>
                     {/* 태그를 텍스트가 아닌 버튼 형식으로 출력하는 방법에 대한 고민 필요 */}
-                    <td colSpan="3">{tags.length ?
+                    <td colSpan="3">{tags ?
                         tags.map(tag => `${tag.tcode}  `)
-                        : "등록된 태그가 없습니다"}</td>
+                        : "등록된 태그가 없습니다"}
+                    </td>
                 </tr>
             </>
         );
