@@ -68,8 +68,6 @@ class Dashboard extends React.Component {
     }  
 
     item(event, category) {
-
-
         fetch( (`/rest/${category}/${event.target.parentNode.dataset.code}`), {
             method: "GET",
             headers: {
