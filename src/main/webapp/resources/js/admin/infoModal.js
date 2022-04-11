@@ -52,7 +52,7 @@ class InfoModal extends React.Component {
     }
 
     render() {
-        const { category, item, tags } = this.props;
+        const { category, title, item, tags } = this.props;
 
         return (
             <div>
@@ -60,22 +60,22 @@ class InfoModal extends React.Component {
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="infoModal">제품 상세</h5>
+                                <h5 className="modal-title" id="infoModal">{title} 상세</h5>
                                 <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
                             <div className="modal-body">
                                 <table className="table">
                                     <tbody>
-                                        {category === 'product' ?
+                                        {/* {category === 'product' ?
                                             <ProductInfo
+                                                title={title}
                                                 item={item}
                                                 tags={tags}
                                             /> : null
                                         }
                                         {category === 'sub' || category === 'orders' ? <OrdersInfo item={item} /> : null}
-                                        {/* {category === 'member' ? <PInfo /> : null}
-                                        {category === 'review' ? <PInfo /> : null}
-                                        {category === 'tags' ? <TagInfo /> : null} */}
+                                        {category === 'member' ? <PInfo item={item} /> : null}
+                                        {category === 'review' ? <ReviewInfo item={item} /> : null} */}
                                     </tbody>
                                 </table>
                             </div>
@@ -165,7 +165,7 @@ class OrdersInfo extends React.Component {
         let time = fmtTimestamp(item.orderDate);
         let fmtDate = `${time.year}-${time.month}-${time.date}`;
 
-        return(
+        return (
             <>
                 <tr>
                     <td>주문 번호</td>
@@ -195,9 +195,55 @@ class OrdersInfo extends React.Component {
                     <td>주문 제품 수량</td>
                     <td>{item.list ? item.product.amount : 0}</td>
                 </tr>
+                {item.products ? item.products.map(p => {
+                    <tr key={p.code}>
+                        <td>{p.code} <img src={p.images.length ? p.images[0].fullpath : null}></img> </td>
+                        <td>{p.name}</td>
+                        <td>{p.price}</td>
+                        <td>{p.manufacture}</td>
+                    </tr>
+                }) : <tr><td>제품 이미지가 없습니다</td></tr>}
+            </>
+        );
+    }
+}
+
+class ReviewInfo extends React.Component {
+    render() {
+        const { item } = this.props;
+        let time = fmtTimestamp(item.regDate);
+        let fmtDate = `${time.year}-${time.month}-${time.date}`;
+        const imgs = item.images;
+
+        return (
+            <>
                 <tr>
-                    <td></td>
+                    <td>리뷰 번호</td>
+                    <td colSpan="3">{item.code}</td>
                 </tr>
+                <tr>
+                    <td>아이디</td>
+                    <td colSpan="3">{item.id}</td>
+                </tr>
+                <tr>
+                    <td>주문 날짜</td>
+                    <td>{fmtDate}</td>
+                    <td>별점</td>
+                    <td>{item.rating}</td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td colSpan="3">{item.contents}</td>
+                </tr>
+                <tr>
+                    <td>리뷰 이미지</td>
+                </tr>
+                <tr>
+                    {item.images ? item.images.map((image, idx) => (
+                        <td key={idx}><img src={image.fullpath}></img></td>
+                    )) : '등록된 이미지가 없습니다'}
+                </tr>
+
             </>
         );
     }
