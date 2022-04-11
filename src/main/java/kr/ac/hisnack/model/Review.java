@@ -13,12 +13,19 @@ public class Review {
 //	리뷰를 쓴 날짜
 	private Date regDate;
 //	별점 (1 ~ 5)
-	private int rating;
+	private float rating;
 //	리뷰 안에 있는 이미지들
 	private List<Image> images;
 //	리뷰를 쓴 회원의 이름
 	private String name;
 	
+	
+	public float getRating() {
+		return rating;
+	}
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
 	public String getMaskname() {
 		if(name == null) {
 			return "name is null";
@@ -67,12 +74,6 @@ public class Review {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
-	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
 	}
 	public String getThumbnail() {
 		if(images == null) return "";

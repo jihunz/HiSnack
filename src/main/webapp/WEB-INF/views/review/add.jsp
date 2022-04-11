@@ -11,7 +11,7 @@
 	<form method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="${user.id}"/>
 		<div><input type="text" name="contents"/></div>
-		<div><input type="number" name="rating"/></div>
+		<div><input type="number" name="rating" step="0.5"/></div>
 		<div><input type="file" name="image"/></div>
 		<div><input type="file" name="image"/></div>
 		<button>확인</button>

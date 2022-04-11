@@ -65,3 +65,26 @@ body {
 	font-size: var(--font-size-small);
 	padding: 10px;
 }
+.review-item .rating{
+	display: flex;
+	justify-content: center;
+}
+
+.review-item .rating .star{
+	background-image: url('/re/img/star.svg');
+	width: 25px;
+	height: 25px;
+	display: block;
+}
+.review-item .rating .star-half{
+	background-image: url('/re/img/star_half.svg');
+	width: 25px;
+	height: 25px;
+	display: block;
+}
+.review-item .rating .star-empty{
+	background-image: url('/re/img/star_empty.svg');
+	width: 25px;
+	height: 25px;
+	display: block;
+}
