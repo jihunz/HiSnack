@@ -67,7 +67,7 @@ class AddModal extends React.Component {
                             <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
                                     {category === 'product' ? 
-                                        <PAddInputs product={product} onChange={this.change} /> : 
+                                        <PAddInputs category={category} product={product} onChange={this.change} /> : 
                                         <TAddInput content={content} onChange={this.change} />
                                     }
                                     
@@ -87,7 +87,7 @@ class AddModal extends React.Component {
 
 class PAddInputs extends React.Component {
     render() {
-        const { product, onChange } = this.props;
+        const { category, product, onChange } = this.props;
 
         return (
             <>
@@ -96,7 +96,7 @@ class PAddInputs extends React.Component {
                     <input type="text" className="form-control"
                         name="name"
                         value={product.name}
-                        onChange={onChange}
+                        onChange={() => onChange(event)}
                         maxLength="32"
                     />
                 </div>
@@ -105,7 +105,7 @@ class PAddInputs extends React.Component {
                     <input type="text" className="form-control"
                         name="price"
                         value={product.price}
-                        onChange={onChange}
+                        onChange={() => onChange(event, category)}
                     />
                 </div>
                 <div className="mb-3">
@@ -113,7 +113,7 @@ class PAddInputs extends React.Component {
                     <input type="text" className="form-control"
                         name="manufacture"
                         value={product.manufacture}
-                        onChange={onChange}
+                        onChange={() => onChange(event, category)}
                         maxLength="32"
                     />
                 </div>
@@ -122,7 +122,7 @@ class PAddInputs extends React.Component {
                     <input type="number" className="form-control"
                         name="tcode"
                         value={product.tcode}
-                        onChange={onChange}
+                        onChange={() => onChange(event, category)}
                         maxLength="10"
                     />
                 </div>
@@ -131,7 +131,7 @@ class PAddInputs extends React.Component {
                     <textarea type="text" className="form-control"
                         name="info"
                         value={product.info}
-                        onChange={onChange}
+                        onChange={() => onChange(event, category)}
                     ></textarea>
                 </div>
                 <div className="mb-3">
@@ -139,7 +139,7 @@ class PAddInputs extends React.Component {
                     <input type="file" className="form-control"
                         name="image"
                         value={product.image}
-                        onChange={onChange}
+                        onChange={() => onChange(event, category)}
                         multiple
                     />
                 </div>
