@@ -27,7 +27,7 @@ class DTbody extends React.Component {
                         {category === 'product' ? <ProductList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'sub' || category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : ''}
-                        {category === 'tag' ? <TagList item={item} category={category} onItem={onItem} /> : ''}
+                        {category === 'tag' ? <TagList item={item} /> : ''}
                         {/* 변경, 삭제 버튼 */}
                         <td data-code={item.code}>
                             {category === 'product' || category === 'tag' ?
@@ -155,18 +155,11 @@ class ReviewList extends React.Component {
 
 class TagList extends React.Component {
     render() {
-        const { item, category, onItem } = this.props;
+        const { item } = this.props;
         return (
             <>
                 <td>{item.code}</td>
-                <td
-                    className="pointer"
-                    onClick={() => onItem(event, category)}
-                    data-bs-toggle="modal"
-                    data-bs-target="#infoModal"
-                >
-                    <b>{item.content}</b>
-                </td>
+                <td>{item.content}</td>
             </>
         );
     }
