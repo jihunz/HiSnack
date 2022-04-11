@@ -52,7 +52,7 @@ class InfoModal extends React.Component {
     }
 
     render() {
-        const { category, item, tags, images } = this.props;
+        const { category, item, tags } = this.props;
 
         return (
             <div>
@@ -67,16 +67,15 @@ class InfoModal extends React.Component {
                                 <table className="table">
                                     <tbody>
                                         {category === 'product' ?
-                                            <PInfo
+                                            <ProductInfo
                                                 item={item}
                                                 tags={tags}
-                                                images={images}
                                             /> : null
                                         }
-                                        {/* {category === 'sub' || category === 'orders' ? <PInfo /> : null}
-                                        {category === 'member' ? <PInfo /> : null}
+                                        {category === 'sub' || category === 'orders' ? <OrdersInfo item={item} /> : null}
+                                        {/* {category === 'member' ? <PInfo /> : null}
                                         {category === 'review' ? <PInfo /> : null}
-                                        {category === 'tags' ? <PInfo /> : null} */}
+                                        {category === 'tags' ? <TagInfo /> : null} */}
                                     </tbody>
                                 </table>
                             </div>
@@ -88,9 +87,9 @@ class InfoModal extends React.Component {
     }
 }
 
-class PInfo extends React.Component {
+class ProductInfo extends React.Component {
     render() {
-        const { item, tags, images } = this.props;
+        const { item, tags } = this.props;
 
         return (
             <>
@@ -98,7 +97,8 @@ class PInfo extends React.Component {
                     <td>제품 번호</td>
                     <td>{item.code}</td>
                     <td>사진</td>
-                    <td rowSpan="3">{images ? <img id="infoImg" src={images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
+                    {/* didUpdate로 기본 props가 0일 경우 처리 */}
+                    <td rowSpan="3">{item.images > 0 ? <img id="infoImg" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
                 </tr>
                 <tr>
                     <td>제품명</td>
@@ -123,6 +123,80 @@ class PInfo extends React.Component {
                         tags.map(tag => `${tag.tcode}  `)
                         : "등록된 태그가 없습니다"}
                     </td>
+                </tr>
+            </>
+        );
+    }
+}
+
+//일원화 해야함
+function fmtTimestamp(data) {
+    let timestamp = new Date(data);
+
+    let time = {
+        year: timestamp.getFullYear(),
+        month: timestamp.getMonth(),
+        date: timestamp.getDate(),
+        hours: timestamp.getHours(),
+        minutes: timestamp.getMinutes(),
+        seconds: timestamp.getSeconds()
+    }
+    if (time.month < 10) {
+        time.month = `0${time.month + 1}`;
+    }
+    if (time.date < 10) {
+        time.date = `0${time.date}`;
+    }
+    if (time.hours < 10) {
+        time.hours = `0${time.hours}`;
+    }
+    if (time.minutes < 10) {
+        time.minutes = `0${time.minutes}`;
+    }
+    if (time.seconds < 10) {
+        time.seconds = `0${time.seconds}`;
+    }
+    return time;
+}
+
+class OrdersInfo extends React.Component {
+    render() {
+        const { item } = this.props;
+        let time = fmtTimestamp(item.orderDate);
+        let fmtDate = `${time.year}-${time.month}-${time.date}`;
+
+        return(
+            <>
+                <tr>
+                    <td>주문 번호</td>
+                    <td colSpan="3">{item.code}</td>
+                </tr>
+                <tr>
+                    <td>아이디</td>
+                    <td colSpan="3">{item.id}</td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td>{`0${item.tel}`}</td>
+                    <td>주문 날짜</td>
+                    <td>{fmtDate}</td>
+                </tr>
+                <tr>
+                    <td>총 가격</td>
+                    <td colSpan="3">{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
+                </tr>
+                <tr>
+                    <td>주소</td>
+                    <td colSpan="3">{item.address}</td>
+                </tr>
+                <tr>
+                    <td>수령인</td>
+                    <td>{item.name}</td>
+                    <td>주문 제품 수량</td>
+                    <td>{item.list ? item.product.amount : 0}</td>
+                </tr>
+                <tr>
+                    <td></td>
                 </tr>
             </>
         );

@@ -14,7 +14,6 @@ class Dashboard extends React.Component {
             // CRUD를 위한 state
             list: [],
             item: {},
-            images: [],
             tags: [],
             codes: [],
             //pager용 state
@@ -69,6 +68,8 @@ class Dashboard extends React.Component {
     }  
 
     item(event, category) {
+
+
         fetch( (`/rest/${category}/${event.target.parentNode.dataset.code}`), {
             method: "GET",
             headers: {
@@ -78,7 +79,6 @@ class Dashboard extends React.Component {
             this.setState(
                 (state, props) => {
                     state.item = result.item;
-                    state.images = result.item.images;
                     state.tags = result.item.tags;
                     return state;
                 });
@@ -214,7 +214,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        const { title, list, item, tags, pageList, prev, next, query, images, category } = this.state;
+        const { title, list, item, tags, pageList, prev, next, query, category } = this.state;
 
         return (
             <div className="container">
@@ -223,7 +223,6 @@ class Dashboard extends React.Component {
                     title={title}
                     item={item}
                     tags={tags}
-                    images={images}
                 />
                 <AddModal
                     category={category}
