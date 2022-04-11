@@ -7,27 +7,11 @@
 <head>
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 	<link rel="stylesheet" href="/re/css/review.css">
-	<!-- <script>
-		ratings = {RatingScore: 4.5}; 
-		totalRating = 5;
-		table = document.querySelector('.RatingStar');
-		
-		function rateIt() {
-			for (rating in ratings) {
-				ratingPercentage = ratings[rating] / totalRating * 100;
-				ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
-				star = table.querySelector(`.${rating} .inner-star`);
-				numberRating = table.querySelector(`.${rating} .numberRating`);
-				star.style.width = ratingRounded;
-				numberRating.innerText = ratings[rating];
-			}
-		}
-		rateIt()
-	</script> -->
 	<script>
 		const path = '/review';
 	</script>
 	<script src="/re/js/block_link.js"></script>
+	<script src="/re/js/review_rating.js"></script>
 </head>
 <body>
 	<div>
