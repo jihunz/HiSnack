@@ -23,8 +23,8 @@ public class SiteLoginer {
 		// Google OAuth Access Token 요청을 위한 파라미터 세팅
 		GoogleOAuthRequest googleOAuthRequestParam = new GoogleOAuthRequest();
 		googleOAuthRequestParam
-				.setClientId("154631232160-ms9nmt9aggc9dgl6625fb0dij3sdhsb2.apps.googleusercontent.com");
-		googleOAuthRequestParam.setClientSecret("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");
+				.setClientId("181800029872-gn2du3mu4vgv8s3ma4uf7eades7f36lg.apps.googleusercontent.com");
+		googleOAuthRequestParam.setClientSecret("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");
 		googleOAuthRequestParam.setCode(authCode);
 		googleOAuthRequestParam.setRedirectUri("http://localhost:9080/login/google");
 		googleOAuthRequestParam.setGrantType("authorization_code");

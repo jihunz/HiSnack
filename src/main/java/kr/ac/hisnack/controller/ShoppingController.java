@@ -33,6 +33,7 @@ public class ShoppingController {
 	 */
 	@GetMapping("/list")
 	public String list(Pager pager, Model model){
+		pager.setPerPage(20);
 		List<Product> list = service.list(pager);
 		model.addAttribute("list", list);
 		return PATH+"list";

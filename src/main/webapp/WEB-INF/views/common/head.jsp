@@ -23,5 +23,5 @@ const user = {
 
 
 <!-- index 페이지 js src -->
-<script src="/re/js/index.js"></script>
+<script src="/re/js/header.js"></script>
 <title>Hi Snack!</title>

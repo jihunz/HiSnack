@@ -6,7 +6,12 @@
 <mapper namespace="review">
 	<sql id="search">
 		<where>
-			
+			<!-- 관리자 페이지에서 검색할 때 사용 -->
+			<if test="search == 1">
+				review.code LIKE CONCAT('%', #{keyword}, '%')
+				OR UPPER(review.id) LIKE CONCAT('%', UPPER(#{keyword}), '%')
+				OR DATE(review.reg_date) = #{keyword}
+			</if>
 		</where>
 	</sql>
 	

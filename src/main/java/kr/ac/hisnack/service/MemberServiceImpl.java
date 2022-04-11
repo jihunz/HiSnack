@@ -111,8 +111,26 @@ public class MemberServiceImpl implements MemberService {
 		dao.keepLogin(sessionId, id);
 	}
 	
+	@Transactional
 	@Override
 	public Member checkMemberWithSessionId(String sessionId) {
-		return dao.checkMemberWithSessionId(sessionId);
+		List<Member> list = dao.checkMemberWithSessionId(sessionId);
+		
+		if(list == null) return null;
+		
+//		session_id가 같은 회원이 있을 경우
+		if(list.size() == 1) {
+//			한명이면 정상이고 반환한다
+			return list.get(0);
+		}
+		else {
+//			여러명이면 비정상이고 회원들의 session_id를 다 null로 수정 
+			for(Member member : list) {
+				keepLogin(null, member.getId());	
+			}
+//			회원 1명만 session_id를 가지게 함
+			keepLogin(sessionId, list.get(0).getId());
+			return list.get(0);
+		}
 	}
 }

@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 mybatis-config.xml
 log4j.xml
+mail_sender.properties
 
 lecture
 target

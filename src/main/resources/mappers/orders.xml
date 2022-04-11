@@ -10,7 +10,8 @@
 				<when test="search == 1">
 					<!-- 관리자 페이지에서 검색할 때 사용 -->
 					(code LIKE CONCAT('%', #{keyword}, '%')
-					OR UPPER(id) LIKE CONCAT('%', UPPER(#{keyword}), '%'))
+					OR UPPER(id) LIKE CONCAT('%', UPPER(#{keyword}), '%')
+					OR DATE(order_date) = #{keyword})
 					AND subscribe=#{keyword2}
 				</when>
 				<when test="search == 2">

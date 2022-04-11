@@ -60,7 +60,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 	
 	@Override
-	public Member checkMemberWithSessionId(String sessionId) {
-		return sql.selectOne("member.check", sessionId);
+	public List<Member> checkMemberWithSessionId(String sessionId) {
+		return sql.selectList("member.check", sessionId);
 	}
 }

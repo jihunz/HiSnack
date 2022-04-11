@@ -19,7 +19,7 @@ public class Pager {
 	/**
 	 * @value 페이지를 몇개 보여주나
 	 */
-	private int perGroup = 5;
+	private int perGroup = 10;
 	/**
 	 * @value 검색하는 keyword의 종류를 표시
 	 */
@@ -110,10 +110,7 @@ public class Pager {
 		return list;
 	}
 	public String getQuery() {
-		if(search < 1)
-			return "order="+order;
-		
-		return String.format("search=%d&keyword=%s", search, keyword);
+		return String.format("search=%d&keyword=%s&option=%d", search, keyword, option);
 	}
 	public int getOrder() {
 		return order;

@@ -23,6 +23,7 @@ import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.MemberService;
 import kr.ac.hisnack.service.ReviewService;
+import kr.ac.hisnack.util.EmailSender;
 import kr.ac.hisnack.util.Pager;
 import kr.ac.hisnack.util.SiteLoginer;
 
@@ -36,6 +37,9 @@ public class RootController {
 	MemberService ms;
 	@Autowired
 	ReviewService rs;
+	@Autowired
+	EmailSender mailSender;
+	
 	
 /**
  * 메인 페이지
@@ -107,6 +111,17 @@ public class RootController {
 	@PostMapping("/signup")
 	public String signup(Member item) {
 		ms.add(item);
+		if(item.getEmail() != null && !item.getEmail().equals("")) {			
+//			SimpleMailMessage message = new SimpleMailMessage();
+//			message.setTo(item.getEmail());
+//			message.setSubject("Hi Snack!의 가입을 환영합니다!");
+//			message.setText(item.getName()+"님 환영합니다. \n알고리즘이 추천한 여러 과자들을 즐겨주세요!");
+//			sender.send(message);
+			
+			mailSender.sendSimpleEmail(item.getEmail(), "Hi Snack!의 가입을 환영합니다!", 
+					item.getName()+"님 환영합니다. \n알고리즘이 추천한 여러 과자들을 즐겨주세요!");
+		}
+		
 		return "redirect:login";
 	}
 	
