@@ -66,7 +66,7 @@ class InfoModal extends React.Component {
                             <div className="modal-body">
                                 <table className="table">
                                     <tbody>
-                                        {/* {category === 'product' ?
+                                        {category === 'product' ?
                                             <ProductInfo
                                                 title={title}
                                                 item={item}
@@ -74,8 +74,8 @@ class InfoModal extends React.Component {
                                             /> : null
                                         }
                                         {category === 'sub' || category === 'orders' ? <OrdersInfo item={item} /> : null}
-                                        {category === 'member' ? <PInfo item={item} /> : null}
-                                        {category === 'review' ? <ReviewInfo item={item} /> : null} */}
+                                        {/* {category === 'member' ? <PInfo item={item} /> : null} */}
+                                        {category === 'review' ? <ReviewInfo item={item} /> : null}
                                     </tbody>
                                 </table>
                             </div>
@@ -98,7 +98,7 @@ class ProductInfo extends React.Component {
                     <td>{item.code}</td>
                     <td>사진</td>
                     {/* didUpdate로 기본 props가 0일 경우 처리 */}
-                    <td rowSpan="3">{item.images > 0 ? <img id="infoImg" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
+                    <td rowSpan="3">{item.images ? <img id="infoImg" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
                 </tr>
                 <tr>
                     <td>제품명</td>
