@@ -61,11 +61,6 @@ class Dashboard extends React.Component {
                     state.query = result.pager.query;
                     return state;
                 });
-            //회원 관리일 경우 기본키인 id를 별도의 state로 저장
-            if(category === 'member') {
-                this.setState({id: result.list.map(item => {return item.id;})});
-            }
-            else {this.setState({id: ''});}
         }).catch(err => console.log(err));
     }
 
@@ -82,11 +77,6 @@ class Dashboard extends React.Component {
                     state.tags = result.item.tags;
                     return state;
                 });
-            //회원 관리일 경우 기본키인 id를 별도의 state로 저장
-            if(category === 'member') {
-                this.setState({id: result.list.map(item => {return item.id;})});
-            }
-            else {this.setState({id: ''});}
         }).catch(err => console.log(err));
     }
 

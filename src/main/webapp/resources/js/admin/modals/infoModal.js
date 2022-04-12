@@ -22,7 +22,7 @@ class InfoModal extends React.Component {
                                             /> : null
                                         }
                                         {category === 'sub' || category === 'orders' ? <OrdersInfo item={item} /> : null}
-                                        {/* {category === 'member' ? <PInfo item={item} /> : null} */}
+                                        {category === 'member' ? <MemberInfo item={item} /> : null}
                                         {category === 'review' ? <ReviewInfo item={item} /> : null}
                                     </tbody>
                                 </table>
@@ -100,7 +100,6 @@ class OrdersInfo extends React.Component {
     render() {
         const { item } = this.props;
         let fmtDate = fmtTimestamp(item.orderDate);
-
         return (
             <>
                 <tr>
@@ -146,11 +145,46 @@ class OrdersInfo extends React.Component {
     }
 }
 
+class MemberInfo extends React.Component {
+    render() {
+        const { item } = this.props;
+        return (
+            <>
+                <tr>
+                    <td>아이디</td>
+                    <td colSpan="3">{item.id}</td>
+                </tr>
+                <tr>
+                    <td>이름</td>
+                    <td colSpan="3">{item.name}</td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td>{item.tel}</td>
+                    <td>관리 등급</td>
+                    <td>{item.grade}</td>
+                </tr>
+                <tr>
+                    <td>주소</td>
+                    <td colSpan="3">{item.address}</td>
+                </tr>
+                <tr>
+                    <td colSpan="4">해당 회원이 선택한 태그</td>
+                </tr>
+                {item.tags > 0 ? item.tags.map((tag, idx) =>
+                    <tr key={idx}>
+                        <td>{tag.contents}</td>
+                    </tr>
+                ) : <tr><td colSpan="4">아직 선택한 태그가 없습니다</td></tr>}
+            </>
+        );
+    }
+}
+
 class ReviewInfo extends React.Component {
     render() {
         const { item } = this.props;
         let fmtDate = fmtTimestamp(item.regDate);
-
         return (
             <>
                 <tr>
@@ -177,11 +211,11 @@ class ReviewInfo extends React.Component {
                 {item.images > 0 ? item.images.map((image, idx) =>
                     <tr key={idx}>
                         <td className="rImg">
-                            <img src={image[i].fullpath}></img>
-                            <img src={image[i + 1].fullpath}></img>
+                            <img src={image.fullpath}></img>
+                            <img src={image[idx + 1].fullpath}></img>
                         </td>
                     </tr>
-                ) : <tr><td colSpan="3">등록된 이미지가 없습니다</td></tr>}
+                ) : <tr><td colSpan="4">등록된 이미지가 없습니다</td></tr>}
             </>
         );
     }

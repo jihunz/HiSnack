@@ -52,7 +52,7 @@ class Table extends React.Component {
     }
 
     render() {
-        const { list, category, id, onDelete, onItem, onGetCode, onGetCodes } = this.props;
+        const { list, category, onDelete, onItem, onGetCode, onGetCodes } = this.props;
         const { allchked, chkList } = this.state;
 
         return (
@@ -78,7 +78,6 @@ class Table extends React.Component {
                     </thead>
                     <Tbody
                         list={list}
-                        id={id}
                         category={category}
                         onDelete={onDelete}
                         onItem={onItem}
