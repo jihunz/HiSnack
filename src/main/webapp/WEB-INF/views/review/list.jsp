@@ -35,7 +35,10 @@
 		<div class="review-list-visual"></div>
 		
 		<div class="review-container">
-			<div class="text-center">
+			<div class="text-center flex items-center column">
+				<div class = "img-border loudspeakersize margin-bottom20">
+					<img alt="" src="/re/img/loudspeaker.png">
+				</div>
 				<p class="font-logo font-size-small">"고객님들의 달콤한 후기"</p>
 				<h1 class="pb-20 pt-25">달콤한 후기</h1>
 				<div>
