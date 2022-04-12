@@ -1,7 +1,5 @@
 'use strict'
 
-//상세 정보 모달
-
 // 관리자 페이지의 모든 컴포넌트들의 부모 컴포넌트 
 class Dashboard extends React.Component {
     constructor(props) {

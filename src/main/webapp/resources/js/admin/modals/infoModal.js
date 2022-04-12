@@ -1,56 +1,5 @@
 //bootstrap을 사용한 infoModal
 class InfoModal extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            product: {
-                name: "",
-                price: "",
-                manufacture: "",
-                tcode: "",
-                info: "",
-                image: ""
-            },
-            content: "",
-        }
-
-        this.change = this.change.bind(this);
-        this.reset = this.reset.bind(this);
-    }
-
-    change(event, category) {
-        const inputName = event.target.name;
-
-        if (category === 'product') {
-            this.setState({
-                product: {
-                    [inputName]: event.target.value,
-                }
-            });
-        } else {
-            this.setState({ [inputName]: event.target.value });
-        }
-
-    }
-
-    reset(category) {
-        if (category === 'product') {
-            this.setState({
-                product: {
-                    name: "",
-                    price: "",
-                    manufacture: "",
-                    tcode: "",
-                    info: "",
-                    image: ""
-                }
-            });
-        } else {
-            this.setState({ content: "" });
-        }
-    }
-
     render() {
         const { category, title, item, tags } = this.props;
 
@@ -90,15 +39,15 @@ class InfoModal extends React.Component {
 class ProductInfo extends React.Component {
     render() {
         const { item, tags } = this.props;
-
         return (
             <>
                 <tr>
                     <td>제품 번호</td>
                     <td>{item.code}</td>
                     <td>사진</td>
-                    {/* didUpdate로 기본 props가 0일 경우 처리 */}
-                    <td rowSpan="3">{item.images ? <img id="infoImg" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}</td>
+                    <td rowSpan="3">
+                        {item.images != 0 ? <img id="infoImg" src={item.thumbnail}></img> : "등록된 사진이 없습니다"}    
+                    </td>
                 </tr>
                 <tr>
                     <td>제품명</td>
@@ -164,7 +113,6 @@ class OrdersInfo extends React.Component {
         const { item } = this.props;
         let time = fmtTimestamp(item.orderDate);
         let fmtDate = `${time.year}-${time.month}-${time.date}`;
-        const arry = [1, 2, 3, 4];
 
         return (
             <>
@@ -198,7 +146,9 @@ class OrdersInfo extends React.Component {
                 </tr>
                 {item.products ? item.products.map(p => 
                     <tr key={p.code}>
-                        <td className="opTd">{p.code}<img src={p.images.length ? p.images[0].fullpath : null} className="opImg"></img></td>
+                        <td className="opTd">{p.code}
+                            {p.images.length ? <img src={p.images[0].fullpath} className="opImg"></img> : '등록된 이미지가 없습니다'}
+                        </td>
                         <td>{p.name}</td>
                         <td>{p.price}</td>
                         <td>{p.manufacture}</td>
