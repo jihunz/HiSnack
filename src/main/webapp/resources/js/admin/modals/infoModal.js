@@ -1,8 +1,7 @@
 //bootstrap을 사용한 infoModal
 class InfoModal extends React.Component {
     render() {
-        const { category, title, item, tags, onFmtTimestamp } = this.props;
-
+        const { category, title, item, tags } = this.props;
         return (
             <div>
                 <div className="modal fade mWrapper" id="infoModal" data-bs-keyboard="false" tabIndex="-1">

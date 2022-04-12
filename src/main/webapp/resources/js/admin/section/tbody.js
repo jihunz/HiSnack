@@ -1,6 +1,5 @@
 //테이블의 행 컴포넌트 -> DB의 각 table에 저장된 데이터의 list를 반환
 class Tbody extends React.Component {
-
     render() {
         const { list, category, chkList, onEachCheck, onGetCode, onDelete, onItem } = this.props;
         return (
