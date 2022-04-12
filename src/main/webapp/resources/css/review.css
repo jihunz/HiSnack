@@ -10,7 +10,7 @@ body {
 .review-container {
 	width: 1200px;
 	margin: 0 auto;
-	padding: 200px 0 45px 0;
+	padding: 100px 0 45px 0;
 }
 
 .review-item{
@@ -22,7 +22,7 @@ body {
 }
 
 .review-item:hover{
-	background: var(--color-light-gray);
+	box-shadow: 4px 4px 10px var(--color-light-gray);
 }
 
 .review-img-border{
@@ -46,6 +46,7 @@ body {
 	padding: 15px 10px 5px;
 	margin-bottom: 45px;
 	font-size: var(--font-size-xsmall);
+	font-weight: var(--font-weight-normal);
 	color: var(--color-gray);
 	height: 30px;
 	text-overflow: ellipsis;
@@ -57,12 +58,16 @@ body {
 	-webkit-box-orient: vertical; 
 	word-wrap:break-word;
 }
-
+.loudspeakersize {
+  width: 75px;
+  height: 75px;
+}
 .review-item .info{
 	display: flex;
 	justify-content: space-between;
 	color: var(--color-gray);
 	font-size: var(--font-size-small);
+	font-weight: var(--font-weight-normal);
 	padding: 10px;
 }
 .review-item .rating{

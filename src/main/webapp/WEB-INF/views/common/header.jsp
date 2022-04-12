@@ -2,14 +2,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="headerstart ">
 	<div class = "headercontent">
-			<div class = logosize>
+			<a href = "http://localhost:9080/"><div class = "logosize">
            		<img alt="" src="/re/img/logo.svg" id ="logoimgsize logoimg">
-            </div>
+            </div></a>
             <div class = "menefont">
 	            <a href="/sub/detail" class = "menupadding">구독</a>
 	            <a href="/shopping/list" class = "menupadding">쇼핑몰</a>
 	            <a href="/orders/cart" class = "menupadding">장바구니</a>
-	            <a href="/review/list" class = "menupadding">리뷰 목록</a>            
+	            <a href="/review/list" class = "menupadding">리뷰</a>            
             </div>
           		<div id="user-menu" class= "menefont">
           			<c:choose>
