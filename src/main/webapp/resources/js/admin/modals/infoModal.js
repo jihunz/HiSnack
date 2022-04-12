@@ -1,7 +1,7 @@
 //bootstrap을 사용한 infoModal
 class InfoModal extends React.Component {
     render() {
-        const { category, title, item, tags } = this.props;
+        const { category, title, item, tags, onFmtTimestamp } = this.props;
 
         return (
             <div>
@@ -34,6 +34,25 @@ class InfoModal extends React.Component {
             </div>
         );
     }
+}
+
+//날짜 출력 형식 변환 함수
+function fmtTimestamp(data) {
+    let timestamp = new Date(data);
+    let time = {
+        year: timestamp.getFullYear(),
+        month: timestamp.getMonth(),
+        date: timestamp.getDate(),
+        hours: timestamp.getHours(),
+        minutes: timestamp.getMinutes(),
+        seconds: timestamp.getSeconds()
+    }
+    if (time.month < 10) {time.month = `0${time.month + 1}`;}
+    if (time.date < 10) {time.date = `0${time.date}`;}
+    if (time.hours < 10) {time.hours = `0${time.hours}`;}
+    if (time.minutes < 10) {time.minutes = `0${time.minutes}`;}
+    if (time.seconds < 10) {time.seconds = `0${time.seconds}`;}
+    return `${time.year}-${time.month}-${time.date}`;
 }
 
 class ProductInfo extends React.Component {
@@ -78,41 +97,10 @@ class ProductInfo extends React.Component {
     }
 }
 
-//일원화 해야함
-function fmtTimestamp(data) {
-    let timestamp = new Date(data);
-
-    let time = {
-        year: timestamp.getFullYear(),
-        month: timestamp.getMonth(),
-        date: timestamp.getDate(),
-        hours: timestamp.getHours(),
-        minutes: timestamp.getMinutes(),
-        seconds: timestamp.getSeconds()
-    }
-    if (time.month < 10) {
-        time.month = `0${time.month + 1}`;
-    }
-    if (time.date < 10) {
-        time.date = `0${time.date}`;
-    }
-    if (time.hours < 10) {
-        time.hours = `0${time.hours}`;
-    }
-    if (time.minutes < 10) {
-        time.minutes = `0${time.minutes}`;
-    }
-    if (time.seconds < 10) {
-        time.seconds = `0${time.seconds}`;
-    }
-    return time;
-}
-
 class OrdersInfo extends React.Component {
     render() {
         const { item } = this.props;
-        let time = fmtTimestamp(item.orderDate);
-        let fmtDate = `${time.year}-${time.month}-${time.date}`;
+        let fmtDate = fmtTimestamp(item.orderDate);
 
         return (
             <>
@@ -162,9 +150,7 @@ class OrdersInfo extends React.Component {
 class ReviewInfo extends React.Component {
     render() {
         const { item } = this.props;
-        let time = fmtTimestamp(item.regDate);
-        let fmtDate = `${time.year}-${time.month}-${time.date}`;
-        const imgs = item.images;
+        let fmtDate = fmtTimestamp(item.regDate);
 
         return (
             <>

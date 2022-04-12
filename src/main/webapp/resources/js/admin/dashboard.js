@@ -35,13 +35,12 @@ class Dashboard extends React.Component {
     }
 
     list(category, page, query, search, order) {
-
         let url = `rest/${category}`;
 
-        if(page != null) {
+        if (page != null) {
             //페이지네이션 시 요청할 uri
             url += `?page=${page}&${query}`
-        } else if(search != null) {
+        } else if (search != null) {
             //검색 시 요청할 uri
             const keyword = document.querySelector("#searchBox").value;
             url += `?search=${search}&keyword=${keyword}`
@@ -63,10 +62,10 @@ class Dashboard extends React.Component {
                     return state;
                 });
         }).catch(err => console.log(err));
-    }  
+    }
 
     item(event, category) {
-        fetch( (`/rest/${category}/${event.target.parentNode.dataset.code}`), {
+        fetch((`/rest/${category}/${event.target.parentNode.dataset.code}`), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -82,7 +81,7 @@ class Dashboard extends React.Component {
     }
 
     //UpdateModal에 있는 input('태그 코드', '이미지 등록' 제외)들의 state를 관리하는 함수
-    change(event) {     
+    change(event) {
         const inputName = event.target.name;
         this.setState({
             item: {
@@ -91,7 +90,7 @@ class Dashboard extends React.Component {
             },
         });
     }
-  
+
     //UpdateModal에 있는 태그 코드 input의 state를 관리하는 함수 
     tagChange(event, index) {
         this.setState({
@@ -106,13 +105,13 @@ class Dashboard extends React.Component {
 
     //add 혹은 update 요청을 실행하는 함수 -> type 파라미터로 add와 update 구분
     modify(type, category) {
-        let url;         
+        let url;
         const formData = new FormData(document.getElementById(`${type}Form`));
         const cancel = document.querySelector(`.${type}Cancel`);
 
-        if(type == "add") {
+        if (type == "add") {
             url = `/rest/${category}`;
-        } else if(type == "update") {
+        } else if (type == "update") {
             const code = document.getElementById("codeInput").value;
             url = `/rest/${category}/${code}`;
         }
@@ -141,7 +140,7 @@ class Dashboard extends React.Component {
     deleteList(category) {
         const c = this.state.codes;
 
-        for(let i = 0; i <= c.length - 1; i++) {
+        for (let i = 0; i <= c.length - 1; i++) {
             fetch(`/rest/${category}/${c[i]}`, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
@@ -151,37 +150,35 @@ class Dashboard extends React.Component {
         }
     }
 
-    initCodes() {
-        this.setState({ codes: [] });
-    }
+    initCodes() {this.setState({ codes: [] });}
 
     getCode(event) {
-        if(event.target.checked) {
+        if (event.target.checked) {
             this.setState(
                 (state) => {
                     state.codes = [...state.codes, event.target.value];
                     return state;
-            });
+                });
         } else {
             const updateCodes = this.state.codes.filter((code) => {
-                if(code !== event.target.value) return code;
+                if (code !== event.target.value) return code;
             });
-            this.setState( {codes: updateCodes} );
+            this.setState({ codes: updateCodes });
         }
     }
 
     getCodes(event) {
         const cboxes = document.querySelectorAll(".chk");
 
-        for(let i = 0; i <= cboxes.length - 1; i++) {
-            if(!cboxes[i].checked) {
+        for (let i = 0; i <= cboxes.length - 1; i++) {
+            if (!cboxes[i].checked) {
                 this.setState(
                     (state) => {
                         state.codes = [...state.codes, cboxes[i].value];
                         return state;
-                });
-            } else {this.setState( {codes: [] });}
-        }  
+                    });
+            } else { this.setState({ codes: [] }); }
+        }
     }
 
     setCategory(category, title) {
@@ -190,28 +187,19 @@ class Dashboard extends React.Component {
                 state.category = category;
                 state.title = title;
                 return state;
-        });
+            });
         this.list(category);
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
-    componentDidMount() {
-        this.list("product");
-    }
-
+    componentDidMount() {this.list("product");}
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        
-    }
-
+    componentDidUpdate(prevProps, prevState, snapshot) {}
     //컴포넌트가 마운트 해제되어 제거되기 직전에 호출
-    componentWillUnmount() {
-
-    }
+    componentWillUnmount() {}
 
     render() {
         const { title, list, item, tags, pageList, prev, next, query, category } = this.state;
-
         return (
             <div className="container">
                 <InfoModal
@@ -225,18 +213,18 @@ class Dashboard extends React.Component {
                     title={title}
                     onModify={this.modify}
                 />
-                <UpdateModal 
+                <UpdateModal
                     category={category}
                     title={title}
-                    item={item} 
+                    item={item}
                     tags={tags}
-                    onChange={this.change} 
-                    onTagChange={this.tagChange} 
-                    onModify={this.modify}/>
-                <Sidebar 
+                    onChange={this.change}
+                    onTagChange={this.tagChange}
+                    onModify={this.modify} />
+                <Sidebar
                     onSetCategory={this.setCategory}
                 />
-                <Section 
+                <Section
                     category={category}
                     title={title}
                     list={list}
@@ -256,5 +244,4 @@ class Dashboard extends React.Component {
         );
     }
 }
-
 ReactDOM.render(<div><Dashboard /></div>, document.querySelector("#app"));
