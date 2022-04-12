@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hisnack.model.Image;
 import kr.ac.hisnack.model.Member;
+import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.ImageService;
+import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.service.ReviewService;
 import kr.ac.hisnack.util.FileUploader;
 import kr.ac.hisnack.util.Pager;
@@ -35,6 +37,8 @@ public class ReviewController {
 	
 	@Autowired
 	ReviewService service;
+	@Autowired
+	OrdersService os;
 	@Autowired
 	@Qualifier("ReviewImageService")
 	ImageService imageService;
@@ -74,6 +78,10 @@ public class ReviewController {
 	public String add(Model model, HttpSession session) {
 		Member user = (Member)session.getAttribute("user");
 		model.addAttribute("user", user);
+		
+		Orders sub = os.latestSubscribe(user.getId());
+		model.addAttribute("sub", sub);
+		
 		return PATH+"add";
 	}
 /**
