@@ -76,7 +76,7 @@ class Table extends React.Component {
                             {category === 'tag' ? <TagTh /> : ''}
                         </tr>
                     </thead>
-                    <Tb
+                    <Tbody
                         list={list}
                         category={category}
                         onDelete={onDelete}
