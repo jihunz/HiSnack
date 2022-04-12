@@ -34,7 +34,7 @@
 				<c:forEach items="${list}" var="item">
 					<div class="review-item block-link" data-code="${item.code}">
 						<div class="review-img-border">
-							<img src="${item.thumbnail}" alt="${item.images.get(0).filename}" />
+							<img src="${item.thumbnail}" alt="${item.thumbnail}" />
 						</div>
 						<div class="p-5">
 							<div class="rating" data-rating="${item.rating}">
