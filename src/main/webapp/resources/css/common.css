@@ -16,17 +16,17 @@
 	--noto: 'Noto Sans KR', sans-serif;
 
 	--font-weight-light: 300;
-	--font-weight-normal: 400;
-	--font-weight-medium: 500;
+	--font-weight-normal: 500;
+	--font-weight-medium: 600;
 	--font-weight-bold: 700;
 	--font-weight-black: 900;
 
-	--font-size-xsmall: 12px;
-	--font-size-small: 14px;
-	--font-size-laguler: 16px;
+	--font-size-xsmall: 0.75rem;
+	--font-size-small: 0.875rem;
+	--font-size-laguler: 1.125rem;
 	--font-size-medium: 18px;
 	--font-size-large: 24px;
-	--font-size-xlarge: 32px;
+	--font-size-xlarge: 2.625rem;
 }
 
 * {
@@ -72,6 +72,7 @@ a:hover {
 }
 .flex.items-center {
 	align-items: center;
+	
 }
 .flex.column {
 	flex-direction: column;
@@ -399,7 +400,9 @@ a.btn {
 	margin-left: 5px;
 }
 
-
+.mt-120 {
+	margin-top: 120px;
+}
 .mt-60 {
 	margin-top: 60px;
 }
@@ -448,7 +451,9 @@ a.btn {
 	margin-top: 5px;
 }
 
-
+.mb-120 {
+	margin-bottom: 120px;
+}
 
 .mb-60 {
 	margin-bottom: 60px;
@@ -1004,4 +1009,8 @@ a.btn {
 .text-center {
 	text-align: center;
 }
-
+/* ========================color============================= */
+.lightcolor {
+	color : var(--color-light-gray);
+	text-decoration: none;
+}
