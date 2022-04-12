@@ -89,7 +89,9 @@ class ProductList extends React.Component {
         return (
             <>
                 <td>{item.code}</td>
-                <td data-code={item.code}><img src={item.thumbnail} id="thumbnail"></img></td>
+                <td data-code={item.code}>
+                    {item.images != 0 ? <img src={item.thumbnail} id="thumbnail"></img> : '등록된 이미지가 없습니다'}
+                </td>
                 <td
                     className="pointer"
                     onClick={() => onItem(event, category)}
