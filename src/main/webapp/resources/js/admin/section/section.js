@@ -15,7 +15,7 @@ class Section extends React.Component {
                     onDeleteList={onDeleteList}
                     category={category}
                 />
-                <DataTable
+                <Table
                     list={list}
                     category={category}
                     onDelete={onDelete}

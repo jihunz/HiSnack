@@ -1,5 +1,5 @@
 // 테이블 컴포넌트 -> table 태그를 반환
-class DataTable extends React.Component {
+class Table extends React.Component {
     constructor(props) {
         super(props);
 
@@ -76,7 +76,7 @@ class DataTable extends React.Component {
                             {category === 'tag' ? <TagTh /> : ''}
                         </tr>
                     </thead>
-                    <DTbody
+                    <Tb
                         list={list}
                         category={category}
                         onDelete={onDelete}

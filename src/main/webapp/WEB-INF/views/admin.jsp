@@ -21,15 +21,15 @@
     <!-- Load bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- React components -->
-    <script type="text/babel" src="re/js/admin/infoModal.js"></script>
-    <script type="text/babel" src="re/js/admin/addModal.js"></script>
-    <script type="text/babel" src="re/js/admin/updateModal.js"></script>
-    <script type="text/babel" src="re/js/admin/pagenation.js"></script>
-    <script type="text/babel" src="re/js/admin/dThead.js"></script>
-    <script type="text/babel" src="re/js/admin/dTbody.js"></script>
-    <script type="text/babel" src="re/js/admin/dataTable.js"></script>
-    <script type="text/babel" src="re/js/admin/section.js"></script>
-    <script type="text/babel" src="re/js/admin/sidebar.js"></script>
+    <script type="text/babel" src="re/js/admin/modals/infoModal.js"></script>
+    <script type="text/babel" src="re/js/admin/modals/addModal.js"></script>
+    <script type="text/babel" src="re/js/admin/modals/updateModal.js"></script>
+    <script type="text/babel" src="re/js/admin/section/pagenation.js"></script>
+    <script type="text/babel" src="re/js/admin/section/thead.js"></script>
+    <script type="text/babel" src="re/js/admin/section/tbody.js"></script>
+    <script type="text/babel" src="re/js/admin/section/table.js"></script>
+    <script type="text/babel" src="re/js/admin/section/section.js"></script>
+    <script type="text/babel" src="re/js/admin/sidebar/sidebar.js"></script>
     <script type="text/babel" src="re/js/admin/dashboard.js"></script>
 </body>
 </html>
