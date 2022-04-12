@@ -1,20 +1,20 @@
 //테이블의 행 컴포넌트 -> DB의 각 table에 저장된 데이터의 list를 반환
 class Tbody extends React.Component {
     render() {
-        const { list, category, chkList, onEachCheck, onGetCode, onDelete, onItem } = this.props;
+        const { list, category, id, chkList, onEachCheck, onGetCode, onDelete, onItem } = this.props;
         return (
 
             <tbody>
                 {list.length ? list.map((item, idx) =>
                     <tr
                         key={idx}
-                        data-code={item.code}
+                        data-code={category === 'member' ? item.id : item.code}
                     >
                         {/* 체크박스 */}
                         {category === 'sub' || category === 'orders' ? null
                             : <td>
                                 <input type="checkbox" className="chk"
-                                    value={item.code}
+                                    value={category === 'member' ? item.id : item.code}
                                     checked={chkList[idx] ? chkList[idx] : false}
                                     onChange={() => { onEachCheck(idx) }}
                                     onClick={() => { onGetCode(event, idx) }}
@@ -24,6 +24,7 @@ class Tbody extends React.Component {
                         {/* 데이터 목록 */}
                         {category === 'product' ? <ProductList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'sub' || category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : ''}
+                        {category === 'member' ? <MemberList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : ''}
                         {category === 'tag' ? <TagList item={item} /> : ''}
 
@@ -130,6 +131,27 @@ class ReviewList extends React.Component {
     }
 }
 
+class MemberList extends React.Component {
+    render() {
+        const { item, category, onItem } = this.props;
+        return (
+            <>
+                <td>{item.id}</td>
+                <td
+                    className="pointer"
+                    onClick={() => onItem(event, category)}
+                    data-bs-toggle="modal"
+                    data-bs-target="#infoModal"
+                >
+                    <b>{item.name}</b>
+                </td>
+                <td>{item.tel}</td>
+                <td>{item.grade}</td>
+            </>
+        );
+    }
+}
+
 class TagList extends React.Component {
     render() {
         const { item } = this.props;
@@ -157,7 +179,7 @@ class UpDelBtn extends React.Component {
                 }
                 {category === 'sub' || category === 'orders' ? null
                     : <button
-                        id={item.code}
+                        id={category === 'member' ? item.id : item.code}
                         onClick={() => onDelete(event, category)}>삭제
                     </button>
                 }
