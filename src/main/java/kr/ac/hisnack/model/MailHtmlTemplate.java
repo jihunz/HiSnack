@@ -19,6 +19,7 @@ import kr.ac.hisnack.util.FileUploader;
 // image를 넣으면 그걸 cid로 자동으로 넣어줌
 // 넣을 수 있는 것은 메일 내용, 메일에 넣을 이미지 리스트
 // img/hisnack_logo.png를 사용한다
+// 구독 메세지 전용
 public class MailHtmlTemplate {
 	private String[] contents;
 	private List<OrderedProduct> products;
@@ -66,12 +67,13 @@ public class MailHtmlTemplate {
 		for(String content : contents) {
 			html += String.format("<p>%s</p>", content);
 		}
+		html += "<p>구독 상품 목록 ↓</p>";
 		html += "<div style=\"display:flex;flex-wrap:wrap;width:1000px;\">";
 //		이미지 파일을 적음
 		for(OrderedProduct product : products) {
 //			div로 포장해서 이미지와 이름을 적음
-			String containerCSS = "display:flex;flex-direction:column;align-items:center;";
-			String imgBorderCSS = "width:150px;height:150px;overflow:hidden;display:flex;align-items:center;justify-content:center;";
+			String containerCSS = "text-align:center;padding:10px;";
+			String imgBorderCSS = "width:150px;height:150px;overflow:hidden;";
 			String imgCSS = "width:100%;height:100%;object-fit:cover;";
 			html += String.format("<div style=\"%s\">", containerCSS);
 			html += String.format("<div style=\"%s\"><img style=\"%s\" src=\"cid:%s\"></div>", imgBorderCSS, imgCSS, "p"+product.getPcode());

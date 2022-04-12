@@ -89,10 +89,12 @@ public class OrdersServiceImpl implements OrdersService {
 		
 		List<Orders> list = dao.list(pager);
 		
+		Pager p  = new Pager();
+		
 		for(Orders item : list) {
-			pager.setKeyword(item.getCode()+"");
-			pager.setSearch(1);
-			List<OrderedProduct> oProducts = opd.list(pager);
+			p.setKeyword(item.getCode()+"");
+			p.setSearch(1);
+			List<OrderedProduct> oProducts = opd.list(p);
 			item.setProducts(oProducts);
 		}
 		
