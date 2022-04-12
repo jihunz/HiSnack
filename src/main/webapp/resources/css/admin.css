@@ -24,3 +24,12 @@
 .pointer {
     cursor: pointer;
 }
+
+.reviewImgs, .ordersImgs {
+    width: 100px;
+    height: 100px;
+}
+
+.oPTd {
+    display: flex;
+}

@@ -164,6 +164,7 @@ class OrdersInfo extends React.Component {
         const { item } = this.props;
         let time = fmtTimestamp(item.orderDate);
         let fmtDate = `${time.year}-${time.month}-${time.date}`;
+        const arry = [1, 2, 3, 4];
 
         return (
             <>
@@ -195,14 +196,14 @@ class OrdersInfo extends React.Component {
                     <td>주문 제품 수량</td>
                     <td>{item.list ? item.product.amount : 0}</td>
                 </tr>
-                {item.products ? item.products.map(p => {
+                {item.products ? item.products.map(p => 
                     <tr key={p.code}>
-                        <td>{p.code} <img src={p.images.length ? p.images[0].fullpath : null}></img> </td>
+                        <td className="oPTd">{p.code}<img src={p.images.length ? p.images[0].fullpath : null} className="ordersImgs"></img></td>
                         <td>{p.name}</td>
                         <td>{p.price}</td>
                         <td>{p.manufacture}</td>
                     </tr>
-                }) : <tr><td>제품 이미지가 없습니다</td></tr>}
+                ) : <tr><td>제품 이미지가 없습니다</td></tr>}
             </>
         );
     }
@@ -240,7 +241,7 @@ class ReviewInfo extends React.Component {
                 </tr>
                 <tr>
                     {item.images ? item.images.map((image, idx) => (
-                        <td key={idx}><img src={image.fullpath}></img></td>
+                        <td key={idx} className="reviewImgs"><img src={image.fullpath}></img></td>
                     )) : '등록된 이미지가 없습니다'}
                 </tr>
 
