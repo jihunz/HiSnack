@@ -1,3 +1,6 @@
+// 해당 주소 검색 api를 팝업으로 사용하고 싶다면
+// 이벤트 리스너로 execDaumPostcode()를 등록하면 됩니다.
+	
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
