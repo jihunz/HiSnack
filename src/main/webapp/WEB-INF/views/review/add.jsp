@@ -6,7 +6,7 @@
 <head>
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 	<link rel="stylesheet" href="/re/css/review.css" />
-	 <script src="/re/js/review_add.js"></script>
+	 <script src="/re/js/review_form.js"></script>
 </head>
 <body>	
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>

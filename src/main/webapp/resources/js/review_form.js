@@ -10,13 +10,15 @@ $(function(){
 		const dist = e.pageX - (this.getBoundingClientRect().left + this.clientWidth/2);
 		if(dist < 0){
 			// 마우스의 위치가 별의 위치보다 왼쪽이면 0.5
-			$(`.rating span:nth-child(-n+${index-1})`).attr('class', 'star big');
-			$(this).attr('class', 'star-half big');
+			// $(`.rating span:nth-child(-n+${index-1})`).attr('class', 'star big');
+			// $(this).attr('class', 'star-half big');
+			changeStar(index-1+0.5);
 			changeRating(index-1+0.5);
 		}
 		else{
 			// 마우스의 위치가 별의 위치보다 오른쪽이면 1로 인식
-			$(`.rating span:nth-child(-n+${index})`).attr('class', 'star big');
+			// $(`.rating span:nth-child(-n+${index})`).attr('class', 'star big');
+			changeStar(index);
 			changeRating(index);
 		}
 	});
@@ -38,11 +40,31 @@ $(function(){
 	
 		// this.submit();
 	});
-	
+
+	// 만약 select에 rating 값이 있으면 그걸로 설정함
+	const rating = $('.rating-select').data('rating');
+
+	if(rating){
+		changeStar(parseFloat(rating));
+		changeRating(parseFloat(rating));
+	}
 });
 
 // 숫자를 입력하면 select의 값이 바뀌는 함수
 function changeRating(value){
 	const select = $('.rating .rating-select');
 	select.val(value).prop('selected', true);
+}
+// 숫자를 입력하면 별이 바뀌는 함수
+function changeStar(value){
+	if(value % 1 != 0){
+		// 실수일 경우
+		const num = Math.floor(value);
+		$(`.rating span:nth-child(-n+${num})`).attr('class', 'star big');
+		$(`.rating span:nth-child(${num+1})`).attr('class', 'star-half big');
+	}
+	else{
+		// 정수일 경우
+		$(`.rating span:nth-child(-n+${value})`).attr('class', 'star big');
+	}
 }

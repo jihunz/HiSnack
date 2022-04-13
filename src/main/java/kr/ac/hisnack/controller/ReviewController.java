@@ -105,7 +105,10 @@ public class ReviewController {
  * @param model : jsp에 리뷰를 넘길때 사용하는 파라미터
  */
 	@GetMapping("/update/{code}")
-	public String update(@PathVariable int code, Model model) {
+	public String update(@PathVariable int code, Model model, HttpSession session) {
+		Member user = (Member)session.getAttribute("user");
+		model.addAttribute("user", user);
+		
 		Review item = service.item(code);
 		model.addAttribute("item", item);
 		return PATH+"update";

@@ -11,6 +11,7 @@
 <body>
 	<div>
 		<h1>리뷰</h1>
+		<p><a href="update/${item.code}">수정</a></p>
 		<p><fmt:formatDate value="${item.regDate}" pattern="yyyy년 mm월 dd일"/></p>
 		<p>${item.maskname}</p>
 		<div>
