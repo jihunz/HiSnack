@@ -201,7 +201,7 @@ class Dashboard extends React.Component {
     render() {
         const { title, list, item, tags, pageList, prev, next, query, category, id } = this.state;
         return (
-            <div className="container">
+            <div className="admin-container">
                 <InfoModal
                     category={category}
                     title={title}

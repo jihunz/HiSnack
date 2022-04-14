@@ -5,16 +5,18 @@ class Section extends React.Component {
         const { title, list, pageList, prev, next, query, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
 
         return (
-            <div>
-                <Title title={title} />
-                <Search
-                    category={category}
-                    onList={onList}
-                />
-                <Btns
-                    onDeleteList={onDeleteList}
-                    category={category}
-                />
+            <div className="section">
+                <div className="section-header">
+                    <Title title={title} />
+                    <Search
+                        category={category}
+                        onList={onList}
+                    />
+                    <Btns
+                        onDeleteList={onDeleteList}
+                        category={category}
+                    />
+                </div>
                 <Table
                     list={list}
                     category={category}
@@ -44,10 +46,10 @@ class Title extends React.Component {
 
         return (
             <div>
-                <span>
+                <div>
                     <h4>{title} 데이터 관리</h4>
                     <h4>{title}을 쉽게 관리할 수 있도록 도움을 주는 페이지</h4>
-                </span>
+                </div>
                 <h2>{title}</h2>
             </div>
         );
