@@ -148,3 +148,9 @@ body {
 .review-form .input-wrapper .contents::placeholder{
 	color:var(--color-light-gray);
 }
+.review-item-contents{
+	background: var(--color-white);
+	min-height: 500px;
+	border: var(--color-light-gray) 1px solid;
+	padding: 5px;
+}

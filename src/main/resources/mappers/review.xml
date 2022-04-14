@@ -22,6 +22,7 @@
 		<result column="reg_date" property="regDate"/>
 		<result column="rating" property="rating"/>
 		<result column="name" property="name"/>
+		<result column="price" property="price"/>
 		<collection property="images" javaType="ArrayList" ofType="Image">
 			<id column="image_code" property="code"/>
 			<result column="target" property="target"/>
@@ -32,7 +33,7 @@
 
 	<insert id="add">
 		INSERT INTO review
-		VALUES(NULL, #{id}, #{contents}, NOW(), #{rating})
+		VALUES(NULL, #{id}, #{contents}, NOW(), #{rating}, #{price})
 		
 		<selectKey order="AFTER" resultType="Integer" keyProperty="code">
 			SELECT LAST_INSERT_ID()
