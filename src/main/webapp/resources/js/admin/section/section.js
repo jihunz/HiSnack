@@ -5,17 +5,19 @@ class Section extends React.Component {
         const { title, list, pageList, prev, next, query, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
 
         return (
-            <div className="section">
+            <div className="section-container">
                 <div className="section-header">
                     <Title title={title} />
-                    <Search
-                        category={category}
-                        onList={onList}
-                    />
-                    <Btns
-                        onDeleteList={onDeleteList}
-                        category={category}
-                    />
+                    <div className="section-item-btns">
+                        <Search
+                            category={category}
+                            onList={onList}
+                        />
+                        <Btns
+                            onDeleteList={onDeleteList}
+                            category={category}
+                        />
+                    </div>
                 </div>
                 <Table
                     list={list}
@@ -25,14 +27,6 @@ class Section extends React.Component {
                     onGetCode={onGetCode}
                     onGetCodes={onGetCodes}
                     onInitCodes={onInitCodes}
-                />
-                <Pagenation
-                    pageList={pageList}
-                    prev={prev}
-                    next={next}
-                    query={query}
-                    category={category}
-                    onList={onList}
                 />
             </div>
         );
@@ -46,11 +40,11 @@ class Title extends React.Component {
 
         return (
             <div>
-                <div>
-                    <h4>{title} 데이터 관리</h4>
-                    <h4>{title}을 쉽게 관리할 수 있도록 도움을 주는 페이지</h4>
+                <div className="section-item-title-sub">
+                    <p>{title} 데이터 관리</p>
+                    <p>{title}을 쉽게 관리할 수 있도록 도움을 주는 페이지</p>
                 </div>
-                <h2>{title}</h2>
+                <h2 className="section-item-title">{title}</h2>
             </div>
         );
     }
@@ -92,12 +86,12 @@ class Search extends React.Component {
         const { category, onList } = this.props;
 
         return (
-            <div>
+            <>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="keyword" id="searchBox" placeholder={this.state.t} />
                     <button onClick={() => onList(category, null, null, 1)}><img src="" />검색</button>
                 </form>
-            </div>
+            </>
         );
     }
 }
@@ -109,17 +103,14 @@ class Btns extends React.Component {
         return (
             <div>
                 {category === 'product' || category === 'tag' ?
-                    <div>
-                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
-                    </div>
+                        <button type="button" id="section-item-submit" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
                     : null
                 }
                 {category === 'sub' || category === 'orders' ? null
-                    : <div>
+                    :
                         <button
                             onClick={() => { onDeleteList(category) }}
                         >삭제<img src="" /></button>
-                    </div>
                 }
             </div>
         );

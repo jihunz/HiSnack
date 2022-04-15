@@ -61,7 +61,7 @@ class Table extends React.Component {
                     <thead>
                         <tr>
                             {category === 'sub' || category === 'orders' ? null
-                                : <td>
+                                : <td className="thead-checkbox">
                                     <input type="checkbox"
                                         checked={allchked}
                                         onChange={this.allCheck}

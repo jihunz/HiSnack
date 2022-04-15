@@ -150,7 +150,7 @@ class Dashboard extends React.Component {
         }
     }
 
-    initCodes() {this.setState({ codes: [] });}
+    initCodes() { this.setState({ codes: [] }); }
 
     getCode(event) {
         if (event.target.checked) {
@@ -192,11 +192,11 @@ class Dashboard extends React.Component {
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
-    componentDidMount() {this.list("product");}
+    componentDidMount() { this.list("product"); }
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
-    componentDidUpdate(prevProps, prevState, snapshot) {}
+    componentDidUpdate(prevProps, prevState, snapshot) { }
     //컴포넌트가 마운트 해제되어 제거되기 직전에 호출
-    componentWillUnmount() {}
+    componentWillUnmount() { }
 
     render() {
         const { title, list, item, tags, pageList, prev, next, query, category, id } = this.state;
@@ -224,23 +224,33 @@ class Dashboard extends React.Component {
                 <Sidebar
                     onSetCategory={this.setCategory}
                 />
-                <Section
-                    category={category}
-                    title={title}
-                    list={list}
-                    id={id}
-                    pageList={pageList}
-                    prev={prev}
-                    next={next}
-                    query={query}
-                    onList={this.list}
-                    onItem={this.item}
-                    onGetCode={this.getCode}
-                    onGetCodes={this.getCodes}
-                    onDelete={this.delete}
-                    onDeleteList={this.deleteList}
-                    onInitCodes={this.initCodes}
-                />
+                <div className="s-p-container">
+                    <Section
+                        category={category}
+                        title={title}
+                        list={list}
+                        id={id}
+                        pageList={pageList}
+                        prev={prev}
+                        next={next}
+                        query={query}
+                        onList={this.list}
+                        onItem={this.item}
+                        onGetCode={this.getCode}
+                        onGetCodes={this.getCodes}
+                        onDelete={this.delete}
+                        onDeleteList={this.deleteList}
+                        onInitCodes={this.initCodes}
+                    />
+                    <Pagenation
+                        pageList={pageList}
+                        prev={prev}
+                        next={next}
+                        query={query}
+                        category={category}
+                        onList={this.list}
+                    />
+                </div>
             </div>
         );
     }

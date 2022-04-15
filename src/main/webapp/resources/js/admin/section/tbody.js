@@ -29,12 +29,14 @@ class Tbody extends React.Component {
                         {category === 'tag' ? <TagList item={item} /> : ''}
 
                         {/* 변경, 삭제 버튼 */}
-                        <UpDelBtn
-                            category={category}
-                            item={item}
-                            onItem={onItem}
-                            onDelete={onDelete}
-                        />
+                        {category === 'sub' || category === 'orders' ? null
+                            :  <UpDelBtn
+                                category={category}
+                                item={item}
+                                onItem={onItem}
+                                onDelete={onDelete}
+                            />
+                        }
                     </tr>
                 ) : <tr><td colSpan="7">등록된 정보가 없습니다</td></tr>}
 
@@ -77,9 +79,9 @@ class ProductList extends React.Component {
                     data-bs-toggle="modal"
                     data-bs-target="#infoModal"
                 >
-                    <b>{item.name}</b>
+                    {item.name}
                 </td>
-                <td>{item.price}</td>
+                <td>{item.price ? item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
                 <td>{item.manufacture}</td>
             </>
         );
@@ -98,9 +100,7 @@ class OrdersList extends React.Component {
                     onClick={() => onItem(event, category)}
                     data-bs-toggle="modal"
                     data-bs-target="#infoModal"
-                >
-                    <b>{item.id}</b>
-                </td>
+                >{item.id}</td>
                 <td>{`0${item.tel}`}</td>
                 <td>{fmtDate}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
@@ -121,9 +121,7 @@ class ReviewList extends React.Component {
                     onClick={() => onItem(event, category)}
                     data-bs-toggle="modal"
                     data-bs-target="#infoModal"
-                >
-                    <b>{item.id}</b>
-                </td>
+                >{item.id}</td>
                 <td>{fmtDate}</td>
                 <td>{item.rating}</td>
             </>
@@ -142,9 +140,7 @@ class MemberList extends React.Component {
                     onClick={() => onItem(event, category)}
                     data-bs-toggle="modal"
                     data-bs-target="#infoModal"
-                >
-                    <b>{item.name}</b>
-                </td>
+                >{item.name}</td>
                 <td>{item.tel}</td>
                 <td>{item.grade}</td>
             </>
@@ -168,20 +164,22 @@ class UpDelBtn extends React.Component {
     render() {
         const { category, item, onItem, onDelete } = this.props;
         return (
-            <td data-code={item.code}>
+            <td data-code={item.code} className="upDelBtn">
                 {category === 'product' || category === 'tag' ?
+                <span>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal"
                         data-code={item.code}
                         onClick={() => onItem(event, category)}
                     >변경
                     </button>
+                </span>
                     : null
                 }
                 {category === 'sub' || category === 'orders' ? null
-                    : <button
+                    : <span><button
                         id={category === 'member' ? item.id : item.code}
                         onClick={() => onDelete(event, category)}>삭제
-                    </button>
+                    </button></span>
                 }
             </td>
         );
