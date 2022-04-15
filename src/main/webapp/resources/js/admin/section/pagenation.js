@@ -12,7 +12,6 @@ class Pagenation extends React.Component {
 
     setP(event) {
         this.setState({p: event.target.innerText});
-        console.log(event.target.innerText);
     }
 
     render() {

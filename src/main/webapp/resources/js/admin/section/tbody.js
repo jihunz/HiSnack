@@ -8,6 +8,7 @@ class Tbody extends React.Component {
                 {list.length ? list.map((item, idx) =>
                     <tr
                         key={idx}
+                        className={`tr-${idx}`}
                         data-code={category === 'member' ? item.id : item.code}
                     >
                         {/* 체크박스 */}
@@ -166,20 +167,17 @@ class UpDelBtn extends React.Component {
         return (
             <td data-code={item.code} className="upDelBtn">
                 {category === 'product' || category === 'tag' ?
-                <span>
                     <button type="button" data-bs-toggle="modal" data-bs-target="#updateModal"
                         data-code={item.code}
                         onClick={() => onItem(event, category)}
-                    >변경
-                    </button>
-                </span>
+                    >변경</button>
                     : null
                 }
                 {category === 'sub' || category === 'orders' ? null
-                    : <span><button
+                    : <button
                         id={category === 'member' ? item.id : item.code}
                         onClick={() => onDelete(event, category)}>삭제
-                    </button></span>
+                    </button>
                 }
             </td>
         );

@@ -192,16 +192,14 @@ tbody > tr {
     border-radius: 10px;
 }
 
-.upDelBtn > span {
-    padding: 0 10px 0 10px;
-}
-
-.upDelBtn > span > button {
+.upDelBtn > button {
     background: none;
     border-radius: 20px;
     width: 80px;
     height: 40px;
     border: 2px solid rgb(220, 220, 222);
+    margin: 0 10px 0 10px;
+
 }
 
 .pagenation {
