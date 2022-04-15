@@ -64,7 +64,7 @@ public class ReviewRestController {
  */
 	@GetMapping("/{code}")
 	public Map<String, Object> item(@PathVariable int code) {
-		Review item = service.item(code);
+		Review item = service.item(code, false);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);

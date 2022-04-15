@@ -15,7 +15,7 @@
 		<h1 class="text-center pt-20 pb-10 px-40 font-weight-bold">리뷰 수정</h1>
 		<div class="flex justify-between item-center pt-10 pb-50 px-40">
 			<h2 class="font-size-large font-weight-normal">추천과자 랜덤 구독 서비스</h2>
-			<span class="font-size-large font-weight-bold font-red"><fmt:formatNumber pattern="###,###,###원" value="${sub.total}"/></span>
+			<span class="font-size-large font-weight-bold font-red"><fmt:formatNumber pattern="###,###,###원" value="${item.price}"/></span>
 		</div>
 		<div class="input-wrapper">
 			<div class="flex justify-between item-baseline py-10">

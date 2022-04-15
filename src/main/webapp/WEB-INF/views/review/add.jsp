@@ -6,12 +6,13 @@
 <head>
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 	<link rel="stylesheet" href="/re/css/review.css" />
-	 <script src="/re/js/review_form.js"></script>
+	<script src="/re/js/review_form.js"></script>
 </head>
 <body>	
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<form method="post" enctype="multipart/form-data" class="review-form">
 		<input type="hidden" name="id" value="${user.id}"/>
+		<input type="hidden" name="price" value="${sub.total}"/>
 		<h1 class="text-center pt-20 pb-10 px-40 font-weight-bold">리뷰 작성</h1>
 		<div class="flex justify-between item-center pt-10 pb-50 px-40">
 			<h2 class="font-size-large font-weight-normal">추천과자 랜덤 구독 서비스</h2>

@@ -8,6 +8,7 @@
 	--color-white: #ffffff;
 	--logo-color: #ffdf82;
 	--color-red: #dc2329;
+	--color-green: #77f788;
 
 	--button-color: #1d1d1d;
 	--button-size: 170px 50px;
@@ -211,6 +212,10 @@ a:hover {
 	color: var(--color-red) !important;
 }
 
+.font-light-gray{
+	color: var(--color-light-gray) !important;
+}
+
 /* ========================button===================== */
 
 button.btn,
@@ -239,6 +244,11 @@ a.btn {
 
 .btn.red {
 	background: var(--color-red);
+	color: var(--color-white);
+}
+
+.btn.green{
+	background: var(--color-green);
 	color: var(--color-white);
 }
 

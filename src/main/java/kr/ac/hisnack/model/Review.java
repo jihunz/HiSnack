@@ -18,8 +18,15 @@ public class Review {
 	private List<Image> images;
 //	리뷰를 쓴 회원의 이름
 	private String name;
+//	리뷰한 구독의 가격
+	private int price;
 	
-	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public float getRating() {
 		return rating;
 	}

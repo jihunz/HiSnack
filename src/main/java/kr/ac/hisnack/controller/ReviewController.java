@@ -66,7 +66,7 @@ public class ReviewController {
  */
 	@GetMapping("/{code}")
 	public String item(@PathVariable int code, Model model) {
-		Review item = service.item(code);
+		Review item = service.item(code, true);
 		model.addAttribute("item", item);
 		return PATH+"item";
 	}
@@ -109,7 +109,7 @@ public class ReviewController {
 		Member user = (Member)session.getAttribute("user");
 		model.addAttribute("user", user);
 		
-		Review item = service.item(code);
+		Review item = service.item(code, false);
 		model.addAttribute("item", item);
 		return PATH+"update";
 	}
