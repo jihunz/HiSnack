@@ -23,7 +23,7 @@
 				<div class="rating flex justify-center" data-rating="${item.rating}"></div>
 			</div>
 			<div class="py-15">
-				<p class="review-item-contents">${item.contents}</p>
+				<div class="review-item-contents">${item.contents}</div>
 			</div>
 			<div class="text-right">
 				<a class="btn small round gray" href="list">돌아가기</a>

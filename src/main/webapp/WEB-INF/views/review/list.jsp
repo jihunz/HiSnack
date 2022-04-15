@@ -40,7 +40,7 @@
 							<div class="rating" data-rating="${item.rating}">
 								
 							</div>
-							<p class="contents">${item.contents}</p>
+							<div class="contents">${item.contents}</div>
 							<div class="info">
 								<span>${item.maskname}</span>
 								<span><fmt:formatDate value="${item.regDate}" pattern="yyyy-MM-dd"/></span>

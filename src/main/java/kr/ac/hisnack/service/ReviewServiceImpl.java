@@ -25,6 +25,21 @@ public class ReviewServiceImpl implements ReviewService {
 	@Transactional
 	@Override
 	public void add(Review item) {
+//		등록 시 리뷰 내용에서 \n를 p 태그로 변경
+		String contents = item.getContents();
+		
+		String[] str = contents.split("\n");
+		
+		for(int i = 0; i < str.length; i++) {
+			str[i] = String.format("<p>%s</p>", str[i]);
+		}
+		
+		for(String s : str) {
+			System.out.println(s);
+		}
+		
+		item.setContents(String.join("", str));
+		
 		dao.add(item);
 		List<Image> images = item.getImages();
 		
