@@ -9,6 +9,6 @@ public interface ReviewService {
 	void add(Review item);
 	void delete(int code);
 	void update(Review item);
-	Review item(int code);
+	Review item(int code, boolean useSplit);
 	List<Review> list(Pager pager);
 }
