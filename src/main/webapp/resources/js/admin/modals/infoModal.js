@@ -64,7 +64,7 @@ class ProductInfo extends React.Component {
                     <td>{item.code}</td>
                     <td>사진</td>
                     <td rowSpan="3">
-                        {item.images > 0 ? <img id="infoImg" src={item.thumbnail}></img> : "등록된 사진이 없습니다"}
+                        {item.images > 0 ? <img className="product-img" src={item.thumbnail}></img> : "등록된 사진이 없습니다"}
                     </td>
                 </tr>
                 <tr>
@@ -132,8 +132,8 @@ class OrdersInfo extends React.Component {
                 </tr>
                 {item.products ? item.products.map(p =>
                     <tr key={p.code}>
-                        <td className="opTd">{p.code}
-                            {p.images.length ? <img src={p.images[0].fullpath} className="opImg"></img> : '등록된 이미지가 없습니다'}
+                        <td className="orderedProdct-td">{p.code}
+                            {p.images.length ? <img src={p.images[0].fullpath} className="orderedProdct-img"></img> : '등록된 이미지가 없습니다'}
                         </td>
                         <td>{p.name}</td>
                         <td>{p.price}</td>
@@ -210,7 +210,7 @@ class ReviewInfo extends React.Component {
                 </tr>
                 {item.images > 0 ? item.images.map((image, idx) =>
                     <tr key={idx}>
-                        <td className="rImg">
+                        <td className="review-img">
                             <img src={image.fullpath}></img>
                             <img src={image[idx + 1].fullpath}></img>
                         </td>

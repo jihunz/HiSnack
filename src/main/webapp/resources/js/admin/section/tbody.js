@@ -71,7 +71,7 @@ class ProductList extends React.Component {
             <>
                 <td>{item.code}</td>
                 <td data-code={item.code}>
-                    {item.images != 0 ? <img src={item.thumbnail} id="thumbnail"></img> : '등록된 이미지가 없습니다'}
+                    {item.images != 0 ? <img src={item.thumbnail} id="p-img"></img> : '등록된 이미지가 없습니다'}
                 </td>
                 <td
                     className="pointer"

@@ -185,8 +185,12 @@ tbody > tr {
     width: 15rem;
 }
 
-
-
+#p-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
 
 .upDelBtn > span {
     padding: 0 10px 0 10px;
@@ -218,34 +222,18 @@ tbody > tr {
     padding: 0 7px 0px 7px;
 }
 
-
-
-
-
-
-
-
-
-
-
-#thumbnail {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-
-#infoImg {
+.product-img {
     width: 130px;
     height: 130px;
     object-fit: cover;
 }
 
-.rImg,
-.opImg {
-    width: 50px;
-    height: 50px;
+.orderedProdct-td {
+    display: flex;
 }
 
-.opTd {
-    display: flex;
+.orderedProdct-img,
+.review-img {
+    width: 50px;
+    height: 50px;
 }
