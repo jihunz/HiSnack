@@ -137,8 +137,10 @@ public class ProductServiceImpl implements ProductService {
 	public int priceTotal(List<OrderedProduct> products) {
 		int total = 0;
 		for(OrderedProduct product : products) {
-			Product item = dao.item(product.getPcode());
-			total += item.getPrice() * product.getAmount();
+			if(product.isChecked()) {
+				Product item = dao.item(product.getPcode());
+				total += item.getPrice() * product.getAmount();	
+			}
 		}
 		return total;
 	}
@@ -153,6 +155,7 @@ public class ProductServiceImpl implements ProductService {
 		for(OrderedProduct product : products) {
 			Product item = dao.item(product.getPcode());
 			item.setAmount(product.getAmount());
+			item.setChecked(product.isChecked());
 			list.add(item);
 		}
 		return list;

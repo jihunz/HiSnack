@@ -73,7 +73,9 @@ a:hover {
 .flex.justify-center {
 	justify-content: center;
 }
-
+.flex.justify-right{
+	justify-content: right;
+}
 .flex.justify-between {
 	justify-content: space-between;
 }
@@ -214,6 +216,12 @@ a:hover {
 
 .font-light-gray{
 	color: var(--color-light-gray) !important;
+}
+
+.font-title{
+	font-weight: var(--font-weight-bold);
+	border-bottom: solid var(--logo-color) 5px;
+	padding: 5px 10px;
 }
 
 /* ========================button===================== */

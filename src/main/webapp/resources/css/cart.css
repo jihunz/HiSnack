@@ -1,0 +1,121 @@
+.cart-icon{
+	width: 30px;
+	height: 30px;
+}
+
+.cart-wrapper{
+	background: var(--color-light-gray);
+	min-height: 700px;
+}
+
+.delete-btn{
+	width: 40px;
+	height: 40px;
+	background: none;
+	background-image: url('/re/img/close.svg');
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+table.cart-table{
+	border-spacing: 0 10px;
+}
+
+table.cart-table > tbody > tr{
+	box-shadow: 0px 0px 5px 1px #9c9c9c;
+	border-radius: 20px;
+	overflow: hidden;
+}
+table.cart-table > tbody > tr > td{
+	background: var(--color-white);
+}
+table.cart-table > tbody > tr > td:first-child{
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+table.cart-table > tbody > tr > td:last-child{
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.cart-cell{
+	width: 60px;
+	padding: 15px 0px;
+	text-align: center;
+}
+
+.cart-img{
+	width: 70px;
+	height: 70px;
+}
+
+.cart-name{
+	width: 50%;
+}
+
+.cart-price{
+	width: 20%;
+	text-align: right;
+}
+
+.cart-amount::-webkit-outer-spin-button,
+.cart-amount::-webkit-inner-spin-button{
+	-webkit-appearance: none; 
+	-moz-appearance: none; 
+	appearance: none;
+}
+
+.cart-btn{
+	background: var(--color-white);
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	border: 1px solid var(--color-gray);
+	cursor: pointer;
+}
+
+.amount-plus{
+	background: url('/re/img/add.svg') no-repeat center;
+	background-size: 15px 15px;
+}
+
+.amount-minus{
+	background: url('/re/img/remove.svg') no-repeat center;
+	background-size: 15px 15px;
+}
+
+.cart-amount{
+	width: 50px;
+}
+
+.relative{
+	position: relative;
+}
+
+.pos-center{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.cart-info{
+	box-shadow: 0px 0px 5px 1px #9c9c9c;
+	display: flex;
+	padding: 15px 20px;
+	background: var(--color-white);
+	border-radius: 20px;
+}
+
+.cart-info > div{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px 30px;
+}
