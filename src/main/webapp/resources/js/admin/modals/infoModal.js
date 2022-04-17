@@ -12,7 +12,7 @@ class InfoModal extends React.Component {
                                 <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
                             <div className="modal-body">
-                                <table className="table">
+                                <table className="info-table">
                                     <tbody>
                                         {category === 'product' ?
                                             <ProductInfo
@@ -60,31 +60,31 @@ class ProductInfo extends React.Component {
         return (
             <>
                 <tr>
-                    <td>제품 번호</td>
-                    <td>{item.code}</td>
-                    <td>사진</td>
-                    <td rowSpan="3">
+                    <td className="info-titles">제품 번호</td>
+                    <td className="info-c2">{item.code}</td>
+                    <td className="info-titles info-c3">사진</td>
+                    <td rowSpan="3" className="info-c3">
                         {item.images > 0 ? <img className="product-img" src={item.thumbnail}></img> : "등록된 사진이 없습니다"}
                     </td>
                 </tr>
                 <tr>
-                    <td>제품명</td>
+                    <td className="info-titles">제품명</td>
                     <td colSpan="2">{item.name}</td>
                 </tr>
                 <tr>
-                    <td>가격</td>
+                    <td className="info-titles">가격</td>
                     <td colSpan="2">{item.price}</td>
                 </tr>
                 <tr>
-                    <td>제조사</td>
+                    <td className="info-titles">제조사</td>
                     <td colSpan="3">{item.manufacture}</td>
                 </tr>
-                <tr>
-                    <td>설명</td>
+                <tr className="info-h85">
+                    <td className="info-titles">설명</td>
                     <td colSpan="3">{item.info}</td>
                 </tr>
-                <tr>
-                    <td>태그</td>
+                <tr className="info-h85">
+                    <td className="info-titles">태그</td>
                     {/* 태그를 텍스트가 아닌 버튼 형식으로 출력하는 방법에 대한 고민 필요 */}
                     <td colSpan="3">{tags ?
                         tags.map(tag => `${tag.tcode}  `)

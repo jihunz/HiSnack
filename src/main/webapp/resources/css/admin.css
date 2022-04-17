@@ -4,7 +4,10 @@ table {
     margin-bottom: 0 !important;
 }
 
-.sidebar-item-menu-ul > li:hover, #prev:hover, #next:hover, #pages > div:hover {
+.sidebar-item-menu-ul>li:hover,
+#prev:hover,
+#next:hover,
+#pages>div:hover {
     color: var(--logo-color);
 }
 
@@ -72,7 +75,8 @@ table {
     padding-bottom: 20px;
 }
 
-.section-item-title-sub, .section-item-btns {
+.section-item-title-sub,
+.section-item-btns {
     display: flex;
     justify-content: space-between;
 }
@@ -122,7 +126,8 @@ table {
 }
 
 
-thead, tbody {
+thead,
+tbody {
     vertical-align: middle !important;
 }
 
@@ -131,7 +136,7 @@ thead {
     font-weight: var(--font-weight-normal);
 }
 
-tbody > tr {
+tbody>tr {
     height: 73px;
 }
 
@@ -139,21 +144,29 @@ tbody > tr {
     width: 2rem;
 }
 
-.thead-p-c1, .thead-o-c1, .thead-r-c1, .thead-t-c1 {
+.thead-p-c1,
+.thead-o-c1,
+.thead-r-c1,
+.thead-t-c1 {
     width: 10rem;
 }
+
 .thead-p-c2 {
     width: 7rem;
 }
+
 .thead-p-c3 {
     width: 25rem;
 }
+
 .thead-p-c4 {
     width: 15rem;
 }
+
 .thead-p-c5 {
     width: 10rem;
 }
+
 .thead-p-c6 {
     width: 15rem;
 }
@@ -161,6 +174,7 @@ tbody > tr {
 .thead-m-c1 {
     width: 33rem;
 }
+
 .thead-m-c2 {
     width: 13rem;
 }
@@ -168,9 +182,11 @@ tbody > tr {
 .thead-r-c2 {
     width: 33rem;
 }
+
 .thead-r-c3 {
     width: 20rem;
 }
+
 .thead-r-c4 {
     width: 11rem;
 }
@@ -178,9 +194,11 @@ tbody > tr {
 .thead-t-c1 {
     width: 12rem;
 }
+
 .thead-t-c2 {
     width: 60rem;
 }
+
 .thead-t-c3 {
     width: 15rem;
 }
@@ -192,7 +210,7 @@ tbody > tr {
     border-radius: 10px;
 }
 
-.upDelBtn > button {
+.upDelBtn>button {
     background: none;
     border-radius: 20px;
     width: 80px;
@@ -208,7 +226,8 @@ tbody > tr {
     font-size: var(--font-size-laguler);
 }
 
-.pagenation, #pages {
+.pagenation,
+#pages {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,7 +235,7 @@ tbody > tr {
     cursor: pointer;
 }
 
-#pages > div {
+#pages>div {
     padding: 0 7px 0px 7px;
 }
 
@@ -234,4 +253,41 @@ tbody > tr {
 .review-img {
     width: 50px;
     height: 50px;
+}
+
+/* info modal */
+
+.modal-content {
+    width: 800px;
+    border-radius: 30px;
+    padding: 15px 30px;
+}
+
+.modal-title {
+    font-size: 27px;
+}
+
+.info-table tr {
+    height: 50px;
+}
+
+.info-table td {
+    border: 1px solid #ddd;
+}
+
+.info-titles {
+    background: #cbccd2;
+    width: 160px;
+}
+
+.info-c2 {
+    width: 220px;
+}
+
+.info-c3 {
+    width: 160px;
+}
+
+.info-table .info-h85 {
+    height: 85px;
 }
