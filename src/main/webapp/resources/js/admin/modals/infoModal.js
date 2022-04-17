@@ -46,11 +46,11 @@ function fmtTimestamp(data) {
         minutes: timestamp.getMinutes(),
         seconds: timestamp.getSeconds()
     }
-    if (time.month < 10) {time.month = `0${time.month + 1}`;}
-    if (time.date < 10) {time.date = `0${time.date}`;}
-    if (time.hours < 10) {time.hours = `0${time.hours}`;}
-    if (time.minutes < 10) {time.minutes = `0${time.minutes}`;}
-    if (time.seconds < 10) {time.seconds = `0${time.seconds}`;}
+    if (time.month < 10) { time.month = `0${time.month + 1}`; }
+    if (time.date < 10) { time.date = `0${time.date}`; }
+    if (time.hours < 10) { time.hours = `0${time.hours}`; }
+    if (time.minutes < 10) { time.minutes = `0${time.minutes}`; }
+    if (time.seconds < 10) { time.seconds = `0${time.seconds}`; }
     return `${time.year}-${time.month}-${time.date}`;
 }
 
@@ -154,31 +154,33 @@ class MemberInfo extends React.Component {
         return (
             <>
                 <tr>
-                    <td>아이디</td>
+                    <td className="info-titles">아이디</td>
                     <td colSpan="3">{item.id}</td>
                 </tr>
                 <tr>
-                    <td>이름</td>
+                    <td className="info-titles">이름</td>
                     <td colSpan="3">{item.name}</td>
                 </tr>
                 <tr>
-                    <td>전화번호</td>
-                    <td>{item.tel}</td>
-                    <td>관리 등급</td>
-                    <td>{item.grade}</td>
+                    <td className="info-titles">전화번호</td>
+                    <td className="info-w300">{item.tel}</td>
+                    <td className="info-titles">관리 등급</td>
+                    <td className="info-w80">{item.grade}</td>
                 </tr>
                 <tr>
-                    <td>주소</td>
+                    <td className="info-titles info-h85">주소</td>
                     <td colSpan="3">{item.address}</td>
                 </tr>
                 <tr>
-                    <td colSpan="4">해당 회원이 선택한 태그</td>
+                    <td colSpan="4" className="info-mt-title">해당 회원이 선택한 태그</td>
                 </tr>
-                {item.tags > 0 ? item.tags.map((tag, idx) =>
-                    <tr key={idx}>
-                        <td>{tag.contents}</td>
-                    </tr>
-                ) : <tr><td colSpan="4">아직 선택한 태그가 없습니다</td></tr>}
+                <tr>
+                    <td colSpan="4">
+                        {item.tags ? item.tags.map((tag, idx) =>
+                            <div key={idx} className="tag-item">{`#${tag.contents}`}</div>
+                        ) : <div>아직 선택한 태그가 없습니다</div>}
+                    </td>
+                </tr>
             </>
         );
     }

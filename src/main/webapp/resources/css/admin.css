@@ -276,6 +276,10 @@ tbody>tr {
     width: 160px;
 }
 
+.info-w80 {
+    width: 80px;
+}
+
 .info-w140 {
     width: 140px;
 }
@@ -290,6 +294,10 @@ tbody>tr {
 
 .info-w240 {
     width: 240px;
+}
+
+.info-w300 {
+    width: 300px;
 }
 
 .info-table .info-h85 {
@@ -310,4 +318,19 @@ tbody>tr {
     width: 40px;
     height: 40px;
     border-radius: 10px;
+}
+
+.info-mt-title {
+    background: #cbccd2;
+    height: 50px;
+}
+
+.tag-item {
+    display: inline-block;
+    width: 140px;
+    height: auto;
+    background: #ddd;
+    border-radius: 20px;
+    padding: 3px 0;
+    margin: 15px;
 }
