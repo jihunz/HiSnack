@@ -245,12 +245,6 @@ tbody>tr {
     object-fit: cover;
 }
 
-.review-img {
-    width: 160px;
-    height: 160px;
-    border-radius: 10px;
-}
-
 /* info modal */
 
 .modal-content {
@@ -274,6 +268,11 @@ tbody>tr {
 .info-titles {
     background: #cbccd2;
     width: 160px;
+}
+
+.info-titles2 {
+    background: #cbccd2;
+    height: 50px;
 }
 
 .info-w80 {
@@ -304,6 +303,10 @@ tbody>tr {
     height: 85px;
 }
 
+.info-table .info-h150 {
+    height: 150px;
+}
+
 .op-tr {
     overflow: scroll;
 }
@@ -318,11 +321,7 @@ tbody>tr {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-}
-
-.info-mt-title {
-    background: #cbccd2;
-    height: 50px;
+    object-fit: cover;
 }
 
 .tag-item {
@@ -333,4 +332,11 @@ tbody>tr {
     border-radius: 20px;
     padding: 3px 0;
     margin: 15px;
+}
+
+.review-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: cover;
 }

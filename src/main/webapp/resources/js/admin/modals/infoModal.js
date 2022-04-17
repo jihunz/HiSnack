@@ -128,7 +128,7 @@ class OrdersInfo extends React.Component {
                     <td className="info-titles">수령인</td>
                     <td>{item.name}</td>
                     <td className="info-titles">주문 제품 수량</td>
-                    <td>{item.products ? item.products.amount : 0}</td>
+                    <td>{`총 ${item.products ? item.products.amount : 0}개`}</td>
                 </tr>
                 {item.products ? item.products.map(p =>
                     <tr key={p.code} className="op-tr">
@@ -172,7 +172,7 @@ class MemberInfo extends React.Component {
                     <td colSpan="3">{item.address}</td>
                 </tr>
                 <tr>
-                    <td colSpan="4" className="info-mt-title">해당 회원이 선택한 태그</td>
+                    <td colSpan="4" className="info-titles2">해당 회원이 선택한 태그</td>
                 </tr>
                 <tr>
                     <td colSpan="4">
@@ -193,27 +193,27 @@ class ReviewInfo extends React.Component {
         return (
             <>
                 <tr>
-                    <td>리뷰 번호</td>
+                    <td className="info-titles">리뷰 번호</td>
                     <td colSpan="3">{item.code}</td>
                 </tr>
                 <tr>
-                    <td>아이디</td>
+                    <td className="info-titles">아이디</td>
                     <td colSpan="3">{item.id}</td>
                 </tr>
                 <tr>
-                    <td>주문 날짜</td>
-                    <td>{fmtDate}</td>
-                    <td>별점</td>
+                    <td className="info-titles">주문 날짜</td>
+                    <td className="info-w220">{fmtDate}</td>
+                    <td className="info-titles">별점</td>
                     <td>{item.rating}</td>
                 </tr>
                 <tr>
-                    <td>내용</td>
+                    <td className="info-titles info-h150">내용</td>
                     <td colSpan="3">{item.contents}</td>
                 </tr>
                 <tr>
-                    <td colSpan="4">리뷰 이미지</td>
+                    <td colSpan="4" className="info-titles2">리뷰 이미지</td>
                 </tr>
-                {item.images > 0 ? item.images.map((image, idx) =>
+                {item.images ? item.images.map((image, idx) =>
                     <tr key={idx}>
                         <td className="review-img">
                             <img src={image.fullpath}></img>
