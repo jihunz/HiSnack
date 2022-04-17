@@ -61,9 +61,9 @@ class ProductInfo extends React.Component {
             <>
                 <tr>
                     <td className="info-titles">제품 번호</td>
-                    <td className="info-c2">{item.code}</td>
-                    <td className="info-titles info-c3">사진</td>
-                    <td rowSpan="3" className="info-c3">
+                    <td className="info-w220">{item.code}</td>
+                    <td className="info-titles info-w160">사진</td>
+                    <td rowSpan="3" className="info-w160">
                         {item.images > 0 ? <img className="product-img" src={item.thumbnail}></img> : "등록된 사진이 없습니다"}
                     </td>
                 </tr>
@@ -103,43 +103,46 @@ class OrdersInfo extends React.Component {
         return (
             <>
                 <tr>
-                    <td>주문 번호</td>
+                    <td className="info-titles">주문 번호</td>
                     <td colSpan="3">{item.code}</td>
                 </tr>
                 <tr>
-                    <td>아이디</td>
+                    <td className="info-titles">아이디</td>
                     <td colSpan="3">{item.id}</td>
                 </tr>
                 <tr>
-                    <td>전화번호</td>
+                    <td className="info-titles">전화번호</td>
                     <td>{`0${item.tel}`}</td>
-                    <td>주문 날짜</td>
+                    <td className="info-titles">주문 날짜</td>
                     <td>{fmtDate}</td>
                 </tr>
                 <tr>
-                    <td>총 가격</td>
+                    <td className="info-titles">총 가격</td>
                     <td colSpan="3">{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
                 </tr>
                 <tr>
-                    <td>주소</td>
-                    <td colSpan="3">{item.address}</td>
+                    <td className="info-titles">주소</td>
+                    <td colSpan="3" className="info-h85">{item.address}</td>
                 </tr>
                 <tr>
-                    <td>수령인</td>
+                    <td className="info-titles">수령인</td>
                     <td>{item.name}</td>
-                    <td>주문 제품 수량</td>
-                    <td>{item.list ? item.product.amount : 0}</td>
+                    <td className="info-titles">주문 제품 수량</td>
+                    <td>{item.products ? item.products.amount : 0}</td>
                 </tr>
                 {item.products ? item.products.map(p =>
-                    <tr key={p.code}>
-                        <td className="orderedProdct-td">{p.code}
-                            {p.images.length ? <img src={p.images[0].fullpath} className="orderedProdct-img"></img> : '등록된 이미지가 없습니다'}
+                    <tr key={p.code} className="op-tr">
+                        <td>
+                            <div className="op-img-wrapper">
+                                {p.code}
+                                {p.images.length ? <img src={p.images[0].fullpath} className="op-img"></img> : '이미지 없음'}
+                            </div>
                         </td>
                         <td>{p.name}</td>
                         <td>{p.price}</td>
                         <td>{p.manufacture}</td>
                     </tr>
-                ) : <tr><td>제품 이미지가 없습니다</td></tr>}
+                ) : <tr><td colSpan="4">주문한 제품이 없습니다</td></tr>}
             </>
         );
     }
