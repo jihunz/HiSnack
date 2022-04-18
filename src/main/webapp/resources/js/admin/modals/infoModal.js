@@ -176,7 +176,7 @@ class MemberInfo extends React.Component {
                 </tr>
                 <tr>
                     <td colSpan="4">
-                        {item.tags ? item.tags.map((tag, idx) =>
+                        {item.tags && item.tags.length ? item.tags.map((tag, idx) =>
                             <div key={idx} className="tag-item">{`#${tag.contents}`}</div>
                         ) : <div>아직 선택한 태그가 없습니다</div>}
                     </td>
