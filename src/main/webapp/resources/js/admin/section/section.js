@@ -89,7 +89,7 @@ class Search extends React.Component {
             <>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="keyword" id="searchBox" placeholder={this.state.t} />
-                    <button onClick={() => onList(category, null, null, 1)}><img src="" />검색</button>
+                    <div id="searchBox-btn" onClick={() => onList(category, null, null, 1)}><img src="/re/img/admin-search.png" /></div>
                 </form>
             </>
         );
@@ -103,7 +103,7 @@ class Btns extends React.Component {
         return (
             <div>
                 {category === 'product' || category === 'tag' ?
-                        <button type="button" id="section-item-submit" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
+                        <button type="button" id="section-item-add" data-bs-toggle="modal" data-bs-target="#addModal"><span id="section-item-add-text">등록</span><img src="/re/img/admin-add.png" id="section-item-add-img" /></button>
                     : null
                 }
                 {category === 'sub' || category === 'orders' ? null

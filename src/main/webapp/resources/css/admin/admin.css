@@ -90,6 +90,7 @@ table {
 .section-item-btns {
     margin-top: 25px;
     font-size: var(--font-size-medium);
+    line-height: 60px;
 }
 
 #searchBox {
@@ -104,13 +105,34 @@ table {
     color: rgb(211, 211, 211);
 }
 
-#section-item-submit {
+#searchBox-btn {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: #343434;
+    border-radius: 100px;
+}
+
+
+#section-item-add {
     width: 160px;
     height: 60px;
     background: rgb(246, 219, 69);
     border: none;
     border-radius: 45px;
     font-weight: var(--font-weight-normal);
+}
+
+#section-item-add-img {
+    padding: 0;
+    position: relative;
+    top: -6%;
+    left: 20%;
+}
+
+#section-item-add-text {
+    position: relative;
+    left: 15%;
 }
 
 table {
