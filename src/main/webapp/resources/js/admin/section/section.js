@@ -2,7 +2,7 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
+        const { title, list, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
 
         return (
             <div className="section-container">

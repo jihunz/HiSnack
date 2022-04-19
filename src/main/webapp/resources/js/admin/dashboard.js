@@ -206,7 +206,6 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     item={item}
-                    tags={tags}
                 />
                 <AddModal
                     category={category}

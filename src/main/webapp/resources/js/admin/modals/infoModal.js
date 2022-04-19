@@ -18,7 +18,6 @@ class InfoModal extends React.Component {
                                             <ProductInfo
                                                 title={title}
                                                 item={item}
-                                                tags={tags}
                                             /> : null
                                         }
                                         {category === 'sub' || category === 'orders' ? <OrdersInfo item={item} /> : null}
@@ -56,7 +55,7 @@ function fmtTimestamp(data) {
 
 class ProductInfo extends React.Component {
     render() {
-        const { item, tags } = this.props;
+        const { item } = this.props;
         return (
             <>
                 <tr>
@@ -86,8 +85,8 @@ class ProductInfo extends React.Component {
                 <tr className="info-h85">
                     <td className="info-titles">태그</td>
                     {/* 태그를 텍스트가 아닌 버튼 형식으로 출력하는 방법에 대한 고민 필요 */}
-                    <td colSpan="3">{tags ?
-                        tags.map(tag => `${tag.tcode}  `)
+                    <td colSpan="3">{item.tags && item.tags.length ?
+                        item.tags.map(tag => `${tag.tcode}  `)
                         : "등록된 태그가 없습니다"}
                     </td>
                 </tr>
