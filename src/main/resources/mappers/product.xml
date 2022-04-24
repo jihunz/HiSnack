@@ -48,6 +48,15 @@
 			ORDER BY price DESC
 		</if>
 	</sql>
+	<sql id="table">
+		SELECT product.*, 
+		product_image.code AS image_code, target, filename, uuid,
+		product_tag.code AS tag_code, tcode, pcode, content
+		FROM product
+		LEFT OUTER JOIN product_image ON product_image.target=product.code
+		LEFT OUTER JOIN product_tag ON product_tag.pcode=product.code
+		LEFT JOIN tag ON tag.code = product_tag.tcode
+	</sql>
 	
 	<resultMap type="Product" id="ProductMap">
 		<id column="code" property="code"/>
@@ -78,13 +87,7 @@
 		</selectKey>
 	</insert>
 	<select id="item" resultMap="ProductMap">
-		SELECT product.*, 
-		product_image.code AS image_code, target, filename, uuid,
-		product_tag.code AS tag_code, tcode, pcode, content
-		FROM product
-		LEFT OUTER JOIN product_image ON product_image.target=product.code
-		LEFT OUTER JOIN product_tag ON product_tag.pcode=product.code
-		LEFT JOIN tag ON tag.code = product_tag.tcode
+		<include refid="table"/>
 		WHERE product.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -92,12 +95,14 @@
 		FROM product
 		<include refid="search" />
 	</select>
-	<select id="list" resultType="Product">
-		SELECT *
-		FROM product
-		<include refid="search" />
-		<include refid="order"/>
-		LIMIT #{offset}, #{perPage}
+	<select id="list" resultMap="ProductMap">
+		<include refid="table"/>
+		WHERE product.code IN (SELECT * 
+								FROM ((SELECT code
+										FROM product
+										<include refid="search" />
+										<include refid="order"/>
+										LIMIT #{offset}, #{perPage}) AS t1))
 	</select>
 	<delete id="delete">
 		DELETE FROM product

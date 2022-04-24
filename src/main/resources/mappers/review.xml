@@ -14,7 +14,7 @@
 			</if>
 		</where>
 	</sql>
-	<sql id="review">
+	<sql id="table">
 		SELECT review.*, 
 		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
 		member.name
@@ -48,7 +48,7 @@
 		</selectKey>
 	</insert>
 	<select id="item" resultMap="ReviewMap">
-		<include refid="review"/>
+		<include refid="table"/>
 		WHERE review.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -57,12 +57,12 @@
 		<include refid="search" />
 	</select>
 	<select id="list" resultMap="ReviewMap">
-		<include refid="review"/>
+		<include refid="table"/>
 		WHERE review.code IN (SELECT *
 					   		  FROM ((SELECT code
-					 		  FROM review
-					 		  <include refid="search" />
-					 		  LIMIT #{offset}, #{perPage}) AS t1))
+							 		  FROM review
+							 		  <include refid="search" />
+							 		  LIMIT #{offset}, #{perPage}) AS t1))
 	</select>
 	<delete id="delete">
 		DELETE FROM review

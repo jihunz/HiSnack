@@ -121,10 +121,10 @@ public class ProductServiceImpl implements ProductService {
 		
 		List<Product> list = dao.list(pager); 
 		
-		for(Product item : list) {
-			item.setImages(imageDao.list(item.getCode()));
-			item.setTags(tagDao.list(item.getCode()));
-		}
+//		for(Product item : list) {
+//			item.setImages(imageDao.list(item.getCode()));
+//			item.setTags(tagDao.list(item.getCode()));
+//		}
 		
 		return list;
 	}
