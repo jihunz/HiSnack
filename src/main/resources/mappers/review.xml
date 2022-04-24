@@ -14,6 +14,14 @@
 			</if>
 		</where>
 	</sql>
+	<sql id="review">
+		SELECT review.*, 
+		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
+		member.name
+		FROM review
+		LEFT JOIN review_image ON review_image.target=review.code
+		JOIN member ON member.id=review.id
+	</sql>
 	
 	<resultMap type="Review" id="ReviewMap">
 		<id column="code" property="code"/>
@@ -40,12 +48,7 @@
 		</selectKey>
 	</insert>
 	<select id="item" resultMap="ReviewMap">
-		SELECT review.*, 
-		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
-		member.name
-		FROM review
-		LEFT JOIN review_image ON review_image.target=review.code
-		JOIN member ON member.id=review.id
+		<include refid="review"/>
 		WHERE review.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -54,14 +57,12 @@
 		<include refid="search" />
 	</select>
 	<select id="list" resultMap="ReviewMap">
-		SELECT review.*, 
-		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
-		member.name
-		FROM review
-		LEFT JOIN review_image ON review_image.target=review.code
-		JOIN member ON member.id=review.id
-		<include refid="search" />
-		LIMIT #{offset}, #{perPage}
+		<include refid="review"/>
+		WHERE review.code IN (SELECT *
+					   		  FROM ((SELECT code
+					 		  FROM review
+					 		  <include refid="search" />
+					 		  LIMIT #{offset}, #{perPage}) AS t1))
 	</select>
 	<delete id="delete">
 		DELETE FROM review
