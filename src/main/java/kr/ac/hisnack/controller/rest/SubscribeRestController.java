@@ -104,7 +104,6 @@ public class SubscribeRestController {
 		}).collect(Collectors.toList());
 		 
 		item.setTags(tags);
-		mts.add(item.getTags(), item.getId());
 		
 		List<OrderedProduct> list = pService.recommend(item.getId(), 30, item.getTotal(), (int)(item.getTotal() * 0.2));
 		item.setProducts(list);

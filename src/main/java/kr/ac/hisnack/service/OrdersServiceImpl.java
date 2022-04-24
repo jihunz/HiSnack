@@ -23,6 +23,8 @@ public class OrdersServiceImpl implements OrdersService {
 	ProductDao pd;
 	@Autowired
 	ProductService ps;
+	@Autowired
+	MemberTagService mts;
 	
 /**
  * 주문 추가
@@ -37,11 +39,16 @@ public class OrdersServiceImpl implements OrdersService {
 		
 		dao.add(item);
 		
-		if(list == null) return;
-		
-		for(OrderedProduct p : list) {
-			p.setOcode(item.getCode());
-			opd.add(p);
+//		DB에 주문한 상품 저장
+		if(list != null) {
+			for(OrderedProduct p : list) {
+				p.setOcode(item.getCode());
+				opd.add(p);
+			}	
+		}
+//		DB에 회원이 좋아하는 태그 저장
+		if(item.getTags() != null) {
+			mts.add(item.getTags(), item.getId());
 		}
 	}
 	
