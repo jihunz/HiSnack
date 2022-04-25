@@ -113,6 +113,10 @@ table {
     border-radius: 100px;
 }
 
+#searchBox-btn > img{
+    margin: 0 0 12% 10%;
+}
+
 
 #section-item-add {
     width: 160px;
