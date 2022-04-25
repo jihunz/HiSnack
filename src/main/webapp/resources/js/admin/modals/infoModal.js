@@ -63,7 +63,7 @@ class ProductInfo extends React.Component {
                     <td className="info-w220">{item.code}</td>
                     <td className="info-titles info-w160">사진</td>
                     <td rowSpan="3" className="info-w160">
-                        {item.images && item.images.length ? <img className="product-img" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}
+                        {item.images && item.images.length ? <img id="info-product-img" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}
                     </td>
                 </tr>
                 <tr>
