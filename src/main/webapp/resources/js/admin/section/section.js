@@ -110,7 +110,8 @@ class Btns extends React.Component {
                     :
                         <button
                             onClick={() => { onDeleteList(category) }}
-                        >삭제<img src="" /></button>
+                            id="section-item-delete"
+                        ><img src="/re/img/admin-delete.png" id="section-item-delete-img"/></button>
                 }
             </div>
         );

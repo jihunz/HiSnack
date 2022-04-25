@@ -113,7 +113,7 @@ table {
     border-radius: 100px;
 }
 
-#searchBox-btn > img{
+#searchBox-btn>img {
     margin: 0 0 12% 10%;
 }
 
@@ -121,6 +121,7 @@ table {
 #section-item-add {
     width: 160px;
     height: 60px;
+    margin-right: 20px;
     background: rgb(246, 219, 69);
     border: none;
     border-radius: 45px;
@@ -138,6 +139,19 @@ table {
     position: relative;
     left: 15%;
 }
+
+#section-item-delete {
+    background: #a91e1e;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    border-style: none
+}
+
+#section-item-delete-img {
+    margin: 0 0 10% 0;
+}
+
 
 table {
     width: 100%;
