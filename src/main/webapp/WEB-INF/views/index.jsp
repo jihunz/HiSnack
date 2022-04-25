@@ -17,7 +17,7 @@
 
 <script> const path = '/review';</script>
 <script src="/re/js/block_link.js"></script>
-
+<script src="/re/js/review_rating.js"></script>
 <script src="/re/js/index.js"></script>
 </head>
 
