@@ -73,7 +73,7 @@ class Search extends React.Component {
             } else if (category === 'sub' || category === 'orders') {
                 this.setState({ t: "주문 번호, 아이디, 주문 날짜" })
             } else if (category === 'member') {
-                this.setState({ t: "아이디, 이름, 관리 등급" })
+                this.setState({ t: "아이디, 이름, 전화번호, 관리 등급" })
             } else if (category === 'review') {
                 this.setState({ t: "리뷰 번호, 아이디, 작성 날짜" })
             } else {

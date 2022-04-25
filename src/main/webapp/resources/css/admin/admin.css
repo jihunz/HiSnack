@@ -98,7 +98,7 @@ table {
     height: 55px;
     border: 1px solid rgb(211, 211, 211);
     border-radius: 25px;
-    padding: 0 322px 0 34px;
+    padding: 0 0 0 34px;
 }
 
 #searchBox::placeholder {
