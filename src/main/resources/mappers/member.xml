@@ -12,6 +12,7 @@
 					UPPER(id) LIKE CONCAT('%', UPPER(#{keyword}), '%')
 					OR UPPER(name) LIKE CONCAT('%', UPPER(#{keyword}), '%')
 					OR grade LIKE CONCAT('%', #{keyword}, '%')
+					OR tel LIKE CONCAT('%', #{keyword}, '%')
 				</when>
 				<when test="search == 2">
 					<!-- confirm에서 사용 -->

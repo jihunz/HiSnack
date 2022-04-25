@@ -26,6 +26,16 @@ public class Orders {
 //	구독의 태그들
 	private List<Tag> tags;
 	
+//	주문한 상품들의 개수
+	public int getAmount() {
+		int amount = 0;
+		
+		for(OrderedProduct product : products) {
+			amount += product.getAmount();
+		}
+		
+		return amount;
+	}
 	public List<Tag> getTags() {
 		return tags;
 	}
