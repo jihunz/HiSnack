@@ -127,7 +127,7 @@ class OrdersInfo extends React.Component {
                     <td className="info-titles">수령인</td>
                     <td>{item.name}</td>
                     <td className="info-titles">주문 제품 수량</td>
-                    <td>{`총 ${item.products && item.products.length ? item.products.amount : 0}개`}</td>
+                    <td>{`총 ${item.amount ? item.amount : 0}개`}</td>
                 </tr>
                 {item.products && item.products.length ? item.products.map(p =>
                     <tr key={p.code} className="op-tr">
