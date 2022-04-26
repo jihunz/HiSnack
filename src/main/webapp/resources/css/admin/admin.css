@@ -279,10 +279,3 @@ tbody>tr {
 #pages>div {
     padding: 0 7px 0px 7px;
 }
-
-#info-product-img {
-    width: 155px;
-    height: 155px;
-    object-fit: cover;
-    border-radius: 10px;
-}

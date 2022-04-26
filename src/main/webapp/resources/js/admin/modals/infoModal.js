@@ -63,7 +63,7 @@ class ProductInfo extends React.Component {
                     <td className="info-w220">{item.code}</td>
                     <td className="info-titles info-w160">사진</td>
                     <td rowSpan="3" className="info-w160">
-                        {item.images && item.images.length ? <img id="info-product-img" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}
+                        {item.images && item.images.length ? <img id="product-img" src={item.images[0].fullpath}></img> : "등록된 사진이 없습니다"}
                     </td>
                 </tr>
                 <tr>
@@ -176,7 +176,7 @@ class MemberInfo extends React.Component {
                 <tr>
                     <td colSpan="4">
                         {item.tags && item.tags.length ? item.tags.map((tag, idx) =>
-                            <div key={idx} className="tag-item">{`#${tag.contents}`}</div>
+                            <div key={idx} className="tag-item">{`#${tag.content}`}</div>
                         ) : <div>아직 선택한 태그가 없습니다</div>}
                     </td>
                 </tr>
@@ -212,14 +212,13 @@ class ReviewInfo extends React.Component {
                 <tr>
                     <td colSpan="4" className="info-titles2">리뷰 이미지</td>
                 </tr>
-                {item.images && item.images.length ? item.images.map((image, idx) =>
-                    <tr key={idx}>
-                        <td className="review-img">
-                            <img src={image.fullpath}></img>
-                            <img src={image[idx + 1].fullpath}></img>
-                        </td>
-                    </tr>
-                ) : <tr><td colSpan="4">등록된 이미지가 없습니다</td></tr>}
+                <tr>
+                    <td colSpan="4">
+                        {item.images && item.images.length ? item.images.map((image, idx) =>
+                            <img key={idx} src={image.fullpath} className="review-img"></img>
+                        ) : <>등록된 이미지가 없습니다</>}
+                    </td>
+                </tr>
             </>
         );
     }
