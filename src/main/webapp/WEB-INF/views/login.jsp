@@ -28,10 +28,9 @@
             <input type="password" name="password" id="password" placeholder="Password">
         </div>
         <button>로그인</button>
-        <!-- 추후 자동 로그인 구현 시 사용
         <div>
-        	<input type="checkbox" name="autoLogin">자동 로그인
-        </div> -->
+        	<input type="checkbox" name="autoLogin" value="false">자동 로그인
+        </div>
     </form>
     <div>
         <a href="signup">회원가입</a>
