@@ -29,7 +29,7 @@
         </div>
         <button>로그인</button>
         <div>
-        	<input type="checkbox" name="autoLogin" value="false">자동 로그인
+        	<input type="checkbox" name="autoLogin">자동 로그인
         </div>
     </form>
     <div>

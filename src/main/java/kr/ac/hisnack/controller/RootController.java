@@ -71,6 +71,8 @@ public class RootController {
  */
 	@PostMapping("/login")
 	public String login(Member item, HttpSession session, HttpServletResponse response) {
+		// 클라이언트 측에 자동 로그인용 체크박스 추가 -> name="autoLogin"
+		
 		Member user = ms.login(item);
 		
 		if(user == null) {
