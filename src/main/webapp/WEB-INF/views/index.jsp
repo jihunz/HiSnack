@@ -149,7 +149,7 @@
 								<div class = "swiper-slide">
 									<div class="review-item block-link" data-code="${item.code}">
 										<div class="review-img-border">
-											<c:if test="item.images.size() > 0">
+											<c:if test="${item.images.size() > 0}">
 												<img src="${item.thumbnail}" alt="${item.images.get(0).filename}" />											
 											</c:if>
 										</div>
