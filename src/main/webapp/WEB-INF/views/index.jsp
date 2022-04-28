@@ -19,6 +19,7 @@
 <script src="/re/js/block_link.js"></script>
 
 <script src="/re/js/index.js"></script>
+<script src="/re/js/review_rating.js"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
 	<div class="container">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-		<div class= "boxmaincolor flex justify-center">
+		<!-- <div class= "boxmaincolor flex justify-center">
 			<div class="boxsize flex items-center">
 				<div class = "flex justify-between" style ="width: 100%">
 					<div class = "org40 flex justify-center column">
@@ -45,8 +46,50 @@
 						</div>
 				</div>
 			</div>
+		</div> -->
+		<div class="swiper-container">
+			<div class = "swiper mainSwiper" >
+				<div class = "swiper-wrapper ">
+					<div class = "swiper-slide boxmaincolor flex justify-center">
+						<div class="boxsize flex items-center">
+							<div class = "flex justify-between" style ="width: 100%">
+								<div class = "org40 flex justify-center column">
+									<div class = "margin-bottom20"><h3 class = "maintext">달콤한 구독 사이트<br>하이스낵</h3></div>
+									<div class = "margin-bottom20">
+										<p class = "contentfont">알고리즘이 찾아주는 간식 조합
+										<br>알고리즘이 찾아주는 간식 조합
+										<br>알고리즘이 찾아주는 간식 조합</p>
+									</div>
+									<div class = "margin-top20">
+										<a class = "mainBtn" href="sub/detail">구독 시작하기</a>
+									</div>
+								</div>
+									<div class = "org60 flex items-center justify-center">
+										<div class = "imgsize img-border"><img src="/re/img/box.png" alt="sub-img"></div>
+									</div>
+							</div>
+						</div>
+					</div>
+					<div class = "swiper-slide">
+						number 2
+					</div>
+					<div class = "swiper-slide">
+						number 3
+					</div>
+				</div>
+					<!-- <div class = "swiper-button-next"></div>
+					<div class = "swiper-button-prev"></div> -->
+			</div>
+				<div class="btn-wrapper mb-20">
+					<button class="prev"></button>
+					<button class="start"></button>
+					<button class="stop"></button>
+					<button class="next"></button>
+				</div>
 		</div>
-
+		
+		
+		
 		<div class="boxcolor flex justify-center">
 			<div class="boxsize flex items-center justify-between">
 				<div class = "flex justify-between" style ="width: 100%">
@@ -54,7 +97,7 @@
 						<div class = "imgsize img-border"><img src="/re/img/calendar.png" alt="sub-desc-img"></div>
 					</div>
 					<div class = "text-right org40 flex justify-center column"">
-						<div class = "margin-bottom20"><h3 class = "maintext">1달에 한 번<br>선물 받는 느낌</h3></div>
+						<div class = "margin-bottom20"><h3 class = "maintext">1달에 한 번 선물 받는 <br>달콤한 느낌</h3></div>
 						<div>
 							<p class = "contentfont">알고리즘이 찾아주는 간식 조합
 							<br>알고리즘이 찾아주는 간식 조합

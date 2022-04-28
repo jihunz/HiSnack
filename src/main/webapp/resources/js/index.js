@@ -11,4 +11,37 @@ $(function() {
 		},
 
 	});
+
+	var mainSwiper = new Swiper(".mainSwiper", {
+		slidesPerView: '1',
+		spaceBetween: -5,
+		slidesPerGroup: 1,
+
+		autoplay: {
+			delay: 6000,
+			disableOnInteraction: false,
+		},
+		
+		
+
+	});
+	$('.btn-wrapper .start').on('click', function() {
+		alert('start');
+		mainSwiper.autoplay.start();
+		return false;
+	});
+	$('.stop').on('click', function() {
+		alert('stop');
+		mainSwiper.autoplay.stop();
+		return false;
+	});
+
+	$('.prev').click(e => {
+		mainSwiper.slidePrev(500, true);
+	});
+	$('.next').click(e => {
+		mainSwiper.slideNext(500, true);
+	});
 });
+
+
