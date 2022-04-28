@@ -118,6 +118,6 @@ public class OrdersServiceImpl implements OrdersService {
 		
 		List<Orders> list = list(pager);
 		
-		return list.get(0);
+		return list.size() > 0 ? list.get(0) : null;
 	}
 }

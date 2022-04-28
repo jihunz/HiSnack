@@ -77,9 +77,15 @@ public class ReviewController {
 	@GetMapping("/add")
 	public String add(Model model, HttpSession session) {
 		Member user = (Member)session.getAttribute("user");
-		model.addAttribute("user", user);
 		
+//		만약 회원이 한번도 구독을 한적이 없으면 막음
 		Orders sub = os.latestSubscribe(user.getId());
+		
+		if(sub == null) {
+			return "redirect:list";
+		}
+		
+		model.addAttribute("user", user);
 		model.addAttribute("sub", sub);
 		
 		return PATH+"add";
