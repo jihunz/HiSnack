@@ -1,6 +1,7 @@
 package kr.ac.hisnack.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -49,16 +50,27 @@ public class OrdersController {
  */
 	@GetMapping("/payment")
 	public String payment(Model model, HttpSession session) {
+//		로그인한 회원을 찾아서
 		Member user = (Member) session.getAttribute("user");
 		
 		if(user != null) {
+//			jsp에 전달
+//			orders에 id 넣을 때 사용
 			model.addAttribute("user", user);
 		}
 		
+//		카트를 찾아서
 		Object cart = session.getAttribute("cart");
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
 		
-		if(products != null) {
+		if(products != null && products.size() > 0) {
+//			내가 구매를 결정한 것만 걸러내서
+			products = products.stream()
+					.filter(item -> item.isChecked())
+					.collect(Collectors.toList());
+//			session에 저장하고 post페이지에서 사용함
+			session.setAttribute("payment", products);
+//			jsp에서 보여주기 위해 설정한다
 			int total = ps.priceTotal(products);
 			List<Product> productList = ps.list(products);
 			model.addAttribute("list", productList);
@@ -85,9 +97,10 @@ public class OrdersController {
  */
 	@PostMapping("/payment")
 	public String payment(Orders item, HttpSession session) {
-		Object cart = session.getAttribute("cart");
-		
-		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
+//		주문한 상품을 꺼내와서
+		Object payment = session.getAttribute("payment");
+//		orders에 넣는다
+		List<OrderedProduct> products = converter.list(payment, OrderedProduct.class);
 		item.setProducts(products);
 		
 		if(products == null) {
@@ -96,17 +109,29 @@ public class OrdersController {
 			System.out.println("주문한 상품이 없습니다.");
 			return "redirect:cart";
 		}
-		
+//		주문이라고 설정
 		item.setSubscribe('n');
-		
+//		DB에 저장
 		service.add(item);
 		List<Product> productList = ps.list(products);
-		
+//		회원이 좋아하는 태그 저장
 		for(Product p : productList) {
 			mts.add(p.getTags(), item.getId());
 		}
+//		주문한 상품 삭제
+		session.removeAttribute("payment");
 		
-		session.removeAttribute("cart");
+//		카트를 찾는다
+		Object cart = session.getAttribute("cart");
+//		products 변수 재사용
+		products = converter.list(cart, OrderedProduct.class);
+//		이미 주문한 제품은 걸러낸다
+		products = products.stream()
+				.filter(p -> !p.isChecked())
+				.collect(Collectors.toList());
+//		session에 다시 저장
+		session.setAttribute("cart", products);
+		
 		return "redirect:confirm";
 	}
 	
@@ -123,12 +148,24 @@ public class OrdersController {
 		
 		List<OrderedProduct> products = converter.list(cart, OrderedProduct.class);
 		
+		int total = 0;
+		int count = 0;
+		
 		if(products != null) {
-			int total = ps.priceTotal(products);
+			total = ps.priceTotal(products);
 			List<Product> productList = ps.list(products);
+			
+			for(OrderedProduct op : products) {
+				if(op.isChecked()) {
+					count += op.getAmount();
+				}
+			}
+			
 			model.addAttribute("list", productList);
-			model.addAttribute("total", total);
 		}
+		
+		model.addAttribute("total", total);
+		model.addAttribute("count", count);
 		
 		return PATH+"cart";
 	}

@@ -17,7 +17,7 @@
 
 <script> const path = '/review';</script>
 <script src="/re/js/block_link.js"></script>
-
+<script src="/re/js/review_rating.js"></script>
 <script src="/re/js/index.js"></script>
 <script src="/re/js/review_rating.js"></script>
 </head>
@@ -192,7 +192,9 @@
 								<div class = "swiper-slide">
 									<div class="review-item block-link" data-code="${item.code}">
 										<div class="review-img-border">
-											<img src="${item.thumbnail}" alt="${item.images.get(0).filename}" />
+											<c:if test="item.images.size() > 0">
+												<img src="${item.thumbnail}" alt="${item.images.get(0).filename}" />											
+											</c:if>
 										</div>
 										<div class="p-5">
 											<div class="rating" data-rating="${item.rating}"></div>

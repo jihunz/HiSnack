@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.hisnack.model.Image;
 import kr.ac.hisnack.model.Member;
+import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.model.Review;
 import kr.ac.hisnack.service.ImageService;
+import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.service.ReviewService;
 import kr.ac.hisnack.util.FileUploader;
 import kr.ac.hisnack.util.Pager;
@@ -35,6 +37,8 @@ public class ReviewController {
 	
 	@Autowired
 	ReviewService service;
+	@Autowired
+	OrdersService os;
 	@Autowired
 	@Qualifier("ReviewImageService")
 	ImageService imageService;
@@ -62,7 +66,7 @@ public class ReviewController {
  */
 	@GetMapping("/{code}")
 	public String item(@PathVariable int code, Model model) {
-		Review item = service.item(code);
+		Review item = service.item(code, true);
 		model.addAttribute("item", item);
 		return PATH+"item";
 	}
@@ -74,6 +78,10 @@ public class ReviewController {
 	public String add(Model model, HttpSession session) {
 		Member user = (Member)session.getAttribute("user");
 		model.addAttribute("user", user);
+		
+		Orders sub = os.latestSubscribe(user.getId());
+		model.addAttribute("sub", sub);
+		
 		return PATH+"add";
 	}
 /**
@@ -97,8 +105,11 @@ public class ReviewController {
  * @param model : jsp에 리뷰를 넘길때 사용하는 파라미터
  */
 	@GetMapping("/update/{code}")
-	public String update(@PathVariable int code, Model model) {
-		Review item = service.item(code);
+	public String update(@PathVariable int code, Model model, HttpSession session) {
+		Member user = (Member)session.getAttribute("user");
+		model.addAttribute("user", user);
+		
+		Review item = service.item(code, false);
 		model.addAttribute("item", item);
 		return PATH+"update";
 	}

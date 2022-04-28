@@ -2,20 +2,24 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, pageList, prev, next, query, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
+        const { title, list, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
 
         return (
-            <div>
-                <Title title={title} />
-                <Search
-                    category={category}
-                    onList={onList}
-                />
-                <Btns
-                    onDeleteList={onDeleteList}
-                    category={category}
-                />
-                <DataTable
+            <div className="section-container">
+                <div className="section-header">
+                    <Title title={title} />
+                    <div className="section-item-btns">
+                        <Search
+                            category={category}
+                            onList={onList}
+                        />
+                        <Btns
+                            onDeleteList={onDeleteList}
+                            category={category}
+                        />
+                    </div>
+                </div>
+                <Table
                     list={list}
                     category={category}
                     onDelete={onDelete}
@@ -23,14 +27,6 @@ class Section extends React.Component {
                     onGetCode={onGetCode}
                     onGetCodes={onGetCodes}
                     onInitCodes={onInitCodes}
-                />
-                <Pagenation
-                    pageList={pageList}
-                    prev={prev}
-                    next={next}
-                    query={query}
-                    category={category}
-                    onList={onList}
                 />
             </div>
         );
@@ -44,11 +40,11 @@ class Title extends React.Component {
 
         return (
             <div>
-                <span>
-                    <h4>{title} 데이터 관리</h4>
-                    <h4>{title}을 쉽게 관리할 수 있도록 도움을 주는 페이지</h4>
-                </span>
-                <h2>{title}</h2>
+                <div className="section-item-title-sub">
+                    <p>{title} 데이터 관리</p>
+                    <p>{title}을 쉽게 관리할 수 있도록 도움을 주는 페이지</p>
+                </div>
+                <h2 className="section-item-title">{title}</h2>
             </div>
         );
     }
@@ -77,7 +73,7 @@ class Search extends React.Component {
             } else if (category === 'sub' || category === 'orders') {
                 this.setState({ t: "주문 번호, 아이디, 주문 날짜" })
             } else if (category === 'member') {
-                this.setState({ t: "아이디, 이름, 관리 등급" })
+                this.setState({ t: "아이디, 이름, 전화번호, 관리 등급" })
             } else if (category === 'review') {
                 this.setState({ t: "리뷰 번호, 아이디, 작성 날짜" })
             } else {
@@ -90,12 +86,12 @@ class Search extends React.Component {
         const { category, onList } = this.props;
 
         return (
-            <div>
+            <>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="keyword" id="searchBox" placeholder={this.state.t} />
-                    <button onClick={() => onList(category, null, null, 1)}><img src="" />검색</button>
+                    <div id="searchBox-btn" onClick={() => onList(category, null, null, 1)}><img src="/re/img/admin-search.png" /></div>
                 </form>
-            </div>
+            </>
         );
     }
 }
@@ -107,17 +103,15 @@ class Btns extends React.Component {
         return (
             <div>
                 {category === 'product' || category === 'tag' ?
-                    <div>
-                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">등록<img src="" /></button>
-                    </div>
+                        <button type="button" id="section-item-add" data-bs-toggle="modal" data-bs-target="#addModal"><span id="section-item-add-text">등록</span><img src="/re/img/admin-add.png" id="section-item-add-img" /></button>
                     : null
                 }
                 {category === 'sub' || category === 'orders' ? null
-                    : <div>
+                    :
                         <button
                             onClick={() => { onDeleteList(category) }}
-                        >삭제<img src="" /></button>
-                    </div>
+                            id="section-item-delete"
+                        ><img src="/re/img/admin-delete.png" id="section-item-delete-img"/></button>
                 }
             </div>
         );

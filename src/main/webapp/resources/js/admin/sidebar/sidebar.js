@@ -5,9 +5,9 @@ class Sidebar extends React.Component {
         const { onSetCategory } = this.props;
 
         return (
-            <div>
-                <div className="sbHeader">
-                    <a href="../../"><img src="re/img/logo2.svg" id="logo"></img></a>
+            <div className="sidebar-container">
+                <div className="sidebar-item-logo-box">
+                    <a href="/"><img src="re/img/logo2.svg" id="logo"></img></a>
                 </div>
                 <Menu 
                     onSetCategory={onSetCategory}
@@ -23,14 +23,14 @@ class Menu extends React.Component {
         const { onSetCategory } = this.props;
 
         return (
-            <div>
-                <div>
+            <>
+                <div className="sidebar-item-menu-box">
                     <h4>MENU</h4>
                 </div>
                 <MenuList 
                     onSetCategory={onSetCategory}
                 />
-            </div>
+            </>
 
         );
     }
@@ -42,8 +42,8 @@ class MenuList extends React.Component {
         const { onSetCategory } = this.props;
 
         return (
-            <div>
-                <ul className="pointer">
+            <div >
+                <ul className="sidebar-item-menu-ul">
                     <li onClick={ () => onSetCategory("product", "제품") }>제품 관리</li>
                     <li onClick={ () => onSetCategory("sub", "구독") }>구독 관리</li>
                     <li onClick={ () => onSetCategory("orders", "주문") }>주문 관리</li>

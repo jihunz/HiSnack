@@ -70,7 +70,9 @@ public class RootController {
  * @return 실패시 login 페이지로 redirect, 성공시 index로 redirect
  */
 	@PostMapping("/login")
-	public String login(Member item, HttpSession session, HttpServletResponse response) {
+	public String login(Member item, HttpSession session, HttpServletResponse response, boolean autoLogin) {
+		// 클라이언트 측에 자동 로그인용 체크박스 추가 -> name="autoLogin"
+		
 		Member user = ms.login(item);
 		
 		if(user == null) {
@@ -79,18 +81,20 @@ public class RootController {
 		
 		session.setAttribute("user", user);
 		
-//		세션의 아이디를 DB에 저장
-		String sessionId = session.getId();
-		ms.keepLogin(sessionId, user.getId());
-		
-//		세션의 아이디를 쿠키에 넣고 클라이언트에게 보내기
-		Cookie cookie = new Cookie("loginCookie", sessionId);
-		cookie.setPath("/");
-//		7주일 유지
-		cookie.setMaxAge(60 * 60 * 24 * 7);
-		response.addCookie(cookie);
-		
-		
+//		쿠키를 사용한 자동로그인 작업
+		if(autoLogin) {
+//			세션의 아이디를 DB에 저장
+			String sessionId = session.getId();
+			ms.keepLogin(sessionId, user.getId());
+			
+//			세션의 아이디를 쿠키에 넣고 클라이언트에게 보내기
+			Cookie cookie = new Cookie("loginCookie", sessionId);
+			cookie.setPath("/");
+//			7주일 유지
+			cookie.setMaxAge(60 * 60 * 24 * 7);
+			response.addCookie(cookie);
+		}
+
 		return "redirect:/";
 	}
 	
@@ -183,8 +187,8 @@ public class RootController {
 		if(ms.confirm(user.getId())) {
 			ms.add(user);
 		}
-		
-		login(user, session, response);
+//		로그인 시 자동 로그인 안함
+		login(user, session, response, false);
 		
 		return "redirect:/";
 	}

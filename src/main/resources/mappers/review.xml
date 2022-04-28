@@ -14,6 +14,14 @@
 			</if>
 		</where>
 	</sql>
+	<sql id="table">
+		SELECT review.*, 
+		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
+		member.name
+		FROM review
+		LEFT JOIN review_image ON review_image.target=review.code
+		JOIN member ON member.id=review.id
+	</sql>
 	
 	<resultMap type="Review" id="ReviewMap">
 		<id column="code" property="code"/>
@@ -22,6 +30,7 @@
 		<result column="reg_date" property="regDate"/>
 		<result column="rating" property="rating"/>
 		<result column="name" property="name"/>
+		<result column="price" property="price"/>
 		<collection property="images" javaType="ArrayList" ofType="Image">
 			<id column="image_code" property="code"/>
 			<result column="target" property="target"/>
@@ -32,19 +41,14 @@
 
 	<insert id="add">
 		INSERT INTO review
-		VALUES(NULL, #{id}, #{contents}, NOW(), #{rating})
+		VALUES(NULL, #{id}, #{contents}, NOW(), #{rating}, #{price})
 		
 		<selectKey order="AFTER" resultType="Integer" keyProperty="code">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
 	<select id="item" resultMap="ReviewMap">
-		SELECT review.*, 
-		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
-		member.name
-		FROM review
-		LEFT JOIN review_image ON review_image.target=review.code
-		JOIN member ON member.id=review.id
+		<include refid="table"/>
 		WHERE review.code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -53,14 +57,12 @@
 		<include refid="search" />
 	</select>
 	<select id="list" resultMap="ReviewMap">
-		SELECT review.*, 
-		review_image.code AS image_code, review_image.target, review_image.filename, review_image.uuid,
-		member.name
-		FROM review
-		LEFT JOIN review_image ON review_image.target=review.code
-		JOIN member ON member.id=review.id
-		<include refid="search" />
-		LIMIT #{offset}, #{perPage}
+		<include refid="table"/>
+		WHERE review.code IN (SELECT *
+					   		  FROM ((SELECT code
+							 		  FROM review
+							 		  <include refid="search" />
+							 		  LIMIT #{offset}, #{perPage}) AS t1))
 	</select>
 	<delete id="delete">
 		DELETE FROM review

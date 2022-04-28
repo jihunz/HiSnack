@@ -1,5 +1,5 @@
 // 테이블 컴포넌트 -> table 태그를 반환
-class DataTable extends React.Component {
+class Table extends React.Component {
     constructor(props) {
         super(props);
 
@@ -61,7 +61,7 @@ class DataTable extends React.Component {
                     <thead>
                         <tr>
                             {category === 'sub' || category === 'orders' ? null
-                                : <td>
+                                : <td className="thead-checkbox">
                                     <input type="checkbox"
                                         checked={allchked}
                                         onChange={this.allCheck}
@@ -76,7 +76,7 @@ class DataTable extends React.Component {
                             {category === 'tag' ? <TagTh /> : ''}
                         </tr>
                     </thead>
-                    <DTbody
+                    <Tbody
                         list={list}
                         category={category}
                         onDelete={onDelete}

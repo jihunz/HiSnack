@@ -11,6 +11,14 @@
 			</if>
 		</where>
 	</sql>
+	<sql id="table">
+		SELECT ordered_product.*,
+			product.name, product.price, product.manufacture,
+			product_image.code AS imagecode, product_image.target, product_image.filename, product_image.uuid
+		FROM ordered_product
+		JOIN product ON product.code=ordered_product.pcode
+		LEFT JOIN product_image ON product.code=product_image.target
+	</sql>
 	
 	<resultMap type="OrderedProduct" id="OrderedProductMap">
 		<id column="code" property="code"/>
@@ -34,12 +42,7 @@
 		VALUES(NULL, #{pcode}, #{ocode}, #{amount})
 	</insert>
 	<select id="item" resultMap="OrderedProductMap">
-		SELECT ordered_product.*,
-			product.name, product.price, product.manufacture,
-			product_image.code AS imagecode, product_image.target, product_image.filename, product_image.uuid
-		FROM ordered_product
-		JOIN product ON product.code=ordered_product.pcode
-		LEFT JOIN product_image ON product.code=product_image.target
+		<include refid="table"/>
 		WHERE code=#{code}
 	</select>
 	<select id="total" resultType="Integer">
@@ -48,13 +51,8 @@
 		<include refid="search" />
 	</select>
 	<select id="list" resultMap="OrderedProductMap">
-		SELECT ordered_product.*,
-			product.name, product.price, product.manufacture,
-			product_image.code AS imagecode, product_image.target, product_image.filename, product_image.uuid
-		FROM ordered_product
-		JOIN product ON product.code=ordered_product.pcode
-		LEFT JOIN product_image ON product.code=product_image.target
-		<include refid="search"></include>
+		<include refid="table"/>
+		<include refid="search"/>
 	</select>
 	<delete id="delete">
 		DELETE FROM ordered_product

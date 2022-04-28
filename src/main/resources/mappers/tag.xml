@@ -32,6 +32,7 @@
 		SELECT *
 		FROM tag
 		<include refid="search"/>
+		LIMIT #{offset}, #{perPage}
 	</select>
 	<delete id="delete">
 		DELETE FROM tag

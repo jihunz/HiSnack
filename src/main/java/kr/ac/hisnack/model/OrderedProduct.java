@@ -12,7 +12,14 @@ public class OrderedProduct {
 	private int price;
 	private String manufacture;
 	private List<Image> images;
+	private boolean checked;
 	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 	public List<Image> getImages() {
 		return images;
 	}

@@ -29,6 +29,7 @@
         <div>
             <label for="addr">주소</label>
             <input type="text" name="address" id="address" placeholder="Address" maxlength="64">
+            <button type="button" onclick="execDaumPostcode()">주소 찾기</button>
         </div>
         <div>
             <label for="tel">전화번호</label>
@@ -42,8 +43,12 @@
     </form>
     
     <!-- jQuery -->
-    <script src="re/js/jquery.js" type="text/javascript"></script>
-    
-    <script src="re/js/signup.js" type="text/javascript"></script>
+    <script src="/re/js/jquery.js" type="text/javascript"></script>
+    <!-- Daum 우편번호 서비스 CDN-->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- Daum 우편번호 서비스 함수 파일-->
+    <script src="/re/js/daumPostCode.js" type="text/javascript"></script>
+    <script src="/re/js/signup.js" type="text/javascript"></script>
+
     </body>
 </html>

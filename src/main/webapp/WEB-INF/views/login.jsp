@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,13 @@
 <script src="re/js/jquery.js"></script>
 <script src="re/js/google_login.js"></script>
 <title>Hi Snack!</title>
+
+<c:if test="${failMsg != null}">
+	<script type="text/javascript">
+		alert("${failMsg}")
+	</script>
+</c:if>
+
 </head>
 <body>
 	<h4>LOGIN</h4>
@@ -20,10 +28,9 @@
             <input type="password" name="password" id="password" placeholder="Password">
         </div>
         <button>로그인</button>
-        <!-- 추후 자동 로그인 구현 시 사용
         <div>
         	<input type="checkbox" name="autoLogin">자동 로그인
-        </div> -->
+        </div>
     </form>
     <div>
         <a href="signup">회원가입</a>

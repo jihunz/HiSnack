@@ -14,7 +14,7 @@ $(function(){
 			contentType:false,
 			processData:false,
 			success:function(result){
-				console.log(result);
+				console.log(result.msg);
 			},
 			error:function(xhr, status, err){
 				console.log(`error ${xhr.status} : ${xhr.responseText}`);

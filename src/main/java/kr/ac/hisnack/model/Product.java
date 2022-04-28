@@ -22,9 +22,16 @@ public class Product implements Comparable<Product>{
 	
 	private int score;
 	private int amount;
+	private boolean checked;
 	
 	private Date date;
 	
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
 	public Date getDate() {
 		return date;
 	}
