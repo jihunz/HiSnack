@@ -53,7 +53,7 @@
 						<input class="input-search mr-20" type="text" name="keyword" placeholder="검색어를 입력해주세요" value="${pager.keyword}">
 						<button class="search-btn"></button>
 					</div>
-					<select class="input-select" name="order">
+					<select class="input-select selectbox" name="order">
 						<option value="1" ${pager.order == 1 ? 'selected' : ''}>가격낮은순</option>
 						<option value="2" ${pager.order == 2 ? 'selected' : ''}>가격높은순</option>
 					</select>

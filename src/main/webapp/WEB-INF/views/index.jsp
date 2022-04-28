@@ -5,6 +5,8 @@
 <html>
 <head>
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
+<!-- index 페이지 css Link -->
+<link rel="stylesheet" href="/re/css/index.css">  
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 <!-- Swiper JS -->
@@ -19,7 +21,6 @@
 <script src="/re/js/block_link.js"></script>
 <script src="/re/js/review_rating.js"></script>
 <script src="/re/js/index.js"></script>
-<script src="/re/js/review_rating.js"></script>
 </head>
 
 <body>

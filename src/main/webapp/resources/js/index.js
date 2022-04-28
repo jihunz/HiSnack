@@ -26,12 +26,10 @@ $(function() {
 
 	});
 	$('.btn-wrapper .start').on('click', function() {
-		alert('start');
 		mainSwiper.autoplay.start();
 		return false;
 	});
 	$('.stop').on('click', function() {
-		alert('stop');
 		mainSwiper.autoplay.stop();
 		return false;
 	});

@@ -83,6 +83,9 @@ a:hover {
 	align-items: center;
 	
 }
+.flex.flex-end {
+	justify-content: flex-end;
+}
 .flex.column {
 	flex-direction: column;
 }
@@ -477,6 +480,10 @@ a.btn {
 
 .mt-5 {
 	margin-top: 5px !important;
+}
+
+.mb-250 {
+	margin-bottom: 250px;
 }
 
 .mb-120 {
@@ -1048,3 +1055,24 @@ a.btn {
 	color : var(--color-light-gray);
 	text-decoration: none;
 }
+select ::-ms-expand {
+	display: none;
+}
+.selectbox {
+	-o-animation: none;
+	-webkit-animation: none;
+	-moz-animation: none;
+	appearance: none;
+
+	width: 110px;
+	height: 35px;
+	background-position: calc(100% - 5px) center;
+	background-repeat: no-repeat;
+	background-image: url('/re/img/fold.svg');
+	background-size: 20px;
+  	padding: 5px 30px 5px 10px;
+ 	border-radius: 4px;
+	outline: 0 none;
+	  
+}
+
