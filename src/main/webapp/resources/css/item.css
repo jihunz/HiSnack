@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+.subbox {
+	width: 600px;
+	height: 600px;
+	background-color: antiquewhite;
+	border-radius: 50px;
+}
+
+.subtextbox {
+	width: 550px;
+	height: auto;
+}
+
+.subfont {
+	font-size: 40px;
+}
+.textfont {
+	font-size: var(--font-size-medium);
+	color : var(--color-gray);
+}
+.subpricetext {
+	font-size: var(--font-size-medium);
+	font-weight: var(--font-weight-bold);
+}
+.subprice {
+	font-size: var(--font-size-medium);
+	font-weight: 500;
+	color : var(--color-gray);
+}
+.pricefont {
+	color: red;
+	font-size: 32px;
+}
+
+form button {
+	width: 550px;
+	height: 65px;
+	background-color: #dc2329;
+	color: white;
+	border:none;
+	border-radius: 20px;
+	font-size: var(--font-size-medium);
+	font-weight: 500;
+}
+.hrstyle {
+	opacity: 20%;
+}
+.hrop {
+	opacity: 40%;
+}
+.subtextline {
+	width: 85px;
+	height: 5px;
+	background-color: var(--logo-color);
+}
+
+.mftfont {
+	font-size: 22px;
+	color: var(--color-gray);
+	font-weight: 500;
+}
+.namefont {
+	font-size: var(--font-size-xlarge);
+	font-weight: var(--font-weight-bold);
+}
+.productfont {
+	font-size: 22px;
+	font-weight: var(--font-weight-bold);
+}
+.cartbtn {
+	width: 200px;
+	height: 65px;
+	background-color: #d3d3d3;
+	color: #555555;
+	border:none;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+	font-weight: 500;
+}
+
+a.paybtn {
+	background-color: #dc2329;
+	color: white;
+	border:none;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: var(--font-weight-bold);
+	font-weight: 500;
+	border-radius: 15px;
+	display: inline-block;
+	padding: 18px 130px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
