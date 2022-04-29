@@ -189,8 +189,8 @@ public class RootController {
 		if(ms.confirm(user.getId())) {
 			ms.add(user);
 		}
-//		로그인 시 자동 로그인 안함
-		login(user, session, response, false, ra);
+
+		login(user, session, response, true, ra);
 		
 		return "redirect:/";
 	}
