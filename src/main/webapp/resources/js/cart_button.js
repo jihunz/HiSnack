@@ -15,6 +15,7 @@ $(function(){
 			processData:false,
 			success:function(result){
 				console.log(result.msg);
+				alert("상품이 추가되었습니다");
 			},
 			error:function(xhr, status, err){
 				console.log(`error ${xhr.status} : ${xhr.responseText}`);
