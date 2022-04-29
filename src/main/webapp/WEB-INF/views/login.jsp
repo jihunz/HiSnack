@@ -4,11 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!-- jQuery -->
-<script src="re/js/jquery.js"></script>
+<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 <script src="re/js/google_login.js"></script>
-<title>Hi Snack!</title>
 
 <c:if test="${failMsg != null}">
 	<script type="text/javascript">

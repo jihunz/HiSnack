@@ -17,9 +17,16 @@ const user = {
 <!-- jQuery -->
 <script src="/re/js/jquery.js"></script>
 
-
-
-
 <!-- index 페이지 js src -->
 <script src="/re/js/header.js"></script>
 <title>Hi Snack!</title>
+
+<!-- 벡엔드에서 보내는 메시지를 받는 코드 -->
+<script>
+	window.onload = function(){
+		const msg = `${err_msg}`;
+		if(msg){
+			alert(msg);
+		}
+	};
+</script>
