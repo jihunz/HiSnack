@@ -76,13 +76,14 @@ public class ReviewController {
  * 리뷰 작성 페이지
  */
 	@GetMapping("/add")
-	public String add(Model model, HttpSession session) {
+	public String add(Model model, HttpSession session, RedirectAttributes ra) {
 		Member user = (Member)session.getAttribute("user");
 		
 //		만약 회원이 한번도 구독을 한적이 없으면 막음
 		Orders sub = os.latestSubscribe(user.getId());
 		
 		if(sub == null) {
+			ra.addFlashAttribute("err_msg", "리뷰는 구독자만 가능합니다");
 			return "redirect:list";
 		}
 		
