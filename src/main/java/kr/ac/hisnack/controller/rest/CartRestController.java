@@ -166,7 +166,7 @@ public class CartRestController {
 				count += list.get(i).getAmount();
 		}
 //		찾을 걸 지운다
-		if(idx != -1) {
+		if(idx != -1 && list.get(idx).isChecked()) {
 			count -= list.get(idx).getAmount();
 			list.remove(idx);
 		}
