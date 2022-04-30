@@ -3,7 +3,7 @@ $(function(){
 		cart_ajax("cart");
 	});
 
-	$("a[href='/orders/cart'").click(() => {
+	$("a[href='/orders/cart']").click(() => {
 		cart_ajax();
 	});
 });
