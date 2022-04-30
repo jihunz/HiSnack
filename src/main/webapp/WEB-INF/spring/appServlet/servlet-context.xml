@@ -56,6 +56,11 @@
 			<beans:bean class="kr.ac.hisnack.util.interceptor.CookieLoginIntercepter"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/login"/>
+			<mapping path="/signup"/>
+			<beans:bean class="kr.ac.hisnack.util.interceptor.LoginBlockInterceptor"/>
+		</interceptor>
+		<interceptor>
 			<mapping path="/sub/**"/>
 			<mapping path="/review/*/*"/>
 			<mapping path="/review/add"/>
