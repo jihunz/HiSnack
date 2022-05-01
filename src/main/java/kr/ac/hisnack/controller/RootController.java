@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -70,12 +71,13 @@ public class RootController {
  * @return 실패시 login 페이지로 redirect, 성공시 index로 redirect
  */
 	@PostMapping("/login")
-	public String login(Member item, HttpSession session, HttpServletResponse response, boolean autoLogin) {
+	public String login(Member item, HttpSession session, HttpServletResponse response, boolean autoLogin, RedirectAttributes ra) {
 		// 클라이언트 측에 자동 로그인용 체크박스 추가 -> name="autoLogin"
 		
 		Member user = ms.login(item);
 		
 		if(user == null) {
+			ra.addFlashAttribute("err_msg", "로그인에 실패했습니다");
 			return "redirect:login";
 		}
 		
@@ -175,7 +177,7 @@ public class RootController {
  */
 //	
 	@GetMapping("/login/google")
-	public String google(@RequestParam(value = "code") String authCode, HttpSession session, HttpServletResponse response) throws JsonProcessingException{
+	public String google(@RequestParam(value = "code") String authCode, HttpSession session, HttpServletResponse response, RedirectAttributes ra) throws JsonProcessingException{
 		Map<String, String> map = SiteLoginer.google(authCode);
 		
 		Member user = new Member();
@@ -187,8 +189,8 @@ public class RootController {
 		if(ms.confirm(user.getId())) {
 			ms.add(user);
 		}
-//		로그인 시 자동 로그인 안함
-		login(user, session, response, false);
+
+		login(user, session, response, true, ra);
 		
 		return "redirect:/";
 	}

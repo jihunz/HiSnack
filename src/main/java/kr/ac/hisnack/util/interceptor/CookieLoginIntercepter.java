@@ -1,4 +1,4 @@
-package kr.ac.hisnack.util.intercepter;
+package kr.ac.hisnack.util.interceptor;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +12,19 @@ import org.springframework.web.util.WebUtils;
 import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.service.MemberService;
 
-public class LoginIntercepter extends HandlerInterceptorAdapter {
+// 쿠키를 사용한 자동 로그인 인터셉터
+public class CookieLoginIntercepter extends HandlerInterceptorAdapter {
 	@Autowired
 	MemberService ms;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		HttpSession session = request.getSession();
+		
+//		이미 로그인한 경우는 쿠키 처리를 하지 않는다
+		if(session.getAttribute("user") != null) return true;
+		
 //		쿠키를 꺼내온다
 		Cookie cookie = WebUtils.getCookie(request, "loginCookie");
 //		loginCookie가 있는지 확인한다
@@ -27,7 +33,6 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
 			Member user = ms.checkMemberWithSessionId(cookie.getValue());
 			if(user != null) {
 //				session에 저장해서 로그인 한다
-				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
 //				쿠키의 수명을 늘린다
 				cookie.setValue(session.getId());

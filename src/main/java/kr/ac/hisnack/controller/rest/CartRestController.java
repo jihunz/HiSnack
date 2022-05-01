@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.ObjectConverter;
@@ -31,6 +33,8 @@ public class CartRestController {
 	ObjectConverter<OrderedProduct> converter;
 	@Autowired
 	ProductService ps;
+	@Autowired
+	ObjectMapper objectMapper;
 	
 	/**
 	 * 장바구니에 추가하고 싶은 상품의 기본키(pcode)와 수량(amount)를 입력하면 장바구니에 추가한다
@@ -49,7 +53,21 @@ public class CartRestController {
 			list = new ArrayList<OrderedProduct>();
 		}
 		
-		list.add(item);
+		boolean isExist = false;
+		
+//		중복되는 상품이 있는지 찾는다
+		for(OrderedProduct p : list) {
+			if(p.getPcode() == item.getPcode()) {
+//				중복되는 상품이 있으면 수량만 더한다
+				isExist = true;
+				p.setAmount(p.getAmount() + item.getAmount());
+				break;
+			}
+		}
+		
+//		중복되는 상품이 없으면 cart에 추가한다
+		if(!isExist)
+			list.add(item);
 		
 		session.setAttribute("cart", list);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -149,7 +167,8 @@ public class CartRestController {
 		}
 //		찾을 걸 지운다
 		if(idx != -1) {
-			count -= list.get(idx).getAmount();
+			if(list.get(idx).isChecked())
+				count -= list.get(idx).getAmount();
 			list.remove(idx);
 		}
 		else {

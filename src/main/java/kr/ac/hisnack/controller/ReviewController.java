@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.ac.hisnack.model.Image;
 import kr.ac.hisnack.model.Member;
@@ -75,13 +76,14 @@ public class ReviewController {
  * 리뷰 작성 페이지
  */
 	@GetMapping("/add")
-	public String add(Model model, HttpSession session) {
+	public String add(Model model, HttpSession session, RedirectAttributes ra) {
 		Member user = (Member)session.getAttribute("user");
 		
 //		만약 회원이 한번도 구독을 한적이 없으면 막음
 		Orders sub = os.latestSubscribe(user.getId());
 		
 		if(sub == null) {
+			ra.addFlashAttribute("err_msg", "리뷰는 구독자만 가능합니다");
 			return "redirect:list";
 		}
 		
@@ -111,12 +113,20 @@ public class ReviewController {
  * @param model : jsp에 리뷰를 넘길때 사용하는 파라미터
  */
 	@GetMapping("/update/{code}")
-	public String update(@PathVariable int code, Model model, HttpSession session) {
+	public String update(@PathVariable int code, Model model, HttpSession session, RedirectAttributes ra) {
 		Member user = (Member)session.getAttribute("user");
 		model.addAttribute("user", user);
 		
 		Review item = service.item(code, false);
 		model.addAttribute("item", item);
+		
+//		작성이와 로그인한 회원이 다를 경우
+		if(!item.getId().equals(user.getId())) {
+//			리스트로 보낸다
+			ra.addFlashAttribute("err_msg", "작성이와 다른 회원입니다");
+			return "redirect:../list";
+		}
+		
 		return PATH+"update";
 	}
 	
@@ -148,7 +158,17 @@ public class ReviewController {
  * @return list 페이지로 redirect
  */
 	@GetMapping("/delete/{code}")
-	public String delete(@PathVariable int code) {
+	public String delete(@PathVariable int code, HttpSession session, RedirectAttributes ra) {
+		Review item = service.item(code, false);
+		Member user = (Member)session.getAttribute("user");
+		
+//		작성이와 로그인한 회원이 다를 경우
+		if(!item.getId().equals(user.getId())) {
+//			리스트로 보낸다
+			ra.addFlashAttribute("err_msg", "작성이와 다른 회원입니다");
+			return "redirect:../list";
+		}
+		
 		imageService.delete(code);
 		service.delete(code);
 		return "redirect:../list";

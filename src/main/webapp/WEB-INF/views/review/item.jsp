@@ -45,7 +45,9 @@
 		    <!-- Slides -->
 	    	<c:forEach items="${item.images}" var="image">
 	    		<div class="swiper-slide">
-	    			<img class="review-item-img" src="${image.fullpath}" alt="${image.filename}" />
+	    			<div class="review-item-img-border">
+	    				<img class="review-item-img" src="${image.fullpath}" alt="${image.filename}" />
+	    			</div>
 	    		</div>
 	    	</c:forEach>
 		  </div>

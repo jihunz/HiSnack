@@ -12,6 +12,10 @@
 				OR UPPER(review.id) LIKE CONCAT('%', UPPER(#{keyword}), '%')
 				OR DATE(review.reg_date) = #{keyword}
 			</if>
+			<!-- 마이페이지에서 사용 -->
+			<if test="search == 2">
+				UPPER(review.id) LIKE CONCAT('%', UPPER(#{keyword}), '%')
+			</if>
 		</where>
 	</sql>
 	<sql id="table">
