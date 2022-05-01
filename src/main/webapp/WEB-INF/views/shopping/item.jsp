@@ -18,11 +18,11 @@
 <div class = "container">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<div class = "wrapper mb-60">
-		<div class = "flex column">
+		<div class = "flex column" id="item" data-code="${item.code}">
 			<div class = "my-50"><h1 class = "productfont">제품 상세</h1></div>
 			<div class = "flex justify-between">
 				<div class = "">
-					<div id="item" data-code="${item.code}">
+					<div >
 						<c:forEach items="${item.images}" var="image">
 							<div class = "subbox img-border">
 								<img src="${image.fullpath}" alt="${image.filename}" />
