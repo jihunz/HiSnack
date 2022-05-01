@@ -15,8 +15,8 @@
 					AND subscribe=#{keyword2}
 				</when>
 				<when test="search == 2">
-					<!-- 마이페이지에서 회원의 구독 정보를 볼 때 사용 -->
-					subscribe='y' AND id=#{keyword}
+					<!-- 마이페이지에서 회원의 정보를 볼 때 사용 -->
+					subscribe=#{keyword2} AND id=#{keyword}
 				</when>
 				<otherwise>
 					<!-- 그냥 list를 할 때 사용, 주문과 구독을 구분할 때 사용 -->
