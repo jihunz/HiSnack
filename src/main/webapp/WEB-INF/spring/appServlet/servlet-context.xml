@@ -66,6 +66,7 @@
 			<mapping path="/review/add"/>
 			<mapping path="/orders/**"/>
 			<mapping path="/admin"/>
+			<mapping path="/member"/>
 			<exclude-mapping path="/sub/detail"/>
 			<beans:bean class="kr.ac.hisnack.util.interceptor.UserInterceptor"/>
 		</interceptor>
