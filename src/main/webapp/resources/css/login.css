@@ -1,0 +1,73 @@
+.container {
+	width: 1200px;
+	height: auto;
+}
+.loginbox {
+	width: 600px;
+	height: auto;
+	background-color: white;
+	box-shadow: 5px 5px 15px var(--color-light-gray);
+	border-radius: 50px;
+}
+.yellowline {
+	width: 100px;
+	height: 10px;
+	background-color: var(--logo-color);
+	display: inline-block;
+}
+.loginfont {
+	font-size: 50px;
+	font-weight: var(--font-weight-bold);
+}
+.inputsize {
+	width: 400px;
+	height: 40px;
+	outline: none;
+	border: solid 1px var(--color-light-gray);
+	padding-left: 20px;
+	padding-right: 10px;
+	
+}
+.loginbtn {
+  width: 400px;
+  height: 50px;
+  background-color: var(--logo-color);
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  color : white;
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+}
+
+.idbox {
+	height: 50px;
+}
+.hiline {
+	width: 1px;
+	height: 15px;
+	background-color: var(--color-gray);
+}
+.idbox a {
+	width: 100px;
+	padding-right: 20px;
+	padding-left: 20px;
+	color: var(--color-gray);
+}
+.glogin {
+	width: 400px;
+	height: 50px;
+	border: solid 1px var(--color-light-gray);
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: var(--font-weight-normal);
+}
+.googlebox {
+	width: 30px;
+	height: 30px;
+}
+.gline {
+	width: 1px;
+	height: 30px;
+	background-color: var(--color-light-gray);
+}

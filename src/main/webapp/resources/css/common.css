@@ -81,10 +81,12 @@ a:hover {
 }
 .flex.items-center {
 	align-items: center;
-	
 }
 .flex.flex-end {
 	justify-content: flex-end;
+}
+.flex.flex-start {
+	justify-content: flex-start;
 }
 .flex.column {
 	flex-direction: column;
@@ -191,6 +193,7 @@ a:hover {
 .font-size-medium {
 	font-size: var(--font-size-medium) !important;
 }
+
 
 .font-size-large {
 	font-size: var(--font-size-large) !important;
@@ -332,7 +335,9 @@ a.btn {
 }
 
 
-
+.mr-120 {
+	margin-right: 120px !important;
+}
 .mr-60 {
 	margin-right: 60px !important;
 }
