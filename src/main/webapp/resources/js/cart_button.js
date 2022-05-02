@@ -1,16 +1,20 @@
 $(function(){
 	$('#cart-btn').click(() => {
-		cart_ajax("cart");
+		cart_ajax(function(){
+			alert('상품을 장바구니에 담았습니다');
+		});
 	});
 
-	$("a[href='/orders/cart']").click(() => {
-		cart_ajax();
+	$("#order-btn").click(() => {
+		cart_ajax(function(){
+			location.href = "/orders/cart";
+		});
 	});
 });
 
-function cart_ajax(type) {
+function cart_ajax(callback) {
 	const code = $('#item').data('code');
-	const amount = $('#item input[type="number"]').val();
+	const amount = $('#item #amount').val();
 
 	const formData = new FormData();
 	formData.append('pcode', code);
@@ -25,7 +29,7 @@ function cart_ajax(type) {
 		success:function(result){
 			console.log(result.msg);
 			
-			if(type == "cart") alert("상품이 추가 되었습니다");
+			callback();
 		},
 		error:function(xhr, status, err){
 			console.log(`error ${xhr.status} : ${xhr.responseText}`);

@@ -86,7 +86,7 @@ form button {
 	cursor: pointer;
 }
 
-a.paybtn {
+.paybtn {
 	background-color: #dc2329;
 	color: white;
 	border:none;
@@ -101,4 +101,11 @@ a.paybtn {
 	outline: none;
 	cursor: pointer;
 }
-
+#amount{
+	width: 50px;
+}
+#amount::-webkit-outer-spin-button,
+#amount::-webkit-inner-spin-button {
+	 -webkit-appearance: none;
+	 margin: 0;
+}
