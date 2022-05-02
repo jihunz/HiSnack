@@ -8,12 +8,6 @@
 <link rel="stylesheet" href="/re/css/login.css">
 <script src="re/js/google_login.js"></script>
 
-<c:if test="${failMsg != null}">
-	<script type="text/javascript">
-		alert("${failMsg}")
-	</script>
-</c:if>
-
 </head>
 <body>
 	
