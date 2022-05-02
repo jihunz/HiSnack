@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.util.ObjectConverter;
@@ -33,8 +31,6 @@ public class CartRestController {
 	ObjectConverter<OrderedProduct> converter;
 	@Autowired
 	ProductService ps;
-	@Autowired
-	ObjectMapper objectMapper;
 	
 	/**
 	 * 장바구니에 추가하고 싶은 상품의 기본키(pcode)와 수량(amount)를 입력하면 장바구니에 추가한다
