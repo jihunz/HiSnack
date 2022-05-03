@@ -33,7 +33,7 @@
 	
 	<insert id="add">
 		INSERT INTO orders
-		VALUES(NULL, #{id}, #{address}, #{name}, #{tel}, NOW(), #{subscribe}, ${total})
+		VALUES(NULL, #{id}, #{address}, #{name}, #{tel}, NOW(), #{subscribe}, #{total}, #{request})
 		
 		<selectKey keyProperty="code" order="AFTER" resultType="Integer">
 			SELECT LAST_INSERT_ID()

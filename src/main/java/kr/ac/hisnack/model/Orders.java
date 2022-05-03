@@ -21,12 +21,21 @@ public class Orders {
 	private char subscribe;
 //	주문의 총 가격, 구독의 가격
 	private int total;
+//	주문의 요청 사항 (구독은 없음)
+	private String request;
+	
 //	주문된 제품들
 	private List<OrderedProduct> products;
 //	구독의 태그들
 	private List<Tag> tags;
 	
-//	주문한 상품들의 개수
+	public String getRequest() {
+		return request;
+	}
+	public void setRequest(String request) {
+		this.request = request;
+	}
+	//	주문한 상품들의 개수
 	public int getAmount() {
 		int amount = 0;
 		
