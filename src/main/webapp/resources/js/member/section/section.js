@@ -2,7 +2,7 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, item, category, onUpdate, onDelete, onItem, onGetCode, onChange } = this.props;
+        const { title, list, item, category, pageList, prev, next, query, onList, onUpdate, onDelete, onItem, onGetCode, onChange } = this.props;
 
         return (
             <div>
@@ -16,6 +16,11 @@ class Section extends React.Component {
                     <Table
                         list={list}
                         category={category}
+                        pageList={pageList}
+                        prev={prev}
+                        next={next}
+                        query={query}
+                        onList={onList}
                         onDelete={onDelete}
                         onItem={onItem}
                         onGetCode={onGetCode}

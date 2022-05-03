@@ -11,6 +11,11 @@ class Dashboard extends React.Component {
             title: "구독 상품 내역",
             list: [],
             item: {},
+            //pager용 state
+            pageList: [],
+            prev: "",
+            next: "",
+            query: "",
         };
 
         this.list = this.list.bind(this);
@@ -23,12 +28,12 @@ class Dashboard extends React.Component {
         this.setTitle = this.setTitle.bind(this);
     }
 
-    list(category, page, query) {
+    list(category, page) {
         let url = `rest/${category}?search=2&keyword=${user.userId}`;
 
         if (page != null) {
             //페이지네이션 시 요청할 uri
-            url += `&page=${page}&${query}`
+            url += `&page=${page}`
         }
 
         fetch(url, {
@@ -51,7 +56,7 @@ class Dashboard extends React.Component {
 
     item(event, category) {
         let keyword = user.userId;
-        if(category != 'member') {
+        if (category != 'member') {
             keyword = event.target.parentNode.dataset.code;
         }
 
@@ -65,12 +70,12 @@ class Dashboard extends React.Component {
                 (state, props) => {
                     state.item = result.item
                     // 비밀번호 state를 공개하지 않기 위한 코드
-                    if(category == 'member') {
+                    if (category == 'member') {
                         state.item.password = null;
                     }
                     return state;
                 });
-                console.log(this.state.item);
+            console.log(this.state.item);
         }).catch(err => console.log(err));
     }
 
@@ -102,10 +107,23 @@ class Dashboard extends React.Component {
 
     //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
     delete(event, category) {
+        // prompt()
         fetch(`/rest/${category}/${event.target.id}`, {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
-            alert(result.msg);
+            let msg;
+            switch(category) {
+                case 'orders':
+                    msg = '주문이 취소되었습니다.'
+                    break;
+                case 'review':
+                    msg = '리뷰가 삭제되었습니다.'
+                    break;
+                default:
+                    msg = '구독이 취소되었습니다.'
+                    break;
+            }
+            alert(msg);
             this.list(category);
         }).catch(err => console.log(err));
     }
@@ -184,14 +202,6 @@ class Dashboard extends React.Component {
                     onDelete={this.delete}
                     onChange={this.change}
                 />
-                {/* <Pagenation
-                    pageList={pageList}
-                    prev={prev}
-                    next={next}
-                    query={query}
-                    category={category}
-                    onList={this.list}
-                /> */}
             </div>
         );
     }
