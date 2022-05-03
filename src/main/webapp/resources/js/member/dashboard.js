@@ -8,15 +8,19 @@ class Dashboard extends React.Component {
         this.state = {
             //메뉴에 따라서 변경되는 핵심 state
             category: "sub",
+            title: "구독 상품 내역",
+            list: [],
+            item: {},
         };
 
         this.list = this.list.bind(this);
         this.item = this.item.bind(this);
-        this.modify = this.modify.bind(this);
+        this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteList = this.deleteList.bind(this);
         this.change = this.change.bind(this);
         this.setCategory = this.setCategory.bind(this);
+        this.setTitle = this.setTitle.bind(this);
     }
 
     list(category, page, query) {
@@ -46,7 +50,12 @@ class Dashboard extends React.Component {
     }
 
     item(event, category) {
-        fetch((`/rest/${category}/${event.target.parentNode.dataset.code}`), {
+        let keyword = user.userId;
+        if(category != 'member') {
+            keyword = event.target.parentNode.dataset.code;
+        }
+
+        fetch((`/rest/${category}/${keyword}`), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -54,10 +63,14 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    state.item = result.item;
-                    state.tags = result.item.tags;
+                    state.item = result.item
+                    // 비밀번호 state를 공개하지 않기 위한 코드
+                    if(category == 'member') {
+                        state.item.password = null;
+                    }
                     return state;
                 });
+                console.log(this.state.item);
         }).catch(err => console.log(err));
     }
 
@@ -72,26 +85,18 @@ class Dashboard extends React.Component {
         });
     }
 
-    //add 혹은 update 요청을 실행하는 함수 -> type 파라미터로 add와 update 구분
-    modify(type, category) {
-        let url;
+    update(type) {
+        const { category } = this.state;
+
         const formData = new FormData(document.getElementById(`${type}Form`));
-        const cancel = document.querySelector(`.${type}Cancel`);
+        let keyword;
+        category == 'member' ? keyword = user.userId : keyword = document.getElementById("codeInput").value;
 
-        if (type == "add") {
-            url = `/rest/${category}`;
-        } else if (type == "update") {
-            const code = document.getElementById("codeInput").value;
-            url = `/rest/${category}/${code}`;
-        }
-
-        fetch(url, {
+        fetch(`/rest/${category}/${keyword}`, {
             method: "POST",
             body: formData,
         }).then(res => res.json()).then(result => {
-            alert(result.msg);
-            this.list(category);
-            cancel.click();
+            alert("회원 정보가 정상적으로 수정되었습니다.");
         }).catch(err => console.log(err));
     }
 
@@ -128,6 +133,24 @@ class Dashboard extends React.Component {
         this.list(category);
     }
 
+    setTitle(title) {
+        this.setState(
+            (state) => {
+                state.title = title;
+                return state;
+            });
+    }
+
+    change(event) {
+        const inputName = event.target.name;
+        this.setState({
+            item: {
+                ...this.state.item,
+                [inputName]: event.target.value,
+            },
+        });
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() { this.list("sub"); }
 
@@ -142,11 +165,14 @@ class Dashboard extends React.Component {
                 {category === 'review' ? <><div>리뷰 목록</div></> : null}
                 <Sidebar
                     onSetCategory={this.setCategory}
+                    onSetTitle={this.setTitle}
+                    onItem={this.item}
                 />
                 <Section
                     category={category}
                     title={title}
                     list={list}
+                    item={item}
                     id={id}
                     pageList={pageList}
                     prev={prev}
@@ -154,9 +180,9 @@ class Dashboard extends React.Component {
                     query={query}
                     onList={this.list}
                     onItem={this.item}
+                    onUpdate={this.update}
                     onDelete={this.delete}
-                    onDeleteList={this.deleteList}
-                    onInitCodes={this.initCodes}
+                    onChange={this.change}
                 />
                 {/* <Pagenation
                     pageList={pageList}
