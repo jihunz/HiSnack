@@ -1,64 +1,119 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>주문 결제</title>
+	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/re/js/daumPostCode.js" type="text/javascript"></script>
+	<script src="/re/js/payment.js"></script>
+	
+	<script>
+		$(function(){
+			$('#address-btn').click(function(){
+				execDaumPostcode();
+			});
+		});
+	</script>
+	
+	<link rel="stylesheet" href="/re/css/payment.css" />
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<div>
-		<h1>주문 결제</h1>
-		<table>
-			<thead>
-				<tr>
-					<th><input type="checkbox" /></th>
-					<th>이미지</th>
-					<th>상품명</th>
-					<th>가격</th>
-					<th>개수</th>
-					<th>총 가격</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="item">
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td><img src="${item.thumbnail}" alt="${item.images.get(0).filename}" /></td>
-						<td>${item.name}</td>
-						<td>${item.price}</td>
-						<td>${item.amount}</td>
-						<td>${item.price * item.amount}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="6">총 가격 : ${total}</td>
-				</tr>
-			</tfoot>
-		</table>
-		<div>
-			<form method="post">
-				<input type="hidden" name="id" value="${user.id}"/>
-				<div>
-					<label>주소</label>
-					<input type="text" name="address" value="${user.address}"/>
-				</div>
-				<div>
-					<label>수령인</label>
-					<input type="text" name="name" value="${user.name}"/>
-				</div>
-				<div>
-					<label>전화번호</label>
-					<input type="tel" name="tel" value="${user.tel}"/>
-				</div>
-				<div>
-					<button>확인</button>
-				</div>
-			</form>
+		<div class="flex justify-between item-center pb-30 pt-50 wrapper">
+			<h1 class="font-title">상품 결제</h1>
+			<div class="img-border cart-icon">
+				<img src="/re/img/cart.svg"/>
+			</div>
 		</div>
 	</div>
+	<div id="payment-wrapper" class="py-60">
+		<div class="wrapper flex justify-between">
+			<article>
+				<section class="mb-20">
+					<h2 class="pb-20">주문 상품</h2>
+					<ul class="orders-list">
+						<c:forEach items="${list}" var="item">
+							<li>
+								<div class="img-border thumbnail">
+									<img src="${item.thumbnail}" alt="${item.images.get(0).filename}" />
+								</div>
+								<div>
+									${item.name}
+								</div>
+								<div>
+									${item.amount}개
+								</div>
+								<div>
+									<fmt:formatNumber value="${item.price}" pattern="###,###,###원"/>
+								</div>
+							</li>	
+						</c:forEach>
+					</ul>
+				</section>
+				
+			</article>
+			<article>
+				<section>
+					<h2 class="pb-20">배송지 정보</h2>
+					<form method="post" class="payment-form">
+						<input type="hidden" name="id" value="${user.id}"/>
+						<div>
+							<label>수령인</label>
+							<input type="text" name="name"
+							placeholder="이름을 입력 해주세요" value="${user.name}"/>
+						</div>
+						<div>
+							<label>주소</label>
+							<input type="text" class="address" id="address" name="address" value="${user.address}"/>
+								<button id="address-btn" type="button">주소 찾기</button>
+						</div>
+						<div>
+							<label>연락처</label>
+							<input type="tel" name="tel" id="tel"
+							placeholder="'-' 제외하고 입력해주세요" value="${user.tel}"/>
+						</div>
+						<div>
+							<label>요청사항</label>
+							<select id="request-select">
+								<option value="0">
+									직접입력
+								</option>
+								<option value="1" selected>
+									배송 전에 연락 부탁드립니다.
+								</option>
+								<option value="2">
+									경비실에 맡겨 주세요.
+								</option>
+								<option value="3">
+									깨지기 쉬우니 조심히 다뤄주세요.
+								</option>
+							</select>
+						</div>
+						<div class="text-right">
+							<input class="mb-20" id="request" type="hidden" name="request"/>
+						</div>
+						<div class="flex justify-between item-center py-10">
+							<section class="flex justify-center text-center item-center ml-30">
+								<div class="px-50">
+									<span class="font-gray">상품 개수</span>
+									<h2>${amount}개</h2>
+								</div>
+								<div class="px-50">
+									<span class="font-gray">상품금액</span>
+									<h2><fmt:formatNumber value="${total}" pattern="###,###,###원"/></h2>
+								</div>
+							</section>
+							<button class="btn round black py-10 px-60 font-size-large">구매하기</button>
+						</div>
+					</form>
+				</section>
+			</article>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

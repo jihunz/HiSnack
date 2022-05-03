@@ -227,7 +227,7 @@ a:hover {
 .font-title{
 	font-weight: var(--font-weight-bold);
 	border-bottom: solid var(--logo-color) 5px;
-	padding: 5px 10px;
+	padding: 5px 2px;
 }
 
 /* ========================button===================== */
@@ -975,7 +975,10 @@ a.btn {
 	padding-bottom: 5px !important;
 }
 
-
+.px-80 {
+	padding-right: 80px !important;
+	padding-left: 80px !important;
+}
 
 .px-60 {
 	padding-right: 60px !important;
@@ -1055,6 +1058,9 @@ a.btn {
 .text-left{
 	text-align: left;
 }
+.text-justify{
+	text-align: justify;
+}
 /* ========================color============================= */
 .lightcolor {
 	color : var(--color-light-gray);
@@ -1081,3 +1087,9 @@ select ::-ms-expand {
 	  
 }
 
+/* ========================icon=========================== */
+
+.cart-icon{
+	width: 30px;
+	height: 30px;
+}

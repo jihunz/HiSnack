@@ -73,6 +73,14 @@ public class OrdersController {
 //			jsp에서 보여주기 위해 설정한다
 			int total = ps.priceTotal(products);
 			List<Product> productList = ps.list(products);
+			
+			int amount = 0;
+			
+			for(Product p : productList) {
+				amount += p.getAmount();
+			}
+			
+			model.addAttribute("amount", amount);
 			model.addAttribute("list", productList);
 			model.addAttribute("total", total);
 		}

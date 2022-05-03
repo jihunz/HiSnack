@@ -1,0 +1,107 @@
+#payment-wrapper{
+	background: var(--color-light-gray);
+}
+
+#payment-wrapper .thumbnail{
+	width: 45px !important;
+	height: 45px;
+	border-radius: 5px;
+}
+
+#payment-wrapper article:nth-child(1){
+	width: 450px;
+}
+
+#payment-wrapper article:nth-child(2){
+	width: 730px;
+}
+
+#payment-wrapper section{
+	padding: 15px 20px;
+	background: var(--color-white);
+	border-radius: 15px;
+	border: 2px solid #ccc;
+}
+
+#payment-wrapper article > section{
+	box-sizing: border-box;
+}
+
+#payment-wrapper section h2{
+	font-weight: var(--font-weight-normal);
+}
+
+#payment-wrapper .orders-list{
+	height: 400px;
+	overflow-y: auto; 
+}
+
+#payment-wrapper .orders-list li{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px;
+	border-radius: 20px;
+	border: 1px solid #ccc;
+	font-weight: var(--font-weight-normal);
+}
+
+#payment-wrapper .orders-list li > div{
+	width: 90px;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#payment-wrapper .orders-list li:not(:last-child) {
+	margin-bottom: 5px;
+}
+
+#payment-wrapper .payment-form > div:not(:last-child, :nth-last-child(2)){
+	padding-bottom: 20px;
+}
+
+#payment-wrapper .payment-form > div label{
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+	font-weight: var(--font-weight-normal);
+}
+
+#payment-wrapper .payment-form > div input,
+#payment-wrapper .payment-form > div select{
+	padding: 15px 10px;
+	border-radius: 15px;
+	border: 1px solid #ccc;
+	outline-color: var(--color-gray);
+}
+
+#payment-wrapper .payment-form > div input:not(.address),
+#payment-wrapper .payment-form > div select{
+	width: 590px;
+	box-sizing: border-box;
+}
+
+#payment-wrapper .payment-form > div select{
+	-webkit-appearance:none; /* 크롬 화살표 없애기 */
+    -moz-appearance:none; /* 파이어폭스 화살표 없애기 */
+    appearance:none;
+    background-image: url('/re/img/drop_down.svg');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 30px 30px;
+}
+
+#payment-wrapper .payment-form > div input.address{
+	width: 400px;
+}
+#address-btn{
+	padding: 15px 40px;
+	border-radius: 15px;
+	border: 1px solid var(--color-black);
+	background: var(--color-white);
+	font-size: var(--font-size-laguler);
+	margin-left: 13px;
+	cursor: pointer;
+}

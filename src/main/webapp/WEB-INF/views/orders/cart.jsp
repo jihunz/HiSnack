@@ -6,7 +6,7 @@
 <html>
 <head>
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
-	<link rel="stylesheet" href="/re/css/cart.css">
+	<link rel="stylesheet" href="/re/css/cart.css" />
 	<script src="/re/js/cart.js"></script>
 </head>
 <body>
