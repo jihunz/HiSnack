@@ -9,6 +9,7 @@
 
 <jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 
+<link rel="stylesheet" href="/re/css/cart.css">
 <link rel="stylesheet" href="/re/css/item.css">
 
 <title>제품 상세</title>
@@ -46,7 +47,9 @@
 						
 						<div class = "flex mt-20 flex-end">
 							<p class = "subpricetext mr-20">개수</p>
-							<input id="amount" class="text-right px-10" type="number" value="1"/>
+							<button class="cart-btn amount-minus"></button>
+							<input id="amount" type="number" value="1"/>
+							<button class="cart-btn amount-plus"></button>
 						</div>
 						
 						<hr class = "hrstyle mt-20">

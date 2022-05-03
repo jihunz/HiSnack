@@ -102,7 +102,9 @@ form button {
 	cursor: pointer;
 }
 #amount{
-	width: 50px;
+	width: 30px;
+	text-align: center;
+	margin : 0 10px;
 }
 #amount::-webkit-outer-spin-button,
 #amount::-webkit-inner-spin-button {
