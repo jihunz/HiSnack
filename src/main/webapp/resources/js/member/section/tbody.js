@@ -30,7 +30,7 @@ class SubList extends React.Component {
         const { item } = this.props;
         return (
             <>
-                <td>{item.products.images && item.products.images.length ? <img src={item.products[0].images[0].fullpath}></img> : '이미지 없음'}</td>
+                <td>{item.products && item.products.length ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
                 <td>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>
@@ -43,7 +43,7 @@ class OrdersList extends React.Component {
         const { item } = this.props;
         return (
             <>
-                <td>{item.products.images && item.products.images.length ? <img src={item.products[0].images[0].fullpath}></img> : '이미지 없음'}</td>
+                <td>{item.products && item.products.length ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
                 <td>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.amount}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
@@ -57,7 +57,7 @@ class ReviewList extends React.Component {
         const { item } = this.props;
         return (
             <>
-                <td>{item.images && item.images.length ? <img src={item.images[0].fullpath}></img> : '이미지 없음'}</td>
+                <td>{item.images && item.images.length ? <img src={item.images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
                 <td>{item.contents}</td>
                 <td>{item.rating}</td>
                 <td>{item.price}</td>

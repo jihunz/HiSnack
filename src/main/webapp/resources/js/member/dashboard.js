@@ -19,16 +19,12 @@ class Dashboard extends React.Component {
         this.setCategory = this.setCategory.bind(this);
     }
 
-    list(category, page, query, search, order) {
-        let url = `rest/${category}`;
+    list(category, page, query) {
+        let url = `rest/${category}?search=2&keyword=${user.userId}`;
 
         if (page != null) {
             //페이지네이션 시 요청할 uri
-            url += `?page=${page}&${query}`
-        } else if (search != null) {
-            //검색 시 요청할 uri
-            const keyword = document.querySelector("#searchBox").value;
-            url += `?search=${search}&keyword=${keyword}`
+            url += `&page=${page}&${query}`
         }
 
         fetch(url, {

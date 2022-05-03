@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
+	<link rel="stylesheet" href="/re/css/member.css">
 </head>
 <body>
 
