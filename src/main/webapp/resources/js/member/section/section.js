@@ -2,22 +2,31 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, category, onDelete, onItem, onGetCode, onGetCodes, onDeleteList, onInitCodes, onList } = this.props;
+        const { title, list, item, category, pageList, prev, next, query, onList, onUpdate, onDelete, onItem, onGetCode, onChange } = this.props;
 
         return (
             <div>
                 <div>
-                    <Title title={title} />
+                    <Title
+                        title={title}
+                        category={category}
+                    />
                 </div>
-                <Table
-                    list={list}
-                    category={category}
-                    onDelete={onDelete}
-                    onItem={onItem}
-                    onGetCode={onGetCode}
-                    onGetCodes={onGetCodes}
-                    onInitCodes={onInitCodes}
-                />
+                {category != 'member' ?
+                    <Table
+                        list={list}
+                        category={category}
+                        pageList={pageList}
+                        prev={prev}
+                        next={next}
+                        query={query}
+                        onList={onList}
+                        onDelete={onDelete}
+                        onItem={onItem}
+                        onGetCode={onGetCode}
+                    />
+                    : <MemberForm item={item} onUpdate={onUpdate} onChange={onChange} />
+                }
             </div>
         );
     }
@@ -26,16 +35,13 @@ class Section extends React.Component {
 // title 컴포넌트 -> 메뉴 별 title 표시
 class Title extends React.Component {
     render() {
-        const { title } = this.props;
+        const { title, category } = this.props;
 
         return (
-            <div>
-                <div>
-                    <p>주문 정보</p>
-                    <div>최신 순</div>
-                    <div>오래된 순</div>
-                </div>
-            </div>
+            <>
+                <p>{title}</p>
+                {category != 'member' ? <><div>최신 순</div><div>오래된 순</div></> : null}
+            </>
         );
     }
 }

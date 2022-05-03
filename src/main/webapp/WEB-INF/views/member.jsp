@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
+	<link rel="stylesheet" href="/re/css/member.css">
 </head>
 <body>
 
@@ -16,6 +17,7 @@
 	<jsp:include page="/WEB-INF/views/common/react.jsp"></jsp:include>
 	<!-- React components -->
     <script type="text/babel" src="/re/js/member/section/pagenation.js"></script>
+    <script type="text/babel" src="/re/js/member/section/memberForm.js"></script>
     <script type="text/babel" src="/re/js/member/section/thead.js"></script>
     <script type="text/babel" src="/re/js/member/section/tbody.js"></script>
     <script type="text/babel" src="/re/js/member/section/table.js"></script>
