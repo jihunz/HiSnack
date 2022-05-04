@@ -1,7 +1,7 @@
 $(function(){
 	$('#cart-btn').click(() => {
 		cart_ajax(function(){
-			showMsg("#cartmsg");
+			showMsg("#cartMsg");
 		});
 	});
 
@@ -38,8 +38,8 @@ function cart_ajax(callback) {
 }
 
 function showMsg(target) {
-	$(target).removeClass("fadeOut").addClass("fadeIn").css("opacity", "1");
+	$(target).fadeIn(300);
 		setTimeout(() => {
-			$(target).removeClass("fadeIn").addClass("fadeOut").css("opacity", "0");
+			$(target).fadeOut(300);
 		}, 2800)
 }

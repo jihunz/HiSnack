@@ -44,6 +44,7 @@
 						</div>
 						
 						<hr class = "hrstyle mt-20">
+					    <div id="cartMsg">장바구니에 상품이 담겼습니다.<a href="/orders/cart">장바구니로 가기</a></div>
 						
 						<div class = "flex mt-20 flex-end">
 							<p class = "subpricetext mr-20">개수</p>
@@ -62,7 +63,6 @@
 							<button id="cart-btn" class = "cartbtn">장바구니</button>
 							<div><button id="order-btn" class = "paybtn">주문하기</button></div>
 						</div>
-					    <div id="cartmsg">장바구니에 상품이 담겼습니다. <a href="">장바구니로 가기</a></div>
 					</div>
 				</div>
 			</div>

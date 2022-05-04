@@ -86,11 +86,10 @@ form button {
 	cursor: pointer;
 }
 
-#cartmsg {
-	opacity: 0;
-	position: relative;
-    top: -243px;
-    width: 320px;
+#cartMsg {
+	display: none;
+	position: absolute;
+	transform: translate(0px, 12%);
     height: 30px;
     line-height: 30px;
     background: #ffdf82;
@@ -102,8 +101,9 @@ form button {
     font-weight: 700;
 }
 
-#cartmsg > a {
-	color: blue;
+#cartMsg > a {
+	margin-left: 10px;
+	color: #104cf1;
 	text-decoration: none;
 }
 
