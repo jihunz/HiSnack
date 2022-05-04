@@ -23,14 +23,14 @@ class Menu extends React.Component {
         const { onSetCategory } = this.props;
 
         return (
-            <>
+            <div className="sidebar-items">
                 <div className="sidebar-item-menu-box">
                     <h4>MENU</h4>
                 </div>
                 <MenuList 
                     onSetCategory={onSetCategory}
                 />
-            </>
+            </div>
 
         );
     }

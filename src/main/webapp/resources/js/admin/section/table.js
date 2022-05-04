@@ -56,7 +56,7 @@ class Table extends React.Component {
         const { allchked, chkList } = this.state;
 
         return (
-            <div>
+            <div className="table-container">
                 <table className="table table-hover">
                     <thead>
                         <tr>

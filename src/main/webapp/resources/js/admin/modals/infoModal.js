@@ -174,7 +174,7 @@ class MemberInfo extends React.Component {
                     <td colSpan="4" className="info-titles2">해당 회원이 선택한 태그</td>
                 </tr>
                 <tr>
-                    <td colSpan="4">
+                    <td colSpan="4" id="m-t-td">
                         {item.tags && item.tags.length ? item.tags.map((tag, idx) =>
                             <div key={idx} className="t-item">{`#${tag.content}`}</div>
                         ) : <div>아직 선택한 태그가 없습니다</div>}
@@ -214,9 +214,11 @@ class ReviewInfo extends React.Component {
                 </tr>
                 <tr>
                     <td colSpan="4" id="r-img-td">
-                        {item.images && item.images.length ? item.images.map((image, idx) =>
-                            <img key={idx} src={image.fullpath} className="r-img"></img>
-                        ) : <>등록된 이미지가 없습니다</>}
+                        <div>
+                            {item.images && item.images.length ? item.images.map((image, idx) =>
+                                <img key={idx} src={image.fullpath} className="r-img"></img>
+                            ) : <>등록된 이미지가 없습니다</>}
+                        </div>
                     </td>
                 </tr>
             </>

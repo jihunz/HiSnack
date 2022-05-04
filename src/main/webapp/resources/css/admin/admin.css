@@ -17,11 +17,12 @@ table {
 
 .admin-container {
     display: flex;
-    width: 1920px;
+    width: 1730px;
+    height: 1085px;
 }
 
 .sidebar-container {
-    width: 280px;
+    width: 100%;
     background: rgb(29, 29, 29);
     color: var(--color-white);
 }
@@ -36,7 +37,11 @@ table {
     height: 160px;
     position: relative;
     top: -30px;
-    padding-left: 40px;
+    margin-left: 15px;
+}
+
+.sidebar-items {
+    margin-left: 35px;
 }
 
 .sidebar-item-menu-box {
@@ -47,13 +52,12 @@ table {
 }
 
 .sidebar-item-menu-box>h4 {
-    padding-left: 60px;
     font-size: var(--font-size-small);
 }
 
 .sidebar-item-menu-ul {
-    padding: 20px 0px 0px 80px;
     cursor: pointer;
+    padding-left: 1.5rem;
     font-size: var(--font-size-laguler);
 }
 
@@ -67,7 +71,7 @@ table {
 }
 
 .section-container {
-    width: 1656px;
+    width: 1530px;
     padding: 60px 40px 0px 65px;
 }
 
@@ -96,9 +100,9 @@ table {
 #searchBox {
     width: 580px;
     height: 55px;
+    padding: 0 0 0 34px;
     border: 1px solid rgb(211, 211, 211);
     border-radius: 25px;
-    padding: 0 0 0 34px;
 }
 
 #searchBox::placeholder {
@@ -109,6 +113,7 @@ table {
     display: inline-block;
     width: 60px;
     height: 60px;
+    margin-left: 10px;
     background: #343434;
     border-radius: 100px;
 }
@@ -116,7 +121,6 @@ table {
 #searchBox-btn>img {
     margin: 0 0 12% 10%;
 }
-
 
 #section-item-add {
     width: 160px;
@@ -152,7 +156,6 @@ table {
     margin: 0 0 10% 0;
 }
 
-
 table {
     width: 100%;
     text-align: center;
@@ -165,7 +168,6 @@ table {
 .table>:not(caption)>*>* {
     padding: 0 !important;
 }
-
 
 thead,
 tbody {
@@ -262,7 +264,6 @@ tbody>tr {
 }
 
 .pagenation {
-    height: 65px;
     background: rgb(242, 241, 241);
     font-size: var(--font-size-laguler);
 }
@@ -270,6 +271,7 @@ tbody>tr {
 .pagenation,
 #pages {
     display: flex;
+    height: 65px;
     justify-content: center;
     align-items: center;
     padding: 0 7px 0px 7px;

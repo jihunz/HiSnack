@@ -83,6 +83,10 @@
     object-fit: contain;
 }
 
+#m-t-td {
+    text-align: start;
+}
+
 .t-item {
     display: inline-block;
     width: 140px;
@@ -91,10 +95,17 @@
     border-radius: 20px;
     padding: 3px 0;
     margin: 15px;
+    text-align: center;
 }
 
 #r-img-td {
     text-align: start;
+}
+
+#r-img-td > div {
+    display: flex;
+    width: 705px;
+    overflow-x: auto;
 }
 
 .r-img {
@@ -104,3 +115,4 @@
     margin: 20px;
     border-radius: 10px;
 }
+
