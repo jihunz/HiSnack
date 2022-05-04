@@ -86,6 +86,27 @@ form button {
 	cursor: pointer;
 }
 
+#cartmsg {
+	opacity: 0;
+	position: relative;
+    top: -243px;
+    width: 320px;
+    height: 30px;
+    line-height: 30px;
+    background: #ffdf82;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+    text-align: center;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+    font-weight: 700;
+}
+
+#cartmsg > a {
+	color: blue;
+	text-decoration: none;
+}
+
 .paybtn {
 	background-color: #dc2329;
 	color: white;
@@ -110,4 +131,35 @@ form button {
 #amount::-webkit-inner-spin-button {
 	 -webkit-appearance: none;
 	 margin: 0;
+}
+
+.fadeIn {
+	animation: fadein 0.7s;
+  	-moz-animation: fadein 0.7s; /* Firefox */
+  	-webkit-animation: fadein 0.7s; /* Safari and Chrome */
+  	-o-animation: fadein 0.7s; /* Opera */
+}
+.fadeOut {
+	animation: fadeout 0.6s;
+  	-moz-animation: fadeout 0.6s; /* Firefox */
+  	-webkit-animation: fadeout 0.6s; /* Safari and Chrome */
+  	-o-animation: fadeout 0.6s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }

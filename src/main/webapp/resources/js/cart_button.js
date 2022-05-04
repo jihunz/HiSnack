@@ -1,7 +1,7 @@
 $(function(){
 	$('#cart-btn').click(() => {
 		cart_ajax(function(){
-			alert('상품을 장바구니에 담았습니다');
+			showMsg("#cartmsg");
 		});
 	});
 
@@ -35,4 +35,11 @@ function cart_ajax(callback) {
 			console.log(`error ${xhr.status} : ${xhr.responseText}`);
 		}
 	});
+}
+
+function showMsg(target) {
+	$(target).removeClass("fadeOut").addClass("fadeIn").css("opacity", "1");
+		setTimeout(() => {
+			$(target).removeClass("fadeIn").addClass("fadeOut").css("opacity", "0");
+		}, 2800)
 }
