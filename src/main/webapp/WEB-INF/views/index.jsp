@@ -50,29 +50,30 @@
 		</div> -->
 		<div class="swiper-container">
 			<div class = "swiper mainSwiper" >
-				<div class = "swiper-wrapper ">
-					<div class = "swiper-slide boxmaincolor flex justify-center">
-						<div class="boxsize flex items-center">
-							<div class = "flex justify-between" style ="width: 100%">
-								<div class = "org40 flex justify-center column">
-									<div class = "margin-bottom20"><h3 class = "maintext">달콤한 구독 사이트<br>하이스낵</h3></div>
-									<div class = "margin-bottom20">
-										<p class = "contentfont">알고리즘이 찾아주는 간식 조합
-										<br>알고리즘이 찾아주는 간식 조합
-										<br>알고리즘이 찾아주는 간식 조합</p>
-									</div>
-									<div class = "margin-top20">
-										<a class = "mainBtn" href="sub/detail">구독 시작하기</a>
+				<div class = "swiper-wrapper boxsetting">
+					<div class = "swiper-slide bgrimg flex justify-center">
+								<div class="boxsize flex items-center">
+									<div class = "flex justify-between">
+										<div class = "org40 flex justify-center column">
+											<div class = "margin-bottom20"><h3 class = "maintext">달콤한 구독 사이트<br>하이스낵</h3></div>
+											<div class = "margin-bottom20">
+												<p class = "contentfont">알고리즘이 찾아주는 간식 조합
+												<br>알고리즘이 찾아주는 간식 조합
+												<br>알고리즘이 찾아주는 간식 조합</p>
+											</div>
+											<div class = "margin-top20">
+												<a class = "mainBtn" href="sub/detail">구독 시작하기</a>
+											</div>
+										</div>
+											<div class = "org60 flex items-center justify-center">
+												<div class = "imgsize img-border"><!-- <img src="/re/img/box.png" alt="sub-img"> --></div>
+											</div>
 									</div>
 								</div>
-									<div class = "org60 flex items-center justify-center">
-										<div class = "imgsize img-border"><img src="/re/img/box.png" alt="sub-img"></div>
-									</div>
-							</div>
-						</div>
+						
 					</div>
 					<div class = "swiper-slide">
-						number 2
+						<div class = "backgroungcolorrandom"></div>
 					</div>
 					<div class = "swiper-slide">
 						number 3
@@ -130,11 +131,11 @@
 			</div>
 		</div>
 		
-		<div class = "middle-box img-border middle-img flex">
-			<div class = "flex items-center text-center ">
-				<h3 class = "reviewfont-size">소소하지만 달콤한 행복<br>편리 간단하게 구독</h3>
+		<!-- <div class = "middle-box img-border middle-img flex"> -->
+			<div class = "parallaxbox text-center parallaximg flex item-center justify-center">
+				<h3 class = "reviewfont-size">지금 나에게 맞는 과자 받아가세요</h3>
 			</div>
-		</div>
+		<!-- </div> -->
 
 		<div class="review wrapper">
 			<div class = "flex items-center justify-center">
