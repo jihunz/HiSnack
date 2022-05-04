@@ -2,7 +2,7 @@ $(function() {
 	// swiper 동작 설정을 위한 객체
 	var swiper = new Swiper(".mySwiper", {
 		slidesPerView: '4',
-		spaceBetween: -5,
+		spaceBetween: 0,
 		slidesPerGroup: 1,
 		
 		navigation: {
@@ -14,7 +14,7 @@ $(function() {
 
 	var mainSwiper = new Swiper(".mainSwiper", {
 		slidesPerView: '1',
-		spaceBetween: -5,
+		spaceBetween: 0,
 		slidesPerGroup: 1,
 
 		autoplay: {
