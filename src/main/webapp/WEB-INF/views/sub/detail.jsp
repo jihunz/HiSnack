@@ -16,8 +16,11 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<div class = "container">
 		<div class = "wrapper flex mt-60 justify-between item-center">
-			<div class ="subbox">
-				<img alt="" src="">
+			<div class ="subbox flex justify-center items-center">
+				<img alt="" src="/re/img/subbox_1.png">
+				<!-- <img alt="" src="/re/img/subbox_2.png">
+				<img alt="" src="/re/img/subbox_3.png"> -->
+				
 			</div>
 			
 			<div class = "subtextbox">

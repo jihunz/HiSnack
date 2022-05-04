@@ -4,7 +4,9 @@ body {
 
 .review-list-visual {
 	height: 440px;
-	background: #bcbcbc;
+	background-image: url("/re/img/review_mainimg.png");
+	background-repeat:no-repeat;
+	background-position: center center;
 }
 
 .review-container {

@@ -4,7 +4,10 @@ body{
 
 .shopping-list-visual{
 	height: 440px;
-	background: #bcbcbc;
+	background-image: url("/re/img/shop_mainimg.png");
+	background-repeat:no-repeat;
+	background-position: center center;
+	
 }
 .shopping-container{
 	width: 1200px;
