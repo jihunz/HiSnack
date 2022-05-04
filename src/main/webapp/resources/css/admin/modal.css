@@ -59,6 +59,10 @@
     height: 150px;
 }
 
+.just-center {
+    justify-content: center !important;
+}
+
 .info-p-img {
     width: 155px;
     height: 155px;
