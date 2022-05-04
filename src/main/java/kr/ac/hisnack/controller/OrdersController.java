@@ -78,6 +78,7 @@ public class OrdersController {
 			
 //			장바구니가 없을 경우
 			if(products == null) {
+				ra.addFlashAttribute("err_msg", "구매할 상품이 없습니다");
 				return "redirect:cart";
 			}
 			
@@ -105,6 +106,7 @@ public class OrdersController {
 			}
 			else {
 //				결제할 상품이 없을 경우
+				ra.addFlashAttribute("err_msg", "구매할 상품이 없습니다");
 				return "redirect:cart";
 			}
 		}
@@ -148,7 +150,7 @@ public class OrdersController {
  * @return 결제 확인 페이지의 경로
  */
 	@PostMapping("/payment")
-	public String payment(Orders item, HttpSession session) {
+	public String payment(Orders item, HttpSession session, RedirectAttributes ra) {
 //		주문한 상품을 꺼내와서
 		Object payment = session.getAttribute("payment");
 //		orders에 넣는다
@@ -158,7 +160,7 @@ public class OrdersController {
 		if(products == null) {
 //			장바구니에 상품이 없으면 결제페이지에 오늘 걸 막는다
 //			intercepter에 이 기능을 추가할 가능성 있음
-			System.out.println("주문한 상품이 없습니다.");
+			ra.addFlashAttribute("err_msg", "구매할 상품이 없습니다");
 			return "redirect:cart";
 		}
 //		주문이라고 설정
