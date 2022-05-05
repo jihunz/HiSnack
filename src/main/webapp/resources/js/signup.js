@@ -17,7 +17,7 @@ function chkNull(e) {
 
     for (let i = 1; i <= inputNum; i++) {
         let nthLabel = $(`form > div:nth-child(${i}) > label`);
-        let nthInput = $(`form > div:nth-child(${i}) > input`);
+        let nthInput = $(`form > div:nth-child(${i}) input`);
         let inputType = $(nthLabel).text();
 
         if (typeof $(nthInput).val() == "undefined" || $(nthInput).val() == null || $(nthInput).val() == "") {
