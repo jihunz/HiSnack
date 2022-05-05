@@ -61,7 +61,7 @@
 						
 						<div class = "my-30 flex justify-between">
 							<button id="cart-btn" class = "cartbtn">장바구니</button>
-							<div><button id="order-btn" class = "paybtn">주문하기</button></div>
+							<div><button id="order-btn" class = "paybtn">바로 구매</button></div>
 						</div>
 					</div>
 				</div>

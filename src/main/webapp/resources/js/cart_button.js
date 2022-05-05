@@ -6,9 +6,10 @@ $(function(){
 	});
 
 	$("#order-btn").click(() => {
-		cart_ajax(function(){
-			location.href = "/orders/cart";
-		});
+		const pcode = $('#item').data('code');
+		const amount = $('#amount').val();
+		
+		location.href = `/orders/payment?pcode=${pcode}&amount=${amount}`;
 	});
 });
 
