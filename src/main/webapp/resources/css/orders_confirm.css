@@ -1,0 +1,12 @@
+.confirm-wrapper{
+	background: var(--color-light-gray);
+	padding: 200px 0;
+}
+.confirm-form{
+	background: var(--color-white);
+	width: 280px;
+	margin: 0 auto;
+	padding: 15px 10px;
+	border-radius: 15px;
+	box-shadow: 1px 1px 20px var(--color-gray);
+}
