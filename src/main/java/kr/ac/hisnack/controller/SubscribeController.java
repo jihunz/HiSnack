@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.ac.hisnack.model.MailHtmlTemplate;
 import kr.ac.hisnack.model.Member;
@@ -93,14 +94,16 @@ public class SubscribeController {
  * @param session : Orders를 저장하기 위한 session
  * */
 	@PostMapping("/tag")
-	public String tag(@RequestParam("code") List<Integer> list, HttpSession session) {
+	public String tag(@RequestParam("code") List<Integer> list, HttpSession session, RedirectAttributes ra) {
 		Orders item = (Orders) session.getAttribute("sub");
+		
 		List<Tag> tags = new ArrayList<>();
 		for(Integer tcode : list) {
 			Tag tag = new Tag();
 			tag.setCode(tcode);
 			tags.add(tag);
 		}
+		
 		item.setTags(tags);
 		session.setAttribute("sub", item);
 		return "redirect:payment";
@@ -110,7 +113,7 @@ public class SubscribeController {
  * 유저의 정보를 jsp로 넘겨주고 결제 페이지로 이동한다
  */
 	@GetMapping("/payment")
-	public String payment(Model model, HttpSession session) {
+	public String payment(Model model, HttpSession session, RedirectAttributes ra) {
 		Member user = (Member) session.getAttribute("user");
 		Orders sub = (Orders) session.getAttribute("sub");
 		 

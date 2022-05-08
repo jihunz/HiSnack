@@ -1,0 +1,31 @@
+#tag_form{
+	min-height: 420px;
+}
+
+#tag_form .tag_wrapper{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#tag_form input{
+	display: none;
+}
+
+#tag_form label{
+	display: inline-block;
+	padding: 5px 15px;
+	background: var(--color-light-gray);
+	color: var(--color-gray);
+	border-radius: 25px;
+	margin: 5px 5px;
+	cursor: pointer;
+}
+
+#tag_form label:hover{
+	background: var(--logo-color);
+}
+
+#tag_form input:checked + label{
+	background: var(--color-gray);
+	color: var(--color-black);
+}

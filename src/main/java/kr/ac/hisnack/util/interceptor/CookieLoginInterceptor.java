@@ -13,7 +13,7 @@ import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.service.MemberService;
 
 // 쿠키를 사용한 자동 로그인 인터셉터
-public class CookieLoginIntercepter extends HandlerInterceptorAdapter {
+public class CookieLoginInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	MemberService ms;
 	
