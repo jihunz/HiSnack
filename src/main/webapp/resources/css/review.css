@@ -32,7 +32,7 @@ body {
   height: 280px;
   overflow: hidden;
   display: block;
-  background: #feedc2;
+  background: white;
 }
 .review-img-border img{
   width: 100%;
@@ -172,6 +172,6 @@ body {
 .review-item-img-border{
 	height: 500px;
 	width: 100%;
-	background: #ccc;
+	background: white;
 	text-align: center;
 }

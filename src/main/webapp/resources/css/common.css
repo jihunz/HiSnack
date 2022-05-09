@@ -9,6 +9,8 @@
 	--logo-color: #ffdf82;
 	--color-red: #dc2329;
 	--color-green: #77f788;
+	--color-deepred : #b9000f;
+	--color-update: #d0b018;
 
 	--button-color: #1d1d1d;
 	--button-size: 170px 50px;
@@ -261,6 +263,32 @@ a.btn {
 	color: var(--color-white);
 }
 
+.btn.logocolor {
+	background: var(--logo-color);
+	color: var(--color-white);
+}
+.btn.buttoncolor {
+	background: var(--button-color);
+	color: var(--color-white);
+	box-shadow: 2px 2px 3px var(--color-light-gray);
+}
+.btn.whitebtn {
+	background: var(--color-white);
+	color: var(--color-black);
+	border : var(--color-light-gray) solid 1px;
+	box-shadow: 2px 2px 3px var(--color-light-gray);
+}
+
+
+.btn.deepred {
+	background: var(--color-deepred);
+	color: var(--color-white);
+}
+
+.btn.update {
+	background: var(--color-update);
+	color: var(--color-white);
+}
 .btn.green{
 	background: var(--color-green);
 	color: var(--color-white);

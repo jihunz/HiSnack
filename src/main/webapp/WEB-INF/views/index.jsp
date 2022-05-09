@@ -73,10 +73,10 @@
 						
 					</div>
 					<div class = "swiper-slide">
-						<div class = "backgroungcolorrandom"></div>
+						<img alt="" src="/re/img/happyimg.jpg">
 					</div>
 					<div class = "swiper-slide">
-						number 3
+						<img alt="" src="/re/img/openimg.png">
 					</div>
 				</div>
 					<!-- <div class = "swiper-button-next"></div>

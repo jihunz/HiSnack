@@ -38,6 +38,7 @@
 			<h2 class="font-size-large font-weight-normal">추천과자 랜덤 구독 서비스</h2>
 			<span class="font-size-large font-weight-bold font-red"><fmt:formatNumber pattern="###,###,###원" value="${item.price}"/></span>
 		</div>
+		
 		<!-- Slider main container -->
 		<div class="swiper">
 		  <!-- Additional required wrapper -->
@@ -75,15 +76,15 @@
 				 <c:when test="${item.id == sessionScope.user.id}">
 					 <div class="flex justify-between item-center">
 					 	<div>
-					 		<a class="btn small round green" href="update/${item.code}">수정</a>
-					 		<a class="btn small round red" href="delete/${item.code}">삭제</a>
+					 		<a class="btn small round whitebtn" href="update/${item.code}">수정</a>
+					 		<a class="btn small round whitebtn" href="delete/${item.code}">삭제</a>
 					 	</div>
-						<a class="btn small round gray" href="list">돌아가기</a>
+						<a class="btn small round buttoncolor" href="list">돌아가기</a>
 					 </div>
 				 </c:when>
 				 <c:otherwise>
 					<div class="text-right">
-						<a class="btn small round gray" href="list">돌아가기</a>
+						<a class="btn small round buttoncolor" href="list">돌아가기</a>
 					</div>				 
 				 </c:otherwise>
 			</c:choose>
