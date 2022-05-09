@@ -221,7 +221,7 @@ class Dashboard extends React.Component {
                     onTagChange={this.tagChange}
                     onModify={this.modify} />
                 <Sidebar
-                    onSetCategory={this.setCategory}
+                    // onSetCategory={this.setCategory}
                 />
                 <div className="s-p-container">
                     <Section
