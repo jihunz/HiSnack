@@ -13,6 +13,8 @@ class Dashboard extends React.Component {
             list: [],
             item: {},
             tags: [],
+            ptags: [],
+            selectTags: [],
             codes: [],
             //pager용 state
             prev: "",
@@ -32,9 +34,10 @@ class Dashboard extends React.Component {
         this.getCode = this.getCode.bind(this);
         this.getCodes = this.getCodes.bind(this);
         this.setCategory = this.setCategory.bind(this);
+        this.selectTags = this.selectTags.bind(this);
     }
 
-    list(category, page, query, search, order) {
+    list(category, page, query, search, ptagSearch) {
         let url = `rest/${category}`;
 
         if (page != null) {
@@ -42,7 +45,7 @@ class Dashboard extends React.Component {
             url += `?page=${page}&${query}`
         } else if (search != null) {
             //검색 시 요청할 uri
-            const keyword = document.querySelector("#searchBox").value;
+            const keyword = document.querySelector(".search").value;
             url += `?search=${search}&keyword=${keyword}`
         }
 
@@ -54,11 +57,15 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    state.list = result.list;
-                    state.pageList = result.pager.list;
-                    state.prev = result.pager.prev;
-                    state.next = result.pager.next;
-                    state.query = result.pager.query;
+                    if(ptagSearch == null) {
+                        state.list = result.list;
+                        state.pageList = result.pager.list;
+                        state.prev = result.pager.prev;
+                        state.next = result.pager.next;
+                        state.query = result.pager.query;
+                    } else {
+                        state.ptags = result.list;
+                    }
                     return state;
                 });
         }).catch(err => console.log(err));
@@ -191,6 +198,15 @@ class Dashboard extends React.Component {
         this.list(category);
     }
 
+    selectTags(event) {
+        this.setState(
+            (state) => {
+                //state 배열에 객체(tcode, content)를 추가해야함
+                state.selectTags = [...state.selectTags, event.target.value];
+                return state;
+            });
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() { this.list("product"); }
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
@@ -199,7 +215,7 @@ class Dashboard extends React.Component {
     componentWillUnmount() { }
 
     render() {
-        const { title, list, item, tags, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, item, tags, ptags, pageList, prev, next, query, category, id } = this.state;
         return (
             <div className="admin-container">
                 <InfoModal
@@ -210,7 +226,9 @@ class Dashboard extends React.Component {
                 <AddModal
                     category={category}
                     title={title}
+                    ptags={ptags}
                     onModify={this.modify}
+                    onList={this.list}
                 />
                 <UpdateModal
                     category={category}
@@ -221,7 +239,7 @@ class Dashboard extends React.Component {
                     onTagChange={this.tagChange}
                     onModify={this.modify} />
                 <Sidebar
-                    // onSetCategory={this.setCategory}
+                    onSetCategory={this.setCategory}
                 />
                 <div className="s-p-container">
                     <Section

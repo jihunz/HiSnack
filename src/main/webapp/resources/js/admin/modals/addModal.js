@@ -22,7 +22,7 @@ class AddModal extends React.Component {
     change(event, category) {
         const inputName = event.target.name;
 
-        if(category === 'product') {
+        if (category === 'product') {
             this.setState({
                 product: {
                     [inputName]: event.target.value,
@@ -31,11 +31,11 @@ class AddModal extends React.Component {
         } else {
             this.setState({ [inputName]: event.target.value });
         }
-        
+
     }
 
     reset(category) {
-        if(category === 'product') {
+        if (category === 'product') {
             this.setState({
                 product: {
                     name: "",
@@ -52,7 +52,7 @@ class AddModal extends React.Component {
     }
 
     render() {
-        const { category, title, onModify } = this.props;
+        const { category, title, ptags, onModify, onList } = this.props;
         const { product, content } = this.state;
 
         return (
@@ -66,11 +66,19 @@ class AddModal extends React.Component {
                             </div>
                             <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
-                                    {category === 'product' ? 
-                                        <PAddInputs category={category} product={product} onChange={this.change} /> : 
-                                        <TAddInput content={content} onChange={this.change} />
+                                    {category === 'product' ?
+                                        <PAddInputs
+                                            category={category}
+                                            product={product}
+                                            ptags={ptags}
+                                            onChange={this.change}
+                                            onList={onList}
+                                        /> :
+                                        <TAddInput
+                                            content={content}
+                                            onChange={this.change} />
                                     }
-                                    
+
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary addCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
@@ -86,8 +94,18 @@ class AddModal extends React.Component {
 }
 
 class PAddInputs extends React.Component {
+    constructor(props) {
+        super(props);
+        this.enter = this.enter.bind(this);
+    }
+
+    enter(event) {
+        if(event.keyCode == 13) this.props.onList('tag', null, null, 1, true);
+    }
+
     render() {
-        const { category, product, onChange } = this.props;
+        const { category, product, ptags, onChange, onList } = this.props;
+
 
         return (
             <>
@@ -118,13 +136,15 @@ class PAddInputs extends React.Component {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">태그 코드</label>
-                    <input type="number" className="form-control"
-                        name="tcode"
-                        value={product.tcode}
-                        onChange={() => onChange(event, category)}
-                        maxLength="10"
-                    />
+                    <label className="form-label">태그</label>
+
+                    <div>{}</div>
+
+                    <input type="text" name="keyword" className="search form-control" placeholder="태그 이름을 검색해주세요" onKeyPress={() => this.enter(event)}/>
+                    <button type="button" className="btn btn-primary" onClick={() => onList('tag', null, null, 1, true)}>검색</button>
+
+                    <div>{ptags.length ? ptags.map((tag, idx) => <div key={idx} id={tag.tcode}>{tag.content}</div>) : '검색된 태그가 없습니다'}</div>
+
                 </div>
                 <div className="mb-3">
                     <label className="form-label">설명</label>

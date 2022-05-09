@@ -58,6 +58,8 @@ class Search extends React.Component {
         this.state = {
             t: "제품 번호, 제품명, 제조사",
         }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
@@ -88,7 +90,7 @@ class Search extends React.Component {
         return (
             <>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="keyword" id="searchBox" placeholder={this.state.t} />
+                    <input type="text" name="keyword" className="search searchBox" placeholder={this.state.t} />
                     <div id="searchBox-btn" onClick={() => onList(category, null, null, 1)}><img src="/re/img/admin-search.png" /></div>
                 </form>
             </>
