@@ -17,12 +17,11 @@ table {
 
 .admin-container {
     display: flex;
-    width: 1730px;
-    height: 1085px;
+    height: 1086px;
 }
 
 .sidebar-container {
-    width: 100%;
+    width: 15%;
     background: rgb(29, 29, 29);
     color: var(--color-white);
 }
@@ -68,10 +67,10 @@ table {
 .s-p-container {
     display: flex;
     flex-direction: column;
+    width: 85%
 }
 
 .section-container {
-    width: 1530px;
     padding: 60px 40px 0px 65px;
 }
 
@@ -271,7 +270,7 @@ tbody>tr {
 .pagenation,
 #pages {
     display: flex;
-    height: 65px;
+    height: 64px;
     justify-content: center;
     align-items: center;
     padding: 0 7px 0px 7px;
