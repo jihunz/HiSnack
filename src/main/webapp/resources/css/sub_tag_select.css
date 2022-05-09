@@ -19,6 +19,10 @@
 	border-radius: 25px;
 	margin: 5px 5px;
 	cursor: pointer;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none
 }
 
 #tag_form label:hover{
@@ -26,6 +30,5 @@
 }
 
 #tag_form input:checked + label{
-	background: var(--color-gray);
-	color: var(--color-black);
+	background: var(--logo-color);
 }
