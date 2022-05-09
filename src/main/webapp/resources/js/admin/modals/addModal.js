@@ -96,7 +96,7 @@ class PAddInputs extends React.Component {
                     <input type="text" className="form-control"
                         name="name"
                         value={product.name}
-                        onChange={() => onChange(event)}
+                        onChange={() => onChange(event, category)}
                         maxLength="32"
                     />
                 </div>

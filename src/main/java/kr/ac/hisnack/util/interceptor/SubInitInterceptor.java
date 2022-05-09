@@ -12,9 +12,6 @@ public class SubInitInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		request.getSession().removeAttribute("sub");
 		
-		System.out.println(request.getRequestURL().toString());
-		System.out.println("초기화 실행");
-		
 		return true;
 	}
 }

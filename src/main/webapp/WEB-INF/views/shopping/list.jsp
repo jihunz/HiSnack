@@ -54,6 +54,7 @@
 						<button class="search-btn"></button>
 					</div>
 					<select class="input-select selectbox" name="order">
+						<option value="0" ${pager.order == 0 ? 'selected' : ''}>정렬 선택</option>
 						<option value="1" ${pager.order == 1 ? 'selected' : ''}>가격낮은순</option>
 						<option value="2" ${pager.order == 2 ? 'selected' : ''}>가격높은순</option>
 					</select>
