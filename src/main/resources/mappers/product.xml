@@ -101,8 +101,8 @@
 								FROM ((SELECT code
 										FROM product
 										<include refid="search" />
-										<include refid="order"/>
 										LIMIT #{offset}, #{perPage}) AS t1))
+		<include refid="order"/>
 	</select>
 	<delete id="delete">
 		DELETE FROM product
