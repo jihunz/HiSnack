@@ -86,7 +86,7 @@ class ProductInfo extends React.Component {
                     <td className="info-titles">태그</td>
                     {/* 태그를 텍스트가 아닌 버튼 형식으로 출력하는 방법에 대한 고민 필요 */}
                     <td colSpan="3">{item.tags && item.tags.length ?
-                        item.tags.map(tag => `${tag.tcode}  `)
+                        item.tags.map(tag => `${tag.content}  `)
                         : "등록된 태그가 없습니다"}
                     </td>
                 </tr>
