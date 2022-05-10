@@ -120,3 +120,42 @@
     border-radius: 10px;
 }
 
+/* add modal */
+.selectedPtags, .ptag-content {
+    display: flex;
+}
+
+.selectedPtags {
+    margin-bottom: 20px;
+}
+
+.ptag-content {
+    display: flex;
+    justify-content: space-evenly;
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    margin: 10px;
+    background: rgb(246, 219, 69);
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.selectedPtags, .ptags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ptags div {
+    width: 120px;
+    height: 30px;
+    line-height: 30px;
+    margin: 10px;
+    background: #c7d9d3;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+    font-weight: 600;
+    text-align: center;
+}
