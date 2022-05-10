@@ -51,7 +51,7 @@ class AddModal extends React.Component {
     }
 
     render() {
-        const { category, title, ptags, selectTags, onModify, onList, onSelectTag, onRemoveTag } = this.props;
+        const { category, title, ptags, selectTags, onModify, onTagList, onSelectTag, onRemoveTag } = this.props;
         const { product, content } = this.state;
 
         return (
@@ -72,7 +72,7 @@ class AddModal extends React.Component {
                                             ptags={ptags}
                                             selectTags={selectTags}
                                             onChange={this.change}
-                                            onList={onList}
+                                            onTagList={onTagList}
                                             onSelectTag={onSelectTag}
                                             onRemoveTag={onRemoveTag}
                                         /> :
@@ -102,11 +102,11 @@ class ProductInp extends React.Component {
     }
 
     enter(event) {
-        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, true);
+        if (event.keyCode == 13) this.props.onTagList();
     }
 
     render() {
-        const { category, product, ptags, selectTags, onChange, onList, onSelectTag, onRemoveTag } = this.props;
+        const { category, product, ptags, selectTags, onChange, onTagList, onSelectTag, onRemoveTag } = this.props;
 
 
         return (
@@ -156,8 +156,13 @@ class ProductInp extends React.Component {
                         ) : null}
                     </div>
 
-                    <input type="text" name="keyword" className="search form-control" placeholder="태그 이름을 검색해주세요" onKeyPress={() => this.enter(event)} />
-                    <button type="button" className="btn btn-primary" onClick={() => onList('tag', null, null, 1, true)}>검색</button>
+                    <input
+                        type="text"
+                        name="keyword"
+                        className="add-search form-control"
+                        placeholder="태그 이름을 검색해주세요"
+                        onKeyPress={() => this.enter(event)} />
+                    <button type="button" className="btn btn-primary" onClick={onTagList}>검색</button>
 
                     {/* css: 포인터 추가, 드래그 안되도록 수정  */}
                     <div>{ptags.length && ptags ? ptags.map((tag) => <div key={`result${tag.code}`} id={tag.code} onClick={onSelectTag}>{tag.content}</div>) : '검색된 태그가 없습니다'}</div>
