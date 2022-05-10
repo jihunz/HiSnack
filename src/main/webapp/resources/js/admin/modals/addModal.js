@@ -52,7 +52,7 @@ class AddModal extends React.Component {
     }
 
     render() {
-        const { category, title, ptags, onModify, onList } = this.props;
+        const { category, title, ptags, selectTags, onModify, onList, onSelectTag, onRemoveTag } = this.props;
         const { product, content } = this.state;
 
         return (
@@ -71,8 +71,11 @@ class AddModal extends React.Component {
                                             category={category}
                                             product={product}
                                             ptags={ptags}
+                                            selectTags={selectTags}
                                             onChange={this.change}
                                             onList={onList}
+                                            onSelectTag={onSelectTag}
+                                            onRemoveTag={onRemoveTag}
                                         /> :
                                         <TagInp
                                             content={content}
@@ -100,11 +103,11 @@ class ProductInp extends React.Component {
     }
 
     enter(event) {
-        if(event.keyCode == 13) this.props.onList('tag', null, null, 1, true);
+        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, true);
     }
 
     render() {
-        const { category, product, ptags, onChange, onList } = this.props;
+        const { category, product, ptags, selectTags, onChange, onList, onSelectTag, onRemoveTag } = this.props;
 
 
         return (
@@ -138,12 +141,27 @@ class ProductInp extends React.Component {
                 <div className="mb-3">
                     <label className="form-label">태그</label>
 
-                    <div>{}</div>
+                    <div>
+                        {selectTags.length && selectTags ? selectTags.map((tag, idx) =>
+                            <>
+                                <div key={`content1${idx}`}>
+                                    <p key={`content2${idx}`}>{tag.content}</p>
+                                    <span key={`content3${idx}`} onClick={() => onRemoveTag(tag.tcode)}>X</span>
+                                </div>
+                                <input
+                                    key={`tag${idx}`}
+                                    type="hidden"
+                                    name="tcode"
+                                    value={tag.tcode}
+                                    readOnly /></>
+                        ) : null}
+                    </div>
 
-                    <input type="text" name="keyword" className="search form-control" placeholder="태그 이름을 검색해주세요" onKeyPress={() => this.enter(event)}/>
+                    <input type="text" name="keyword" className="search form-control" placeholder="태그 이름을 검색해주세요" onKeyPress={() => this.enter(event)} />
                     <button type="button" className="btn btn-primary" onClick={() => onList('tag', null, null, 1, true)}>검색</button>
 
-                    <div>{ptags.length && ptags ? ptags.map((tag, idx) => <div key={idx} id={tag.tcode}>{tag.content}</div>) : '검색된 태그가 없습니다'}</div>
+                    {/* css: 포인터 추가, 드래그 안되도록 수정  */}
+                    <div>{ptags.length && ptags ? ptags.map((tag) => <div key={`result${tag.code}`} id={tag.code} onClick={onSelectTag}>{tag.content}</div>) : '검색된 태그가 없습니다'}</div>
 
                 </div>
                 <div className="mb-3">

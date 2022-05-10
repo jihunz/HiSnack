@@ -34,7 +34,8 @@ class Dashboard extends React.Component {
         this.getCode = this.getCode.bind(this);
         this.getCodes = this.getCodes.bind(this);
         this.setCategory = this.setCategory.bind(this);
-        this.selectTags = this.selectTags.bind(this);
+        this.selectTag = this.selectTag.bind(this);
+        this.removeTag = this.removeTag.bind(this);
     }
 
     list(category, page, query, search, ptagSearch) {
@@ -57,7 +58,7 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    if(ptagSearch == null) {
+                    if (ptagSearch == null) {
                         state.list = result.list;
                         state.pageList = result.pager.list;
                         state.prev = result.pager.prev;
@@ -198,18 +199,24 @@ class Dashboard extends React.Component {
         this.list(category);
     }
 
-    selectTags(event) {
+    selectTag(event) {
         let tag = {
             tcode: event.target.id,
-            content: event.target.value
+            content: event.target.innerText
         }
-        
         this.setState(
             (state) => {
                 //state 배열에 객체(tcode, content)를 추가해야함
                 state.selectTags = [...state.selectTags, tag];
                 return state;
             });
+    }
+
+    removeTag(source) {
+        console.log(source);
+        const { selectTags } = this.state;
+        const changedTags = selectTags.filter(tag => tag.tcode != source);
+        { this.setState({ selectTags: changedTags });}
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
@@ -220,7 +227,7 @@ class Dashboard extends React.Component {
     componentWillUnmount() { }
 
     render() {
-        const { title, list, item, tags, ptags, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, item, tags, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
         return (
             <div className="admin-container">
                 <InfoModal
@@ -232,8 +239,11 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     ptags={ptags}
+                    selectTags={selectTags}
                     onModify={this.modify}
                     onList={this.list}
+                    onSelectTag={this.selectTag}
+                    onRemoveTag={this.removeTag}
                 />
                 <UpdateModal
                     category={category}
