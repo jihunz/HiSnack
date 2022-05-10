@@ -37,7 +37,17 @@
 					<h2 class="pb-20">주문 상품</h2>
 					<div class="sub-info">
 						<div class="img-border sub-thumbnail">
-							<img src="/re/img/subbox_1.png"/>
+							<c:choose>
+								<c:when test="${sub.total <= 30000}">
+									<img src="/re/img/subbox_1.png"/>
+								</c:when>
+								<c:when test="${sub.total <= 60000}">
+									<img src="/re/img/subbox_2.png"/>
+								</c:when>
+								<c:otherwise>
+									<img src="/re/img/subbox_3.png"/>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div>
 							<h2>사용자 추천 과자 구독박스</h2>
