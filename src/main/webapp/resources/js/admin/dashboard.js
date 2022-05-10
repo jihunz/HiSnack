@@ -36,6 +36,7 @@ class Dashboard extends React.Component {
         this.setCategory = this.setCategory.bind(this);
         this.selectTag = this.selectTag.bind(this);
         this.removeTag = this.removeTag.bind(this);
+        this.removeTags = this.removeTags.bind(this);
     }
 
     list(category, page, query, search, ptagSearch) {
@@ -213,11 +214,16 @@ class Dashboard extends React.Component {
     }
 
     removeTag(source) {
-        console.log(source);
         const { selectTags } = this.state;
         const changedTags = selectTags.filter(tag => tag.tcode != source);
         { this.setState({ selectTags: changedTags });}
     }
+
+    removeTags(source) {
+        const { selectTags } = this.state;
+        { this.setState({ selectTags: [], ptags: [] });}
+    }
+
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() { this.list("product"); }
@@ -244,6 +250,7 @@ class Dashboard extends React.Component {
                     onList={this.list}
                     onSelectTag={this.selectTag}
                     onRemoveTag={this.removeTag}
+                    onRemoveTags={this.removeTags}
                 />
                 <UpdateModal
                     category={category}

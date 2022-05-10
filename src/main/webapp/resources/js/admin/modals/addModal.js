@@ -8,7 +8,6 @@ class AddModal extends React.Component {
                 name: "",
                 price: "",
                 manufacture: "",
-                tcode: "",
                 info: "",
                 image: ""
             },
@@ -34,18 +33,18 @@ class AddModal extends React.Component {
 
     }
 
-    reset(category) {
-        if (category === 'product') {
+    reset() {
+        if (this.props.category === 'product') {
             this.setState({
                 product: {
                     name: "",
                     price: "",
                     manufacture: "",
-                    tcode: "",
                     info: "",
                     image: ""
                 }
             });
+            this.props.onRemoveTags();
         } else {
             this.setState({ content: "" });
         }
