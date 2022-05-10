@@ -58,13 +58,13 @@ public class TagServiceImpl implements TagService {
 		dao.delete(code);
 	}
 
-@Override
-public List<Tag> listAll() {
-	Pager pager = new Pager();
-	int total = dao.total(pager);
-	pager.setTotal(total);
-	pager.setPerPage(total);
-	return dao.list(pager);
-}
+	@Override
+	public List<Tag> listAll() {
+		Pager pager = new Pager();
+		int total = dao.total(pager);
+		pager.setTotal(total);
+		pager.setPerPage(total);
+		return dao.list(pager);
+	}
 
 }
