@@ -1,7 +1,3 @@
-#tag_form{
-	min-height: 420px;
-}
-
 #tag_form .tag_wrapper{
 	display: flex;
 	flex-wrap: wrap;

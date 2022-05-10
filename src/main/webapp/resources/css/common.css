@@ -1066,6 +1066,14 @@ a.btn {
 	color : var(--color-light-gray);
 	text-decoration: none;
 }
+.back-white{
+	background: var(--color-white);
+}
+.back-light-gray{
+	background: var(--color-light-gray);
+}
+
+
 select ::-ms-expand {
 	display: none;
 }
