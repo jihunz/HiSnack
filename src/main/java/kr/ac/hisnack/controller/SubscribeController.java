@@ -26,7 +26,6 @@ import kr.ac.hisnack.service.OrdersService;
 import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.service.TagService;
 import kr.ac.hisnack.util.EmailSender;
-import kr.ac.hisnack.util.Pager;
 
 /**
  * 구독과 관련된 일을 하는 컨트롤러
@@ -81,8 +80,7 @@ public class SubscribeController {
  * */
 	@GetMapping("/tag")
 	public String tag(Model model) {
-		Pager pager = new Pager();
-		List<Tag> list = ts.list(pager);
+		List<Tag> list = ts.listAll();
 		model.addAttribute("list", list);
 		return PATH+"tag";
 	}
