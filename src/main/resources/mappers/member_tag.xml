@@ -5,10 +5,27 @@
   
 <mapper namespace="member_tag">
 	<select id="list" resultType="MemberTag">
-		SELECT member_tag.*, tag.content
+		<!-- SELECT member_tag.*, tag.content
 		FROM member_tag
 		JOIN tag ON tag.code=member_tag.tcode
-		WHERE id=#{id}
+		WHERE id=#{id} -->
+		SELECT tag.code AS tcode, tag.content, (
+			SELECT COUNT(*)
+			FROM member_tag
+			WHERE member_tag.id = #{id}
+			AND member_tag.recom = 'y'
+			AND member_tag.tcode = tag.code
+		) - (
+			SELECT COUNT(*)
+			FROM member_tag
+			WHERE member_tag.id = #{id}
+			AND member_tag.recom = 'n'	
+			AND member_tag.tcode = tag.code
+		) AS recomVal
+		FROM member_tag
+		JOIN tag ON tag.code = member_tag.tcode
+		WHERE member_tag.id = #{id}
+		GROUP BY tag.code, tag.content
 	</select>
 	<insert id="add">
 		INSERT INTO member_tag
