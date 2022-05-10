@@ -199,10 +199,15 @@ class Dashboard extends React.Component {
     }
 
     selectTags(event) {
+        let tag = {
+            tcode: event.target.id,
+            content: event.target.value
+        }
+        
         this.setState(
             (state) => {
                 //state 배열에 객체(tcode, content)를 추가해야함
-                state.selectTags = [...state.selectTags, event.target.value];
+                state.selectTags = [...state.selectTags, tag];
                 return state;
             });
     }

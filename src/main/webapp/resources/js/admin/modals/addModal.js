@@ -67,14 +67,14 @@ class AddModal extends React.Component {
                             <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
                                     {category === 'product' ?
-                                        <PAddInputs
+                                        <ProductInp
                                             category={category}
                                             product={product}
                                             ptags={ptags}
                                             onChange={this.change}
                                             onList={onList}
                                         /> :
-                                        <TAddInput
+                                        <TagInp
                                             content={content}
                                             onChange={this.change} />
                                     }
@@ -93,7 +93,7 @@ class AddModal extends React.Component {
     }
 }
 
-class PAddInputs extends React.Component {
+class ProductInp extends React.Component {
     constructor(props) {
         super(props);
         this.enter = this.enter.bind(this);
@@ -143,7 +143,7 @@ class PAddInputs extends React.Component {
                     <input type="text" name="keyword" className="search form-control" placeholder="태그 이름을 검색해주세요" onKeyPress={() => this.enter(event)}/>
                     <button type="button" className="btn btn-primary" onClick={() => onList('tag', null, null, 1, true)}>검색</button>
 
-                    <div>{ptags.length ? ptags.map((tag, idx) => <div key={idx} id={tag.tcode}>{tag.content}</div>) : '검색된 태그가 없습니다'}</div>
+                    <div>{ptags.length && ptags ? ptags.map((tag, idx) => <div key={idx} id={tag.tcode}>{tag.content}</div>) : '검색된 태그가 없습니다'}</div>
 
                 </div>
                 <div className="mb-3">
@@ -168,7 +168,7 @@ class PAddInputs extends React.Component {
     }
 }
 
-class TAddInput extends React.Component {
+class TagInp extends React.Component {
     render() {
         const { content, onChange } = this.props;
         return (
