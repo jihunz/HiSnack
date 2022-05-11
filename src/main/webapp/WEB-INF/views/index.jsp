@@ -57,9 +57,9 @@
 										<div class = "org40 flex justify-center column">
 											<div class = "margin-bottom20"><h3 class = "maintext">달콤한 구독 사이트<br>하이스낵</h3></div>
 											<div class = "margin-bottom20">
-												<p class = "contentfont">알고리즘이 찾아주는 간식 조합
-												<br>알고리즘이 찾아주는 간식 조합
-												<br>알고리즘이 찾아주는 간식 조합</p>
+												<p class = "contentfont">사용자 맞춤 취향 분석하여 과자 추천 서비스
+												<br>정기 구독을 하여 고객님께 달콤한 과자 배송
+												<br>소소한 행복을 느낄수 있는 Hi Snack!</p>
 											</div>
 											<div class = "margin-top20">
 												<a class = "mainBtn" href="sub/detail">구독 시작하기</a>
@@ -76,7 +76,7 @@
 						<img alt="" src="/re/img/happyimg.jpg">
 					</div>
 					<div class = "swiper-slide">
-						<img alt="" src="/re/img/openimg.png">
+						<img alt="" src="/re/img/openimg.jpg">
 					</div>
 				</div>
 					<!-- <div class = "swiper-button-next"></div>
@@ -101,9 +101,9 @@
 					<div class = "text-right org40 flex justify-center column"">
 						<div class = "margin-bottom20"><h3 class = "maintext">1달에 한 번 선물 받는 <br>달콤한 느낌</h3></div>
 						<div>
-							<p class = "contentfont">알고리즘이 찾아주는 간식 조합
-							<br>알고리즘이 찾아주는 간식 조합
-							<br>알고리즘이 찾아주는 간식 조합</p>
+							<p class = "contentfont">1달에 한번 구독서비스로 인한
+							<br>입안 가득 차오르는 달콤한들로 인해
+							<br>하루를 행복하게 보내세요!</p>
 						</div>
 					</div>
 				</div>
@@ -114,18 +114,18 @@
 			<div class="boxsize flex items-center">
 				<div class = "flex justify-between" style ="width: 100%">
 					<div class = "org40 flex justify-center column">
-						<div class = "margin-bottom20"><h3 class = "maintext">달콤한 쇼핑 사이트<br>쇼핑몰</h3></div>
+						<div class = "margin-bottom20"><h3 class = "maintext">마음에 드는 과자는<br>직접 쇼핑!</h3></div>
 						<div class = "margin-bottom20">
-							<p class = "contentfont">알고리즘이 찾아주는 간식 조합
-							<br>알고리즘이 찾아주는 간식 조합
-							<br>알고리즘이 찾아주는 간식 조합</p>
+							<p class = "contentfont">과자가 한눈에 보이는 사이트
+							<br>Hi Snack! 빠른 구매! 빠른 배송!
+							<br>입 안까지 빠르게 쏙!</p>
 						</div>
 						<div class = "margin-top20">
 							<a class = "mainBtn" href="sub/detail">쇼핑 시작하기</a>
 						</div>
 					</div>
 					<div class = "org60 flex items-center justify-center">
-						<div class = "imgsize img-border"><img src="/re/img/box.png" alt="sub-img"></div>
+						<div class = "imgsize img-border"><img src="/re/img/shopping.png" alt="sub-img"></div>
 					</div>
 				</div>
 			</div>
