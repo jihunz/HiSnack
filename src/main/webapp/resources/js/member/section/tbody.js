@@ -1,10 +1,18 @@
 //테이블의 행 컴포넌트 -> DB의 각 table에 저장된 데이터의 list를 반환
 class Tbody extends React.Component {
     render() {
-        const { list, category, onDelete, onItem } = this.props;
+        const { list, orderList, category, onDelete, onItem } = this.props;
+
+        let data;
+        if (category != 'orders' && category != 'sub') {
+            data = list;
+        } else {
+            data = orderList;
+        }
+
         return (
             <tbody>
-                {list ? list.map((item, idx) =>
+                {data ? data.map((item, idx) =>
                     <tr key={idx}>
                         {/* 데이터 목록 */}
                         {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} /> : null}
@@ -19,7 +27,6 @@ class Tbody extends React.Component {
                         />
                     </tr>
                 ) : <tr><td colSpan="4">등록된 정보가 없습니다</td></tr>}
-
             </tbody>
         );
     }
@@ -36,17 +43,17 @@ function fmtTimestamp(data) {
         minutes: timestamp.getMinutes(),
         seconds: timestamp.getSeconds()
     }
-    if (time.month < 10) {time.month = `0${time.month + 1}`;}
-    if (time.date < 10) {time.date = `0${time.date}`;}
-    if (time.hours < 10) {time.hours = `0${time.hours}`;}
-    if (time.minutes < 10) {time.minutes = `0${time.minutes}`;}
-    if (time.seconds < 10) {time.seconds = `0${time.seconds}`;}
+    if (time.month < 10) { time.month = `0${time.month + 1}`; }
+    if (time.date < 10) { time.date = `0${time.date}`; }
+    if (time.hours < 10) { time.hours = `0${time.hours}`; }
+    if (time.minutes < 10) { time.minutes = `0${time.minutes}`; }
+    if (time.seconds < 10) { time.seconds = `0${time.seconds}`; }
     return `${time.year}-${time.month}-${time.date}`;
 }
 
 
 class SubList extends React.Component {
-    
+
     render() {
         const { item } = this.props;
         return (
@@ -76,7 +83,7 @@ class OrdersList extends React.Component {
 class ReviewList extends React.Component {
     render() {
         const { item } = this.props;
-        let fmtDate = fmtTimestamp(item.regDate);        
+        let fmtDate = fmtTimestamp(item.regDate);
         return (
             <>
                 <td>{item.images && item.images.length != 0 ? <img src={item.images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>

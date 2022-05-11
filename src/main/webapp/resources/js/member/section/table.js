@@ -1,7 +1,7 @@
 // 테이블 컴포넌트 -> table 태그를 반환
 class Table extends React.Component {
     render() {
-        const { list, category, pageList, prev, next, query, onList, onDelete, onItem, onGetCode } = this.props;
+        const { list, orderList, category, pageList, prev, next, query, onList, onDelete, onItem, onGetCode } = this.props;
 
         return (
             <div>
@@ -15,6 +15,7 @@ class Table extends React.Component {
                     </thead>
                     <Tbody
                         list={list}
+                        orderList={orderList}
                         category={category}
                         onDelete={onDelete}
                         onItem={onItem}

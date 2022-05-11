@@ -10,6 +10,7 @@ class Dashboard extends React.Component {
             category: "sub",
             title: "구독 상품 내역",
             list: [],
+            orderList: [],
             item: {},
             //pager용 state
             pageList: [],
@@ -44,7 +45,11 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    state.list = result.list;
+                    if(category != 'orders' && category != 'sub') {
+                        state.list = result.list;
+                    } else {
+                        state.orderList = result.list;
+                    }
                     state.pageList = result.pager.list;
                     state.prev = result.pager.prev;
                     state.next = result.pager.next;
@@ -172,7 +177,7 @@ class Dashboard extends React.Component {
     componentDidMount() { this.list("sub"); }
 
     render() {
-        const { title, list, item, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, orderList, item, pageList, prev, next, query, category, id } = this.state;
         return (
             <div>
                 <div>마이페이지</div>
@@ -189,6 +194,7 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     list={list}
+                    orderList={orderList}
                     item={item}
                     id={id}
                     pageList={pageList}
