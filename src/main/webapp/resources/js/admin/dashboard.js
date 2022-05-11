@@ -252,6 +252,7 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     item={item}
+                    onRemoveTags={this.removeTags}
                 />
                 <AddModal
                     category={category}
