@@ -77,7 +77,7 @@
 				<div><img alt="" src="/re/img/subcontent.png"></div>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

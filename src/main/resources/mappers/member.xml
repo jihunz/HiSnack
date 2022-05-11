@@ -21,35 +21,14 @@
 			</choose>
 		</where>
 	</sql>
-	
-	<resultMap type="Member" id="MemberMap">
-		<id column="id" property="id"/>
-		<result column="password" property="password"/>
-		<result column="address" property="address"/>
-		<result column="name" property="name"/>
-		<result column="tel" property="tel"/>
-		<result column="grade" property="grade"/>
-		<result column="email" property="email"/>
-		<collection property="tags" javaType="ArrayList" ofType="MemberTag">
-			<id column="mtcode" property="code"/>
-			<result column="mtid" property="id"/>
-			<result column="tcode" property="tcode"/>
-			<result column="recom" property="recom"/>
-			<result column="content" property="content"/>
-		</collection>
-	</resultMap>
 
 	<insert id="add">
 		INSERT INTO member
 		VALUES(#{id}, PASSWORD(#{password}), #{address}, #{name}, #{tel}, 0, #{email}, NULL)
 	</insert>
-	<select id="item" resultMap="MemberMap">
-		SELECT member.*,
-		member_tag.code AS mtcode, member_tag.id AS mtid, member_tag.tcode, member_tag.recom,
-		tag.content
+	<select id="item" resultType="Member">
+		SELECT *
 		FROM member
-		LEFT JOIN member_tag ON member_tag.id=member.id
-		LEFT JOIN tag ON tag.code = member_tag.tcode
 		WHERE member.id=#{id}
 	</select>
 	<select id="login" resultType="Member">

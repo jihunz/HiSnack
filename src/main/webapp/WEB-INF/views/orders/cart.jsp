@@ -9,9 +9,9 @@
 	<link rel="stylesheet" href="/re/css/cart.css" />
 	<script src="/re/js/cart.js"></script>
 </head>
-<body>
+<body class="back-light-gray">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-	<div>
+	<div class="back-white">
 		<div class="flex justify-between item-center pb-30 pt-50 wrapper">
 			<h1 class="font-title">장바구니</h1>
 			<div class="img-border cart-icon">
