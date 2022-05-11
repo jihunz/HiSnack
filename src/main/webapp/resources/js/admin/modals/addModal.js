@@ -167,7 +167,8 @@ class ProductInp extends React.Component {
                     </div>
                     <div className="ptags">
                         {ptags.length && ptags ? ptags.map((tag) =>
-                            <div key={`result${tag.code}`} id={tag.code} className="pointer" onClick={onSelectTag}>{tag.content}</div>) : '검색된 태그가 없습니다'}
+                            <div key={`result${tag.code}`} id={tag.code} className="pointer" onClick={onSelectTag}>{tag.content}</div>) 
+                        : '검색된 태그가 없습니다'}
                     </div>
 
                 </div>

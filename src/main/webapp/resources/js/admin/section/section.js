@@ -88,7 +88,7 @@ class Search extends React.Component {
         const { category, onList } = this.props;
 
         return (
-            <>
+            <div>
                 <input
                     type="text"
                     name="keyword"
@@ -96,7 +96,7 @@ class Search extends React.Component {
                     placeholder={this.state.t}
                     onKeyPress={() => this.enter(event)} />
                 <div id="searchBox-btn" onClick={() => onList(category, null, null, 1, null, "sec-search")}><img src="/re/img/admin-search.png" /></div>
-            </>
+            </div>
         );
     }
 }
