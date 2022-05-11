@@ -1129,3 +1129,13 @@ select ::-ms-expand {
 	width: 30px;
 	height: 30px;
 }
+/* 미디어 쿼리 */
+
+@media screen and (max-width: 768px) {
+	
+	.video-wrap {
+		top: 5vw;
+		left: -50%;
+		widows: 200%;
+	}
+}

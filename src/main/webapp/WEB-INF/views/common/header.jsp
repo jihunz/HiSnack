@@ -2,9 +2,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="headerstart ">
 	<div class = "headercontent">
-			<a href = "http://localhost:9080/"><div class = "logosize">
-           		<img alt="" src="/re/img/logo.svg" id ="logoimgsize logoimg">
+		
+			<a href = "http://localhost:9080/"><div class = "logosizeh">
+           		<img alt="" src="/re/img/logo.svg" id ="logoimgsizeh">
             </div></a>
+            
+            <button class = "menubtn">
+				<i class = "icon"></i>
+			</button>
+		
+       
             <div class = "menefont">
 	            <a href="/sub/detail" class = "menupadding">구독</a>
 	            <a href="/shopping/list" class = "menupadding">쇼핑몰</a>
@@ -32,5 +39,6 @@
                 	</c:if>
                 	
 				</div>
+			
 	</div>
 </div>

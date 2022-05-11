@@ -23,11 +23,12 @@
 .flex {
 	display: flex;
 }
-#logoimgsize {
-	width: 400px;
-	height: 200px;
+#logoimgsizeh {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
-.logosize {
+.logosizeh {
 	width: 140px;
 	height: 45px;
 	overflow: hidden;
@@ -36,8 +37,8 @@
 	justify-content: center;
 }
 .logoimg {
-	width: 100%;
-	height: 100%;
+	width: 140px;
+	height: 45px;
 	object-fit: cover;
 	
 }
@@ -68,9 +69,7 @@
 	position: relative;
 }
 #user-dropdown{
-	top: 30px;
-	left: -10px;
-	position: absolute;
+	position: fixed;
 	background-color: white;
 	
 	box-shadow: 2px 2px 3px var(--color-light-gray);
@@ -96,4 +95,119 @@
 	user-select: none;
 	cursor: pointer;
 	padding: 10px 0px 10px 0px;
+}
+.menubtn {
+	display: none;
+}
+
+
+/* 미디어 쿼리 */
+
+@media screen and (max-width: 768px) {
+	
+	.video-wrap {
+		top: 5vw;
+		left: -50%;
+		widows: 200%;
+	}
+	
+	.headerstart  {
+		height: auto;
+		
+	}
+	.logosize {
+		padding: 10px 12px;
+	}
+	
+	.headercontent {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.menubtn.active .icon {
+		background-image: url("/re/img/close.svg");
+		width: 40px;
+		height: 40px;
+		background-repeat: no-repeat;
+		display: block;
+		background-size: contain;
+	}
+	.menubtn .icon {
+		background-image: url("/re/img/menu.svg");
+		width: 40px;
+		height: 40px;
+		background-repeat: no-repeat;
+		display: block;
+		background-size: contain;
+	}
+	.menubtn {
+		display: block;
+		position: absolute;
+		right: 12px;
+		top: 10px;
+		width: 40px;
+		height: 40px;
+		border-radius: 8px;
+		border: none;
+		background-color: transparent;
+		
+	/* list-style: none;
+	color: black;
+	display: flex;
+	position: absolute;
+	right: 32px;
+	padding-top: 10px;
+	color: black; */
+	} 
+	.headercontent {
+		padding: 0;
+		
+	}
+	.menupadding {
+		/* height: 60px;
+		text-align: center;
+		align-items: center;
+		display: flex;
+		 */
+		 
+		 display: block;
+		 padding: 15px 0px;
+		 text-align: center;
+		 width: 100%;
+	}
+	.menupadding:hover{
+		background-color: var(--logo-color);
+	}
+	#logoimgsizeh {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.logosizeh {
+		width: 125px;
+		height: 40px;
+		padding-left: 12px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		
+	}
+	.menefont {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		width: 100%;
+		display: none;
+	}	
+	.menefont.active {
+		display: block;
+	}
+
+	.menefont a {
+		color: black;
+	}
+	#user-menu {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 }

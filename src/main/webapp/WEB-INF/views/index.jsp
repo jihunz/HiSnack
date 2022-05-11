@@ -25,7 +25,7 @@
 
 <body>
 	
-	<div class="container">
+	<div class="container video-wrap" id = "main">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 		<!-- <div class= "boxmaincolor flex justify-center">
@@ -48,7 +48,7 @@
 				</div>
 			</div>
 		</div> -->
-		<div class="swiper-container">
+		<div class="swiper-container" >
 			<div class = "swiper mainSwiper" >
 				<div class = "swiper-wrapper boxsetting">
 					<div class = "swiper-slide bgrimg flex justify-center">
