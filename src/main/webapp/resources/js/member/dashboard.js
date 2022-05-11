@@ -75,7 +75,6 @@ class Dashboard extends React.Component {
                     }
                     return state;
                 });
-            console.log(this.state.item);
         }).catch(err => console.log(err));
     }
 
