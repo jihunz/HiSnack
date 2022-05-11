@@ -8,7 +8,6 @@ class AddModal extends React.Component {
                 name: "",
                 price: "",
                 manufacture: "",
-                tcode: "",
                 info: "",
                 image: ""
             },
@@ -22,7 +21,7 @@ class AddModal extends React.Component {
     change(event, category) {
         const inputName = event.target.name;
 
-        if(category === 'product') {
+        if (category === 'product') {
             this.setState({
                 product: {
                     [inputName]: event.target.value,
@@ -31,28 +30,28 @@ class AddModal extends React.Component {
         } else {
             this.setState({ [inputName]: event.target.value });
         }
-        
+
     }
 
-    reset(category) {
-        if(category === 'product') {
+    reset() {
+        if (this.props.category === 'product') {
             this.setState({
                 product: {
                     name: "",
                     price: "",
                     manufacture: "",
-                    tcode: "",
                     info: "",
                     image: ""
                 }
             });
+            this.props.onRemoveTags();
         } else {
             this.setState({ content: "" });
         }
     }
 
     render() {
-        const { category, title, onModify } = this.props;
+        const { category, title, ptags, selectTags, onModify, onTagList, onSelectTag, onRemoveTag } = this.props;
         const { product, content } = this.state;
 
         return (
@@ -66,11 +65,22 @@ class AddModal extends React.Component {
                             </div>
                             <form id="addForm" encType="multipart/form-data">
                                 <div className="modal-body">
-                                    {category === 'product' ? 
-                                        <PAddInputs category={category} product={product} onChange={this.change} /> : 
-                                        <TAddInput content={content} onChange={this.change} />
+                                    {category === 'product' ?
+                                        <ProductInp
+                                            category={category}
+                                            product={product}
+                                            ptags={ptags}
+                                            selectTags={selectTags}
+                                            onChange={this.change}
+                                            onTagList={onTagList}
+                                            onSelectTag={onSelectTag}
+                                            onRemoveTag={onRemoveTag}
+                                        /> :
+                                        <TagInp
+                                            content={content}
+                                            onChange={this.change} />
                                     }
-                                    
+
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary addCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
@@ -85,9 +95,19 @@ class AddModal extends React.Component {
     }
 }
 
-class PAddInputs extends React.Component {
+class ProductInp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.enter = this.enter.bind(this);
+    }
+
+    enter(event) {
+        if (event.keyCode == 13) this.props.onTagList();
+    }
+
     render() {
-        const { category, product, onChange } = this.props;
+        const { category, product, ptags, selectTags, onChange, onTagList, onSelectTag, onRemoveTag } = this.props;
+
 
         return (
             <>
@@ -118,13 +138,39 @@ class PAddInputs extends React.Component {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">태그 코드</label>
-                    <input type="number" className="form-control"
-                        name="tcode"
-                        value={product.tcode}
-                        onChange={() => onChange(event, category)}
-                        maxLength="10"
-                    />
+                    <label className="form-label">태그</label>
+
+                    <div className="selectedPtags">
+                        {selectTags.length && selectTags ? selectTags.map((tag, idx) =>
+                            <>
+                                <div key={`content1${idx}`} className="ptag-content pointer">
+                                    <p key={`content2${idx}`}>{tag.content}</p>
+                                    <div key={`content3${idx}`} onClick={() => onRemoveTag(tag.tcode)}>X</div>
+                                </div>
+                                <input
+                                    key={`tag${idx}`}
+                                    type="hidden"
+                                    name="tcode"
+                                    value={tag.tcode}
+                                    readOnly /></>
+                        ) : null}
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <input
+                            type="text"
+                            name="keyword"
+                            className="add-search form-control"
+                            placeholder="태그 이름을 검색해주세요"
+                            onKeyPress={() => this.enter(event)} />
+                        <button type="button" className="btn btn-warning" onClick={onTagList}>검색</button>
+                    </div>
+                    <div className="ptags">
+                        {ptags.length && ptags ? ptags.map((tag) =>
+                            <div key={`result${tag.code}`} id={tag.code} className="pointer" onClick={onSelectTag}>{tag.content}</div>) 
+                        : '검색된 태그가 없습니다'}
+                    </div>
+
                 </div>
                 <div className="mb-3">
                     <label className="form-label">설명</label>
@@ -148,7 +194,7 @@ class PAddInputs extends React.Component {
     }
 }
 
-class TAddInput extends React.Component {
+class TagInp extends React.Component {
     render() {
         const { content, onChange } = this.props;
         return (

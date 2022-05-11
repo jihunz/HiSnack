@@ -23,11 +23,11 @@ class Tbody extends React.Component {
                             </td>
                         }
                         {/* 데이터 목록 */}
-                        {category === 'product' ? <ProductList item={item} category={category} onItem={onItem} /> : ''}
-                        {category === 'sub' || category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : ''}
-                        {category === 'member' ? <MemberList item={item} category={category} onItem={onItem} /> : ''}
-                        {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : ''}
-                        {category === 'tag' ? <TagList item={item} /> : ''}
+                        {category === 'product' ? <ProductList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'sub' || category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'member' ? <MemberList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'tag' ? <TagList item={item} /> : null}
 
                         {/* 변경, 삭제 버튼 */}
                         {category === 'sub' || category === 'orders' ? null

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/re/css/detail.css">
 
 <script src="/re/js/sub_detail.js"></script>
+<script src="/re/js/sub_detail_slider.js"></script>
 
 <title>구독 상세</title>
 </head>
@@ -16,10 +17,18 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<div class = "container">
 		<div class = "wrapper flex mt-60 justify-between item-center">
-			<div class ="subbox flex justify-center items-center">
-				<img alt="" src="/re/img/subbox_1.png">
-				<!-- <img alt="" src="/re/img/subbox_2.png">
-				<img alt="" src="/re/img/subbox_3.png"> -->
+			<div class ="flex items-center subbox">
+				<div id="sub-box-img-wrapper">
+					<div>
+						<img alt="" src="/re/img/subbox_1.png">
+					</div>
+					<div>
+						<img alt="" src="/re/img/subbox_2.png">
+					</div>
+					<div>
+						<img alt="" src="/re/img/subbox_3.png">
+					</div>
+				</div>
 				
 			</div>
 			
@@ -40,10 +49,10 @@
 							<option value="30000">30,000원</option>
 							<option value="40000">40,000원</option>
 							<option value="50000">50,000원</option>
-							<option value="60000">60,000원</option>								<option value="70000">70000원</option>
+							<option value="60000">60,000원</option>								
+							<option value="70000">70,000원</option>
 							<option value="80000">80,000원</option>
 							<option value="90000">90,000원</option>	
-							<option value="100000">100,000원</option>
 						</select>
 					</div>
 					
@@ -68,7 +77,7 @@
 				<div><img alt="" src="/re/img/subcontent.png"></div>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

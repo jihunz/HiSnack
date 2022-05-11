@@ -60,8 +60,10 @@ class Search extends React.Component {
         }
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    enter(event) {
+        const { category, onList } = this.props;
+
+        if (event.keyCode == 13) onList(category, null, null, 1, null, "sec-search");
     }
 
     componentDidUpdate(prevProps) {
@@ -86,12 +88,15 @@ class Search extends React.Component {
         const { category, onList } = this.props;
 
         return (
-            <>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="keyword" id="searchBox" placeholder={this.state.t} />
-                    <div id="searchBox-btn" onClick={() => onList(category, null, null, 1)}><img src="/re/img/admin-search.png" /></div>
-                </form>
-            </>
+            <div>
+                <input
+                    type="text"
+                    name="keyword"
+                    className="sec-search searchBox"
+                    placeholder={this.state.t}
+                    onKeyPress={() => this.enter(event)} />
+                <div id="searchBox-btn" onClick={() => onList(category, null, null, 1, null, "sec-search")}><img src="/re/img/admin-search.png" /></div>
+            </div>
         );
     }
 }
@@ -103,15 +108,15 @@ class Btns extends React.Component {
         return (
             <div>
                 {category === 'product' || category === 'tag' ?
-                        <button type="button" id="section-item-add" data-bs-toggle="modal" data-bs-target="#addModal"><span id="section-item-add-text">등록</span><img src="/re/img/admin-add.png" id="section-item-add-img" /></button>
+                    <button type="button" id="section-item-add" data-bs-toggle="modal" data-bs-target="#addModal"><span id="section-item-add-text">등록</span><img src="/re/img/admin-add.png" id="section-item-add-img" /></button>
                     : null
                 }
                 {category === 'sub' || category === 'orders' ? null
                     :
-                        <button
-                            onClick={() => { onDeleteList(category) }}
-                            id="section-item-delete"
-                        ><img src="/re/img/admin-delete.png" id="section-item-delete-img"/></button>
+                    <button
+                        onClick={() => { onDeleteList(category) }}
+                        id="section-item-delete"
+                    ><img src="/re/img/admin-delete.png" id="section-item-delete-img" /></button>
                 }
             </div>
         );

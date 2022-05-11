@@ -13,6 +13,8 @@ class Dashboard extends React.Component {
             list: [],
             item: {},
             tags: [],
+            ptags: [],
+            selectTags: [],
             codes: [],
             //pager용 state
             prev: "",
@@ -32,9 +34,13 @@ class Dashboard extends React.Component {
         this.getCode = this.getCode.bind(this);
         this.getCodes = this.getCodes.bind(this);
         this.setCategory = this.setCategory.bind(this);
+        this.selectTag = this.selectTag.bind(this);
+        this.removeTag = this.removeTag.bind(this);
+        this.removeTags = this.removeTags.bind(this);
+        this.tagList = this.tagList.bind(this);
     }
 
-    list(category, page, query, search, order) {
+    list(category, page, query, search) {
         let url = `rest/${category}`;
 
         if (page != null) {
@@ -42,7 +48,7 @@ class Dashboard extends React.Component {
             url += `?page=${page}&${query}`
         } else if (search != null) {
             //검색 시 요청할 uri
-            const keyword = document.querySelector("#searchBox").value;
+            const keyword = document.querySelector(".sec-search").value;
             url += `?search=${search}&keyword=${keyword}`
         }
 
@@ -52,15 +58,31 @@ class Dashboard extends React.Component {
                 "Content-type": "application/json"
             }
         }).then(res => res.json()).then(result => {
-            this.setState(
-                (state, props) => {
-                    state.list = result.list;
-                    state.pageList = result.pager.list;
-                    state.prev = result.pager.prev;
-                    state.next = result.pager.next;
-                    state.query = result.pager.query;
-                    return state;
-                });
+            this.setState((state, props) => {
+                state.list = result.list;
+                state.pageList = result.pager.list;
+                state.prev = result.pager.prev;
+                state.next = result.pager.next;
+                state.query = result.pager.query;
+                return state;
+            });
+        }).catch(err => console.log(err));
+    }
+
+    tagList() {
+        const keyword = document.querySelector(".add-search").value;
+        let url = `rest/tag?search=1&keyword=${keyword}`
+        
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json"
+            }
+        }).then(res => res.json()).then(result => {
+            this.setState((state, props) => {
+                state.ptags = result.list;
+                return state;
+            });
         }).catch(err => console.log(err));
     }
 
@@ -191,6 +213,31 @@ class Dashboard extends React.Component {
         this.list(category);
     }
 
+    selectTag(event) {
+        let tag = {
+            tcode: event.target.id,
+            content: event.target.innerText
+        }
+        this.setState(
+            (state) => {
+                //state 배열에 객체(tcode, content)를 추가해야함
+                state.selectTags = [...state.selectTags, tag];
+                return state;
+            });
+    }
+
+    removeTag(source) {
+        const { selectTags } = this.state;
+        const changedTags = selectTags.filter(tag => tag.tcode != source);
+        { this.setState({ selectTags: changedTags }); }
+    }
+
+    removeTags(source) {
+        const { selectTags } = this.state;
+        { this.setState({ selectTags: [], ptags: [] }); }
+    }
+
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() { this.list("product"); }
     //컴포넌트가 갱신된 후 호출 -> 최초 렌더링에서는 호출되지 않음
@@ -199,7 +246,7 @@ class Dashboard extends React.Component {
     componentWillUnmount() { }
 
     render() {
-        const { title, list, item, tags, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, item, tags, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
         return (
             <div className="admin-container">
                 <InfoModal
@@ -210,7 +257,13 @@ class Dashboard extends React.Component {
                 <AddModal
                     category={category}
                     title={title}
+                    ptags={ptags}
+                    selectTags={selectTags}
                     onModify={this.modify}
+                    onTagList={this.tagList}
+                    onSelectTag={this.selectTag}
+                    onRemoveTag={this.removeTag}
+                    onRemoveTags={this.removeTags}
                 />
                 <UpdateModal
                     category={category}

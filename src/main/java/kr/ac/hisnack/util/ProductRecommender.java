@@ -37,21 +37,7 @@ public class ProductRecommender {
 		
 //		(태그 번호 : 태그)로 맵을 만든다
 		for(MemberTag tag : tagList) {
-//			중복되는 태그가 있으면 추천도를 재설정 한다
-			if(tagMap.containsKey(tag.getTcode())) {
-//				태그가 호감이면 추천도를 +1하고 불호면 -1한다
-				MemberTag mt = tagMap.get(tag.getTcode());
-				if(tag.getRecom() == 'y') {
-					mt.setRecomVal(mt.getRecomVal()+1);
-				}
-				else {
-					mt.setRecomVal(mt.getRecomVal()-1);
-				}
-			}
-			else {
-				tag.setRecomVal(tag.getRecom() == 'y' ? 1 : -1);
-				tagMap.put(tag.getTcode(), tag);
-			}
+			tagMap.put(tag.getTcode(), tag);
 		}
 		
 //		tagMap의 내용을 추천도의 크기에 따라 정렬함

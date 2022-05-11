@@ -75,9 +75,11 @@ public class MemberServiceImpl implements MemberService {
 /**
  * 회원 정보 얻기
  */
+	@Transactional
 	@Override
 	public Member item(String id) {
 		Member item = dao.item(id);
+		item.setTags(mts.list(item.getId()));
 		return item;
 	}
 

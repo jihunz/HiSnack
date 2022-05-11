@@ -11,4 +11,5 @@ public interface TagService {
 	void add(Tag item);
 	void update(Tag item);
 	void delete(int code);
+	List<Tag> listAll();
 }

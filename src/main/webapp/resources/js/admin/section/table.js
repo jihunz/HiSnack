@@ -69,11 +69,11 @@ class Table extends React.Component {
                                     />
                                 </td>
                             }
-                            {category === 'product' ? <ProductTh /> : ''}
-                            {category === 'sub' || category === 'orders' ? <OrdersTh /> : ''}
-                            {category === 'member' ? <MemberTh /> : ''}
-                            {category === 'review' ? <ReviewTh /> : ''}
-                            {category === 'tag' ? <TagTh /> : ''}
+                            {category === 'product' ? <ProductTh /> : null}
+                            {category === 'sub' || category === 'orders' ? <OrdersTh /> : null}
+                            {category === 'member' ? <MemberTh /> : null}
+                            {category === 'review' ? <ReviewTh /> : null}
+                            {category === 'tag' ? <TagTh /> : null}
                         </tr>
                     </thead>
                     <Tbody

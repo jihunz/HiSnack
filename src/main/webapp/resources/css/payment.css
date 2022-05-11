@@ -77,6 +77,10 @@
 	outline-color: var(--color-gray);
 }
 
+#payment-wrapper .payment-form > div select{
+	cursor: pointer;
+}
+
 #payment-wrapper .payment-form > div input:not(.address),
 #payment-wrapper .payment-form > div select{
 	width: 590px;
@@ -104,4 +108,25 @@
 	font-size: var(--font-size-laguler);
 	margin-left: 13px;
 	cursor: pointer;
+}
+
+
+#payment-wrapper .sub-thumbnail{
+	width: 300px !important;
+	height: 300px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px var(--color-light-gray);
+}
+
+#payment-wrapper .sub-info{
+	padding: 10px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#payment-wrapper .sub-info h2{
+	padding: 25px 0px;
+	font-weight: var(--font-weight-normal);
 }
