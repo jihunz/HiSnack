@@ -68,6 +68,27 @@ public class MemberTagRestController {
 	}
 	
 /**
+ * 상품으로 태그를 저장한다 
+ * @param code : 상품의 기본키
+ * @param recom : 호불호 y 또는 n이 들어간다
+ * @return 메세지와 입력한 상품의 기본키 반환한다
+ */
+	@PostMapping("/{id}/{code}")
+	public Map<String, Object> add(@PathVariable String id, @PathVariable int code, @RequestBody MemberTag recom){
+		System.out.println("---------------------------------");
+		System.out.println(recom.getRecom());
+		System.out.println("---------------------------------");
+		service.add(id, code, recom.getRecom());
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("code", code);
+		map.put("msg", String.format("product %s tag add : ok", code));
+		
+		return map;
+	}
+	
+/**
  * 입력한 회원이 선택한 태그를 삭제
  * @param code : 회원이 선택한 태그의 기본키
  * @return code를 다시 반환
