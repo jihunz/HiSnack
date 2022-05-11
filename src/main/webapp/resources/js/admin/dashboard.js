@@ -12,7 +12,6 @@ class Dashboard extends React.Component {
             // CRUD를 위한 state
             list: [],
             item: {},
-            tags: [],
             ptags: [],
             selectTags: [],
             codes: [],
@@ -72,7 +71,7 @@ class Dashboard extends React.Component {
     tagList() {
         const keyword = document.querySelector(".add-search").value;
         let url = `rest/tag?search=1&keyword=${keyword}`
-        
+
         fetch(url, {
             method: "GET",
             headers: {
@@ -96,7 +95,7 @@ class Dashboard extends React.Component {
             this.setState(
                 (state, props) => {
                     state.item = result.item;
-                    state.tags = result.item.tags;
+                    state.selectTags = result.item.tags;
                     return state;
                 });
         }).catch(err => console.log(err));
@@ -246,7 +245,7 @@ class Dashboard extends React.Component {
     componentWillUnmount() { }
 
     render() {
-        const { title, list, item, tags, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, item, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
         return (
             <div className="admin-container">
                 <InfoModal
@@ -269,10 +268,16 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     item={item}
-                    tags={tags}
+                    ptags={ptags}
+                    selectTags={selectTags}
                     onChange={this.change}
                     onTagChange={this.tagChange}
-                    onModify={this.modify} />
+                    onModify={this.modify}
+                    onTagList={this.tagList}
+                    onSelectTag={this.selectTag}
+                    onRemoveTag={this.removeTag}
+                    onRemoveTags={this.removeTags}
+                />
                 <Sidebar
                     onSetCategory={this.setCategory}
                 />

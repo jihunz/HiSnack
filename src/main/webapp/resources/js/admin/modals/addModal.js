@@ -139,7 +139,6 @@ class ProductInp extends React.Component {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">태그</label>
-
                     <div className="selectedPtags">
                         {selectTags.length && selectTags ? selectTags.map((tag, idx) =>
                             <>
@@ -152,11 +151,11 @@ class ProductInp extends React.Component {
                                     type="hidden"
                                     name="tcode"
                                     value={tag.tcode}
-                                    readOnly /></>
+                                    readOnly />
+                            </>
                         ) : null}
                     </div>
-
-                    <div class="input-group mb-3">
+                    <div className="input-group mb-3">
                         <input
                             type="text"
                             name="keyword"
@@ -167,10 +166,9 @@ class ProductInp extends React.Component {
                     </div>
                     <div className="ptags">
                         {ptags.length && ptags ? ptags.map((tag) =>
-                            <div key={`result${tag.code}`} id={tag.code} className="pointer" onClick={onSelectTag}>{tag.content}</div>) 
-                        : '검색된 태그가 없습니다'}
+                            <div key={`result${tag.code}`} id={tag.code} className="pointer" onClick={onSelectTag}>{tag.content}</div>)
+                            : '검색된 태그가 없습니다'}
                     </div>
-
                 </div>
                 <div className="mb-3">
                     <label className="form-label">설명</label>
