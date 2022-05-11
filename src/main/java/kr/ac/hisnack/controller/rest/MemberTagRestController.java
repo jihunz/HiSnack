@@ -75,9 +75,6 @@ public class MemberTagRestController {
  */
 	@PostMapping("/{id}/{code}")
 	public Map<String, Object> add(@PathVariable String id, @PathVariable int code, @RequestBody MemberTag recom){
-		System.out.println("---------------------------------");
-		System.out.println(recom.getRecom());
-		System.out.println("---------------------------------");
 		service.add(id, code, recom.getRecom());
 		
 		Map<String, Object> map = new HashMap<>();
