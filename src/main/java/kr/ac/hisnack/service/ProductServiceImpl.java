@@ -170,7 +170,7 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	@Override
 	public List<OrderedProduct> recommend(String id, int randomRange, int basePrice, int weightPrice) {
-		ProductRecommender recommender = new ProductRecommender(randomRange);
+		ProductRecommender recommender = new ProductRecommender(randomRange, 10);
 		
 		Pager pager = new Pager();
 		int total = dao.total(pager);

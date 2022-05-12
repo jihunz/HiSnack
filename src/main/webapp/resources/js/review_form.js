@@ -7,7 +7,7 @@ $(function(){
 		const index = $(this).index() + 1;
 		// 별들을 초기화
 		$(`.rating span`).attr('class', 'star-empty big');
-		const dist = e.pageX - (this.getBoundingClientRect().left + this.clientWidth/2);
+		const dist = e.clientX - (this.getBoundingClientRect().left + this.clientWidth/2);
 		if(dist < 0){
 			// 마우스의 위치가 별의 위치보다 왼쪽이면 0.5
 			// $(`.rating span:nth-child(-n+${index-1})`).attr('class', 'star big');
