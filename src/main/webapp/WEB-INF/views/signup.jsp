@@ -49,16 +49,33 @@
 			        </div>
 			        <div>
 			            <label for="email">이메일</label>
-			            <input type="email" name="email" id="email" placeholder="Email" maxlength="32" class = "inputsize">
+			            <div class="flex item-center">
+			            	<input type="email" name="email" id="email" placeholder="Email" maxlength="32" class = "addressinput">
+			            	<button type="button" id="email-btn" class = "addressbtn text-center">보내기</button>
+			            </div>
+			            
+			        </div>
+			        <div>
+			        	<label for="email-confirm">이메일 확인 번호</label>
+			        	<div class="flex item-center">
+			            	<div id="email-confirm-wrapper">
+			            		<input type="text" id="email-confirm" placeholder="Email Confirm" maxlength="32" class = "addressinput"/>
+			            		<span></span>
+			            	</div>
+			            	<button type="button" id="email-confirm-btn" class = "addressbtn text-center">확인</button>
+			            </div>
 			        </div>
 			        <button id="signupBtn" class = "signupbtn mt-30 mb-60">회원가입</button>
 			    </form>
+			    
+			    <input type="hidden" id="email-confirm-hidden"/>
 			    
 			    <!-- Daum 우편번호 서비스 CDN-->
 			    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 			    <!-- Daum 우편번호 서비스 함수 파일-->
 			    <script src="/re/js/daumPostCode.js" type="text/javascript"></script>
 			    <script src="/re/js/signup.js" type="text/javascript"></script>
+			    <script src="/re/js/email_confirm.js"></script>
 		    </div>
 	    </div>
 	</div>

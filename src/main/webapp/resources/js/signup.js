@@ -1,7 +1,9 @@
 $(function () {
     $("#signupBtn").click((e) => {
-        chkNull(e);
-        chkPwd(e);
+	
+        if(!chkNull(e)) return false;
+        if(!chkPwd(e)) return false;
+        if(!chkEmail(e)) return false;
     });
 
     $("#userId").on({
@@ -24,9 +26,11 @@ function chkNull(e) {
             e.preventDefault();
             alert(`${inputType}를(을) 입력해주세요`);
             nthInput.focus();
-            return;
+            return false;
         }
     }
+    
+    return true;
 }
 
 function chkPwd(e) {
@@ -38,8 +42,10 @@ function chkPwd(e) {
         alert("비밀번호가 일치하지 않습니다");
         pwd.val("").focus();
         pwdConfirm.val("");
-        return;
+        return false;
     }
+    
+    return true;
 }
 
 function pwdRegx() {
@@ -104,4 +110,20 @@ function restrictId() {
         $("#userId").val("");
         return;
     }
+}
+
+// 이메일 확인을 했는지 체크한다
+function chkEmail(e){
+	// email하고 email-confirm-hidden하고 같은지 확인한다
+	const email = $('#email').val();
+	const confirm = $('#email-confirm-hidden').val();
+	if(email !== confirm){
+		e.preventDefault();
+		alert('이메일 확인을 다시 해주세요.');
+		$('#email-confirm').val('').focus();
+		$('#email-confirm-wrapper span').text('');
+		return false;
+	}
+	
+	return true;
 }

@@ -107,3 +107,14 @@ label {
 	margin-top: 5px;
 	
 }
+#email-confirm-wrapper{
+	position: relative;
+}
+#email-confirm-wrapper span{
+	position: absolute;
+	right: 10px;
+	top : 50%;
+	transform: translate(0px, -50%);
+	font-size: var(--font-size-small);
+	color: var(--color-gray);
+}
