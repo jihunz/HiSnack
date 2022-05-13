@@ -82,7 +82,7 @@ public class RootController {
 		}
 		
 		session.setAttribute("user", user);
-		
+
 //		쿠키를 사용한 자동로그인 작업
 		if(autoLogin) {
 //			세션의 아이디를 DB에 저장
@@ -95,6 +95,13 @@ public class RootController {
 //			7주일 유지
 			cookie.setMaxAge(60 * 60 * 24 * 7);
 			response.addCookie(cookie);
+		}
+		
+//		원래 가려고 하던 페이지가 있으면 그쪽으로 보낸다
+		String destPath = (String) session.getAttribute("dest_path");
+		if(destPath != null) {
+			session.removeAttribute("dest_path");
+			return "redirect:"+destPath;
 		}
 
 		return "redirect:/";
