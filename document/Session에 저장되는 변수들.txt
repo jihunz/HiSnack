@@ -1,0 +1,21 @@
+저장된 키값
+변수 타입
+설명
+
+user
+Member
+로그인한 회원
+로그인 하면 저장되고
+로그아웃하면 삭제된다
+
+cart
+List<OrderedProduct>
+장바구니에 담은 상품들
+장바구니에 있는 상품을 결제하면 삭제한다
+장바구니를 거치지 않고 바로구매하면 삭제되지 않는다
+주문한다고 체크 박스(checked 변수)를 체크해야지만 구매할 수 있다
+
+payment
+List<OrderedProduct>
+cart에 저장된 상품 중 checked 변수가 true인 상품만 따로 담아둔 리스트 
+payment 페이지에서 결제한 후 삭제된다
