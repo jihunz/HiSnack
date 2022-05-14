@@ -79,7 +79,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member item(String id) {
 		Member item = dao.item(id);
-		item.setTags(mts.list(item.getId()));
+		if(item != null)
+			item.setTags(mts.list(item.getId()));
 		return item;
 	}
 
