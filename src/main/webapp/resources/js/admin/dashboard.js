@@ -86,7 +86,11 @@ class Dashboard extends React.Component {
     }
 
     item(event, category) {
-        fetch((`/rest/${category}/${event.target.parentNode.dataset.code}`), {
+        let url = `/rest/${category}/${event.target.parentNode.dataset.code}`
+
+        if (category == 'member') url = `/rest/${category}/item?id=${event.target.parentNode.dataset.code}`;
+
+        fetch(url, {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -149,7 +153,11 @@ class Dashboard extends React.Component {
 
     //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
     delete(event, category) {
-        fetch(`/rest/${category}/${event.target.id}`, {
+        let url = `/rest/${category}/${event.target.id}`
+
+        if (category == 'member') url = `/rest/${category}/delete?id=${event.target.id}`;
+
+        fetch(url, {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             alert(result.msg);
@@ -159,10 +167,14 @@ class Dashboard extends React.Component {
 
     // 전체 및 선택 삭제 시 사용하는 함수
     deleteList(category) {
-        const c = this.state.codes;
+        const codes = this.state.codes;
+        let i = 0;
+        let url = `/rest/${category}/${codes[i]}`;
 
-        for (let i = 0; i <= c.length - 1; i++) {
-            fetch(`/rest/${category}/${c[i]}`, {
+        if (category == 'member') url = `/rest/${category}/delete?id=${codes[i]}`;
+
+        for (let i = 0; i <= codes.length - 1; i++) {
+            fetch(url, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
                 this.initCodes();
