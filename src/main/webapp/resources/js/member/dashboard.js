@@ -62,12 +62,17 @@ class Dashboard extends React.Component {
     }
 
     item(event, category) {
-        let keyword = user.userId;
-        if (category != 'member') {
+        let keyword;
+        let url = `/rest/${category}/${keyword}`
+        
+        if (category == 'member') {
+            keyword = user.userId;
+            url = `/rest/${category}/item?id=${keyword}`;
+        } else {
             keyword = event.target.parentNode.dataset.code;
         }
 
-        fetch((`/rest/${category}/${keyword}`), {
+        fetch((url), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -77,7 +82,7 @@ class Dashboard extends React.Component {
                 (state, props) => {
                     state.item = result.item
                     // 비밀번호 state를 공개하지 않기 위한 코드
-                    if (category == 'member') {
+                    if (category == 'member' && state.item.password != undefined && state.item.password != null && state.item.password != '') {
                         state.item.password = null;
                     }
                     return state;
@@ -98,12 +103,18 @@ class Dashboard extends React.Component {
 
     update(type) {
         const { category } = this.state;
-
         const formData = new FormData(document.getElementById(`${type}Form`));
         let keyword;
-        category == 'member' ? keyword = user.userId : keyword = document.getElementById("codeInput").value;
+        let url = `/rest/${category}/${keyword}`;
+    
+        if(category == 'member') {
+            keyword = user.userId
+            url = `/rest/${category}/update?id=${keyword}`;
+        } else {
+            keyword = document.getElementById("codeInput").value;
+        }
 
-        fetch(`/rest/${category}?id=${keyword}`, {
+        fetch(url, {
             method: "POST",
             body: formData,
         }).then(res => res.json()).then(result => {

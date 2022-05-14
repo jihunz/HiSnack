@@ -13,11 +13,11 @@ class MemberForm extends React.Component {
                     </div>
                     <div>
                         <label>주소</label>
-                        <input name="address" value={item.address} onChange={onChange} />
+                        <input name="address" value={item.address != null ? item.address : null} onChange={onChange} />
                     </div>
                     <div>
                         <label>전화번호</label>
-                        <input name="tel" value={item.tel} onChange={onChange} />
+                        <input name="tel" value={item.tel != null ? item.tel : null} onChange={onChange} />
                     </div>
                     <div>
                         <label>이메일</label>
