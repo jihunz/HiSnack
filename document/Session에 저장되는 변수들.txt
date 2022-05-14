@@ -19,3 +19,13 @@ payment
 List<OrderedProduct>
 cart에 저장된 상품 중 checked 변수가 true인 상품만 따로 담아둔 리스트 
 payment 페이지에서 결제한 후 삭제된다
+
+sub
+Orders
+/sub/detail, /sub/tag, /sub/payment에서 사용하는 구독 정보를 저장하는 변수
+인터셉터로 구독 절차 중이 아니면 삭제 한다
+
+dest_path
+String
+로그인이 필요한 페이지에 접근 했을 때 로그인 페이지에 리다이렉트 됐을 경우
+로그인하면 원래 페이지로 리다이렉트 할 때 사용한다
