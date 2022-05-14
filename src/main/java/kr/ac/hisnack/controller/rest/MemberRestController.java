@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,8 +51,8 @@ public class MemberRestController {
  * @param id
  * @return
  */
-	@GetMapping("/{id}")
-	public Map<String, Object> item(@PathVariable String id) {
+	@GetMapping("/item")
+	public Map<String, Object> item(String id) {
 		Member item = service.item(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -89,14 +88,13 @@ public class MemberRestController {
  * @param item : address, name, tel, grade의 정보가 들어있어야 된다
  * @return 입력한 정보를 다시 반환
  */
-	@PostMapping("/{id}")
-	public Map<String, Object> update(@PathVariable String id, Member item) {
-		item.setId(id);
+	@PostMapping("/update")
+	public Map<String, Object> update(Member item) {
 		service.update(item);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item", item);
-		map.put("msg", String.format("member %s update : ok", id));
+		map.put("msg", String.format("member %s update : ok", item.getId()));
 		
 		return map;
 	}
@@ -106,8 +104,8 @@ public class MemberRestController {
  * @param id : 회원의 id
  * @return id를 다시 반환
  */
-	@DeleteMapping("/{id}")
-	public Map<String, Object> delete(@PathVariable String id) {
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(String id) {
 		service.delete(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
