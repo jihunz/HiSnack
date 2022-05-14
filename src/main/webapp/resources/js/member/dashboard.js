@@ -1,5 +1,7 @@
 'use strict'
 
+// member item, update, delete 요청에 '?id=아이디값' 쿼리스트링 추가하기
+
 // 마이 페이지의 모든 컴포넌트들의 부모 컴포넌트 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -101,7 +103,7 @@ class Dashboard extends React.Component {
         let keyword;
         category == 'member' ? keyword = user.userId : keyword = document.getElementById("codeInput").value;
 
-        fetch(`/rest/${category}/${keyword}`, {
+        fetch(`/rest/${category}?id=${keyword}`, {
             method: "POST",
             body: formData,
         }).then(res => res.json()).then(result => {
