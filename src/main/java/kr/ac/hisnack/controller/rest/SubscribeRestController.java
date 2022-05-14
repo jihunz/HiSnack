@@ -168,4 +168,25 @@ public class SubscribeRestController {
 		
 		return map;
 	}
+	
+	@PostMapping("/cancel")
+	public Map<String, Object> cancel(String id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Orders item = service.latestSubscribe(id);
+		
+		if(item == null) {
+			map.put("msg", String.format("%s's subscribe cancel : fail, %s는 구독을 하지 않았습니다.", id, id));
+		}
+		else {
+			item.setSubscribe('c');
+			
+			service.update(item);
+			
+			map.put("item", item);
+			map.put("msg", String.format("%s's subscribe cancel : ok", id));	
+		}
+		
+		return map;
+	}
 }

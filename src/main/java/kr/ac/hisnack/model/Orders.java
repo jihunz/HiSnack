@@ -17,7 +17,8 @@ public class Orders {
 	private String tel;
 //	주문한 날짜
 	private Date orderDate;
-//	주문이 구독인지 여부 (y or n)
+//	주문이 구독인지 여부 (y or n or c)
+//	y 구독임, n 주문임, c 구독인데 취소된 구독임
 	private char subscribe;
 //	주문의 총 가격, 구독의 가격
 	private int total;
