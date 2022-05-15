@@ -51,7 +51,7 @@ class AddModal extends React.Component {
     }
 
     render() {
-        const { category, title, ptags, selectTags, onModify, onTagList, onSelectTag, onRemoveTag } = this.props;
+        const { category, title, ptags, selectTags, t_pageList, t_prev, t_next, t_query, onList, onModify, onSelectTag, onRemoveTag } = this.props;
         const { product, content } = this.state;
 
         return (
@@ -71,8 +71,12 @@ class AddModal extends React.Component {
                                             product={product}
                                             ptags={ptags}
                                             selectTags={selectTags}
+                                            t_pageList={t_pageList}
+                                            t_prev={t_prev}
+                                            t_next={t_next}
+                                            t_query={t_query}
                                             onChange={this.change}
-                                            onTagList={onTagList}
+                                            onList={onList}
                                             onSelectTag={onSelectTag}
                                             onRemoveTag={onRemoveTag}
                                         /> :
@@ -102,11 +106,11 @@ class ProductInp extends React.Component {
     }
 
     enter(event) {
-        if (event.keyCode == 13) this.props.onTagList();
+        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, '.modal-search');
     }
 
     render() {
-        const { category, product, ptags, selectTags, onChange, onTagList, onSelectTag, onRemoveTag } = this.props;
+        const { category, product, ptags, selectTags, t_pageList, t_prev, t_next, t_query, onChange, onList, onSelectTag, onRemoveTag } = this.props;
 
 
         return (
@@ -142,9 +146,9 @@ class ProductInp extends React.Component {
                     <div className="selectedPtags">
                         {selectTags.length && selectTags ? selectTags.map((tag, idx) =>
                             <>
-                                <div key={`content1${idx}`} className="ptag-content pointer">
-                                    <p key={`content2${idx}`}>{tag.content}</p>
-                                    <div key={`content3${idx}`} onClick={() => onRemoveTag(tag.tcode)}>X</div>
+                                <div key={`content1${idx}`} id={`content1${idx}`} className="ptag-content pointer">
+                                    <p>{tag.content}</p>
+                                    <div onClick={() => onRemoveTag(tag.tcode)}>X</div>
                                 </div>
                                 <input
                                     key={`tag${idx}`}
@@ -159,10 +163,10 @@ class ProductInp extends React.Component {
                         <input
                             type="text"
                             name="keyword"
-                            className="add-search form-control"
+                            className="modal-search form-control"
                             placeholder="태그 이름을 검색해주세요"
                             onKeyPress={() => this.enter(event)} />
-                        <button type="button" className="btn btn-warning" onClick={onTagList}>검색</button>
+                        <button type="button" className="btn btn-warning" onClick={() => onList('tag', null, null, 1, '.modal-search')}>검색</button>
                     </div>
                     <div className="ptags">
                         {ptags.length && ptags ? ptags.map((tag) =>
@@ -170,6 +174,15 @@ class ProductInp extends React.Component {
                             : '검색된 태그가 없습니다'}
                     </div>
                 </div>
+                <Pagenation
+                    t_pageList={t_pageList}
+                    t_prev={t_prev}
+                    t_next={t_next}
+                    t_query={t_query}
+                    category={category}
+                    type='.modal-search'
+                    onList={onList}
+                />
                 <div className="mb-3">
                     <label className="form-label">설명</label>
                     <textarea type="text" className="form-control"
