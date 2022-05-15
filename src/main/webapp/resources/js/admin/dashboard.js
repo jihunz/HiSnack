@@ -40,7 +40,6 @@ class Dashboard extends React.Component {
         this.selectTag = this.selectTag.bind(this);
         this.removeTag = this.removeTag.bind(this);
         this.removeTags = this.removeTags.bind(this);
-        this.tagList = this.tagList.bind(this);
         this.setList = this.setList.bind(this);
         this.setTags = this.setTags.bind(this);
     }
@@ -89,24 +88,6 @@ class Dashboard extends React.Component {
         state.t_next = result.pager.next;
         state.t_query = result.pager.query;
     }
-
-    tagList(page, query) {
-        const keyword = document.querySelector(".add-search").value;
-        let url = `rest/tag?page=${page}&${query}&search=1&keyword=${keyword}`;
-
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json"
-            }
-        }).then(res => res.json()).then(result => {
-            this.setState((state, props) => {
-                this.setTags(state, result);
-                return state;
-            });
-        }).catch(err => console.log(err));
-    }
-
 
     item(event, category) {
         let url = `/rest/${category}/${event.target.parentNode.dataset.code}`
@@ -310,10 +291,14 @@ class Dashboard extends React.Component {
                     item={item}
                     ptags={ptags}
                     selectTags={selectTags}
+                    t_pageList={t_pageList}
+                    t_prev={t_prev}
+                    t_next={t_next}
+                    t_query={t_query}
+                    onList={this.list}
                     onChange={this.change}
                     onTagChange={this.tagChange}
                     onModify={this.modify}
-                    onTagList={this.tagList}
                     onSelectTag={this.selectTag}
                     onRemoveTag={this.removeTag}
                     onRemoveTags={this.removeTags}
