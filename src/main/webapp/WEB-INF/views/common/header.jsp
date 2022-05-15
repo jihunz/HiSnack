@@ -12,7 +12,7 @@
 			</button>
 		
        
-            <div class = "menefont">
+            <div class = "menefont nav-menu">
 	            <a href="/sub/detail" class = "menupadding">구독</a>
 	            <a href="/shopping/list" class = "menupadding">쇼핑몰</a>
 	            <a href="/orders/cart" class = "menupadding">장바구니</a>

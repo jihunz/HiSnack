@@ -5,7 +5,7 @@
 				<div class = "logosize logoh maringtop">
 	           		<img alt="" src="/re/img/logo2.svg" id ="logoimgsize logoimg">
 	            </div>
-				<div class = "">
+				<div class = "footbottom">
 					<h4 class = "menu-center">Team Members</h4>
 					<p>장지훈 : jjh351@naver.com</p>
 					<p>오종택 : tivmzk5@gmail.com</p>
@@ -20,7 +20,7 @@
 						<img src="/re/img/qr.png" class = "qrimg" alt="demoVidQr">
 					</div>
 				</div>
-				<div class= "">
+				<div class= "pbottom50">
 					<h4 class ="menu-center">Team Members Github</h4>
 					<div class= "textflex">
 						<div class = "flexcenter">

@@ -95,7 +95,11 @@ body {
 
 
 
-.imgsize{
+.subimgsize {
+  width: 550px;
+  height: 550px;
+}
+.imgsize {
   width: 550px;
   height: 550px;
 }
@@ -309,4 +313,67 @@ body {
 .parallaximg {
 	background-image: url("/re/img/saleimg.jpg");
 	height: 360px;
+}
+img {
+	max-width: 100%;
+}
+@media screen and (max-width: 768px) {
+	
+	.subimgsize {
+		display: none;
+	}
+	.org60  {
+		flex-basis: 100%;
+		justify-content: center;
+	}
+	.justify-between {
+		justify-content: center;
+		flex-direction: column;
+		text-align: center;
+	}
+	.org40 {
+		flex-basis: 100%;
+		text-align: center;
+	}
+	.boxsize  {
+		width: 100%;
+		height: 650px;
+	}
+	.center {
+		justify-content: center;
+	}
+	.bgrimg {
+		background-image: url("/re/img/main_swiper_1.png");
+		background-repeat:no-repeat;
+		background-position: bottom center;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-size: cover;
+	}
+	.imgsize {
+		width: 300px;
+		height: 300px;
+	}
+	.topflex {
+		padding-top: 200px;
+	}
+	.column-reverse {
+		flex-direction: column-reverse;
+	}
+	.parallaximg {
+		height: 200px;
+	} 
+	.review-box {
+		width: 100%;
+		text-align: center;
+		justify-content: center;
+		
+	}
+	.wrapper {
+		width: 100%;
+	}
+	.review-div {
+		width: 100%;
+	}
 }

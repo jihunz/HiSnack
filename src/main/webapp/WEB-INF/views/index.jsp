@@ -52,7 +52,7 @@
 			<div class = "swiper mainSwiper" >
 				<div class = "swiper-wrapper boxsetting">
 					<div class = "swiper-slide bgrimg flex justify-center">
-								<div class="boxsize flex items-center">
+								<div class="boxsize flex items-center center">
 									<div class = "flex justify-between">
 										<div class = "org40 flex justify-center column">
 											<div class = "margin-bottom20"><h3 class = "maintext">달콤한 구독 사이트<br>하이스낵</h3></div>
@@ -66,7 +66,7 @@
 											</div>
 										</div>
 											<div class = "org60 flex items-center justify-center">
-												<div class = "imgsize img-border"><!-- <img src="/re/img/box.png" alt="sub-img"> --></div>
+												<div class = "subimgsize img-border"><!-- <img src="/re/img/box.png" alt="sub-img"> --></div>
 											</div>
 									</div>
 								</div>
@@ -92,7 +92,7 @@
 		
 		
 		
-		<div class="boxcolor flex justify-center">
+		<div class="boxcolor flex justify-center topflex">
 			<div class="boxsize flex items-center justify-between">
 				<div class = "flex justify-between" style ="width: 100%">
 					<div class = "org60 flex">
@@ -111,8 +111,8 @@
 		</div>
 		
 		<div class= "boxcolor flex justify-center">
-			<div class="boxsize flex items-center">
-				<div class = "flex justify-between" style ="width: 100%">
+			<div class="boxsize flex items-center ">
+				<div class = "flex justify-between column-reverse" style ="width: 100% ">
 					<div class = "org40 flex justify-center column">
 						<div class = "margin-bottom20"><h3 class = "maintext">마음에 드는 과자는<br>직접 쇼핑!</h3></div>
 						<div class = "margin-bottom20">
@@ -132,7 +132,7 @@
 		</div>
 		
 		<!-- <div class = "middle-box img-border middle-img flex"> -->
-			<div class = "parallaxbox text-center parallaximg flex item-center justify-center">
+			<div class = "parallaxbox text-center parallaximg flex item-center justify-center ">
 				<h3 class = "reviewfont-size">지금 나에게 맞는 과자 받아가세요</h3>
 			</div>
 		<!-- </div> -->

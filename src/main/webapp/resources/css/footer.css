@@ -122,3 +122,32 @@ footer {
 	bottom: 0px;
 	width: 100%;
 }
+@media screen and (max-width: 768px) {
+	
+	body {
+		padding-bottom: 800px;
+	}
+	.footerall {
+		flex-direction: column;
+		height: auto;
+	}
+	.logosize {
+		padding-top: 50px;
+	}
+	.maringtop {
+    	margin-bottom: 50px;
+	}
+	.footbottom {
+		padding-bottom: 50px;
+		text-align: center;
+	}
+	.qrmenu {
+		padding-bottom: 50px;
+	}
+	.pbottom50 {
+		padding-bottom: 50px;
+	}
+	#footerdown {
+		height: 50px;
+	}
+}
