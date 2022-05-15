@@ -168,3 +168,18 @@
     background: rgb(246, 219, 69);
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
+
+.modal-pagenation {
+    padding-top: 8px;
+    border-top: 2px solid rgb(206, 204, 204);
+    font-size: var(--font-size-laguler);
+}
+
+.modal-pagenation,
+#pages {
+    display: flex;
+    height: auto !important;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

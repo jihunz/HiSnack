@@ -63,7 +63,7 @@ class Search extends React.Component {
     enter(event) {
         const { category, onList } = this.props;
 
-        if (event.keyCode == 13) onList(category, null, null, 1, null, "sec-search");
+        if (event.keyCode == 13) onList(category, null, null, 1, ".sec-search");
     }
 
     componentDidUpdate(prevProps) {
@@ -95,7 +95,7 @@ class Search extends React.Component {
                     className="sec-search searchBox"
                     placeholder={this.state.t}
                     onKeyPress={() => this.enter(event)} />
-                <div id="searchBox-btn" onClick={() => onList(category, null, null, 1, null, "sec-search")}><img src="/re/img/admin-search.png" /></div>
+                <div id="searchBox-btn" onClick={() => onList(category, null, null, 1, ".sec-search")}><img src="/re/img/admin-search.png" /></div>
             </div>
         );
     }

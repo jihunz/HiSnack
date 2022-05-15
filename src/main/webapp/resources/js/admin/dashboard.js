@@ -20,6 +20,10 @@ class Dashboard extends React.Component {
             pageList: [],
             next: "",
             query: "",
+            t_prev: "",
+            t_pageList: [],
+            t_next: "",
+            t_query: "",
         };
 
         this.list = this.list.bind(this);
@@ -36,21 +40,22 @@ class Dashboard extends React.Component {
         this.selectTag = this.selectTag.bind(this);
         this.removeTag = this.removeTag.bind(this);
         this.removeTags = this.removeTags.bind(this);
-        this.tagList = this.tagList.bind(this);
+        this.setList = this.setList.bind(this);
+        this.setTags = this.setTags.bind(this);
     }
 
-    list(category, page, query, search) {
+    list(category, page, query, search, type) {
         let url = `rest/${category}`;
-
+        
         if (page != null) {
             //페이지네이션 시 요청할 uri
             url += `?page=${page}&${query}`
         } else if (search != null) {
             //검색 시 요청할 uri
-            const keyword = document.querySelector(".sec-search").value;
+            let keyword = document.querySelector(type).value;
             url += `?search=${search}&keyword=${keyword}`
         }
-
+        
         fetch(url, {
             method: "GET",
             headers: {
@@ -58,31 +63,30 @@ class Dashboard extends React.Component {
             }
         }).then(res => res.json()).then(result => {
             this.setState((state, props) => {
-                state.list = result.list;
-                state.pageList = result.pager.list;
-                state.prev = result.pager.prev;
-                state.next = result.pager.next;
-                state.query = result.pager.query;
+                if (type == '.modal-search') {
+                    this.setTags(state, result);
+                } else {
+                    this.setList(state, result);
+                }
                 return state;
             });
         }).catch(err => console.log(err));
     }
 
-    tagList() {
-        const keyword = document.querySelector(".add-search").value;
-        let url = `rest/tag?search=1&keyword=${keyword}`
-
-        fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json"
-            }
-        }).then(res => res.json()).then(result => {
-            this.setState((state, props) => {
-                state.ptags = result.list;
-                return state;
-            });
-        }).catch(err => console.log(err));
+    setList(state, result) {
+        state.list = result.list;
+        state.pageList = result.pager.list;
+        state.prev = result.pager.prev;
+        state.next = result.pager.next;
+        state.query = result.pager.query;
+    }
+    
+    setTags(state, result) {
+        state.ptags = result.list;
+        state.t_pageList = result.pager.list;
+        state.t_prev = result.pager.prev;
+        state.t_next = result.pager.next;
+        state.t_query = result.pager.query;
     }
 
     item(event, category) {
@@ -245,7 +249,7 @@ class Dashboard extends React.Component {
 
     removeTags(source) {
         const { selectTags } = this.state;
-        { this.setState({ selectTags: [], ptags: [] }); }
+        { this.setState({ selectTags: [], ptags: [], t_pageList: [] }); }
     }
 
 
@@ -257,7 +261,7 @@ class Dashboard extends React.Component {
     componentWillUnmount() { }
 
     render() {
-        const { title, list, item, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, item, ptags, selectTags, pageList, prev, next, query, t_pageList, t_prev, t_next, t_query, category, id } = this.state;
         return (
             <div className="admin-container">
                 <InfoModal
@@ -271,8 +275,12 @@ class Dashboard extends React.Component {
                     title={title}
                     ptags={ptags}
                     selectTags={selectTags}
+                    t_pageList={t_pageList}
+                    t_prev={t_prev}
+                    t_next={t_next}
+                    t_query={t_query}
+                    onList={this.list}
                     onModify={this.modify}
-                    onTagList={this.tagList}
                     onSelectTag={this.selectTag}
                     onRemoveTag={this.removeTag}
                     onRemoveTags={this.removeTags}
@@ -283,10 +291,14 @@ class Dashboard extends React.Component {
                     item={item}
                     ptags={ptags}
                     selectTags={selectTags}
+                    t_pageList={t_pageList}
+                    t_prev={t_prev}
+                    t_next={t_next}
+                    t_query={t_query}
+                    onList={this.list}
                     onChange={this.change}
                     onTagChange={this.tagChange}
                     onModify={this.modify}
-                    onTagList={this.tagList}
                     onSelectTag={this.selectTag}
                     onRemoveTag={this.removeTag}
                     onRemoveTags={this.removeTags}

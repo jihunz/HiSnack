@@ -15,23 +15,38 @@ class Pagenation extends React.Component {
     }
 
     render() {
-        const { pageList, prev, next, query, category, onList } = this.props;
+        const { type, onList } = this.props;
+        let category = this.props.category;
+        let pageList = this.props.pageList;
+        let prev = this.props.prev;
+        let next = this.props.next;
+        let query = this.props.query;
+        let style = "pagenation";
+
+        if(type == '.modal-search') {
+            category = 'tag';
+            pageList = this.props.t_pageList;
+            prev = this.props.t_prev;
+            next = this.props.t_next;
+            query = this.props.t_query;
+            style = "modal-pagenation"
+        }
 
         return (
-            <div className="pagenation">
-                <div id="prev" onClick={() => onList(category, prev, query)} >이전</div>
+            <div className={style}>
+                <div id="prev" onClick={() => onList(category, prev, query, null, type)} >이전</div>
                 <div id="pages">
-                    {pageList.map(page =>
-                        <div key={page} 
+                    { pageList && pageList.length > 0 ? pageList.map(page =>
+                        <div key={'t' + page} 
                             className={this.state.p == page ? "curr-page" : ''}
                             onClick={() => {
-                                onList(category, page, query)
+                                onList(category, page, query, null, type)
                                 this.setP(event)
                             }}
                         >{page}</div>
-                    )}
+                    ) : <div>1</div>}
                 </div>
-                <div id="next" onClick={() => onList(category, next, query)}>다음</div>
+                <div id="next" onClick={() => onList(category, next, query, null, type)}>다음</div>
             </div>
 
         );
