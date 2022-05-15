@@ -21,6 +21,7 @@ class Pagenation extends React.Component {
         let prev = this.props.prev;
         let next = this.props.next;
         let query = this.props.query;
+        let style = "pagenation";
 
         if(type == '.modal-search') {
             category = 'tag';
@@ -28,13 +29,14 @@ class Pagenation extends React.Component {
             prev = this.props.t_prev;
             next = this.props.t_next;
             query = this.props.t_query;
+            style = "modal-pagenation"
         }
 
         return (
-            <div className="pagenation">
+            <div className={style}>
                 <div id="prev" onClick={() => onList(category, prev, query, null, type)} >이전</div>
                 <div id="pages">
-                    { pageList ? pageList.map(page =>
+                    { pageList && pageList.length > 0 ? pageList.map(page =>
                         <div key={'t' + page} 
                             className={this.state.p == page ? "curr-page" : ''}
                             onClick={() => {
@@ -42,7 +44,7 @@ class Pagenation extends React.Component {
                                 this.setP(event)
                             }}
                         >{page}</div>
-                    ) : null}
+                    ) : <div>1</div>}
                 </div>
                 <div id="next" onClick={() => onList(category, next, query, null, type)}>다음</div>
             </div>

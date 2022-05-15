@@ -268,7 +268,7 @@ class Dashboard extends React.Component {
 
     removeTags(source) {
         const { selectTags } = this.state;
-        { this.setState({ selectTags: [], ptags: [] }); }
+        { this.setState({ selectTags: [], ptags: [], t_pageList: [] }); }
     }
 
 
