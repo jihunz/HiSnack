@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.ac.hisnack.dao.MemberTagDao;
 import kr.ac.hisnack.model.MemberTag;
+import kr.ac.hisnack.model.Product;
 import kr.ac.hisnack.model.ProductTag;
 import kr.ac.hisnack.model.Tag;
 
@@ -15,6 +16,8 @@ import kr.ac.hisnack.model.Tag;
 public class MemberTagServiceImpl implements MemberTagService{
 	@Autowired
 	MemberTagDao dao;
+	@Autowired
+	ProductService ps;
 	
 /**
  * 회원이 선택한 태그 리스트
@@ -76,6 +79,22 @@ public class MemberTagServiceImpl implements MemberTagService{
 				item.setRecom('y');
 				dao.add(item);
 			}
+		}
+	}
+/**
+ * 회원이 선택한 상품을 recom의 값에 따라 호불호를 설정한다
+ * */
+	@Transactional
+	@Override
+	public void add(String id, int code, char recom) {
+		Product product = ps.item(code);
+		
+		for(ProductTag pt : product.getTags()) {
+			MemberTag mt = new MemberTag();
+			mt.setId(id);
+			mt.setTcode(pt.getTcode());
+			mt.setRecom(recom);
+			dao.add(mt);
 		}
 	}
 }

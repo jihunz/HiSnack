@@ -2,6 +2,7 @@ package kr.ac.hisnack.service;
 
 import java.util.List;
 
+import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.util.Pager;
 
@@ -12,4 +13,5 @@ public interface OrdersService {
 	Orders item(int code);
 	List<Orders> list(Pager pager);
 	Orders latestSubscribe(String id);
+	void subscribe(Orders item, Member user, String subject, String ... contents);
 }

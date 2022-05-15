@@ -1,5 +1,7 @@
 'use strict'
 
+// member item, update, delete 요청에 '?id=아이디값' 쿼리스트링 추가하기
+
 // 마이 페이지의 모든 컴포넌트들의 부모 컴포넌트 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -10,6 +12,7 @@ class Dashboard extends React.Component {
             category: "sub",
             title: "구독 상품 내역",
             list: [],
+            orderList: [],
             item: {},
             //pager용 state
             pageList: [],
@@ -44,7 +47,11 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    state.list = result.list;
+                    if(category != 'orders' && category != 'sub') {
+                        state.list = result.list;
+                    } else {
+                        state.orderList = result.list;
+                    }
                     state.pageList = result.pager.list;
                     state.prev = result.pager.prev;
                     state.next = result.pager.next;
@@ -55,12 +62,17 @@ class Dashboard extends React.Component {
     }
 
     item(event, category) {
-        let keyword = user.userId;
-        if (category != 'member') {
+        let keyword;
+        let url = `/rest/${category}/${keyword}`
+        
+        if (category == 'member') {
+            keyword = user.userId;
+            url = `/rest/${category}/item?id=${keyword}`;
+        } else {
             keyword = event.target.parentNode.dataset.code;
         }
 
-        fetch((`/rest/${category}/${keyword}`), {
+        fetch((url), {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -70,12 +82,11 @@ class Dashboard extends React.Component {
                 (state, props) => {
                     state.item = result.item
                     // 비밀번호 state를 공개하지 않기 위한 코드
-                    if (category == 'member') {
+                    if (category == 'member' && state.item.password != undefined && state.item.password != null && state.item.password != '') {
                         state.item.password = null;
                     }
                     return state;
                 });
-            console.log(this.state.item);
         }).catch(err => console.log(err));
     }
 
@@ -92,12 +103,18 @@ class Dashboard extends React.Component {
 
     update(type) {
         const { category } = this.state;
-
         const formData = new FormData(document.getElementById(`${type}Form`));
         let keyword;
-        category == 'member' ? keyword = user.userId : keyword = document.getElementById("codeInput").value;
+        let url = `/rest/${category}/${keyword}`;
+    
+        if(category == 'member') {
+            keyword = user.userId
+            url = `/rest/${category}/update?id=${keyword}`;
+        } else {
+            keyword = document.getElementById("codeInput").value;
+        }
 
-        fetch(`/rest/${category}/${keyword}`, {
+        fetch(url, {
             method: "POST",
             body: formData,
         }).then(res => res.json()).then(result => {
@@ -173,7 +190,7 @@ class Dashboard extends React.Component {
     componentDidMount() { this.list("sub"); }
 
     render() {
-        const { title, list, item, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, orderList, item, pageList, prev, next, query, category, id } = this.state;
         return (
             <div>
                 <div>마이페이지</div>
@@ -190,6 +207,7 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     list={list}
+                    orderList={orderList}
                     item={item}
                     id={id}
                     pageList={pageList}

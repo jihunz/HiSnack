@@ -1,10 +1,10 @@
 //bootstrap을 사용한 infoModal
 class InfoModal extends React.Component {
     render() {
-        const { category, title, item, tags } = this.props;
+        const { category, title, item, tags, onRemoveTags } = this.props;
         return (
             <div>
-                <div className="modal fade mWrapper" id="infoModal" data-bs-keyboard="false" tabIndex="-1">
+                <div className="modal fade mWrapper" id="infoModal" data-bs-keyboard="false" tabIndex="-1" onClick={onRemoveTags}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -177,7 +177,7 @@ class MemberInfo extends React.Component {
                     <td colSpan="4" id="m-t-td">
                         {item.tags && item.tags.length ? item.tags.map((tag, idx) =>
                             <div key={idx} className="t-item">{`#${tag.content}`}</div>
-                        ) : <div className="text-align-center">아직 선택한 태그가 없습니다</div>}
+                        ) : <div className="text-center">아직 선택한 태그가 없습니다</div>}
                     </td>
                 </tr>
             </>

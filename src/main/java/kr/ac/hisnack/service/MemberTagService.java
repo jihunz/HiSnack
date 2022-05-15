@@ -15,4 +15,6 @@ public interface MemberTagService {
 	void delete(String id);
 
 	void add(List<?> tagList, String id);
+
+	void add(String id, int code, char recom);
 }

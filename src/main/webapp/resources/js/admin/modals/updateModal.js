@@ -1,6 +1,6 @@
 class UpdateModal extends React.Component {
     render() {
-        const { item, tags, category, onChange, onTagChange, onModify } = this.props;
+        const { item, ptags, selectTags, category, onChange, onTagList, onSelectTag, onRemoveTag, onRemoveTags, onModify } = this.props;
 
         return (
             <div>
@@ -9,7 +9,7 @@ class UpdateModal extends React.Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="updateModalLabel">제품 정보 변경</h5>
-                                <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
+                                <button type="button" className="btn-close" onClick={onRemoveTags} data-bs-dismiss="modal"></button>
                             </div>
                             <form id="updateForm" encType="multipart/form-data">
                                 <div className="modal-body">
@@ -18,20 +18,23 @@ class UpdateModal extends React.Component {
                                         value={item.code}
                                     />
                                     {category === 'product' ?
-                                        <PUpateInputs
+                                        <U_ProductInp
                                             item={item}
-                                            tags={tags}
+                                            ptags={ptags}
+                                            selectTags={selectTags}
                                             onChange={onChange}
-                                            onTagChange={onTagChange}
+                                            onTagList={onTagList}
+                                            onSelectTag={onSelectTag}
+                                            onRemoveTag={onRemoveTag}
                                         /> :
-                                        <TUpdateInput
+                                        <U_TagInp
                                             item={item}
                                             onChange={onChange}
                                         />
                                     }
                                 </div>
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary updateCancel" onClick={this.reset} data-bs-dismiss="modal">취소</button>
+                                    <button type="button" className="btn btn-secondary updateCancel" onClick={onRemoveTags} data-bs-dismiss="modal">취소</button>
                                     <button type="button" className="btn btn-primary" onClick={() => onModify("update", category)}>변경</button>
                                 </div>
                             </form>
@@ -43,9 +46,18 @@ class UpdateModal extends React.Component {
     }
 }
 
-class PUpateInputs extends React.Component {
+class U_ProductInp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.enter = this.enter.bind(this);
+    }
+
+    enter(event) {
+        if (event.keyCode == 13) this.props.onTagList();
+    }
+
     render() {
-        const { item, tags, onChange, onTagChange } = this.props;
+        const { item, ptags, selectTags, onChange, onTagList, onSelectTag, onRemoveTag } = this.props;
         return (
             <>
                 <div className="mb-3">
@@ -75,21 +87,37 @@ class PUpateInputs extends React.Component {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">태그 코드</label>
-                    {tags ?
-                        tags.map(tag =>
-                            <input type="number" className="form-control"
-                                key={tag.tcode}
-                                name="tcode"
-                                value={tag.tcode}
-                                onChange={() => onTagChange(event, tags.indexOf(tag))}
-                            />)
-                        : <input type="number" className="form-control"
-                            key={item.code}
-                            name="tcode"
-                            placeholder="등록된 태그가 없습니다"
-                        />
-                    }
+                    <label className="form-label">태그</label>
+                    <div className="selectedPtags">
+                        {selectTags.length && selectTags ? selectTags.map((tag, idx) =>
+                            <>
+                                <div key={`content1${idx}`} className="ptag-content pointer">
+                                    <p key={`content2${idx}`}>{tag.content}</p>
+                                    <div key={`content3${idx}`} onClick={() => onRemoveTag(tag.tcode)}>X</div>
+                                </div>
+                                <input
+                                    key={`tag${idx}`}
+                                    type="hidden"
+                                    name="tcode"
+                                    value={tag.tcode}
+                                    readOnly />
+                            </>
+                        ) : null}
+                    </div>
+                    <div className="input-group mb-3">
+                        <input
+                            type="text"
+                            name="keyword"
+                            className="add-search form-control"
+                            placeholder="태그 이름을 검색해주세요"
+                            onKeyPress={() => this.enter(event)} />
+                        <button type="button" className="btn btn-warning" onClick={onTagList}>검색</button>
+                    </div>
+                    <div className="ptags">
+                        {ptags.length && ptags ? ptags.map((tag) =>
+                            <div key={`result${tag.code}`} id={tag.code} className="pointer" onClick={onSelectTag}>{tag.content}</div>)
+                            : '검색된 태그가 없습니다'}
+                    </div>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">설명</label>
@@ -111,7 +139,7 @@ class PUpateInputs extends React.Component {
     }
 }
 
-class TUpdateInput extends React.Component {
+class U_TagInp extends React.Component {
     render() {
         const { item, onChange } = this.props;
         return (

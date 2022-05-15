@@ -1,5 +1,7 @@
 package kr.ac.hisnack.util.interceptor;
 
+import java.net.URL;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -33,6 +35,14 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 			flashMap.put("err_msg", "로그인이 필요합니다");
 			FlashMapManager manager = RequestContextUtils.getFlashMapManager(request);
 			manager.saveOutputFlashMap(flashMap, request, response);
+			
+//			원래 가려고 했던 곳을 저장한다
+			URL url = new URL(request.getRequestURL().toString()+"?"+request.getQueryString());
+			
+			String query = "?"+url.getQuery();
+			String target = url.getPath() + (query != null ? query : "");
+			
+			session.setAttribute("dest_path", target);
 			
 			return false;
 		}

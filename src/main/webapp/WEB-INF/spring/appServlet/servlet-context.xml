@@ -4,7 +4,9 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
@@ -36,7 +38,7 @@
 	            <beans:prop key="mail.transport.protocol">smtp</beans:prop>
 	            <beans:prop key="mail.smtp.auth">true</beans:prop>
 	            <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-	            <beans:prop key="mail.debug">true</beans:prop>
+	            <beans:prop key="mail.debug">false</beans:prop>
 	            <beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
 				<beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
 	        </beans:props>
@@ -92,4 +94,12 @@
 			<beans:bean class="kr.ac.hisnack.util.interceptor.AdminInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
+	<!-- 스케쥴러 설정 -->
+	<!-- 스케쥴러 파일이 있는 패키지 -->
+	<context:component-scan base-package="kr.ac.hisnack.scheduler"/>
+	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 -->
+	<task:scheduler id="jobScheduler" pool-size="10"/>
+	<task:annotation-driven scheduler="jobScheduler"/>
+	
 </beans:beans>

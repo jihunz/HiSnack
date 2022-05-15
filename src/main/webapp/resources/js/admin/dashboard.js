@@ -12,7 +12,6 @@ class Dashboard extends React.Component {
             // CRUD를 위한 state
             list: [],
             item: {},
-            tags: [],
             ptags: [],
             selectTags: [],
             codes: [],
@@ -72,7 +71,7 @@ class Dashboard extends React.Component {
     tagList() {
         const keyword = document.querySelector(".add-search").value;
         let url = `rest/tag?search=1&keyword=${keyword}`
-        
+
         fetch(url, {
             method: "GET",
             headers: {
@@ -87,7 +86,11 @@ class Dashboard extends React.Component {
     }
 
     item(event, category) {
-        fetch((`/rest/${category}/${event.target.parentNode.dataset.code}`), {
+        let url = `/rest/${category}/${event.target.parentNode.dataset.code}`
+
+        if (category == 'member') url = `/rest/${category}/item?id=${event.target.parentNode.dataset.code}`;
+
+        fetch(url, {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -96,7 +99,7 @@ class Dashboard extends React.Component {
             this.setState(
                 (state, props) => {
                     state.item = result.item;
-                    state.tags = result.item.tags;
+                    state.selectTags = result.item.tags;
                     return state;
                 });
         }).catch(err => console.log(err));
@@ -150,7 +153,11 @@ class Dashboard extends React.Component {
 
     //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
     delete(event, category) {
-        fetch(`/rest/${category}/${event.target.id}`, {
+        let url = `/rest/${category}/${event.target.id}`
+
+        if (category == 'member') url = `/rest/${category}/delete?id=${event.target.id}`;
+
+        fetch(url, {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             alert(result.msg);
@@ -160,10 +167,14 @@ class Dashboard extends React.Component {
 
     // 전체 및 선택 삭제 시 사용하는 함수
     deleteList(category) {
-        const c = this.state.codes;
+        const codes = this.state.codes;
+        let i = 0;
+        let url = `/rest/${category}/${codes[i]}`;
 
-        for (let i = 0; i <= c.length - 1; i++) {
-            fetch(`/rest/${category}/${c[i]}`, {
+        if (category == 'member') url = `/rest/${category}/delete?id=${codes[i]}`;
+
+        for (let i = 0; i <= codes.length - 1; i++) {
+            fetch(url, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
                 this.initCodes();
@@ -246,13 +257,14 @@ class Dashboard extends React.Component {
     componentWillUnmount() { }
 
     render() {
-        const { title, list, item, tags, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, item, ptags, selectTags, pageList, prev, next, query, category, id } = this.state;
         return (
             <div className="admin-container">
                 <InfoModal
                     category={category}
                     title={title}
                     item={item}
+                    onRemoveTags={this.removeTags}
                 />
                 <AddModal
                     category={category}
@@ -269,10 +281,16 @@ class Dashboard extends React.Component {
                     category={category}
                     title={title}
                     item={item}
-                    tags={tags}
+                    ptags={ptags}
+                    selectTags={selectTags}
                     onChange={this.change}
                     onTagChange={this.tagChange}
-                    onModify={this.modify} />
+                    onModify={this.modify}
+                    onTagList={this.tagList}
+                    onSelectTag={this.selectTag}
+                    onRemoveTag={this.removeTag}
+                    onRemoveTags={this.removeTags}
+                />
                 <Sidebar
                     onSetCategory={this.setCategory}
                 />

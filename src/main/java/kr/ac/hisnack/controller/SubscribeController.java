@@ -15,17 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kr.ac.hisnack.model.MailHtmlTemplate;
 import kr.ac.hisnack.model.Member;
-import kr.ac.hisnack.model.OrderedProduct;
 import kr.ac.hisnack.model.Orders;
 import kr.ac.hisnack.model.Tag;
-import kr.ac.hisnack.service.MemberService;
-import kr.ac.hisnack.service.MemberTagService;
 import kr.ac.hisnack.service.OrdersService;
-import kr.ac.hisnack.service.ProductService;
 import kr.ac.hisnack.service.TagService;
-import kr.ac.hisnack.util.EmailSender;
 
 /**
  * 구독과 관련된 일을 하는 컨트롤러
@@ -39,14 +33,6 @@ public class SubscribeController {
 	TagService ts;
 	@Autowired
 	OrdersService os;
-	@Autowired
-	ProductService ps;
-	@Autowired
-	MemberTagService mts;
-	@Autowired
-	MemberService ms;
-	@Autowired
-	EmailSender mailSender;
 	
 /**
  * 구독 상세 페이지로 이동시키는 메서드
@@ -133,27 +119,10 @@ public class SubscribeController {
 		item.setTags(sub.getTags());
 		item.setSubscribe('y');
 		
-//		여기서 추천 범위를 설정할 수 있다
-		List<OrderedProduct> list = ps.recommend(item.getId(), 30, item.getTotal(), (int)(item.getTotal() * 0.2));
-		item.setProducts(list);
-		
-		os.add(item);
 		session.removeAttribute("sub");
 		
-		Member user = ms.item(item.getId());
-		
-//		구독을 하면 이메일을 보낸다
-		if(user.getEmail() != null && !user.getEmail().equals("")) {
-//			이메일을 위한 html 인스턴스를 사용
-	        MailHtmlTemplate html = new MailHtmlTemplate("html/subscribe_mail_template.html");
-//	        내용 입력
-	        html.setContents("안녕하세요. Hi Snack입니다",
-	        				"구독해 주셔서 감사합니다!");
-//	        이미지로 들어갈 상품 설정
-	        html.setOrderedProduct(os.item(item.getCode()).getProducts());
-//	        이미지가 포함된 html로 메일 보내기
-	        mailSender.sendHtmlWithImageEmail(user.getEmail(), user.getName(), "Hi Snack 구독하셨습니다", html);
-		}
+		os.subscribe(item, null, "HiSnack! 구독하셨습니다!", "안녕하세요. HiSnack!입니다",
+														 "구독해 주셔서 감사합니다!");
 		
 		return "redirect:/orders/confirm";
 	}
