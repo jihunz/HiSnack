@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
             }
         }).then(res => res.json()).then(result => {
             this.setState((state, props) => {
-                if (type == '.modal-search') {
+                if (type == '.modal-search' || type == '.modal-search2') {
                     this.setTags(state, result);
                 } else {
                     this.setList(state, result);

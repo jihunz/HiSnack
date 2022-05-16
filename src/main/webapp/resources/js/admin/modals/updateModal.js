@@ -57,7 +57,7 @@ class U_ProductInp extends React.Component {
     }
 
     enter(event) {
-        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, '.modal-search');
+        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, '.modal-search2');
     }
 
     render() {
@@ -112,10 +112,10 @@ class U_ProductInp extends React.Component {
                         <input
                             type="text"
                             name="keyword"
-                            className="modal-search form-control"
+                            className="modal-search2 form-control"
                             placeholder="태그 이름을 검색해주세요"
                             onKeyPress={() => this.enter(event)} />
-                        <button type="button" className="btn btn-warning" onClick={() => onList('tag', null, null, 1, '.modal-search')}>검색</button>
+                        <button type="button" className="btn btn-warning" onClick={() => onList('tag', null, null, 1, '.modal-search2')}>검색</button>
                     </div>
                     <div className="ptags">
                         {ptags.length && ptags ? ptags.map((tag) =>
