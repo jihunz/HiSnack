@@ -101,11 +101,10 @@ class DelBtn extends React.Component {
             <td data-code={item.code}>
                 {category === 'sub' || category === 'orders' ?
                     <button
-                        id={item.code}
-                        onClick={() => onDelete(event, category)}>취소
+                        onClick={() => onDelete(category, item.code)}>취소
                     </button>
                     : null}
-                {category == 'review' ? <button id={item.code} onClick={() => onDelete(event, category)}>삭제</button> : null}
+                {category == 'review' ? <button onClick={() => onDelete(category, item.code)}>삭제</button> : null}
             </td>
         );
     }

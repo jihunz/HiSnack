@@ -64,8 +64,7 @@ class Dashboard extends React.Component {
     }
 
     item(category, code) {
-        let val;
-        let url;
+        let val, url;
         
         if (category == 'member') {
             val = user.userId;
@@ -126,9 +125,8 @@ class Dashboard extends React.Component {
     }
 
     //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
-    delete(event, category) {
-        // prompt()
-        fetch(`/rest/${category}/${event.target.id}`, {
+    delete(category, code) {
+        fetch(`/rest/${category}/${code}`, {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             let msg;
