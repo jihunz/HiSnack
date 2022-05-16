@@ -63,18 +63,16 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    item(event, category, ordersCode) {
-        let keyword;
-        let url = `/rest/${category}/${keyword}`;
+    item(category, code) {
+        let val;
+        let url;
         
         if (category == 'member') {
-            keyword = user.userId;
-            url = `/rest/${category}/item?id=${keyword}`;
-        } else if (ordersCode != undefined) {
-            keyword = ordersCode;
-            url = `/rest/${category}/${keyword}`;
-        } else {
-            keyword = event.target.parentNode.dataset.code;
+            val = user.userId;
+            url = `/rest/${category}/item?id=${val}`;
+        } else if (code != undefined) {
+            val = code;
+            url = `/rest/${category}/${val}`;
         }
 
         fetch(url, {

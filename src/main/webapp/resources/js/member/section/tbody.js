@@ -22,7 +22,6 @@ class Tbody extends React.Component {
                         <DelBtn
                             category={category}
                             item={item}
-                            onItem={onItem}
                             onDelete={onDelete}
                         />
                     </tr>
@@ -59,7 +58,7 @@ class SubList extends React.Component {
         return (
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td onClick={() => {onSetSubForm(1); onItem(event, 'orders', item.code);}}>{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td onClick={() => {onSetSubForm(1); onItem('orders', item.code);}}>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>
         );
