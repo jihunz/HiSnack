@@ -2,7 +2,7 @@
 class Section extends React.Component {
 
     render() {
-        const { title, list, orderList, item, category, pageList, prev, next, query, onList, onUpdate, onDelete, onItem, onGetCode, onChange } = this.props;
+        const { title, list, orderList, item, category, pageList, prev, next, query, subForm, onList, onUpdate, onDelete, onItem, onGetCode, onChange, onSetSubForm } = this.props;
 
         return (
             <div>
@@ -12,6 +12,7 @@ class Section extends React.Component {
                         category={category}
                     />
                 </div>
+                {subForm == 1 ? <SubForm item={item} onUpdate={onUpdate} onChange={onChange} /> : null}
                 {category != 'member' ?
                     <Table
                         list={list}
@@ -25,6 +26,7 @@ class Section extends React.Component {
                         onDelete={onDelete}
                         onItem={onItem}
                         onGetCode={onGetCode}
+                        onSetSubForm={onSetSubForm}
                     />
                     : <MemberForm item={item} onUpdate={onUpdate} onChange={onChange} />
                 }

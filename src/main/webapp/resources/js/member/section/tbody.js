@@ -1,7 +1,7 @@
 //테이블의 행 컴포넌트 -> DB의 각 table에 저장된 데이터의 list를 반환
 class Tbody extends React.Component {
     render() {
-        const { list, orderList, category, onDelete, onItem } = this.props;
+        const { list, orderList, category, onDelete, onItem, onSetSubForm } = this.props;
 
         let data;
         if (category != 'orders' && category != 'sub') {
@@ -15,7 +15,7 @@ class Tbody extends React.Component {
                 {data ? data.map((item, idx) =>
                     <tr key={idx}>
                         {/* 데이터 목록 */}
-                        {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} onSetSubForm={onSetSubForm}/> : null}
                         {category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : null}
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : null}
                         {/* 변경, 삭제 버튼 */}
@@ -55,11 +55,11 @@ function fmtTimestamp(data) {
 class SubList extends React.Component {
 
     render() {
-        const { item } = this.props;
+        const { item, onItem, onSetSubForm } = this.props;
         return (
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td>{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td onClick={() => {onSetSubForm(1); onItem(event, 'orders', item.code);}}>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>
         );
