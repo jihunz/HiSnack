@@ -124,6 +124,17 @@ public class ProductRecommender {
 			range = productList.size();
 		}
 		
+//		적어도 가장 순위가 높은 3위 까지는 무조건 들어가게 한다
+		if(range > 3) {
+//			범위가 3보다 커야 실행된다
+			for(int i = 0; i < 3; i++) {
+				OrderedProduct item = createOrderedProduct(productList, i);
+				productMap.put(item.getPcode(), item);
+				total += productList.get(i).getPrice();
+				System.out.println("무조건 선택 : " + productList.get(i).getName() + ", total : " + total);
+			}
+		}
+		
 //		지정 가격이 될 때까지 상품을 선택한다
 		while(total < basePrice) {
 			int idx = rand.nextInt(range);
@@ -135,12 +146,7 @@ public class ProductRecommender {
 			}
 			else {
 //				없으면 새로 등록한다
-				OrderedProduct item = new OrderedProduct();
-				item.setPcode(productList.get(idx).getCode());
-				item.setAmount(1);
-				item.setPrice(productList.get(idx).getPrice());
-				item.setName(productList.get(idx).getName());
-				
+				OrderedProduct item = createOrderedProduct(productList, idx);
 				productMap.put(item.getPcode(), item);
 			}
 //			선택된 상품 만큼 돈값을 더한다
@@ -151,6 +157,15 @@ public class ProductRecommender {
 		this.total = total;
 		
 		return new ArrayList<>(productMap.values());
+	}
+
+	private OrderedProduct createOrderedProduct(List<Product> productList, int idx) {
+		OrderedProduct item = new OrderedProduct();
+		item.setPcode(productList.get(idx).getCode());
+		item.setAmount(1);
+		item.setPrice(productList.get(idx).getPrice());
+		item.setName(productList.get(idx).getName());
+		return item;
 	}
 
 	private void settingScoreOfProducts(List<Product> productList) {
