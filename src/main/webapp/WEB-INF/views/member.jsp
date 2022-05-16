@@ -21,7 +21,7 @@
     <script type="text/babel" src="/re/js/member/section/thead.js"></script>
     <script type="text/babel" src="/re/js/member/section/tbody.js"></script>
     <script type="text/babel" src="/re/js/member/section/table.js"></script>
-    <script type="text/babel" src="/re/js/member/section/subForm.js"></script>
+    <script type="text/babel" src="/re/js/member/section/subInfo.js"></script>
     <script type="text/babel" src="/re/js/member/section/section.js"></script>
     <script type="text/babel" src="/re/js/member/sidebar/sidebar.js"></script>
     <script type="text/babel" src="/re/js/member/dashboard.js"></script>

@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
             list: [],
             orderList: [],
             item: {},
-            subForm: 0,
+            showSubInfo: false,
             //pager용 state
             pageList: [],
             prev: "",
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
         this.change = this.change.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setTitle = this.setTitle.bind(this);
-        this.setSubForm = this.setSubForm.bind(this);
+        this.setShowSubInfo = this.setShowSubInfo.bind(this);
     }
 
     list(category, page) {
@@ -92,7 +92,7 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    //UpdateModal에 있는 input('태그 코드', '이미지 등록' 제외)들의 state를 관리하는 함수
+    //UpdateModal에 있는 input의 state를 관리하는 함수
     change(event) {
         const inputName = event.target.name;
         this.setState({
@@ -177,14 +177,6 @@ class Dashboard extends React.Component {
             });
     }
 
-    setSubForm(val) {
-        this.setState(
-            (state) => {
-                state.subForm = val;
-                return state;
-            });
-    }
-
     change(event) {
         const inputName = event.target.name;
         this.setState({
@@ -195,20 +187,31 @@ class Dashboard extends React.Component {
         });
     }
 
+    setShowSubInfo(val) {
+        this.setState(
+            (state) => {
+                if(val != null && Object.keys(val).length <= 0) {
+                    state.showSubInfo = val;
+                } else {
+                    state.showSubInfo = false;
+                }
+                return state;
+            });
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() { this.list("sub"); }
 
     render() {
-        const { title, list, orderList, item, pageList, prev, next, query, category, id, subForm } = this.state;
+        const { title, list, orderList, item, pageList, prev, next, query, category, id, showSubInfo } = this.state;
         return (
             <div>
                 <div>마이페이지</div>
-                {category === 'sub' ? <div><div>구독 상품 내역 보기</div><div>구독 정보</div></div> : null}
+                {category === 'sub' ? <div><div onClick={this.setShowSubInfo}>구독 상품 내역 보기</div><div>구독 정보</div></div> : null}
                 {category === 'orders' ? <><div>주문 내역</div></> : null}
                 {category === 'member' ? <><div>회원 정보 수정</div></> : null}
                 {category === 'review' ? <><div>리뷰 목록</div></> : null}
                 <Sidebar
-                    subForm={subForm}
                     onSetCategory={this.setCategory}
                     onSetTitle={this.setTitle}
                     onItem={this.item}
@@ -224,12 +227,13 @@ class Dashboard extends React.Component {
                     prev={prev}
                     next={next}
                     query={query}
+                    showSubInfo={showSubInfo}
                     onList={this.list}
                     onItem={this.item}
                     onUpdate={this.update}
                     onDelete={this.delete}
                     onChange={this.change}
-                    onSetSubForm={this.setSubForm}
+                    onSetShowSubInfo={this.setShowSubInfo}
                 />
             </div>
         );

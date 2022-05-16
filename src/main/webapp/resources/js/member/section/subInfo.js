@@ -1,11 +1,11 @@
 // title 컴포넌트 -> 메뉴 별 title 표시
-class SubForm extends React.Component {
+class SubInfo extends React.Component {
     render() {
         const { item, onUpdate, onChange } = this.props;
 
         return (
             <div>
-                <form id="ordersForm">
+                <form id="SubForm">
                     <h1>배송지 정보</h1>
                     <div>
                         <label>수령인</label>

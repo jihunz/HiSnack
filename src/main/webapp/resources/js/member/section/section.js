@@ -1,8 +1,7 @@
 // 섹션 컴포넌트 -> 검색창, 버튼, 테이블, 페이지네이션을 삽입
 class Section extends React.Component {
-
     render() {
-        const { title, list, orderList, item, category, pageList, prev, next, query, subForm, onList, onUpdate, onDelete, onItem, onGetCode, onChange, onSetSubForm } = this.props;
+        const { title, list, orderList, item, category, pageList, prev, next, query, showSubInfo, onList, onUpdate, onDelete, onItem, onGetCode, onChange, onSetShowSubInfo } = this.props;
 
         return (
             <div>
@@ -12,8 +11,8 @@ class Section extends React.Component {
                         category={category}
                     />
                 </div>
-                {subForm == 1 ? <SubForm item={item} onUpdate={onUpdate} onChange={onChange} /> : null}
-                {category != 'member' ?
+                {showSubInfo ? <SubInfo item={item} onUpdate={onUpdate} onChange={onChange} /> : null}
+                {category != 'member' && !showSubInfo ?
                     <Table
                         list={list}
                         orderList={orderList}
@@ -26,7 +25,7 @@ class Section extends React.Component {
                         onDelete={onDelete}
                         onItem={onItem}
                         onGetCode={onGetCode}
-                        onSetSubForm={onSetSubForm}
+                        onSetShowSubInfo={onSetShowSubInfo}
                     />
                     : <MemberForm item={item} onUpdate={onUpdate} onChange={onChange} />
                 }
