@@ -18,7 +18,7 @@ class Tbody extends React.Component {
                         {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} onSetShowSubInfo={onSetShowSubInfo}/> : null}
                         {category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : null}
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : null}
-                        {/* 변경, 삭제 버튼 */}
+                        {/* 삭제 버튼 */}
                         <DelBtn
                             category={category}
                             item={item}

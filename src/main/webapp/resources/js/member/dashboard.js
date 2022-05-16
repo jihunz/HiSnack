@@ -14,6 +14,7 @@ class Dashboard extends React.Component {
             list: [],
             orderList: [],
             item: {},
+            item_sub: {},
             showSubInfo: false,
             //pager용 state
             pageList: [],
@@ -27,7 +28,8 @@ class Dashboard extends React.Component {
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteList = this.deleteList.bind(this);
-        this.change = this.change.bind(this);
+        this.subChange = this.subChange.bind(this);
+        this.memberChange = this.memberChange.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setTitle = this.setTitle.bind(this);
         this.setShowSubInfo = this.setShowSubInfo.bind(this);
@@ -82,18 +84,36 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    state.item = result.item
+                    if (category == 'orders') {
+                        state.item_sub = result.item;
+                    } else {
+                        state.item = result.item;
+                    }
+
                     // 비밀번호 state를 공개하지 않기 위한 코드
                     if (category == 'member' && state.item.password != undefined && state.item.password != null && state.item.password != '') {
                         state.item.password = null;
                     }
+
+
                     return state;
                 });
         }).catch(err => console.log(err));
     }
 
-    //UpdateModal에 있는 input의 state를 관리하는 함수
-    change(event) {
+    // 구독 정보의 input state를 관리하는 함수
+    subChange(event) {
+        const inputName = event.target.name;
+        this.setState({
+            item_sub: {
+                ...this.state.item_sub,
+                [inputName]: event.target.value,
+            },
+        });
+    }
+
+    // 회원 정보 수정의 input state를 관리하는 함수
+    memberChange(event) {
         const inputName = event.target.name;
         this.setState({
             item: {
@@ -103,24 +123,33 @@ class Dashboard extends React.Component {
         });
     }
 
-    update(type) {
-        const { category } = this.state;
-        const formData = new FormData(document.getElementById(`${type}Form`));
-        let keyword;
-        let url = `/rest/${category}/${keyword}`;
-    
+    update(category, val) {
+        const formData = new FormData(document.getElementById(`${category}Form`));
+
+        let code = val;
+        let url = `/rest/${category}/${code}`;
+        
         if(category == 'member') {
-            keyword = user.userId
-            url = `/rest/${category}/update?id=${keyword}`;
-        } else {
-            keyword = document.getElementById("codeInput").value;
+            code = user.userId;
+            url = `/rest/${category}/update?id=${code}`;
         }
 
         fetch(url, {
             method: "POST",
             body: formData,
         }).then(res => res.json()).then(result => {
-            alert("회원 정보가 정상적으로 수정되었습니다.");
+            let msg;
+            switch(category) {
+                case 'sub':
+                    msg = '구독 정보가 변경되었습니다.'
+                    break;
+                case 'member':
+                    msg = '회원 정보가 변경되었습니다.'
+                    break;
+                default:
+                    break;
+            }
+            alert(msg);
         }).catch(err => console.log(err));
     }
 
@@ -177,16 +206,6 @@ class Dashboard extends React.Component {
             });
     }
 
-    change(event) {
-        const inputName = event.target.name;
-        this.setState({
-            item: {
-                ...this.state.item,
-                [inputName]: event.target.value,
-            },
-        });
-    }
-
     setShowSubInfo(val) {
         this.setState(
             (state) => {
@@ -203,7 +222,7 @@ class Dashboard extends React.Component {
     componentDidMount() { this.list("sub"); }
 
     render() {
-        const { title, list, orderList, item, pageList, prev, next, query, category, id, showSubInfo } = this.state;
+        const { title, list, orderList, item_sub, item, pageList, prev, next, query, category, id, showSubInfo } = this.state;
         return (
             <div>
                 <div>마이페이지</div>
@@ -222,6 +241,7 @@ class Dashboard extends React.Component {
                     list={list}
                     orderList={orderList}
                     item={item}
+                    item_sub={item_sub}
                     id={id}
                     pageList={pageList}
                     prev={prev}
@@ -232,7 +252,8 @@ class Dashboard extends React.Component {
                     onItem={this.item}
                     onUpdate={this.update}
                     onDelete={this.delete}
-                    onChange={this.change}
+                    onSubChange={this.subChange}
+                    onMemberChange={this.memberChange}
                     onSetShowSubInfo={this.setShowSubInfo}
                 />
             </div>
