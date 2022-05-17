@@ -40,8 +40,10 @@ public class Orders {
 	public int getAmount() {
 		int amount = 0;
 		
-		for(OrderedProduct product : products) {
-			amount += product.getAmount();
+		if(products != null) {
+			for(OrderedProduct product : products) {
+				amount += product.getAmount();
+			}	
 		}
 		
 		return amount;
