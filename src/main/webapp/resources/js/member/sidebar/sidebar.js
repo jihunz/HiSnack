@@ -20,9 +20,9 @@ class Menu extends React.Component {
     render() {
         const { onSetCategory, onSetTitle, onItem, onSetShowSubInfo } = this.props;
         return (
-            <>
-                <div>
-                    <h4>MENU</h4>
+            <div className="menu">
+                <div className="menu-title-wrapper">
+                    <h4 id="menu-title">MENU</h4>
                 </div>
                 <MenuList 
                     onSetCategory={onSetCategory}
@@ -30,7 +30,7 @@ class Menu extends React.Component {
                     onItem={onItem}
                     onSetShowSubInfo={onSetShowSubInfo}
                 />
-            </>
+            </div>
 
         );
     }
@@ -41,7 +41,7 @@ class MenuList extends React.Component {
     render() {
         const { onSetCategory, onSetTitle, onItem, onSetShowSubInfo } = this.props;
         return (
-            <div >
+            <div className="menu-list">
                 <ul>
                     <li onClick={ () => {
                         onSetCategory("sub", "구독"); 

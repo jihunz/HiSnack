@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    if(category != 'orders' && category != 'sub') {
+                    if (category != 'orders' && category != 'sub') {
                         state.list = result.list;
                     } else {
                         state.orderList = result.list;
@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
 
     item(category, code) {
         let val, url;
-        
+
         if (category == 'member') {
             val = user.userId;
             url = `/rest/${category}/item?id=${val}`;
@@ -128,8 +128,8 @@ class Dashboard extends React.Component {
 
         let code = val;
         let url = `/rest/${category}/${code}`;
-        
-        if(category == 'member') {
+
+        if (category == 'member') {
             code = user.userId;
             url = `/rest/${category}/update?id=${code}`;
         }
@@ -139,7 +139,7 @@ class Dashboard extends React.Component {
             body: formData,
         }).then(res => res.json()).then(result => {
             let msg;
-            switch(category) {
+            switch (category) {
                 case 'sub':
                     msg = '구독 정보가 변경되었습니다.'
                     break;
@@ -159,7 +159,7 @@ class Dashboard extends React.Component {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             let msg;
-            switch(category) {
+            switch (category) {
                 case 'orders':
                     msg = '주문이 취소되었습니다.'
                     break;
@@ -209,7 +209,7 @@ class Dashboard extends React.Component {
     setShowSubInfo(val) {
         this.setState(
             (state) => {
-                if(val != null && Object.keys(val).length <= 0) {
+                if (val != null && Object.keys(val).length <= 0) {
                     state.showSubInfo = val;
                 } else {
                     state.showSubInfo = false;
@@ -224,39 +224,47 @@ class Dashboard extends React.Component {
     render() {
         const { title, list, orderList, item_sub, item, pageList, prev, next, query, category, id, showSubInfo } = this.state;
         return (
-            <div>
-                <div>마이페이지</div>
-                {category === 'sub' ? <div><div onClick={this.setShowSubInfo}>구독 상품 내역 보기</div><div>구독 정보</div></div> : null}
-                {category === 'orders' ? <><div>주문 내역</div></> : null}
-                {category === 'member' ? <><div>회원 정보 수정</div></> : null}
-                {category === 'review' ? <><div>리뷰 목록</div></> : null}
-                <Sidebar
-                    onSetCategory={this.setCategory}
-                    onSetTitle={this.setTitle}
-                    onItem={this.item}
-                    onSetShowSubInfo={this.setShowSubInfo}
-                />
-                <Section
-                    category={category}
-                    title={title}
-                    list={list}
-                    orderList={orderList}
-                    item={item}
-                    item_sub={item_sub}
-                    id={id}
-                    pageList={pageList}
-                    prev={prev}
-                    next={next}
-                    query={query}
-                    showSubInfo={showSubInfo}
-                    onList={this.list}
-                    onItem={this.item}
-                    onUpdate={this.update}
-                    onDelete={this.delete}
-                    onSubChange={this.subChange}
-                    onMemberChange={this.memberChange}
-                    onSetShowSubInfo={this.setShowSubInfo}
-                />
+            <div className="member-container">
+                <div className="sidebar-container">
+                    <div id="title">마이페이지</div>
+                    <Sidebar
+                        onSetCategory={this.setCategory}
+                        onSetTitle={this.setTitle}
+                        onItem={this.item}
+                        onSetShowSubInfo={this.setShowSubInfo}
+                    />
+                </div>
+                <div className="section-container">
+                    {category === 'sub' ?
+                        <div className="sub-menu">
+                            <div onClick={this.setShowSubInfo} className={showSubInfo ? '' : "sub-menu-clicked"}>구독 내역</div>
+                            <div className={showSubInfo ? "sub-menu-clicked" : ''}>구독 상세 정보</div>
+                        </div> : null}
+                    {category === 'orders' ? <><div>주문 내역</div></> : null}
+                    {category === 'member' ? <><div>회원 정보 수정</div></> : null}
+                    {category === 'review' ? <><div>리뷰 목록</div></> : null}
+                    <Section
+                        category={category}
+                        title={title}
+                        list={list}
+                        orderList={orderList}
+                        item={item}
+                        item_sub={item_sub}
+                        id={id}
+                        pageList={pageList}
+                        prev={prev}
+                        next={next}
+                        query={query}
+                        showSubInfo={showSubInfo}
+                        onList={this.list}
+                        onItem={this.item}
+                        onUpdate={this.update}
+                        onDelete={this.delete}
+                        onSubChange={this.subChange}
+                        onMemberChange={this.memberChange}
+                        onSetShowSubInfo={this.setShowSubInfo}
+                    />
+                </div>
             </div>
         );
     }
