@@ -9,19 +9,20 @@ class SubInfo extends React.Component {
                     <h1>배송지 정보</h1>
                     <div>
                         <label>수령인</label>
-                        <input name="name" value={item_sub.name} onChange={onSubChange} />
+                        <input type="text" name="name" value={item_sub.name} onChange={onSubChange} />
                     </div>
                     <div>
                         <label>연락처</label>
-                        <input name="tel" value={item_sub.tel} onChange={onSubChange} />
+                        <input type="text" name="tel" value={item_sub.tel} onChange={onSubChange} />
                     </div>
                     <div>
                         <label>주소</label>
-                        <input name="address" value={item_sub.address} onChange={onSubChange} />
+                        <input type="text" id="address" name="address" value={item_sub.address} onChange={onSubChange} />
+                        <button type="button" onClick={execDaumPostcode} className="addressbtn text-center">주소 찾기</button>
                     </div>
                     <div>
                         <label>구독가격</label>
-                        <input name="total" value={item_sub.total} readOnly />
+                        <input type="number" name="total" value={item_sub.total} readOnly />
                     </div>
                     <button type="button" onClick={() => onUpdate("sub", item_sub.code)}>수정</button>
                 </form>
