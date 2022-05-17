@@ -43,7 +43,7 @@ function execDaumPostcode() {
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("address").value = addr;
                 // 커서를 전화번호 필드로 이동한다.
-                document.getElementById("tel").focus();
+                if (document.getElementById("tel")) document.getElementById("tel").focus();
         }
     }).open();
 }
