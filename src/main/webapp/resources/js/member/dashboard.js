@@ -234,6 +234,7 @@ class Dashboard extends React.Component {
                     onSetCategory={this.setCategory}
                     onSetTitle={this.setTitle}
                     onItem={this.item}
+                    onSetShowSubInfo={this.setShowSubInfo}
                 />
                 <Section
                     category={category}
