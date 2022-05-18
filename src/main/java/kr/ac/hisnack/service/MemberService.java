@@ -17,4 +17,5 @@ public interface MemberService {
 	void keepLogin(String sessionId, String id);
 	Member checkMemberWithSessionId(String sessionId);
 	boolean confirmEmail(String email);
+	void changePassword(String id, String pw);
 }

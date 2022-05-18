@@ -63,4 +63,12 @@ public class MemberDaoImpl implements MemberDao{
 	public List<Member> checkMemberWithSessionId(String sessionId) {
 		return sql.selectList("member.check", sessionId);
 	}
+	
+	@Override
+	public void changePassword(String id, String pw) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("password", pw);
+		sql.update("member.change_password", map);
+	}
 }

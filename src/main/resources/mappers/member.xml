@@ -77,4 +77,10 @@
 		FROM member
 		WHERE session_id = #{sessionId}
 	</select>
+	<update id="change_password">
+		UPDATE member
+		SET
+		password=PASSWORD(#{password})
+		WHERE id=#{id}
+	</update>
 </mapper>

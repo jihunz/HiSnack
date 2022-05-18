@@ -25,4 +25,6 @@ public interface MemberDao {
 
 	List<Member> checkMemberWithSessionId(String sessionId);
 
+	void changePassword(String id, String pw);
+
 }

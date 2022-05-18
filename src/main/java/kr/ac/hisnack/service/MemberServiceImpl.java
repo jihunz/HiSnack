@@ -151,4 +151,9 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 	}
+	
+	@Override
+	public void changePassword(String id, String pw) {
+		dao.changePassword(id, pw);
+	}
 }
