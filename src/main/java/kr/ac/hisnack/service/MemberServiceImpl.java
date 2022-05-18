@@ -136,4 +136,19 @@ public class MemberServiceImpl implements MemberService {
 			return list.get(0);
 		}
 	}
+	
+	@Override
+	public boolean confirmEmail(String email) {
+		Pager pager = new Pager();
+		pager.setKeyword(email);
+		pager.setSearch(3);
+		int total = total(pager);
+		
+		if(total == 0) {
+			return true;	
+		}
+		else {
+			return false;
+		}
+	}
 }

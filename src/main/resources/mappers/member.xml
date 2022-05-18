@@ -18,6 +18,10 @@
 					<!-- confirm에서 사용 -->
 					id=#{keyword}
 				</when>
+				<when test="search == 3">
+					<!-- confirmEmail에서 사용 이메일 중복 검사 -->
+					email=#{keyword}
+				</when>
 			</choose>
 		</where>
 	</sql>

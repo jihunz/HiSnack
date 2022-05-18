@@ -129,4 +129,22 @@ public class MemberRestController {
 			return "no";
 		}
 	}
+	
+/**
+ * email의 중복을 확인하는 메서드
+ * @param email : 확인하고 싶은 이메일
+ * @return email이 사용가능한가 반환 중복이면 no 중복이 없으면 ok
+ * */
+	@GetMapping("/confirm/email")
+	public String confirmEmail(String email) {
+//		이메일에 중복이 없으면
+		if(service.confirmEmail(email)) {
+//			ok 반환
+			return "ok";
+		}
+		else {
+//			중복이면 no 반환
+			return "no";
+		}
+	}
 }
