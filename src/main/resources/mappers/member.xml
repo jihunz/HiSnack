@@ -20,7 +20,9 @@
 				</when>
 				<when test="search == 3">
 					<!-- confirmEmail에서 사용 이메일 중복 검사 -->
+					<!-- 이메일로 아이디를 검색하 때 사용 -->
 					email=#{keyword}
+					AND NOT id LIKE '%@%'
 				</when>
 			</choose>
 		</where>

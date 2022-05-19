@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -205,5 +204,20 @@ public class MemberRestController {
 	/**
 	 * 이메일로 아이디를 찾는다
 	 */
-	
+		@GetMapping("/find")
+		public Map<String, Object> findId(String email){
+			Map<String, Object> map = new HashMap<>();
+			
+			String id = service.findId(email);
+			
+			if(id == null || id.equals("")) {
+				map.put("msg", String.format("%s에 해당하는 아이디가 없습니다.", email));
+			}
+			else {
+				map.put("id", id);
+				map.put("msg", "찾는데 성공했습니다.");
+			}
+			
+			return map;
+		}
 }

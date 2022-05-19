@@ -18,4 +18,5 @@ public interface MemberService {
 	Member checkMemberWithSessionId(String sessionId);
 	boolean confirmEmail(String email);
 	void changePassword(String id, String pw);
+	String findId(String email);
 }
