@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -152,26 +153,26 @@ public class MemberRestController {
 /**
  * 아이디를 입력하면 그 아이디의 비번을 임시 비번으로 변경하고
  * 그 비번을 반환한다
- *  @param id : 비밀번호를 변경하고 싶은 회원의 아이디
+ *  @param member : 비밀번호를 변경하고 싶은 회원의 아이디가 입력되 있어야 함
  *  @return 임시 비밀번호
  */
 	@PostMapping("/change/temp/password")
-	public Map<String, Object> changePassword(String id) {
+	public Map<String, Object> changeToTempPassword(@RequestBody Member member) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Member item = service.item(id);
+		Member item = service.item(member.getId());
 		
 		if(item != null) {
 			Random rand = new Random();
 			String pw = (rand.nextInt(100000))+"";
 			
-			service.changePassword(id, pw);
+			service.changePassword(member.getId(), pw);
 			
 			
 			map.put("password", pw);
-			map.put("msg", String.format("member %s change temp password  : ok", id));	
+			map.put("msg", String.format("member %s change temp password  : ok", member.getId()));	
 		}
 		else {
-			map.put("msg", String.format("member %s change temp password : %s is null", id, id));
+			map.put("msg", String.format("member %s change temp password : %s is null", member.getId(), member.getId()));
 		}
 		
 		
@@ -180,25 +181,29 @@ public class MemberRestController {
 	
 	/**
 	 * 아이디와 비밀번호를 입력하면 그 아이디의 비밀번호를 변경한다
-	 *  @param id : 비밀번호를 변경하고 싶은 회원의 아이디
-	 *  @param password : 변경될 비밀번호
+	 *  @param member : 비밀번호를 변경하고 싶은 회원의 아이디와 새로 적용하고 싶은 비밀번호를 입력되있어야 함
 	 *  @return 결과 메세지
 	 */
 		@PostMapping("/change/password")
-		public Map<String, Object> changePassword(String id, String password) {
+		public Map<String, Object> changePassword(@RequestBody Member member) {
 			Map<String, Object> map = new HashMap<String, Object>();
-			Member item = service.item(id);
+			Member item = service.item(member.getId());
 			
 			if(item != null) {
-				service.changePassword(id, password);
+				service.changePassword(member.getId(), member.getPassword());
 				
-				map.put("msg", String.format("member %s change password to %s : ok", id, password));	
+				map.put("msg", String.format("member %s change password to %s : ok", member.getId(), member.getPassword()));	
 			}
 			else {
-				map.put("msg", String.format("member %s change password to %s : %s is null", id, password, id));
+				map.put("msg", String.format("member %s change password to %s : %s is null", member.getId(), member.getPassword(), member.getId()));
 			}
 			
 			
 			return map;
 		}
+		
+	/**
+	 * 이메일로 아이디를 찾는다
+	 */
+	
 }
