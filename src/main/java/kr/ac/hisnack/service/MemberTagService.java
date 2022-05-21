@@ -17,4 +17,6 @@ public interface MemberTagService {
 	void add(List<?> tagList, String id);
 
 	void add(String id, int code, char recom);
+
+	void add(MemberTag item);
 }

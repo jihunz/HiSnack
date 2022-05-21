@@ -97,4 +97,9 @@ public class MemberTagServiceImpl implements MemberTagService{
 			dao.add(mt);
 		}
 	}
+
+	@Override
+	public void add(MemberTag item) {
+		dao.add(item);
+	}
 }
