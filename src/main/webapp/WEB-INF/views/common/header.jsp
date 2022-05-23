@@ -2,9 +2,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="headerstart ">
 	<div class = "headercontent">
+<<<<<<< HEAD
 		
 			<a href = "http://localhost:9080/"><div class = "logosizeh">
            		<img alt="" src="/re/img/logo.svg" id ="logoimgsizeh">
+=======
+			<a href = "/"><div class = "logosize">
+           		<img alt="" src="/re/img/logo.svg" id ="logoimgsize logoimg">
+>>>>>>> d6d3ba612b74bf37bff60e8998390033d89a7953
             </div></a>
             
             <button class = "menubtn">
