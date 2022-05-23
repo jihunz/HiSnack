@@ -120,19 +120,9 @@ public class OrdersServiceImpl implements OrdersService {
 		Pager pager = new Pager();
 		pager.setPerPage(1);
 		pager.setOrder(1);
-		pager.setSearch(2);
+		pager.setSearch(3);
 		pager.setKeyword(id);
-//		취소된 구독이 있는지 검사한다
-		pager.setKeyword2("c");
 		List<Orders> list = list(pager);
-		
-		if(list.size() < 1) {
-//			취소된 구독이 없으면
-//			정상적인 구독으로 다시 찾는다
-			pager.setKeyword2("y");
-			list = list(pager);
-		}
-		
 		
 		return list.size() > 0 ? list.get(0) : null;
 	}

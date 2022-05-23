@@ -16,6 +16,8 @@ class AddModal extends React.Component {
 
         this.change = this.change.bind(this);
         this.reset = this.reset.bind(this);
+        this.preventDefault = this.preventDefault.bind(this);
+        this.send = this.send.bind(this);
     }
 
     change(event, category) {
@@ -50,6 +52,15 @@ class AddModal extends React.Component {
         }
     }
 
+    preventDefault(event) {
+        event.preventDefault();
+    }
+
+    send(event) {
+        const { category, onModify } = this.props;
+        if (event.keyCode == 13) onModify('add', category);
+    }
+
     render() {
         const { category, title, ptags, selectTags, t_pageList, t_prev, t_next, t_query, onList, onModify, onSelectTag, onRemoveTag } = this.props;
         const { product, content } = this.state;
@@ -63,7 +74,7 @@ class AddModal extends React.Component {
                                 <h5 className="modal-title" id="addModalLabel">{title} 등록</h5>
                                 <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
-                            <form id="addForm" encType="multipart/form-data">
+                            <form id="addForm" encType="multipart/form-data" onSubmit={() => this.preventDefault(event)}>
                                 <div className="modal-body">
                                     {category === 'product' ?
                                         <ProductInp
@@ -82,7 +93,10 @@ class AddModal extends React.Component {
                                         /> :
                                         <TagInp
                                             content={content}
-                                            onChange={this.change} />
+                                            onChange={this.change}
+                                            onPreventDefault={this.preventDefault}
+                                            onSend={this.send}
+                                        />
                                     }
 
                                 </div>
@@ -207,7 +221,7 @@ class ProductInp extends React.Component {
 
 class TagInp extends React.Component {
     render() {
-        const { content, onChange } = this.props;
+        const { content, onChange, onSend } = this.props;
         return (
             <>
                 <div className="mb-3">
@@ -216,6 +230,7 @@ class TagInp extends React.Component {
                         name="content"
                         value={content}
                         onChange={onChange}
+                        onKeyPress={() => onSend(event)}
                     />
                 </div>
             </>

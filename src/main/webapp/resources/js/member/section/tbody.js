@@ -1,7 +1,7 @@
 //테이블의 행 컴포넌트 -> DB의 각 table에 저장된 데이터의 list를 반환
 class Tbody extends React.Component {
     render() {
-        const { list, orderList, category, onDelete, onItem } = this.props;
+        const { list, orderList, category, onDelete, onItem, onSetShowSubInfo } = this.props;
 
         let data;
         if (category != 'orders' && category != 'sub') {
@@ -15,14 +15,13 @@ class Tbody extends React.Component {
                 {data ? data.map((item, idx) =>
                     <tr key={idx}>
                         {/* 데이터 목록 */}
-                        {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} onSetShowSubInfo={onSetShowSubInfo}/> : null}
                         {category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : null}
                         {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : null}
-                        {/* 변경, 삭제 버튼 */}
+                        {/* 삭제 버튼 */}
                         <DelBtn
                             category={category}
                             item={item}
-                            onItem={onItem}
                             onDelete={onDelete}
                         />
                     </tr>
@@ -53,13 +52,12 @@ function fmtTimestamp(data) {
 
 
 class SubList extends React.Component {
-
     render() {
-        const { item } = this.props;
+        const { item, onItem, onSetShowSubInfo } = this.props;
         return (
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td>{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td onClick={() => {onItem('orders', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>
         );
@@ -102,11 +100,10 @@ class DelBtn extends React.Component {
             <td data-code={item.code}>
                 {category === 'sub' || category === 'orders' ?
                     <button
-                        id={item.code}
-                        onClick={() => onDelete(event, category)}>취소
+                        onClick={() => onDelete(category, item.code)}>취소
                     </button>
                     : null}
-                {category == 'review' ? <button id={item.code} onClick={() => onDelete(event, category)}>삭제</button> : null}
+                {category == 'review' ? <button onClick={() => onDelete(category, item.code)}>삭제</button> : null}
             </td>
         );
     }

@@ -136,4 +136,43 @@ public class MemberServiceImpl implements MemberService {
 			return list.get(0);
 		}
 	}
+	
+	@Override
+	public boolean confirmEmail(String email) {
+		Pager pager = new Pager();
+		pager.setKeyword(email);
+		pager.setSearch(3);
+		int total = total(pager);
+		
+		if(total == 0) {
+			return true;	
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	public void changePassword(String id, String pw) {
+		dao.changePassword(id, pw);
+	}
+
+	@Override
+	public String findId(String email) {
+		Pager pager = new Pager();
+		pager.setKeyword(email);
+		pager.setSearch(3);
+		List<Member> list = list(pager);
+		
+//		이메일에 해당하는 아이디가 없으면 null
+		if(list.size() < 1) {
+			return null;
+		}
+		else {
+//			아이디가 있으면 첫번째 것을 가져옴
+//			해당하는 아이디가 여러 개일 경우 논리적으로 모순이 생김
+			return list.get(0).getId();
+		}
+		
+	}
 }

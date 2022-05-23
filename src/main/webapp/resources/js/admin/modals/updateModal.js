@@ -1,4 +1,20 @@
 class UpdateModal extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.preventDefault = this.preventDefault.bind(this);
+        this.send = this.send.bind(this);
+    }
+
+    preventDefault(event) {
+        event.preventDefault();
+    }
+
+    send(event) {
+        const { category, onModify } = this.props;
+        if (event.keyCode == 13) onModify('update', category);
+    }
+
     render() {
         const { item, ptags, selectTags, category, t_pageList, t_prev, t_next, t_query, onList, onChange, onTagList, onSelectTag, onRemoveTag, onRemoveTags, onModify } = this.props;
 
@@ -11,7 +27,7 @@ class UpdateModal extends React.Component {
                                 <h5 className="modal-title" id="updateModalLabel">제품 정보 변경</h5>
                                 <button type="button" className="btn-close" onClick={onRemoveTags} data-bs-dismiss="modal"></button>
                             </div>
-                            <form id="updateForm" encType="multipart/form-data">
+                            <form id="updateForm" encType="multipart/form-data" onSubmit={this.preventDefault}>
                                 <div className="modal-body">
                                     <input type="hidden" id="codeInput"
                                         name="code"
@@ -34,6 +50,7 @@ class UpdateModal extends React.Component {
                                         <U_TagInp
                                             item={item}
                                             onChange={onChange}
+                                            onSend={this.send}
                                         />
                                     }
                                 </div>
@@ -57,7 +74,7 @@ class U_ProductInp extends React.Component {
     }
 
     enter(event) {
-        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, '.modal-search');
+        if (event.keyCode == 13) this.props.onList('tag', null, null, 1, '.modal-search2');
     }
 
     render() {
@@ -112,10 +129,10 @@ class U_ProductInp extends React.Component {
                         <input
                             type="text"
                             name="keyword"
-                            className="modal-search form-control"
+                            className="modal-search2 form-control"
                             placeholder="태그 이름을 검색해주세요"
                             onKeyPress={() => this.enter(event)} />
-                        <button type="button" className="btn btn-warning" onClick={() => onList('tag', null, null, 1, '.modal-search')}>검색</button>
+                        <button type="button" className="btn btn-warning" onClick={() => onList('tag', null, null, 1, '.modal-search2')}>검색</button>
                     </div>
                     <div className="ptags">
                         {ptags.length && ptags ? ptags.map((tag) =>
@@ -154,7 +171,7 @@ class U_ProductInp extends React.Component {
 
 class U_TagInp extends React.Component {
     render() {
-        const { item, onChange } = this.props;
+        const { item, onChange, onSend } = this.props;
         return (
             <>
                 <div className="mb-3">
@@ -163,6 +180,7 @@ class U_TagInp extends React.Component {
                         name="content"
                         value={item.content}
                         onChange={onChange}
+                        onKeyPress={() => onSend(event)}
                     />
                 </div>
             </>

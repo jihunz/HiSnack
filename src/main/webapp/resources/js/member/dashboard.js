@@ -14,6 +14,8 @@ class Dashboard extends React.Component {
             list: [],
             orderList: [],
             item: {},
+            item_sub: {},
+            showSubInfo: false,
             //pager용 state
             pageList: [],
             prev: "",
@@ -26,9 +28,11 @@ class Dashboard extends React.Component {
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
         this.deleteList = this.deleteList.bind(this);
-        this.change = this.change.bind(this);
+        this.subChange = this.subChange.bind(this);
+        this.memberChange = this.memberChange.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setTitle = this.setTitle.bind(this);
+        this.setShowSubInfo = this.setShowSubInfo.bind(this);
     }
 
     list(category, page) {
@@ -47,7 +51,7 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    if(category != 'orders' && category != 'sub') {
+                    if (category != 'orders' && category != 'sub') {
                         state.list = result.list;
                     } else {
                         state.orderList = result.list;
@@ -61,18 +65,18 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
-    item(event, category) {
-        let keyword;
-        let url = `/rest/${category}/${keyword}`
-        
+    item(category, code) {
+        let val, url;
+
         if (category == 'member') {
-            keyword = user.userId;
-            url = `/rest/${category}/item?id=${keyword}`;
-        } else {
-            keyword = event.target.parentNode.dataset.code;
+            val = user.userId;
+            url = `/rest/${category}/item?id=${val}`;
+        } else if (code != undefined) {
+            val = code;
+            url = `/rest/${category}/${val}`;
         }
 
-        fetch((url), {
+        fetch(url, {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -80,18 +84,36 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    state.item = result.item
+                    if (category == 'orders') {
+                        state.item_sub = result.item;
+                    } else {
+                        state.item = result.item;
+                    }
+
                     // 비밀번호 state를 공개하지 않기 위한 코드
                     if (category == 'member' && state.item.password != undefined && state.item.password != null && state.item.password != '') {
                         state.item.password = null;
                     }
+
+
                     return state;
                 });
         }).catch(err => console.log(err));
     }
 
-    //UpdateModal에 있는 input('태그 코드', '이미지 등록' 제외)들의 state를 관리하는 함수
-    change(event) {
+    // 구독 정보의 input state를 관리하는 함수
+    subChange(event) {
+        const inputName = event.target.name;
+        this.setState({
+            item_sub: {
+                ...this.state.item_sub,
+                [inputName]: event.target.value,
+            },
+        });
+    }
+
+    // 회원 정보 수정의 input state를 관리하는 함수
+    memberChange(event) {
         const inputName = event.target.name;
         this.setState({
             item: {
@@ -101,35 +123,43 @@ class Dashboard extends React.Component {
         });
     }
 
-    update(type) {
-        const { category } = this.state;
-        const formData = new FormData(document.getElementById(`${type}Form`));
-        let keyword;
-        let url = `/rest/${category}/${keyword}`;
-    
-        if(category == 'member') {
-            keyword = user.userId
-            url = `/rest/${category}/update?id=${keyword}`;
-        } else {
-            keyword = document.getElementById("codeInput").value;
+    update(category, val) {
+        const formData = new FormData(document.getElementById(`${category}Form`));
+
+        let code = val;
+        let url = `/rest/${category}/${code}`;
+
+        if (category == 'member') {
+            code = user.userId;
+            url = `/rest/${category}/update?id=${code}`;
         }
 
         fetch(url, {
             method: "POST",
             body: formData,
         }).then(res => res.json()).then(result => {
-            alert("회원 정보가 정상적으로 수정되었습니다.");
+            let msg;
+            switch (category) {
+                case 'sub':
+                    msg = '구독 정보가 변경되었습니다.'
+                    break;
+                case 'member':
+                    msg = '회원 정보가 변경되었습니다.'
+                    break;
+                default:
+                    break;
+            }
+            alert(msg);
         }).catch(err => console.log(err));
     }
 
     //개별 삭제 시 사용하는 함수 -> 테이블의 각 행에 있는 삭제 버튼 클릭 시 동작
-    delete(event, category) {
-        // prompt()
-        fetch(`/rest/${category}/${event.target.id}`, {
+    delete(category, code) {
+        fetch(`/rest/${category}/${code}`, {
             method: "DELETE",
         }).then(res => res.json()).then(result => {
             let msg;
-            switch(category) {
+            switch (category) {
                 case 'orders':
                     msg = '주문이 취소되었습니다.'
                     break;
@@ -176,50 +206,65 @@ class Dashboard extends React.Component {
             });
     }
 
-    change(event) {
-        const inputName = event.target.name;
-        this.setState({
-            item: {
-                ...this.state.item,
-                [inputName]: event.target.value,
-            },
-        });
+    setShowSubInfo(val) {
+        this.setState(
+            (state) => {
+                if (val != null && Object.keys(val).length <= 0) {
+                    state.showSubInfo = val;
+                } else {
+                    state.showSubInfo = false;
+                }
+                return state;
+            });
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() { this.list("sub"); }
 
     render() {
-        const { title, list, orderList, item, pageList, prev, next, query, category, id } = this.state;
+        const { title, list, orderList, item_sub, item, pageList, prev, next, query, category, id, showSubInfo } = this.state;
         return (
-            <div>
-                <div>마이페이지</div>
-                {category === 'sub' ? <><div>구독 상품 내역 보기</div><div>구독 정보</div></> : null}
-                {category === 'orders' ? <><div>주문 내역</div></> : null}
-                {category === 'member' ? <><div>회원 정보 수정</div></> : null}
-                {category === 'review' ? <><div>리뷰 목록</div></> : null}
-                <Sidebar
-                    onSetCategory={this.setCategory}
-                    onSetTitle={this.setTitle}
-                    onItem={this.item}
-                />
-                <Section
-                    category={category}
-                    title={title}
-                    list={list}
-                    orderList={orderList}
-                    item={item}
-                    id={id}
-                    pageList={pageList}
-                    prev={prev}
-                    next={next}
-                    query={query}
-                    onList={this.list}
-                    onItem={this.item}
-                    onUpdate={this.update}
-                    onDelete={this.delete}
-                    onChange={this.change}
-                />
+            <div className="member-container">
+                <div className="sidebar-container">
+                    <div id="title">마이페이지</div>
+                    <Sidebar
+                        onSetCategory={this.setCategory}
+                        onSetTitle={this.setTitle}
+                        onItem={this.item}
+                        onSetShowSubInfo={this.setShowSubInfo}
+                    />
+                </div>
+                <div className="section-container">
+                    {category === 'sub' ?
+                        <div className="sub-menu">
+                            <div onClick={this.setShowSubInfo} className={showSubInfo ? '' : "sub-menu-clicked"}>구독 내역</div>
+                            <div className={showSubInfo ? "sub-menu-clicked" : ''}>구독 상세 정보</div>
+                        </div> : null}
+                    {category === 'orders' ? <><div>주문 내역</div></> : null}
+                    {category === 'member' ? <><div>회원 정보 수정</div></> : null}
+                    {category === 'review' ? <><div>리뷰 목록</div></> : null}
+                    <Section
+                        category={category}
+                        title={title}
+                        list={list}
+                        orderList={orderList}
+                        item={item}
+                        item_sub={item_sub}
+                        id={id}
+                        pageList={pageList}
+                        prev={prev}
+                        next={next}
+                        query={query}
+                        showSubInfo={showSubInfo}
+                        onList={this.list}
+                        onItem={this.item}
+                        onUpdate={this.update}
+                        onDelete={this.delete}
+                        onSubChange={this.subChange}
+                        onMemberChange={this.memberChange}
+                        onSetShowSubInfo={this.setShowSubInfo}
+                    />
+                </div>
             </div>
         );
     }

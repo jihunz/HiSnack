@@ -3,6 +3,7 @@ package kr.ac.hisnack.controller.rest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -129,4 +130,94 @@ public class MemberRestController {
 			return "no";
 		}
 	}
+	
+/**
+ * email의 중복을 확인하는 메서드
+ * @param email : 확인하고 싶은 이메일
+ * @return email이 사용가능한가 반환 중복이면 no 중복이 없으면 ok
+ * */
+	@GetMapping("/confirm/email")
+	public String confirmEmail(String email) {
+//		이메일에 중복이 없으면
+		if(service.confirmEmail(email)) {
+//			ok 반환
+			return "ok";
+		}
+		else {
+//			중복이면 no 반환
+			return "no";
+		}
+	}
+	
+/**
+ * 아이디를 입력하면 그 아이디의 비번을 임시 비번으로 변경하고
+ * 그 비번을 반환한다
+ *  @param member : 비밀번호를 변경하고 싶은 회원의 아이디가 입력되 있어야 함
+ *  @return 임시 비밀번호
+ */
+	@PostMapping("/change/temp/password")
+	public Map<String, Object> changeToTempPassword(Member member) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Member item = service.item(member.getId());
+		
+		if(item != null) {
+			Random rand = new Random();
+			String pw = (rand.nextInt(100000))+"";
+			
+			service.changePassword(member.getId(), pw);
+			
+			
+			map.put("password", pw);
+			map.put("msg", String.format("member %s change temp password  : ok", member.getId()));	
+		}
+		else {
+			map.put("msg", String.format("member %s change temp password : %s is null", member.getId(), member.getId()));
+		}
+		
+		
+		return map;
+	}
+	
+	/**
+	 * 아이디와 비밀번호를 입력하면 그 아이디의 비밀번호를 변경한다
+	 *  @param member : 비밀번호를 변경하고 싶은 회원의 아이디와 새로 적용하고 싶은 비밀번호를 입력되있어야 함
+	 *  @return 결과 메세지
+	 */
+		@PostMapping("/change/password")
+		public Map<String, Object> changePassword(Member member) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			Member item = service.item(member.getId());
+			
+			if(item != null) {
+				service.changePassword(member.getId(), member.getPassword());
+				
+				map.put("msg", String.format("member %s change password to %s : ok", member.getId(), member.getPassword()));	
+			}
+			else {
+				map.put("msg", String.format("member %s change password to %s : %s is null", member.getId(), member.getPassword(), member.getId()));
+			}
+			
+			
+			return map;
+		}
+		
+	/**
+	 * 이메일로 아이디를 찾는다
+	 */
+		@GetMapping("/find")
+		public Map<String, Object> findId(String email){
+			Map<String, Object> map = new HashMap<>();
+			
+			String id = service.findId(email);
+			
+			if(id == null || id.equals("")) {
+				map.put("msg", String.format("%s에 해당하는 아이디가 없습니다.", email));
+			}
+			else {
+				map.put("id", id);
+				map.put("msg", "찾는데 성공했습니다.");
+			}
+			
+			return map;
+		}
 }

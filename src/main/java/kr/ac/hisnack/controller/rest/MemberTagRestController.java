@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.ac.hisnack.model.Member;
 import kr.ac.hisnack.model.MemberTag;
 import kr.ac.hisnack.service.MemberTagService;
 
@@ -29,11 +29,12 @@ public class MemberTagRestController {
 	
 /**
  * 입력한 회원이 선택한 태그를 반환하는 메서드
- * @param id : 회원의 id
+ * @param item : 회원의 id가 입력되어 있어야 한다
  * @return 회원이 선택한 태그들 반환
  */
-	@GetMapping("/{id}")
-	public Map<String, Object> list(@PathVariable String id){
+	@GetMapping
+	public Map<String, Object> list(Member item){
+		String id = item.getId();
 		List<MemberTag> list = service.list(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -49,19 +50,17 @@ public class MemberTagRestController {
 	
 /**
  * id의 회원이 선택한 태그들을 DB에 저장하는 메서드
- * @param id : 회원의 id
- * @param list : 회원이 선택한 태그, tcode, recom이 입력되어 있어야 한다
+ * @param item : 회원이 선택한 태그, id, tcode, recom이 입력되어 있어야 한다
  * @return 입력한 태그 리스트를 반환
  */
-	@PostMapping("/{id}")
-	public Map<String, Object> add(@PathVariable String id, @RequestBody List<MemberTag> list){
-		for(MemberTag tag : list) {
-			tag.setId(id);
-		}
-		service.add(list);
+	@PostMapping
+	public Map<String, Object> add(MemberTag item){
+		String id = item.getId();
+		
+		service.add(item);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
+		map.put("item", item);
 		map.put("msg", String.format("member %s tag add : ok", id));
 		
 		return map;
@@ -70,12 +69,12 @@ public class MemberTagRestController {
 /**
  * 상품으로 태그를 저장한다 
  * @param code : 상품의 기본키
- * @param recom : 호불호 y 또는 n이 들어간다
+ * @param item : id와 recom이 입력되어 있어야 한다
  * @return 메세지와 입력한 상품의 기본키 반환한다
  */
-	@PostMapping("/{id}/{code}")
-	public Map<String, Object> add(@PathVariable String id, @PathVariable int code, @RequestBody MemberTag recom){
-		service.add(id, code, recom.getRecom());
+	@PostMapping("/{code}")
+	public Map<String, Object> add(@PathVariable int code, MemberTag item){
+		service.add(item.getId(), code, item.getRecom());
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -87,11 +86,11 @@ public class MemberTagRestController {
 	
 /**
  * 입력한 회원이 선택한 태그를 삭제
- * @param code : 회원이 선택한 태그의 기본키
+ * @param code : 회원이 선택한 태그의 기본키, MemberTag의 기본키
  * @return code를 다시 반환
  */
-	@DeleteMapping
-	public Map<String, Object> delete(int code) {
+	@DeleteMapping("/{code}")
+	public Map<String, Object> delete(@PathVariable int code) {
 		service.delete(code);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -103,11 +102,12 @@ public class MemberTagRestController {
 	
 /**
  * 회원이 선택한 태그 다 삭제하는 메서드
- * @param id : 삭제하고 싶은 태그를 가진 회원의 id
+ * @param item : 회원, id가 입력되어 있어야 한다
  * @return id를 다시 반환
  */
-	@DeleteMapping("/{id}")
-	public Map<String, Object> delete(@PathVariable String id) {
+	@DeleteMapping
+	public Map<String, Object> delete(Member item) {
+		String id = item.getId();
 		service.delete(id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
