@@ -95,7 +95,6 @@ class Dashboard extends React.Component {
                         state.item.password = null;
                     }
 
-
                     return state;
                 });
         }).catch(err => console.log(err));
