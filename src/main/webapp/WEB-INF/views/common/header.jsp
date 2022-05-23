@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="headerstart ">
 	<div class = "headercontent">
-			<a href = "http://localhost:9080/"><div class = "logosize">
+			<a href = "/"><div class = "logosize">
            		<img alt="" src="/re/img/logo.svg" id ="logoimgsize logoimg">
             </div></a>
             <div class = "menefont">
