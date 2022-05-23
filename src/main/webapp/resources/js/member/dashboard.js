@@ -13,7 +13,9 @@ class Dashboard extends React.Component {
             title: "구독 상품 내역",
             list: [],
             orderList: [],
-            item: {},
+            item: {
+                passwordConfirm: "",
+            },
             item_sub: {},
             showSubInfo: false,
             //pager용 state

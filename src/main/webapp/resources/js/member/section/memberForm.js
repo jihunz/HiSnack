@@ -4,7 +4,7 @@ class MemberForm extends React.Component {
         super(props);
 
         this.chkNull = this.chkNull.bind(this);
-        // this.chkPwd = this.chkPwd.bind(this);
+        this.chkPwd = this.chkPwd.bind(this);
         // this.pwdRegx = this.pwdRegx.bind(this);
         // this.chkEmail = this.chkEmail.bind(this);
     }
@@ -29,18 +29,18 @@ class MemberForm extends React.Component {
         
     }
     
-    // chkPwd(e) {
-    //     const pwd = $("#password");
-    //     const pwdConfirm = $("#pwdConfirm");
+    chkPwd(e) {
+        const pwd = document.querySelector("#password");
+        const pwdConfirm = document.querySelector("#passwordConfirm");
     
-    //     if (pwd.val() !== pwdConfirm.val()) {
-    //         e.preventDefault();
-    //         alert("비밀번호가 일치하지 않습니다");
-    //         pwd.val("").focus();
-    //         pwdConfirm.val("");
-    //     }
-        
-    // }
+        if (pwd.value !== pwdConfirm.value) {
+            e.preventDefault();
+            alert("비밀번호가 일치하지 않습니다");
+            pwd.value = null;
+            pwd.focus();
+            pwdConfirm.value = null;
+        }
+    }
     
     // pwdRegx() {
     //     const pwd = $("#password");
@@ -77,15 +77,15 @@ class MemberForm extends React.Component {
                     <h1>회원 정보 수정</h1>
                     <div>
                         <label>이름</label>
-                        <input type="text" name="name" value={item.name} onChange={onMemberChange} placeholder="Name" maxLength="8"/>
+                        <input type="text" name="name" id="name" value={item.name} onChange={onMemberChange} placeholder="Name" maxLength="8"/>
                     </div>
                     <div>
                         <label>비밀번호</label>
-                        <input type="password" name="password" value={item.password} onChange={onMemberChange}  placeholder="Password" maxLength="15"/>
+                        <input type="password" name="password" id="password" value={item.password} onChange={onMemberChange}  placeholder="Password" maxLength="15"/>
                     </div>
                     <div>
                         <label>비밀번호 확인</label>
-                        <input type="password" name="password-confirm" value={item.password} onChange={onMemberChange} placeholder="Confirm Password" maxLength="15"/>
+                        <input type="password" name="passwordConfirm" id="passwordConfirm" value={item.passwordConfirm} onChange={onMemberChange} placeholder="Confirm Password" maxLength="15"/>
                     </div>
                     <div>
                         <label>주소</label>
@@ -118,7 +118,10 @@ class MemberForm extends React.Component {
 			            	<button type="button" id="email-confirm-btn">확인</button>
 			            </div>
 			        </div>
-                    <button type="button" id="modifyBtn" onClick={(e) => this.chkNull(e)}>수정</button>
+                    <button type="button" id="modifyBtn" onClick={(e) => {
+                        this.chkNull(e);
+                        this.chkPwd(e);
+                        }}>수정</button>
                 </form>
             </div>
         );
