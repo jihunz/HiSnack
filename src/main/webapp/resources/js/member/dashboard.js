@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
             orderList: [],
             item: {
                 passwordConfirm: "",
+                emailConfirm: "",
             },
             item_sub: {},
             showSubInfo: false,

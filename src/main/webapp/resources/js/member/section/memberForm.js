@@ -5,14 +5,14 @@ class MemberForm extends React.Component {
 
         this.chkNull = this.chkNull.bind(this);
         this.chkPwd = this.chkPwd.bind(this);
-        // this.pwdRegx = this.pwdRegx.bind(this);
+        this.pwdRegx = this.pwdRegx.bind(this);
         // this.chkEmail = this.chkEmail.bind(this);
     }
 
     chkNull(e) {
         const inputNum = $("form input").length;
 
-        for (let i = 1; i <= inputNum; i++) {
+        for (let i = 1; i <= inputNum + 1; i++) {
             let nthLabel = document.querySelector(`form > div:nth-child(${i}) > label`);
             let nthInput = document.querySelector(`form > div:nth-child(${i}) > input`);
 
@@ -26,13 +26,12 @@ class MemberForm extends React.Component {
                 }
             }
         }
-        
     }
     
     chkPwd(e) {
         const pwd = document.querySelector("#password");
         const pwdConfirm = document.querySelector("#passwordConfirm");
-    
+        
         if (pwd.value !== pwdConfirm.value) {
             e.preventDefault();
             alert("비밀번호가 일치하지 않습니다");
@@ -42,18 +41,18 @@ class MemberForm extends React.Component {
         }
     }
     
-    // pwdRegx() {
-    //     const pwd = $("#password");
-    //     const regx = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+    pwdRegx() {
+        const pwd = $("#password");
+        const regx = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
     
-    //     if (!regx.test(pwd.val())) {
-    //         pwd.val("").attr("placeholder", "비밀번호 형식을 확인해주세요");
-    //         pwd.focus();
-    //         return;
-    //     } else {
-    //         pwd.attr("placeholder", "Password");
-    //     }
-    // }
+        if (!regx.test(pwd.val())) {
+            pwd.val("").attr("placeholder", "비밀번호 형식을 확인해주세요");
+            pwd.focus();
+            return;
+        } else {
+            pwd.attr("placeholder", "Password");
+        }
+    }
     
     // // 이메일 확인을 했는지 체크한다
     // chkEmail(e){
@@ -96,32 +95,20 @@ class MemberForm extends React.Component {
                         <label>전화번호</label>
                         <input type="text" id="tel" name="tel" value={item.tel != null ? item.tel : ''} onChange={onMemberChange} placeholder="Tel" maxLength=""/>
                     </div>
-                    {/* <div>
-                        <label>이메일</label>
-                        <input type="text" name="email" value={item.email} onChange={onMemberChange} />
-                    </div> */}
                     <div>
-			            <label for="email">이메일</label>
-			            <div>
-			            	<input type="email" name="email" id="email" placeholder="Email" maxLength="32" value={item.email} onChange={onMemberChange} />
-			            	<button type="button" id="email-btn">보내기</button>
-			            </div>
-			            
+			            <label>이메일</label>
+                        <input type="email" name="email" id="email" placeholder="Email" maxLength="32" value={item.email} onChange={onMemberChange} />
+                        <button type="button" id="email-btn">보내기</button>
 			        </div>
 			        <div>
-			        	<label for="email-confirm">이메일 확인 번호</label>
-			        	<div>
-			            	<div id="email-confirm-wrapper">
-			            		<input type="text" id="email-confirm" placeholder="Email Confirm" maxLength="32" />
-			            		<span></span>
-			            	</div>
-			            	<button type="button" id="email-confirm-btn">확인</button>
-			            </div>
+			        	<label>이메일 확인 번호</label>
+                        <input type="text" id="email-confirm" placeholder="Email Confirm" maxLength="32" value={item.emailConfirm} onChange={onMemberChange}/>
+                        <button type="button" id="email-confirm-btn">확인</button>
 			        </div>
                     <button type="button" id="modifyBtn" onClick={(e) => {
                         this.chkNull(e);
                         this.chkPwd(e);
-                        }}>수정</button>
+                    }}>수정</button>
                 </form>
             </div>
         );
