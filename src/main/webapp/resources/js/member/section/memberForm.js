@@ -6,7 +6,6 @@ class MemberForm extends React.Component {
         this.chkNull = this.chkNull.bind(this);
         this.chkPwd = this.chkPwd.bind(this);
         this.pwdRegx = this.pwdRegx.bind(this);
-        // this.chkEmail = this.chkEmail.bind(this);
     }
 
     chkNull(e) {
@@ -33,39 +32,28 @@ class MemberForm extends React.Component {
         const pwdConfirm = document.querySelector("#passwordConfirm");
         
         if (pwd.value !== pwdConfirm.value) {
-            e.preventDefault();
             alert("비밀번호가 일치하지 않습니다");
-            pwd.value = null;
+            // 비밀번호 불일치시 pwd도 공백으로 만들어야 함
+            pwd.value = '';
+            this.props.onMemberChange(e, "password");
+            pwdConfirm.value = '';
+            this.props.onMemberChange(e, "passwordConfirm");
             pwd.focus();
-            pwdConfirm.value = null;
         }
     }
     
-    pwdRegx() {
-        const pwd = $("#password");
+    pwdRegx(e) {
+        const pwd = document.querySelector("#password");
         const regx = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
     
-        if (!regx.test(pwd.val())) {
-            pwd.val("").attr("placeholder", "비밀번호 형식을 확인해주세요");
-            pwd.focus();
-            return;
+        if (!regx.test(pwd.value)) {
+            pwd.value = '';
+            this.props.onMemberChange(e);
+            pwd.setAttribute("placeholder", "비밀번호 형식을 확인해주세요");
         } else {
-            pwd.attr("placeholder", "Password");
+            pwd.setAttribute("placeholder", "Password");
         }
     }
-    
-    // // 이메일 확인을 했는지 체크한다
-    // chkEmail(e){
-    //     // email하고 email-confirm-hidden하고 같은지 확인한다
-    //     const email = $('#email').val();
-    //     const confirm = $('#email-confirm-hidden').val();
-    //     if(email !== confirm){
-    //         e.preventDefault();
-    //         alert('이메일 확인을 다시 해주세요.');
-    //         $('#email-confirm').val('').focus();
-    //         $('#email-confirm-wrapper span').text('');
-    //     }
-    // }
 
     render() {
         const { item, onUpdate, onMemberChange } = this.props;
@@ -80,7 +68,7 @@ class MemberForm extends React.Component {
                     </div>
                     <div>
                         <label>비밀번호</label>
-                        <input type="password" name="password" id="password" value={item.password} onChange={onMemberChange}  placeholder="Password" maxLength="15"/>
+                        <input type="password" name="password" id="password" value={item.password} onChange={onMemberChange} onBlur={this.pwdRegx}  placeholder="Password" maxLength="15"/>
                     </div>
                     <div>
                         <label>비밀번호 확인</label>
@@ -88,26 +76,22 @@ class MemberForm extends React.Component {
                     </div>
                     <div>
                         <label>주소</label>
-                        <input type="text" id="address" name="address" value={item.address != null ? item.address : ''} onChange={onMemberChange} placeholder="Address" maxLength=""/>
+                        <input type="text" id="address" name="address" value={item.address} onChange={onMemberChange} onBlur={onMemberChange} placeholder="Address" maxLength="64"/>
                         <button type="button" onClick={execDaumPostcode} className="addressbtn text-center">주소 찾기</button>
                     </div>
                     <div>
                         <label>전화번호</label>
-                        <input type="text" id="tel" name="tel" value={item.tel != null ? item.tel : ''} onChange={onMemberChange} placeholder="Tel" maxLength=""/>
+                        <input type="text" id="tel" name="tel" value={item.tel} onChange={onMemberChange} placeholder="Tel" maxLength="16"/>
                     </div>
                     <div>
 			            <label>이메일</label>
                         <input type="email" name="email" id="email" placeholder="Email" maxLength="32" value={item.email} onChange={onMemberChange} />
-                        <button type="button" id="email-btn">보내기</button>
-			        </div>
-			        <div>
-			        	<label>이메일 확인 번호</label>
-                        <input type="text" id="email-confirm" placeholder="Email Confirm" maxLength="32" value={item.emailConfirm} onChange={onMemberChange}/>
-                        <button type="button" id="email-confirm-btn">확인</button>
 			        </div>
                     <button type="button" id="modifyBtn" onClick={(e) => {
+                        // 91, 92번을 만족시키지 못할 경우 onUpdate를 막아야 함
                         this.chkNull(e);
                         this.chkPwd(e);
+                        // onUpdate("member");
                     }}>수정</button>
                 </form>
             </div>
