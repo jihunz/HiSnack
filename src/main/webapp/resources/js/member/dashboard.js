@@ -13,7 +13,12 @@ class Dashboard extends React.Component {
             title: "구독 상품 내역",
             list: [],
             orderList: [],
-            item: {},
+            item: {
+                password:"",
+                passwordConfirm: "",
+                address: "",
+                tel: "",
+            },
             item_sub: {},
             showSubInfo: false,
             //pager용 state
@@ -30,6 +35,7 @@ class Dashboard extends React.Component {
         this.deleteList = this.deleteList.bind(this);
         this.subChange = this.subChange.bind(this);
         this.memberChange = this.memberChange.bind(this);
+        this.setAddress = this.setAddress.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setTitle = this.setTitle.bind(this);
         this.setShowSubInfo = this.setShowSubInfo.bind(this);
@@ -95,7 +101,6 @@ class Dashboard extends React.Component {
                         state.item.password = null;
                     }
 
-
                     return state;
                 });
         }).catch(err => console.log(err));
@@ -113,13 +118,31 @@ class Dashboard extends React.Component {
     }
 
     // 회원 정보 수정의 input state를 관리하는 함수
-    memberChange(event) {
+    memberChange(event, type) {
         const inputName = event.target.name;
+        if(type != null) {
+            this.setState({
+                item: {
+                    ...this.state.item,
+                    [type]: event.target.value,
+                },
+            });
+        } else {
+            this.setState({
+                item: {
+                    ...this.state.item,
+                    [inputName]: event.target.value,
+                },
+            });
+        }
+    }
+
+    // 회원 정보 수정에서 주소 검색 시 주소를 state에 저장하는 함수
+    setAddress(address) {
         this.setState({
             item: {
-                ...this.state.item,
-                [inputName]: event.target.value,
-            },
+                address: address
+            }
         });
     }
 

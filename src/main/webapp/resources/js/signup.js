@@ -15,7 +15,7 @@ $(function () {
 });
 
 function chkNull(e) {
-    const inputNum = $("form input").length
+    const inputNum = $("form input").length;
 
     for (let i = 1; i <= inputNum; i++) {
         let nthLabel = $(`form > div:nth-child(${i}) > label`);

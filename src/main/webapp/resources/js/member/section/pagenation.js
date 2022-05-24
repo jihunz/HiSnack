@@ -15,7 +15,7 @@ class Pagenation extends React.Component {
     }
 
     render() {
-        const { pageList, prev, next, query, category, onList } = this.props;
+        const { pageList, prev, next, category, onList } = this.props;
 
         return (
             <tfoot className="pagenation">
