@@ -3,6 +3,10 @@ class MemberForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            chkPwd: true,
+        }
+
         this.chkNull = this.chkNull.bind(this);
         this.chkPwd = this.chkPwd.bind(this);
         this.pwdRegx = this.pwdRegx.bind(this);
@@ -35,6 +39,9 @@ class MemberForm extends React.Component {
             alert("비밀번호가 일치하지 않습니다");
             this.props.onMemberChange(e, "pwd");
             pwd.focus();
+            this.setState({chkPwd: false});
+        } else {
+            this.setState({chkPwd: true});
         }
     }
     
@@ -84,11 +91,10 @@ class MemberForm extends React.Component {
                         <input type="email" name="email" id="email" placeholder="Email" maxLength="32" value={item.email} onChange={onMemberChange} />
 			        </div>
                     <button type="button" id="modifyBtn" onClick={(e) => {
-                        // 91, 92번을 만족시키지 못할 경우 onUpdate를 막아야 함
                         this.chkNull(e);
                         this.chkPwd(e);
-                        onUpdate("member");
-                        onChangePwd();
+                        {this.state.chkPwd ? onUpdate("member") : null}
+                        {this.state.chkPwd ? onChangePwd() : null}
                     }}>수정</button>
                 </form>
             </div>
