@@ -35,6 +35,7 @@ class Dashboard extends React.Component {
         this.deleteList = this.deleteList.bind(this);
         this.subChange = this.subChange.bind(this);
         this.memberChange = this.memberChange.bind(this);
+        this.changePwd = this.changePwd.bind(this);
         this.setAddress = this.setAddress.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setTitle = this.setTitle.bind(this);
@@ -118,22 +119,22 @@ class Dashboard extends React.Component {
     }
 
     // 회원 정보 수정의 input state를 관리하는 함수
-    memberChange(event, type) {
+    memberChange(event, pwd) {
         const inputName = event.target.name;
-        if(type != null) {
+
+        if(pwd != null) {
             this.setState({
                 item: {
                     ...this.state.item,
-                    [type]: event.target.value,
-                },
-            });
+                    password: '',
+                    passwordConfirm: '',
+                }});
         } else {
             this.setState({
                 item: {
                     ...this.state.item,
                     [inputName]: event.target.value,
-                },
-            });
+                }});
         }
     }
 
@@ -144,6 +145,20 @@ class Dashboard extends React.Component {
                 address: address
             }
         });
+    }
+
+    changePwd() {
+        let id = user.userId;
+        let password = this.state.item.password;
+        let item = {id, password};
+
+        fetch('/rest/member/change/password', {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(item),
+        }).then(res => res.json()).then(result => {
+            return;
+        }).catch(err => console.log(err));
     }
 
     update(category, val) {
@@ -285,6 +300,7 @@ class Dashboard extends React.Component {
                         onDelete={this.delete}
                         onSubChange={this.subChange}
                         onMemberChange={this.memberChange}
+                        onChangePwd={this.changePwd}
                         onSetShowSubInfo={this.setShowSubInfo}
                     />
                 </div>

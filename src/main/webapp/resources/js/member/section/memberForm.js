@@ -33,11 +33,7 @@ class MemberForm extends React.Component {
         
         if (pwd.value !== pwdConfirm.value) {
             alert("비밀번호가 일치하지 않습니다");
-            // 비밀번호 불일치시 pwd도 공백으로 만들어야 함
-            pwd.value = '';
-            this.props.onMemberChange(e, "password");
-            pwdConfirm.value = '';
-            this.props.onMemberChange(e, "passwordConfirm");
+            this.props.onMemberChange(e, "pwd");
             pwd.focus();
         }
     }
@@ -56,7 +52,7 @@ class MemberForm extends React.Component {
     }
 
     render() {
-        const { item, onUpdate, onMemberChange } = this.props;
+        const { item, onUpdate, onMemberChange, onChangePwd } = this.props;
 
         return (
             <div>
@@ -91,7 +87,8 @@ class MemberForm extends React.Component {
                         // 91, 92번을 만족시키지 못할 경우 onUpdate를 막아야 함
                         this.chkNull(e);
                         this.chkPwd(e);
-                        // onUpdate("member");
+                        onUpdate("member");
+                        onChangePwd();
                     }}>수정</button>
                 </form>
             </div>

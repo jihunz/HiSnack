@@ -1,7 +1,7 @@
 // 섹션 컴포넌트 -> 검색창, 버튼, 테이블, 페이지네이션을 삽입
 class Section extends React.Component {
     render() {
-        const { title, list, orderList, item_sub, item, category, pageList, prev, next, query, showSubInfo, onList, onUpdate, onDelete, onItem, onGetCode, onSubChange, onMemberChange, onSetShowSubInfo } = this.props;
+        const { title, list, orderList, item_sub, item, category, pageList, prev, next, query, showSubInfo, onList, onUpdate, onDelete, onItem, onGetCode, onSubChange, onMemberChange, onChangePwd, onSetShowSubInfo } = this.props;
 
         return (
             <div className="section-table-container">
@@ -37,6 +37,7 @@ class Section extends React.Component {
                             item={item}
                             onUpdate={onUpdate}
                             onMemberChange={onMemberChange}
+                            onChangePwd={onChangePwd}
                         /> : null}
             </div>
         );
