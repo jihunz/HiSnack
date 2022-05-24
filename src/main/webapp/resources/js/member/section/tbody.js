@@ -57,7 +57,7 @@ class SubList extends React.Component {
         return (
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td onClick={() => {onItem('orders', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td className="pointer" onClick={() => {onItem('orders', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>
         );
@@ -70,7 +70,7 @@ class OrdersList extends React.Component {
         return (
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td>{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td className="pointer">{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.amount}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>
@@ -100,10 +100,11 @@ class DelBtn extends React.Component {
             <td data-code={item.code}>
                 {category === 'sub' || category === 'orders' ?
                     <button
+                        className="cancel"
                         onClick={() => onDelete(category, item.code)}>취소
                     </button>
                     : null}
-                {category == 'review' ? <button onClick={() => onDelete(category, item.code)}>삭제</button> : null}
+                {category == 'review' ? <button className="delete" onClick={() => onDelete(category, item.code)}>삭제</button> : null}
             </td>
         );
     }

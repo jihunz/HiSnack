@@ -18,22 +18,24 @@ class Pagenation extends React.Component {
         const { pageList, prev, next, category, onList } = this.props;
 
         return (
-            <tfoot className="pagenation">
+            <tfoot>
                 <tr>
                     <td colSpan={category == 'sub' ? 4 : 5}>
-                        <div id="prev" onClick={() => onList(category, prev)} >이전</div>
-                        <div id="pages">
-                            {pageList.map(page =>
-                                <div key={page}
-                                    className={this.state.p == page ? "curr-page" : ''}
-                                    onClick={() => {
-                                        onList(category, page)
-                                        this.setP(event)
-                                    }}
-                                >{page}</div>
-                            )}
+                        <div className="pagenation">
+                            <div id="prev" onClick={() => onList(category, prev)} >이전</div>
+                            <div id="pages">
+                                {pageList.map(page =>
+                                    <div key={page}
+                                        className={this.state.p == page ? "curr-page" : ''}
+                                        onClick={() => {
+                                            onList(category, page)
+                                            this.setP(event)
+                                        }}
+                                    >{page}</div>
+                                )}
+                            </div>
+                            <div id="next" onClick={() => onList(category, next)}>다음</div>
                         </div>
-                        <div id="next" onClick={() => onList(category, next)}>다음</div>
                     </td>
                 </tr>
             </tfoot>

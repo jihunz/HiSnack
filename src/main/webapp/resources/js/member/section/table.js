@@ -5,7 +5,7 @@ class Table extends React.Component {
 
         return (
             <div>
-                <table border="1">
+                <table className="table table-hover table-borderless">
                     <thead>
                         <tr>
                             {category === 'sub' ? <SubTh /> : ''}
