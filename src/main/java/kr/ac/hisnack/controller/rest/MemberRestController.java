@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -156,7 +157,7 @@ public class MemberRestController {
  *  @return 임시 비밀번호
  */
 	@PostMapping("/change/temp/password")
-	public Map<String, Object> changeToTempPassword(Member member) {
+	public Map<String, Object> changeToTempPassword(@RequestBody Member member) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Member item = service.item(member.getId());
 		
@@ -184,7 +185,7 @@ public class MemberRestController {
 	 *  @return 결과 메세지
 	 */
 		@PostMapping("/change/password")
-		public Map<String, Object> changePassword(Member member) {
+		public Map<String, Object> changePassword(@RequestBody Member member) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			Member item = service.item(member.getId());
 			
