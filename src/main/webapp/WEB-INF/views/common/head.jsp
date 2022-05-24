@@ -11,7 +11,8 @@
 const user = {
 	userId: `${sessionScope.user.id}`,
 	grade: `${sessionScope.user.grade}`,
-	name: `${sessionScope.user.name}`
+	name: `${sessionScope.user.name}`,
+	address : '',
 };
 </script>
 <!-- jQuery -->

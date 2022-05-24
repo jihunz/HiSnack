@@ -42,6 +42,8 @@ function execDaumPostcode() {
 
                 // 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("address").value = addr;
+                // 리엑트를 사용하는 페이지일 경우 주소 정보를 해당 변수에 저장한다.
+                if(document.getElementById("app")) user.address = addr;
                 // 커서를 전화번호 필드로 이동한다.
                 if (document.getElementById("tel")) document.getElementById("tel").focus();
         }

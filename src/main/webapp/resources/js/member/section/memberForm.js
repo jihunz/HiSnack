@@ -4,51 +4,69 @@ class MemberForm extends React.Component {
         super(props);
 
         this.state = {
-            chkPwd: true,
+            nullValid: false,
+            pwdValid: false,
         }
 
         this.chkNull = this.chkNull.bind(this);
+        this.setNullVaild = this.setNullVaild.bind(this);
         this.chkPwd = this.chkPwd.bind(this);
         this.pwdRegx = this.pwdRegx.bind(this);
     }
 
-    chkNull(e) {
+    chkNull() {
         const inputNum = $("form input").length;
-
+        
+        this.setState({nullValid: false});
+        
         for (let i = 1; i <= inputNum + 1; i++) {
             let nthLabel = document.querySelector(`form > div:nth-child(${i}) > label`);
-            let nthInput = document.querySelector(`form > div:nth-child(${i}) > input`);
-
+            var nthInput = document.querySelector(`form > div:nth-child(${i}) > input`);
+            
             if(nthLabel != null) {
                 let inputType = nthLabel.innerText;
-
+                
                 if (typeof nthInput.value == "undefined" || nthInput.value == null || nthInput.value == "") {
-                    e.preventDefault();
                     alert(`${inputType}를(을) 입력해주세요`);
                     nthInput.focus();
                 }
             }
         }
+
+        this.setNullVaild(inputNum);
+    }
+    
+    // 모든 input이 null이 아닐 경우 nullValid를 true로 바꿈
+    setNullVaild (inputNum) {
+        const inputs = document.getElementsByTagName("input");
+        let count = 0;
+        
+        for(let k = 0; k <= inputNum - 1; k++) {
+            if(inputs[k].value != '') count++;
+        }
+    
+        if(count === 6) this.setState({nullValid: true});
     }
     
     chkPwd(e) {
         const pwd = document.querySelector("#password");
         const pwdConfirm = document.querySelector("#passwordConfirm");
+
+        this.setState({pwdValid: false});
         
-        if (pwd.value !== pwdConfirm.value) {
+        if (pwd.value !== pwdConfirm.value & pwd.value !== '' && pwdConfirm.value !== '') {
             alert("비밀번호가 일치하지 않습니다");
             this.props.onMemberChange(e, "pwd");
             pwd.focus();
-            this.setState({chkPwd: false});
-        } else {
-            this.setState({chkPwd: true});
+        } else if(pwd.value === pwdConfirm.value & pwd.value !== '' && pwdConfirm.value !== '') {
+            this.setState({pwdValid: true});
         }
     }
     
     pwdRegx(e) {
         const pwd = document.querySelector("#password");
         const regx = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-    
+
         if (!regx.test(pwd.value)) {
             pwd.value = '';
             this.props.onMemberChange(e);
@@ -58,8 +76,22 @@ class MemberForm extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        const { nullValid, pwdValid } = this.state;
+        const { onUpdate, onChangePwd } = this.props;
+
+        if(nullValid && pwdValid) {
+            onUpdate("member"); 
+            onChangePwd();
+            this.setState({
+                nullValid: false,
+                pwdValid: false,
+            });
+        }
+    }
+
     render() {
-        const { item, onUpdate, onMemberChange, onChangePwd } = this.props;
+        const { item, onMemberChange, onSetAddress } = this.props;
 
         return (
             <div>
@@ -79,7 +111,7 @@ class MemberForm extends React.Component {
                     </div>
                     <div>
                         <label>주소</label>
-                        <input type="text" id="address" name="address" value={item.address} onChange={onMemberChange} onBlur={onMemberChange} placeholder="Address" maxLength="64"/>
+                        <input type="text" id="address" name="address" value={item.address} onChange={onMemberChange} onBlur={onSetAddress} placeholder="Address" maxLength="64"/>
                         <button type="button" onClick={execDaumPostcode} className="addressbtn text-center">주소 찾기</button>
                     </div>
                     <div>
@@ -91,10 +123,9 @@ class MemberForm extends React.Component {
                         <input type="email" name="email" id="email" placeholder="Email" maxLength="32" value={item.email} onChange={onMemberChange} />
 			        </div>
                     <button type="button" id="modifyBtn" onClick={(e) => {
-                        this.chkNull(e);
+                        this.chkNull();
                         this.chkPwd(e);
-                        {this.state.chkPwd ? onUpdate("member") : null}
-                        {this.state.chkPwd ? onChangePwd() : null}
+                        // 회원 정보 수정과 비밀번호 변경 함수는 componentDidUpdate()에서 실행
                     }}>수정</button>
                 </form>
             </div>

@@ -139,10 +139,11 @@ class Dashboard extends React.Component {
     }
 
     // 회원 정보 수정에서 주소 검색 시 주소를 state에 저장하는 함수
-    setAddress(address) {
+    setAddress() {
         this.setState({
             item: {
-                address: address
+                ...this.state.item,
+                address: user.address,
             }
         });
     }
@@ -302,6 +303,7 @@ class Dashboard extends React.Component {
                         onMemberChange={this.memberChange}
                         onChangePwd={this.changePwd}
                         onSetShowSubInfo={this.setShowSubInfo}
+                        onSetAddress={this.setAddress}
                     />
                 </div>
             </div>
