@@ -285,9 +285,9 @@ class Dashboard extends React.Component {
                             <div onClick={this.setShowSubInfo} className={showSubInfo ? '' : "sub-menu-clicked"}>구독 내역</div>
                             <div className={showSubInfo ? "sub-menu-clicked" : ''}>구독 상세 정보</div>
                         </div> : null}
-                    {category === 'orders' ? <><div>주문 내역</div></> : null}
-                    {category === 'member' ? <><div>회원 정보 수정</div></> : null}
-                    {category === 'review' ? <><div>리뷰 목록</div></> : null}
+                    {category === 'orders' ? <><div className="sub-menu-single">주문 내역</div></> : null}
+                    {category === 'member' ? <><div className="sub-menu-single">회원 정보 수정</div></> : null}
+                    {category === 'review' ? <><div className="sub-menu-single">리뷰 목록</div></> : null}
                     <Section
                         category={category}
                         title={title}

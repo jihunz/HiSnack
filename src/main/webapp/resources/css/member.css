@@ -75,6 +75,15 @@
 	background: var(--logo-color);
 }
 
+.sub-menu-single {
+	height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: var(--font-weight-normal);
+    font-size: 22px;
+    background: var(--logo-color);
+}
+
 .section-table-container {
 	margin-top: 60px;
     border-top: 2px solid rgb(203, 203, 203);
