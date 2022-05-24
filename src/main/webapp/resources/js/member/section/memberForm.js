@@ -111,12 +111,12 @@ class MemberForm extends React.Component {
                     </div>
                     <div>
                         <label>주소</label>
-                        <input type="text" id="address" name="address" value={item.address} onChange={onMemberChange} onBlur={onSetAddress} placeholder="Address" maxLength="64"/>
+                        <input type="text" id="address" name="address" value={item.address} onChange={onMemberChange} placeholder="Address" maxLength="64" readOnly/>
                         <button type="button" onClick={execDaumPostcode} className="addressbtn text-center">주소 찾기</button>
                     </div>
                     <div>
                         <label>전화번호</label>
-                        <input type="text" id="tel" name="tel" value={item.tel} onChange={onMemberChange} placeholder="Tel" maxLength="16"/>
+                        <input type="text" id="tel" name="tel" value={item.tel} onChange={onMemberChange} onFocus={onSetAddress} placeholder="Tel" maxLength="16"/>
                     </div>
                     <div>
 			            <label>이메일</label>

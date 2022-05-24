@@ -258,7 +258,13 @@ class Dashboard extends React.Component {
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
-    componentDidMount() { this.list("sub"); }
+    componentDidMount() { 
+        this.list("sub");
+    }
+    
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.item == prevState.item) user.address = this.state.item.address;
+    }
 
     render() {
         const { title, list, orderList, item_sub, item, pageList, prev, next, query, category, id, showSubInfo } = this.state;
