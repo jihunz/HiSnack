@@ -23,11 +23,13 @@
 
 /* sidebar */
 .sidebar-container {
+	position: relative;
+    top: -18px;
 	width: 27%;
 }
 
 .menu {
-	margin-left: 20px;
+	margin: 60px 0 0 20px;
 }
 
 .menu-title-wrapper {
@@ -39,7 +41,7 @@
 }
 
 .menu-list ul {
-	margin-left: 25px;
+	margin-left: -13px
 }
 .menu-list ul li {
 	padding-bottom: 15px;

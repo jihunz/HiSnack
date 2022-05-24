@@ -9,9 +9,7 @@ class Sidebar extends React.Component {
                 <div className="sidebar-item-logo-box">
                     <a href="/"><img src="re/img/logo2.svg" id="logo"></img></a>
                 </div>
-                <Menu
-                    onSetCategory={onSetCategory}
-                />
+                <Menu onSetCategory={onSetCategory} />
             </div>
         );
     }
@@ -27,9 +25,7 @@ class Menu extends React.Component {
                 <div className="sidebar-item-menu-box">
                     <h4 className="sidebar-ml">MENU</h4>
                 </div>
-                <MenuList
-                    onSetCategory={onSetCategory}
-                />
+                <MenuList onSetCategory={onSetCategory} />
             </>
 
         );

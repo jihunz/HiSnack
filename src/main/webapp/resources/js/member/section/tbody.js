@@ -58,7 +58,7 @@ class SubList extends React.Component {
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
                 <td className="pointer" onClick={() => {onItem('orders', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
-                <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
+                <td>{item.total ? `${item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원` : 0}</td>
             </>
         );
     }
@@ -70,9 +70,9 @@ class OrdersList extends React.Component {
         return (
             <>
                 <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td className="pointer">{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.amount}</td>
-                <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
+                <td>{item.total ? `${item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원` : 0}</td>
             </>
         );
     }

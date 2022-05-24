@@ -3,14 +3,14 @@ class Sidebar extends React.Component {
     render() {
         const { onSetCategory, onSetTitle, onItem, onSetShowSubInfo } = this.props;
         return (
-            <div>
+            <>
                 <Menu 
                     onSetCategory={onSetCategory}
                     onSetTitle={onSetTitle}
                     onItem={onItem}
                     onSetShowSubInfo={onSetShowSubInfo}
                 />
-            </div>
+            </>
         );
     }
 }
