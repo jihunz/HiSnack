@@ -1,12 +1,13 @@
 #app {
 	display: flex;
-    justify-content: center;
+	justify-content: center;
 }
 
 .member-container {
 	display: flex;
-    width: 1200px;
-    margin-top: 100px;
+	width: 1200px;
+	height: 1330px;
+	margin-top: 100px;
 }
 
 #title {
@@ -24,7 +25,7 @@
 /* sidebar */
 .sidebar-container {
 	position: relative;
-    top: -18px;
+	top: -18px;
 	width: 27%;
 }
 
@@ -43,6 +44,7 @@
 .menu-list ul {
 	margin-left: -13px
 }
+
 .menu-list ul li {
 	padding-bottom: 15px;
 	font-size: 17px;
@@ -62,13 +64,14 @@
 .sub-menu div:first-child {
 	cursor: pointer;
 }
+
 .sub-menu div {
 	width: 50%;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    font-weight: var(--font-weight-normal);
-    font-size: 22px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	font-weight: var(--font-weight-normal);
+	font-size: 22px;
 }
 
 .sub-menu-clicked {
@@ -77,33 +80,33 @@
 
 .sub-menu-single {
 	height: 60px;
-    line-height: 60px;
-    text-align: center;
-    font-weight: var(--font-weight-normal);
-    font-size: 22px;
-    background: var(--logo-color);
+	line-height: 60px;
+	text-align: center;
+	font-weight: var(--font-weight-normal);
+	font-size: 22px;
+	background: var(--logo-color);
 }
 
 .section-table-container {
 	margin-top: 60px;
-    border-top: 2px solid rgb(203, 203, 203);
+	border-top: 2px solid rgb(203, 203, 203);
 }
 
 .section-sub-title {
 	display: flex;
-    justify-content: space-between;
-    height: 50px;
-    line-height: 50px;
-    padding: 0 30px;
-    margin-bottom: 3px;
-    font-weight: var(--font-weight-medium);
-    background: rgb(249, 249, 249);
+	justify-content: space-between;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 30px;
+	margin-bottom: 3px;
+	font-weight: var(--font-weight-medium);
+	background: rgb(249, 249, 249);
 }
 
 .order-wrapper {
 	display: flex;
 	justify-content: space-between;
-    width: 140px;
+	width: 140px;
 }
 
 
@@ -116,56 +119,119 @@
 
 table {
 	width: 100%;
-    text-align: center;
-    font-size: 18px;
+	text-align: center;
+	font-size: 18px;
 	font-weight: 500;
 }
 
-table > thead {
+table>thead {
 	font-weight: 500;
-    height: 40px;
+	height: 40px;
 	background: #fff5d9;
 }
 
-table > tbody tr {
+table>tbody tr {
 	height: 100px;
 }
 
 thead,
 tbody {
-    vertical-align: middle !important;
+	vertical-align: middle !important;
 }
 
-.cancel, .delete {
+.cancel,
+.delete {
 	width: 85px;
-    height: 45px;
+	height: 45px;
 	border: none;
-    border-radius: 30px;
-    background: rgb(204, 204, 204);
-    font-size: 18px;
+	border-radius: 30px;
+	background: rgb(204, 204, 204);
+	font-size: 18px;
 }
 
 .delete {
-    background: rgb(027, 027, 027);
+	background: rgb(027, 027, 027);
 	color: #fff;
 }
 
 /* pagenation */
 .pagenation {
-    font-size: var(--font-size-laguler);
+	font-size: var(--font-size-laguler);
 }
 
 .pagenation,
 #pages {
-    display: flex;
-    height: 45px;
-    justify-content: center;
-    align-items: center;
-    padding: 0 7px 0px 7px;
-    cursor: pointer;
+	display: flex;
+	height: 45px;
+	justify-content: center;
+	align-items: center;
+	padding: 0 7px 0px 7px;
+	cursor: pointer;
 }
 
 #pages>div {
-    padding: 0 7px 0px 7px;
+	padding: 0 7px 0px 7px;
 }
 
+/* memberForm */
+
+.memberForm-wrapper, .subForm-wrapper {
+	margin: 40px 0 0 30px;
+}
+
+#memberForm>div, #subForm>div {
+	margin: 40px 0 0 49px;
+}
+
+#memberForm>div div, #subForm>div div {
+	margin-top: 15px;
+}
+
+#memberForm>div div label, #subForm>div div label {
+	width: 110px;
+	font-size: 18px;
+	font-weight: 500;
+	margin-right: 25px;
+	text-align: center;
+}
+
+#memberForm>div div input, #subForm>div div input {
+	width: 600px;
+	height: 55px;
+	padding-left: 20px;
+	border: 2px solid rgb(202, 202, 202);
+	border-radius: 20px;
+	font-size: 18px;
+}
+
+.addressbtn {
+	position: absolute;
+	right: 410px;
+	height: 55px;
+	padding: 10px;
+	border: 2px solid rgb(202, 202, 202);
+	border-radius: 0 20px 20px 0;
+	font-size: 18px;
+}
+
+.addressbtn:hover,
+.addressbtn:active {
+	background: var(--logo-color);
+}
+
+.modifyBtn {
+	width: 200px;
+    height: 50px;
+    margin-top: 40px;
+    border: none;
+    border-radius: 30px;
+    background: #000;
+    font-size: 20px;
+    color: #fff;
+}
+
+.modifyBtn-wrapper {
+	display: flex;
+    justify-content: end;
+    width: 735px;
+}
