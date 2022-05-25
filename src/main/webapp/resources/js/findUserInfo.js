@@ -14,8 +14,8 @@ function getTempPwd() {
     const email = $('#email').val();
     const id = $('#userId').val();
     
-    if(id != null && cofirmed_email != null && email != null) {
-        if(cofirmed_email == email) {
+    if(id !== null && cofirmed_email !== null && email !== null) {
+        if(cofirmed_email === email) {
             $.ajax('rest/member/change/temp/password', {
                 method: "POST",
                 headers: {'Content-type': 'application/json'},
@@ -36,7 +36,7 @@ function chkId() {
     $.ajax(`rest/member/confirm?id=${id}`, {
         method: "GET",
         success: result => {
-            if (result == 'no') {
+            if (result === 'no') {
                 alert('아이디가 확인되었습니다. 가입 시 입력한 이메일을 입력해주세요.')
                 $('.email-wrapper').css('display', 'block');
                 $('#email').removeAttr('readonly');
@@ -51,7 +51,7 @@ function chkId() {
 }
 
 function stopExec(e) {
-    if (e.keyCode == 13) e.preventDefault();
+    if (e.keyCode === 13) e.preventDefault();
 }
 
 function validEmail() {
@@ -96,6 +96,5 @@ function chkEmail(e) {
         $('#email-confirm-wrapper span').text('');
         return false;
     }
-
     return true;
 }
