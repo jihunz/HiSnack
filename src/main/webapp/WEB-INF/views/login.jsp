@@ -37,9 +37,9 @@
 				    <div class = "idbox flex justify-center items-center">
 				        <a href="signup">회원가입</a>
 				        <div class = "hiline "></div>
-				        <a href="../">아이디 찾기</a>
+				        <a href="findUserInfo">아이디 찾기</a>
 				         <div class = "hiline"></div>
-				        <a href="../">비밀번호 찾기</a>
+				        <a href="findUserInfo">비밀번호 찾기</a>
 				    </div>
 				    
 				    <div id="googleBtn" class = "mt-10 mb-60 glogin flex items-center">

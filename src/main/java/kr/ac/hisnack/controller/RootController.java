@@ -201,4 +201,9 @@ public class RootController {
 		
 		return "redirect:/";
 	}
+	
+	@GetMapping("/findUserInfo")
+	public String findUserInfo() {
+		return "findUserInfo";
+	}
 }
