@@ -22,6 +22,10 @@
 	cursor: pointer;
 }
 
+ol, ul {
+    padding-left: 0 !important;
+}
+
 /* sidebar */
 .sidebar-container {
 	position: relative;
@@ -42,7 +46,7 @@
 }
 
 .menu-list ul {
-	margin-left: -13px
+	margin-left: 22px;
 }
 
 .menu-list ul li {
