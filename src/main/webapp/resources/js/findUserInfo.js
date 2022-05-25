@@ -14,7 +14,7 @@ function getTempPwd() {
     const email = $('#email').val();
     const id = $('#userId').val();
     
-    if(id !== null && cofirmed_email !== null && email !== null) {
+    if(id !== '' && cofirmed_email !== '' && email !== '') {
         if(cofirmed_email === email) {
             $.ajax('rest/member/change/temp/password', {
                 method: "POST",
@@ -23,10 +23,14 @@ function getTempPwd() {
                 success: result => {
                     alert(`임시 비밀번호는 ${result.password} 입니다.`);
                     $('#userId').removeAttr('readonly');
+                    return;
                 },
                 error: xhr => {}
             });
         }
+    } else {
+        alert('비밀번호를 찾을 아이디를 입력해주세요.');
+        return;
     }
 }
 
@@ -43,10 +47,11 @@ function chkId() {
                 $('#email').removeAttr('readonly');
                 $('#email-confirm').removeAttr('readonly');
                 $('#userId').attr('readonly', true);
+                return;
             } else {
                 alert('아이디가 존재하지 않습니다.');
+                return;
             }
-            return;
         },
         error: xhr => {}
     });
