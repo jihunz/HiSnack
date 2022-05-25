@@ -16,14 +16,14 @@
 					<h4 class = "signupfont mt-60">아이디 찾기</h4>
 				    <div class ="yellowline flex justify-center"></div>
 			    </div>
-			    <form method="post" action="signup" class="signupForm">
+			    <form class="signupForm">
 			        <div>
 			            <label for="email">이메일</label>
 			            <div class="flex item-center">
-			            	<input type="email" name="email" id="email" placeholder="Email" maxlength="32" class = "addressinput">
+			            	<input type="email" name="email" id="email-id" placeholder="Email" maxlength="32" class = "addressinput">
 			            </div>
 			        </div>
-			        <button id="signupBtn" class = "signupbtn mt-30 mb-60">아이디 찾기</button>
+			        <button id="idBtn" class = "signupbtn mt-30 mb-60" type="button">아이디 찾기</button>
 
 			<div class = "signupbox text-center mt-120">
 				<div>
