@@ -202,6 +202,9 @@ public class RootController {
 		return "redirect:/";
 	}
 	
+/**
+ * 아이디, 비밀번호 찾기 페이지로 유도
+ */
 	@GetMapping("/findUserInfo")
 	public String findUserInfo() {
 		return "findUserInfo";
