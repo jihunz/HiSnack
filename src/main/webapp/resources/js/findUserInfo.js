@@ -3,8 +3,52 @@ $(function () {
 
     $("#idBtn").click(() => validEmail());
 
-    $("#id-confirm-btn").click(() => console.log('hi'));
+    $("#id-confirm-btn").click(() => chkId());
+
+    $('#pwdBtn').click(() => getTempPwd()); 
 });
+
+
+function getTempPwd() {
+    const cofirmed_email = $('#email-confirm-hidden').val();
+    const email = $('#email').val();
+    const id = $('#userId').val();
+    
+    if(id != null && cofirmed_email != null && email != null) {
+        if(cofirmed_email == email) {
+            $.ajax('rest/member/change/temp/password', {
+                method: "POST",
+                headers: {'Content-type': 'application/json'},
+                data: JSON.stringify({id: id}),
+                success: result => {
+                    alert(`임시 비밀번호는 ${result.password} 입니다.`);
+                },
+                error: xhr => {}
+            });
+        }
+    }
+}
+
+
+function chkId() {
+    const id = $('#userId').val();
+
+    $.ajax(`rest/member/confirm?id=${id}`, {
+        method: "GET",
+        success: result => {
+            if (result == 'no') {
+                alert('아이디가 확인되었습니다. 가입 시 입력한 이메일을 입력해주세요.')
+                $('.email-wrapper').css('display', 'block');
+                $('#email').removeAttr('readonly');
+                $('#email-confirm').removeAttr('readonly');
+            } else {
+                alert('아이디가 존재하지 않습니다.');
+            }
+            return;
+        },
+        error: xhr => {}
+    });
+}
 
 function stopExec(e) {
     if (e.keyCode == 13) e.preventDefault();
@@ -26,7 +70,7 @@ function validEmail() {
             return;
         },
         error: xhr => {}
-    })
+    });
 }
 
 function findId(email) {
@@ -37,7 +81,7 @@ function findId(email) {
             return;
         },
         error: xhr => {}
-    })
+    });
 }
 
 // 이메일 확인을 했는지 체크한다
