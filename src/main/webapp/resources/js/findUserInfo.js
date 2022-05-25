@@ -22,6 +22,7 @@ function getTempPwd() {
                 data: JSON.stringify({id: id}),
                 success: result => {
                     alert(`임시 비밀번호는 ${result.password} 입니다.`);
+                    $('#userId').removeAttr('readonly');
                 },
                 error: xhr => {}
             });
@@ -41,6 +42,7 @@ function chkId() {
                 $('.email-wrapper').css('display', 'block');
                 $('#email').removeAttr('readonly');
                 $('#email-confirm').removeAttr('readonly');
+                $('#userId').attr('readonly', true);
             } else {
                 alert('아이디가 존재하지 않습니다.');
             }
