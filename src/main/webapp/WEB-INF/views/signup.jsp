@@ -53,7 +53,6 @@
 			            	<input type="email" name="email" id="email" placeholder="Email" maxlength="32" class = "addressinput">
 			            	<button type="button" id="email-btn" class = "addressbtn text-center">보내기</button>
 			            </div>
-			            
 			        </div>
 			        <div>
 			        	<label for="email-confirm">이메일 확인 번호</label>

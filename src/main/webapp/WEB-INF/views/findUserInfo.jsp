@@ -38,16 +38,25 @@
 			            	<button type="button" id="id-confirm-btn" class = "addressbtn text-center">아이디 확인</button>
 			            </div>
 			        </div>
-			        <div>
-			        	<label for="email-confirm">이메일 확인 번호</label>
-			        	<div class="flex item-center">
-			            	<div id="email-confirm-wrapper">
-			            		<input type="text" id="email-confirm" placeholder="Email Confirm" maxlength="32" class = "addressinput"/>
-			            		<span></span>
-			            	</div>
-			            	<button type="button" id="email-confirm-btn" class = "addressbtn text-center">확인</button>
-			            </div>
-			        </div>
+					<div class="email-wrapper">
+						<div>
+							<label for="email">이메일</label>
+							<div class="flex item-center">
+								<input type="email" name="email" id="email" placeholder="Email" maxlength="32" class = "addressinput">
+								<button type="button" id="email-btn" class = "addressbtn text-center">보내기</button>
+							</div>
+						</div>
+						<div>
+							<label for="email-confirm">이메일 확인 번호</label>
+							<div class="flex item-center">
+								<div id="email-confirm-wrapper">
+									<input type="text" id="email-confirm" placeholder="Email Confirm" maxlength="32" class = "addressinput"/>
+									<span></span>
+								</div>
+								<button type="button" id="email-confirm-btn" class = "addressbtn text-center">확인</button>
+							</div>
+						</div>
+					</div>
 			        <button id="signupBtn" class = "signupbtn mt-30 mb-60">비밀번호 찾기</button>
 			    </form>
 			    
