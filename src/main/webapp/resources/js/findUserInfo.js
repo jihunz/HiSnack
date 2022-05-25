@@ -3,11 +3,11 @@ $(function () {
 
     $("#idBtn").click(() => validEmail());
 
-    $("#id-confirm-btn").click(() => findId());
+    $("#id-confirm-btn").click(() => console.log('hi'));
 });
 
 function stopExec(e) {
-    if (e.keyCode == 13) e.preventDefault();  
+    if (e.keyCode == 13) e.preventDefault();
 }
 
 function validEmail() {
@@ -25,42 +25,33 @@ function validEmail() {
             }
             return;
         },
-        error: xhr => {
-        }
+        error: xhr => {}
     })
 }
 
 function findId(email) {
-    const id = $("#userId").val();
-    let url = `rest/member/find?id=${id}`;
-
-    if(email) url = `rest/member/?email=${email}`
-
-    $.ajax(url , {
+    $.ajax(`rest/member/find?email=${email}`, {
         method: "GET",
         success: result => {
-            if(email) alert(`아이디는 ${result.id} 입니다.`);
-
-            alert('이메일로 확인');
+            alert(`아이디는 ${result.id} 입니다.`)
             return;
         },
-        error: xhr => {
-        }
+        error: xhr => {}
     })
 }
 
 // 이메일 확인을 했는지 체크한다
-function chkEmail(e){
-	// email하고 email-confirm-hidden하고 같은지 확인한다
-	const email = $('#email').val();
-	const confirm = $('#email-confirm-hidden').val();
-	if(email !== confirm){
-		e.preventDefault();
-		alert('이메일 확인을 다시 해주세요.');
-		$('#email-confirm').val('').focus();
-		$('#email-confirm-wrapper span').text('');
-		return false;
-	}
-	
-	return true;
+function chkEmail(e) {
+    // email하고 email-confirm-hidden하고 같은지 확인한다
+    const email = $('#email').val();
+    const confirm = $('#email-confirm-hidden').val();
+    if (email !== confirm) {
+        e.preventDefault();
+        alert('이메일 확인을 다시 해주세요.');
+        $('#email-confirm').val('').focus();
+        $('#email-confirm-wrapper span').text('');
+        return false;
+    }
+
+    return true;
 }
