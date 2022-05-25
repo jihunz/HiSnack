@@ -31,15 +31,11 @@
 				    <div class ="yellowline flex justify-center"></div>
 			    </div>
 			    <form method="post" action="signup" class="signupForm">
-			        <div class = "mt-30">
-			            <label for="userId">아이디</label>
-			            <input type="text" name="id" id="userId" placeholder="ID" maxlength="32" class = "inputsize">
-			        </div>
 			        <div>
-			            <label for="email">이메일</label>
-			            <div class="flex item-center">
-			            	<input type="email" name="email" id="email" placeholder="Email" maxlength="32" class = "addressinput">
-			            	<button type="button" id="email-btn" class = "addressbtn text-center">보내기</button>
+						<div class="flex item-center">
+							<label for="userId">아이디</label>
+			            	<input type="text" name="id" id="userId" placeholder="ID" maxlength="32" class = "addressinput">
+			            	<button type="button" id="id-confirm-btn" class = "addressbtn text-center">아이디 확인</button>
 			            </div>
 			        </div>
 			        <div>

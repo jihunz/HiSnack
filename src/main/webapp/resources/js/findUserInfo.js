@@ -1,11 +1,13 @@
 $(function () {
-    $('form').keydown((e) => stopExec(e));
+    $("form").keydown((e) => stopExec(e));
 
     $("#idBtn").click(() => validEmail());
+
+    $("#id-confirm-btn").click(() => findId());
 });
 
 function stopExec(e) {
-    e.preventDefault();   
+    if (e.keyCode == 13) e.preventDefault();  
 }
 
 function validEmail() {
@@ -29,10 +31,17 @@ function validEmail() {
 }
 
 function findId(email) {
-    $.ajax(`rest/member/find?email=${email}`, {
+    const id = $("#userId").val();
+    let url = `rest/member/find?id=${id}`;
+
+    if(email) url = `rest/member/?email=${email}`
+
+    $.ajax(url , {
         method: "GET",
         success: result => {
-            alert(`아이디는 ${result.id} 입니다.`);
+            if(email) alert(`아이디는 ${result.id} 입니다.`);
+
+            alert('이메일로 확인');
             return;
         },
         error: xhr => {
