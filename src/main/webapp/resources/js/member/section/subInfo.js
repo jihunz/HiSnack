@@ -18,8 +18,7 @@ class SubInfo extends React.Component {
                         </div>
                         <div>
                             <label>주소</label>
-                            <input type="text" id="address" name="address" value={item_sub.address} onChange={onSubChange} />
-                            <button type="button" onClick={execDaumPostcode} className="addressbtn text-center">주소 찾기</button>
+                            <input type="text" id="address" name="address" value={item_sub.address} onChange={onSubChange} readOnly/>
                         </div>
                         <div>
                             <label>구독가격</label>
