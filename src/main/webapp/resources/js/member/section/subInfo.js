@@ -1,7 +1,7 @@
 // title 컴포넌트 -> 메뉴 별 title 표시
 class SubInfo extends React.Component {
     render() {
-        const { item_sub, onUpdate, onSubChange } = this.props;
+        const { item_sub, onSubChange } = this.props;
 
         return (
             <div className="subForm-wrapper">
@@ -10,11 +10,11 @@ class SubInfo extends React.Component {
                     <div>
                         <div>
                             <label>수령인</label>
-                            <input type="text" name="name" value={item_sub.name} onChange={onSubChange} />
+                            <input type="text" name="name" value={item_sub.name} onChange={onSubChange} readOnly/>
                         </div>
                         <div>
                             <label>연락처</label>
-                            <input type="text" name="tel" value={item_sub.tel} onChange={onSubChange} />
+                            <input type="text" name="tel" value={item_sub.tel} onChange={onSubChange} readOnly/>
                         </div>
                         <div>
                             <label>주소</label>
@@ -22,10 +22,7 @@ class SubInfo extends React.Component {
                         </div>
                         <div>
                             <label>구독가격</label>
-                            <input type="number" name="total" value={item_sub.total} readOnly />
-                        </div>
-                        <div className="modifyBtn-wrapper">
-                            <button className="modifyBtn" type="button" onClick={() => onUpdate("sub", item_sub.code)}>수정</button>
+                            <input type="number" name="total" value={item_sub.total} onChange={onSubChange} readOnly />
                         </div>
                     </div>
                 </form>

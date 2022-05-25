@@ -14,7 +14,6 @@ class Section extends React.Component {
                 {showSubInfo ?
                     <SubInfo
                         item_sub={item_sub}
-                        onUpdate={onUpdate}
                         onSubChange={onSubChange}
                     /> : null}
                     {category != 'member' && !showSubInfo ?
