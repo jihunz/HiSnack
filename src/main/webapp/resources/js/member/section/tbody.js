@@ -15,7 +15,7 @@ class Tbody extends React.Component {
                 {data ? data.map((item, idx) =>
                     <tr key={idx}>
                         {/* 데이터 목록 */}
-                        {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} onSetShowSubInfo={onSetShowSubInfo}/> : null}
+                        {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} onSetShowSubInfo={onSetShowSubInfo} /> : null}
                         {category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : null}
                         {category === 'review' ? <ReviewList item={item} category={category} /> : null}
                         {/* 삭제 버튼 */}
@@ -56,15 +56,15 @@ class SubList extends React.Component {
         const { item, onItem, onSetShowSubInfo } = this.props;
         return (
             <>
-                <td 
-                    className="pointer" 
-                    onClick={() => onItem('sub', item.code)} 
-                    data-bs-toggle="modal" 
+                <td
+                    className="pointer"
+                    onClick={() => onItem('sub', item.code)}
+                    data-bs-toggle="modal"
                     data-bs-target="#infoModal"
                 >
                     {item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}
                 </td>
-                <td className="pointer" onClick={() => {onItem('orders', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
+                <td className="pointer" onClick={() => { onItem('sub', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? `${item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원` : 0}</td>
             </>
         );
@@ -76,10 +76,10 @@ class OrdersList extends React.Component {
         const { item, onItem } = this.props;
         return (
             <>
-                <td 
-                    className="pointer" 
+                <td
+                    className="pointer"
                     onClick={() => onItem('orders', item.code)}
-                    data-bs-toggle="modal" 
+                    data-bs-toggle="modal"
                     data-bs-target="#infoModal"
                 >
                     {item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}
@@ -113,10 +113,16 @@ class DelBtn extends React.Component {
         return (
             <td data-code={item.code}>
                 {category === 'sub' || category === 'orders' ?
-                    <button
-                        className="cancel"
-                        onClick={() => onDelete(category, item.code)}>취소
-                    </button>
+                    <>
+                        {/* <button
+                            className="cancel"
+                            onClick={() => onDelete(category, item.code)}>배송지 정보
+                        </button> */}
+                        <button
+                            className="cancel"
+                            onClick={() => onDelete(category, item.code)}>취소
+                        </button>
+                    </>
                     : null}
                 {category == 'review' ? <button className="delete" onClick={() => onDelete(category, item.code)}>삭제</button> : null}
             </td>

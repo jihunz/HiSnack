@@ -1,20 +1,20 @@
 //bootstrap을 사용한 infoModal
 class InfoModal extends React.Component {
     render() {
-        const { category, title, item, tags, onRemoveTags } = this.props;
+        const { category, title, item, item_sub, onRemoveTags } = this.props;
         return (
             <div>
                 <div className="modal fade mWrapper" id="infoModal" data-bs-keyboard="false" tabIndex="-1" onClick={onRemoveTags}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="infoModal">{title} 상세</h5>
+                                <h5 className="modal-title" id="infoModal">{title}</h5>
                                 <button type="button" className="btn-close" onClick={this.reset} data-bs-dismiss="modal"></button>
                             </div>
                             <div className="modal-body">
                                 <table className="info-table">
                                     <tbody>
-                                        {category === 'sub' || category === 'orders' ? <OrdersInfo item={item} /> : null}
+                                        {category === 'sub' || category === 'orders' ? <OrdersInfo category={category} item={item} item_sub={item_sub} /> : null}
                                     </tbody>
                                 </table>
                             </div>
@@ -47,39 +47,46 @@ function fmtTimestamp(data) {
 
 class OrdersInfo extends React.Component {
     render() {
-        const { item } = this.props;
-        let fmtDate = fmtTimestamp(item.orderDate);
+        const { category, item, item_sub} = this.props;
+        let source;
+        if (category === 'sub') {
+            source = item_sub;
+        } else {
+            source = item;
+        }
+
+        let fmtDate = fmtTimestamp(source.orderDate);
         return (
             <>
                 <tr>
                     <td className="info-titles">주문 번호</td>
-                    <td colSpan="3">{item.code}</td>
+                    <td colSpan="3">{source.code}</td>
                 </tr>
                 <tr>
                     <td className="info-titles">아이디</td>
-                    <td colSpan="3">{item.id}</td>
+                    <td colSpan="3">{source.id}</td>
                 </tr>
                 <tr>
                     <td className="info-titles">전화번호</td>
-                    <td>{`0${item.tel}`}</td>
+                    <td>{`0${source.tel}`}</td>
                     <td className="info-titles">주문 날짜</td>
                     <td>{fmtDate}</td>
                 </tr>
                 <tr>
                     <td className="info-titles">총 가격</td>
-                    <td colSpan="3">{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
+                    <td colSpan="3">{source.total ? source.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
                 </tr>
                 <tr>
                     <td className="info-titles">주소</td>
-                    <td colSpan="3" className="info-h85">{item.address}</td>
+                    <td colSpan="3" className="info-h85">{source.address}</td>
                 </tr>
                 <tr>
                     <td className="info-titles">수령인</td>
-                    <td>{item.name}</td>
+                    <td>{source.name}</td>
                     <td className="info-titles">주문 제품 수량</td>
-                    <td>{`총 ${item.amount ? item.amount : 0}개`}</td>
+                    <td>{`총 ${source.amount ? source.amount : 0}개`}</td>
                 </tr>
-                {item.products && item.products.length ? item.products.map(p =>
+                {source.products && source.products.length ? source.products.map(p =>
                     <tr key={p.code} className="op-tr">
                         <td>
                             <div className="op-img-wrapper">

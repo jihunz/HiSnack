@@ -22,6 +22,10 @@
 	cursor: pointer;
 }
 
+.pointer:hover {
+	background: #f3e73fb7;
+}
+
 ol, ul {
     padding-left: 0 !important;
 }

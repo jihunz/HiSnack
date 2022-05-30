@@ -91,8 +91,7 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
-                    // 카테고리=sub일 때 데이터를 item_sub에 담아야 함 
-                    if (category == 'orders') {
+                    if (category === 'sub') {
                         state.item_sub = result.item;
                     } else {
                         state.item = result.item;
@@ -279,6 +278,7 @@ class Dashboard extends React.Component {
                         category={category}
                         title={title}
                         item={item}
+                        item_sub={item_sub}
                         onRemoveTags={this.removeTags}
                     />
                     <Sidebar
@@ -292,7 +292,7 @@ class Dashboard extends React.Component {
                     {category === 'sub' ?
                         <div className="sub-menu">
                             <div onClick={this.setShowSubInfo} className={showSubInfo ? '' : "sub-menu-clicked"}>구독 내역</div>
-                            <div className={showSubInfo ? "sub-menu-clicked" : ''}>구독 상세 정보</div>
+                            <div className={showSubInfo ? "sub-menu-clicked" : ''}>배송지 정보</div>
                         </div> : null}
                     {category === 'orders' ? <><div className="sub-menu-single">주문 내역</div></> : null}
                     {category === 'member' ? <><div className="sub-menu-single">회원 정보 수정</div></> : null}
