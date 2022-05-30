@@ -17,7 +17,7 @@ class Tbody extends React.Component {
                         {/* 데이터 목록 */}
                         {category === 'sub' ? <SubList item={item} category={category} onItem={onItem} onSetShowSubInfo={onSetShowSubInfo}/> : null}
                         {category === 'orders' ? <OrdersList item={item} category={category} onItem={onItem} /> : null}
-                        {category === 'review' ? <ReviewList item={item} category={category} onItem={onItem} /> : null}
+                        {category === 'review' ? <ReviewList item={item} category={category} /> : null}
                         {/* 삭제 버튼 */}
                         <DelBtn
                             category={category}
@@ -56,7 +56,14 @@ class SubList extends React.Component {
         const { item, onItem, onSetShowSubInfo } = this.props;
         return (
             <>
-                <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
+                <td 
+                    className="pointer" 
+                    onClick={() => onItem('sub', item.code)} 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#infoModal"
+                >
+                    {item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}
+                </td>
                 <td className="pointer" onClick={() => {onItem('orders', item.code); onSetShowSubInfo(true); }}>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.total ? `${item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원` : 0}</td>
             </>
@@ -66,10 +73,17 @@ class SubList extends React.Component {
 
 class OrdersList extends React.Component {
     render() {
-        const { item } = this.props;
+        const { item, onItem } = this.props;
         return (
             <>
-                <td>{item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
+                <td 
+                    className="pointer" 
+                    onClick={() => onItem('orders', item.code)}
+                    data-bs-toggle="modal" 
+                    data-bs-target="#infoModal"
+                >
+                    {item.products != 0 && item.products[0].images.length != 0 ? <img src={item.products[0].images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}
+                </td>
                 <td>{item.products && item.products.length ? item.products[0].name : null}</td>
                 <td>{item.amount}</td>
                 <td>{item.total ? `${item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원` : 0}</td>

@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
             list: [],
             orderList: [],
             item: {
-                password:"",
+                password: "",
                 passwordConfirm: "",
                 address: "",
                 tel: "",
@@ -91,6 +91,7 @@ class Dashboard extends React.Component {
         }).then(res => res.json()).then(result => {
             this.setState(
                 (state, props) => {
+                    // 카테고리=sub일 때 데이터를 item_sub에 담아야 함 
                     if (category == 'orders') {
                         state.item_sub = result.item;
                     } else {
@@ -122,19 +123,21 @@ class Dashboard extends React.Component {
     memberChange(event, pwd) {
         const inputName = event.target.name;
 
-        if(pwd != null) {
+        if (pwd != null) {
             this.setState({
                 item: {
                     ...this.state.item,
                     password: '',
                     passwordConfirm: '',
-                }});
+                }
+            });
         } else {
             this.setState({
                 item: {
                     ...this.state.item,
                     [inputName]: event.target.value,
-                }});
+                }
+            });
         }
     }
 
@@ -151,11 +154,11 @@ class Dashboard extends React.Component {
     changePwd() {
         let id = user.userId;
         let password = this.state.item.password;
-        let item = {id, password};
+        let item = { id, password };
 
         fetch('/rest/member/change/password', {
             method: "POST",
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item),
         }).then(res => res.json()).then(result => {
             return;
@@ -258,12 +261,12 @@ class Dashboard extends React.Component {
     }
 
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
-    componentDidMount() { 
+    componentDidMount() {
         this.list("sub");
     }
-    
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.state.item == prevState.item) user.address = this.state.item.address;
+        if (this.state.item == prevState.item) user.address = this.state.item.address;
     }
 
     render() {
@@ -272,6 +275,12 @@ class Dashboard extends React.Component {
             <div className="member-container">
                 <div className="sidebar-container">
                     <div id="title">마이페이지</div>
+                    <InfoModal
+                        category={category}
+                        title={title}
+                        item={item}
+                        onRemoveTags={this.removeTags}
+                    />
                     <Sidebar
                         onSetCategory={this.setCategory}
                         onSetTitle={this.setTitle}

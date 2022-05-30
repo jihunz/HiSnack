@@ -1,0 +1,111 @@
+/*---------- info modal ----------*/
+.modal-content {
+    width: 800px;
+    border-radius: 30px;
+    padding: 15px 30px;
+}
+
+.modal-title {
+    font-size: 27px;
+}
+
+.info-table tr {
+    height: 50px;
+}
+
+.info-table td {
+    border: 1px solid #ddd;
+}
+
+.info-titles {
+    background: #cbccd2;
+    width: 160px;
+}
+
+.info-titles2 {
+    background: #cbccd2;
+    height: 50px;
+}
+
+.info-w80 {
+    width: 80px;
+}
+
+.info-w140 {
+    width: 140px;
+}
+
+.info-w160 {
+    width: 160px;
+}
+
+.info-w220 {
+    width: 220px;
+}
+
+.info-w240 {
+    width: 240px;
+}
+
+.info-w300 {
+    width: 300px;
+}
+
+.info-table .info-h85 {
+    height: 85px;
+}
+
+.info-table .info-h150 {
+    height: 150px;
+}
+
+.just-center {
+    justify-content: center !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.info-p-img {
+    width: 155px;
+    height: 155px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.op-tr {
+    overflow: scroll;
+}
+
+.op-img-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.op-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+#m-t-td {
+    text-align: start;
+}
+
+.t-item {
+    display: inline-block;
+    width: 140px;
+    height: auto;
+    background: #ddd;
+    border-radius: 20px;
+    padding: 3px 0;
+    margin: 15px;
+    text-align: center;
+}
