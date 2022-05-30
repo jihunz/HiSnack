@@ -148,8 +148,90 @@ class OrdersInfo extends React.Component {
 }
 
 class MemberInfo extends React.Component {
+    appendChart() {
+        if(document.querySelector('#preferenceChart')) {
+            document.querySelector('#preferenceChart').remove();
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.setAttribute("id", "preferenceChart");
+        canvas.setAttribute("width", "90");
+        canvas.setAttribute("height", "70");
+
+        document.querySelector('#m-t-td').appendChild(canvas);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) { 
+        const { item } = this.props;
+        
+        if (prevProps.item != item) {
+            // canvas 생성
+            this.appendChart();
+    
+            // 막대의 배경과 테두리 색깔을 랜덤으로 생성하여 배열에 담는다 
+            let backgroundArr = [];
+            let borderColorArr = [];
+            
+            for (let i=0; i<=item.tags.length-1; i++) {
+                const num = `${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}`;
+                backgroundArr.push(`rgba(${num}, 0.5)`);
+                borderColorArr.push(`rgba(${num}, 1.0)`);
+            }
+
+            // 차트 객체를 생성한다.
+            const ctx = document.getElementById(`preferenceChart`).getContext('2d');
+            const preferenceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    datasets: [{
+                        data: item.tags,
+                        backgroundColor: backgroundArr,
+                        borderColor: borderColorArr,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: false,
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: '태그 종류',
+                                font: {
+                                    size: 13,
+                                    weight: 700
+                                }
+                            },
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '선호 정도',
+                                font: {
+                                    size: 13,
+                                    weight: 700
+                                }
+                            },
+                            ticks: {
+                                stepSize: 1
+                            }
+                        },
+                    },
+                    parsing: {
+                        xAxisKey: 'content',
+                        yAxisKey: 'recomVal'
+                    }
+                }
+            });
+        } 
+    }
+
     render() {
         const { item } = this.props;
+
         return (
             <>
                 <tr>
@@ -171,13 +253,11 @@ class MemberInfo extends React.Component {
                     <td colSpan="3">{item.address}</td>
                 </tr>
                 <tr>
-                    <td colSpan="4" className="info-titles2">해당 회원이 선택한 태그</td>
+                    <td colSpan="4" className="info-titles2">{item.name} 님의 선호도</td>
                 </tr>
                 <tr>
                     <td colSpan="4" id="m-t-td">
-                        {item.tags && item.tags.length ? item.tags.map((tag, idx) =>
-                            <div key={idx} className="t-item">{`#${tag.content}`}</div>
-                        ) : <div className="text-center">아직 선택한 태그가 없습니다</div>}
+                        {item.tags && item.tags.length ? null : <div className="text-center chartMsg">아직 선택한 태그가 없습니다.</div>}
                     </td>
                 </tr>
             </>
