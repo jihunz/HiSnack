@@ -11,11 +11,18 @@
 
 <link rel="stylesheet" href="/re/css/cart.css">
 <link rel="stylesheet" href="/re/css/item.css">
-
-<title>제품 상세</title>
-<script src="/re/js/jquery.js"></script>
 <script src="/re/js/cart_button.js"></script>
 <script src="/re/js/shopping_item.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+	<script>
+		$(function(){
+			const swiper = new Swiper('.swiper', {
+			  // Optional parameters
+				slidesPerView: 1,
+			});
+		});
+	</script>
 </head>
 <body>
 <div class = "container">
@@ -24,15 +31,17 @@
 		<div class = "flex column" id="item" data-code="${item.code}" data-price="${item.price}">
 			<div class = "my-50"><h1 class = "productfont">제품 상세</h1></div>
 			<div class = "flex justify-between">
-				<div class = "">
-					<div >
-						<c:forEach items="${item.images}" var="image">
-							<div class = "subbox img-border">
-								<img src="${image.fullpath}" alt="${image.filename}" />
-							</div>
-						</c:forEach>
+				<div class = "swiper">
+						<div class="swiper-wrapper">
+							<c:forEach items="${item.images}" var="image">
+								<div class="swiper-slide">
+									<div class = "subbox img-border">
+										<img src="${image.fullpath}" alt="${image.filename}" />
+									</div>
+								</div>
+							</c:forEach>
+						</div>
 					</div>
-				</div>
 				<div class = "flex items-center">
 					<div class = "subtextbox">
 						<div class = "mb-30">
