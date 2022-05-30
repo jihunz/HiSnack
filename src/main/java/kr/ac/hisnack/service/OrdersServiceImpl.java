@@ -129,6 +129,10 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public void subscribe(Orders item, Member user, String subject, String ... contents) {
+		mts.add(item.getTags(), item.getId());
+		
+		item.setTags(null);
+		
 //		여기서 추천 범위를 설정할 수 있다
 		List<OrderedProduct> list = ps.recommend(item.getId(), 30, item.getTotal(), (int)(item.getTotal() * 0.2));
 		item.setProducts(list);
