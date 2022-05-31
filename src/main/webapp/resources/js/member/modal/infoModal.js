@@ -95,8 +95,8 @@ class OrdersInfo extends React.Component {
                             </div>
                         </td>
                         <td>{p.name}</td>
-                        <td>{p.price}</td>
                         <td>{p.manufacture}</td>
+                        <td>{`${p.price}원`} {` * ${p.amount}개`}</td>
                     </tr>
                 ) : <tr><td colSpan="4">주문한 제품이 없습니다</td></tr>}
             </>
