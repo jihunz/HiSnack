@@ -111,7 +111,7 @@ class OrdersInfo extends React.Component {
                 </tr>
                 <tr>
                     <td className="info-titles">전화번호</td>
-                    <td>{`0${item.tel}`}</td>
+                    <td>{item.tel}</td>
                     <td className="info-titles">주문 날짜</td>
                     <td>{fmtDate}</td>
                 </tr>
