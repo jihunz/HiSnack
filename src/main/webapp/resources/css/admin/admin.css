@@ -15,6 +15,10 @@ table {
     cursor: pointer;
 }
 
+.pointer:hover {
+	background: #fffbd6;
+}
+
 .admin-container {
     display: flex;
     height: 1086px;
