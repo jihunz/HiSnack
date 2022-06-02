@@ -172,19 +172,19 @@ class Dashboard extends React.Component {
     // 전체 및 선택 삭제 시 사용하는 함수
     deleteList(category) {
         const codes = this.state.codes;
-        let i = 0;
-        let url = `/rest/${category}/${codes[i]}`;
-
-        if (category == 'member') url = `/rest/${category}/delete?id=${codes[i]}`;
-
+        
         for (let i = 0; i <= codes.length - 1; i++) {
+            let url = `/rest/${category}/${codes[i]}`;
+            if (category == 'member') url = `/rest/${category}/delete?id=${codes[i]}`;
+
             fetch(url, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
-                this.initCodes();
-                this.list(category);
+                console.log(result);
             }).catch(err => console.log(err));
         }
+        this.initCodes();
+        this.list(category);
     }
 
     initCodes() { this.setState({ codes: [] }); }
