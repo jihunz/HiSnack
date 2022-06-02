@@ -102,7 +102,7 @@ class OrdersList extends React.Component {
                     data-bs-toggle="modal"
                     data-bs-target="#infoModal"
                 >{item.id}</td>
-                <td>{`0${item.tel}`}</td>
+                <td>{item.tel}</td>
                 <td>{fmtDate}</td>
                 <td>{item.total ? item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}</td>
             </>

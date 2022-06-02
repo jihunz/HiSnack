@@ -99,7 +99,7 @@ class ReviewList extends React.Component {
         return (
             <>
                 <td>{item.images && item.images.length != 0 ? <img src={item.images[0].fullpath} className="thumbnail"></img> : '이미지 없음'}</td>
-                <td>{item.contents}</td>
+                <td><a href={`/review/${item.code}`}> {item.contents}</a></td>
                 <td>{item.rating}</td>
                 <td>{fmtDate}</td>
             </>

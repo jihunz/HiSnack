@@ -111,7 +111,7 @@ class OrdersInfo extends React.Component {
                 </tr>
                 <tr>
                     <td className="info-titles">전화번호</td>
-                    <td>{`0${item.tel}`}</td>
+                    <td>{item.tel}</td>
                     <td className="info-titles">주문 날짜</td>
                     <td>{fmtDate}</td>
                 </tr>
@@ -138,8 +138,8 @@ class OrdersInfo extends React.Component {
                             </div>
                         </td>
                         <td>{p.name}</td>
-                        <td>{p.price}</td>
                         <td>{p.manufacture}</td>
+                        <td>{`${p.price}원`} {` * ${p.amount}개`}</td>
                     </tr>
                 ) : <tr><td colSpan="4">주문한 제품이 없습니다</td></tr>}
             </>
