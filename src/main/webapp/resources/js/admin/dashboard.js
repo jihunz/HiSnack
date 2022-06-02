@@ -180,7 +180,7 @@ class Dashboard extends React.Component {
             fetch(url, {
                 method: "DELETE",
             }).then(res => res.json()).then(result => {
-                console.log(result);
+                console.log(result.msg);
             }).catch(err => console.log(err));
         }
         this.initCodes();
