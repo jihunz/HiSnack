@@ -26,6 +26,7 @@ class Dashboard extends React.Component {
             prev: "",
             next: "",
             query: "",
+            order: 0
         };
 
         this.list = this.list.bind(this);
@@ -41,6 +42,7 @@ class Dashboard extends React.Component {
         this.setTitle = this.setTitle.bind(this);
         this.setShowSubInfo = this.setShowSubInfo.bind(this);
         this.addPreference = this.addPreference.bind(this);
+        this.setOrder = this.setOrder.bind(this);
     }
 
     list(category, page) {
@@ -48,7 +50,7 @@ class Dashboard extends React.Component {
 
         if (page != null) {
             //페이지네이션 시 요청할 uri
-            url += `&page=${page}`
+            url += `&page=${page}&order=${this.state.order}`
         }
 
         fetch(url, {
@@ -268,6 +270,10 @@ class Dashboard extends React.Component {
         }).catch(err => console.log(err));
     }
 
+    setOrder(orderVal) {
+        this.setState({order: orderVal});
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
         this.list("sub");
@@ -329,6 +335,7 @@ class Dashboard extends React.Component {
                         onChangePwd={this.changePwd}
                         onSetShowSubInfo={this.setShowSubInfo}
                         onSetAddress={this.setAddress}
+                        onSetOrder={this.setOrder}
                     />
                 </div>
             </div>

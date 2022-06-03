@@ -18,12 +18,15 @@
 	font-weight: var(--font-weight-bold);
 }
 
-.pointer {
+.pointer:hover {
 	cursor: pointer;
+	background: #fffbd6;
 }
 
-.pointer:hover {
-	background: #fffbd6;
+
+.text:hover {
+    color: var(--logo-color);
+	cursor: pointer;
 }
 
 ol, ul {

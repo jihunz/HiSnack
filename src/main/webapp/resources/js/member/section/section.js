@@ -1,7 +1,7 @@
 // 섹션 컴포넌트 -> 검색창, 버튼, 테이블, 페이지네이션을 삽입
 class Section extends React.Component {
     render() {
-        const { title, list, orderList, item_sub, item, category, pageList, prev, next, query, showSubInfo, onList, onUpdate, onDelete, onItem, onGetCode, onSubChange, onMemberChange, onChangePwd, onSetShowSubInfo, onSetAddress } = this.props;
+        const { title, list, orderList, item_sub, item, category, pageList, prev, next, query, showSubInfo, onList, onUpdate, onDelete, onItem, onGetCode, onSubChange, onMemberChange, onChangePwd, onSetShowSubInfo, onSetAddress, onSetOrder } = this.props;
 
         return (
             <div className="section-table-container">
@@ -9,6 +9,8 @@ class Section extends React.Component {
                     <Title
                         title={title}
                         category={category}
+                        onList={onList}
+                        onSetOrder={onSetOrder}
                     />
                 </div>
                 {showSubInfo ?
@@ -47,12 +49,16 @@ class Section extends React.Component {
 // title 컴포넌트 -> 메뉴 별 title 표시
 class Title extends React.Component {
     render() {
-        const { title, category } = this.props;
+        const { title, category, onList, onSetOrder } = this.props;
 
         return (
             <>
                 <p>{title}</p>
-                {category != 'member' ? <div className="order-wrapper"><div>최신 순</div><div>오래된 순</div></div> : null}
+                {category != 'member' ? 
+                    <div className="order-wrapper">
+                        <div className="text" onClick={() => {onSetOrder(1); onList(category, 1)}}>최신 순</div>
+                        <div className="text" onClick={() => {onSetOrder(2); onList(category, 1)}}>오래된 순</div>
+                    </div> : null}
             </>
         );
     }

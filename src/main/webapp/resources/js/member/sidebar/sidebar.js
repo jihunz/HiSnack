@@ -43,24 +43,32 @@ class MenuList extends React.Component {
         return (
             <div className="menu-list">
                 <ul>
-                    <li onClick={ () => {
+                    <li 
+                        className="text"
+                        onClick={ () => {
                         onSetCategory("sub", "구독"); 
                         onSetTitle("구독 상품 내역");
                         onSetShowSubInfo(); }}>
                     구독 관리</li>
-                    <li onClick={ () => {
+                    <li 
+                        className="text"
+                        onClick={ () => {
                         onSetCategory("orders", "주문"); 
                         onSetTitle("주문 정보");
                         onSetShowSubInfo(); }}>
                     주문 관리</li>
-                    <li onClick={ () => {
+                    <li 
+                        className="text"
+                        onClick={ () => {
                         onSetCategory("member", "회원"); 
                         onSetTitle("회원 정보");
                         onSetShowSubInfo(); 
                         onItem(
                         'member');}}>
                     회원 정보 수정</li>
-                    <li onClick={ () => {
+                    <li 
+                        className="text"
+                        onClick={ () => {
                         onSetCategory("review", "리뷰"); 
                         onSetTitle("리뷰 정보");
                         onSetShowSubInfo(); }}>
