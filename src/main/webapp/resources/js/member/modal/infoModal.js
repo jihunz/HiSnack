@@ -1,7 +1,7 @@
 //bootstrap을 사용한 infoModal
 class InfoModal extends React.Component {
     render() {
-        const { category, title, item, item_sub, onRemoveTags } = this.props;
+        const { category, title, item, item_sub, onRemoveTags, onAddPreference } = this.props;
         return (
             <div>
                 <div className="modal fade mWrapper" id="infoModal" data-bs-keyboard="false" tabIndex="-1" onClick={onRemoveTags}>
@@ -14,13 +14,19 @@ class InfoModal extends React.Component {
                             <div className="modal-body">
                                 <table className="info-table">
                                     <tbody>
-                                        {category === 'sub' || category === 'orders' ? <OrdersInfo category={category} item={item} item_sub={item_sub} /> : null}
+                                        {category === 'sub' || category === 'orders' ? <OrdersInfo 
+                                            category={category} 
+                                            item={item} 
+                                            item_sub={item_sub} 
+                                            onAddPreference={onAddPreference}
+                                        /> : null}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                {/* <PreferenceModal /> */}
             </div>
         );
     }
@@ -47,7 +53,7 @@ function fmtTimestamp(data) {
 
 class OrdersInfo extends React.Component {
     render() {
-        const { category, item, item_sub} = this.props;
+        const { category, item, item_sub, onSavePreference } = this.props;
         let source;
         if (category === 'sub') {
             source = item_sub;
@@ -89,9 +95,21 @@ class OrdersInfo extends React.Component {
                 {source.products && source.products.length ? source.products.map(p =>
                     <tr key={p.code} className="op-tr">
                         <td>
-                            <div className="op-img-wrapper">
-                                {p.code}
+                            <div className="op-img-wrapper pointer">
+                                {/* {p.code} */}
                                 {p.images && p.images.length ? <img src={p.images[0].fullpath} className="op-img"></img> : '이미지 없음'}
+                                <div>
+                                    <button 
+                                        type="button" 
+                                        className="preferenceBtn"
+                                        onClick={() => onSavePreference(p.pcode, source.id, "y")}
+                                    >👍</button>
+                                    <button 
+                                        type="button" 
+                                        className="preferenceBtn"
+                                        onClick={() => onSavePreference(p.pcode, source.id, "n")}
+                                    >👎</button>
+                                </div>
                             </div>
                         </td>
                         <td>{p.name}</td>

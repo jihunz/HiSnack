@@ -40,6 +40,7 @@ class Dashboard extends React.Component {
         this.setCategory = this.setCategory.bind(this);
         this.setTitle = this.setTitle.bind(this);
         this.setShowSubInfo = this.setShowSubInfo.bind(this);
+        this.addPreference = this.addPreference.bind(this);
     }
 
     list(category, page) {
@@ -259,6 +260,14 @@ class Dashboard extends React.Component {
             });
     }
 
+    addPreference(pcode, id, recom) {
+        fetch(`/rest/member/tag/${pcode}?id=${id}&recom=${recom}`, {
+            method: "POST",
+        }).then(res => res.json()).then(result => {
+           alert(result.msg);
+        }).catch(err => console.log(err));
+    }
+
     // 컴포넌트가 DOM tree(이하 트리)에 삽입된 직후 호출
     componentDidMount() {
         this.list("sub");
@@ -280,6 +289,7 @@ class Dashboard extends React.Component {
                         item={item}
                         item_sub={item_sub}
                         onRemoveTags={this.removeTags}
+                        onAddPreference={this.addPreference}
                     />
                     <Sidebar
                         onSetCategory={this.setCategory}
