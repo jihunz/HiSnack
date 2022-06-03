@@ -34,6 +34,9 @@
 		<if test="order == 1">
 			ORDER BY order_date DESC
 		</if>
+		<if test="order == 2">
+			ORDER BY order_date
+		</if>
 	</sql>
 	
 	<insert id="add">
