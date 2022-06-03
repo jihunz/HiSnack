@@ -53,7 +53,7 @@ function fmtTimestamp(data) {
 
 class OrdersInfo extends React.Component {
     render() {
-        const { category, item, item_sub, onSavePreference } = this.props;
+        const { category, item, item_sub, onAddPreference } = this.props;
         let source;
         if (category === 'sub') {
             source = item_sub;
@@ -102,12 +102,12 @@ class OrdersInfo extends React.Component {
                                     <button 
                                         type="button" 
                                         className="preferenceBtn"
-                                        onClick={() => onSavePreference(p.pcode, source.id, "y")}
+                                        onClick={() => onAddPreference(p.pcode, source.id, "y")}
                                     >👍</button>
                                     <button 
                                         type="button" 
                                         className="preferenceBtn"
-                                        onClick={() => onSavePreference(p.pcode, source.id, "n")}
+                                        onClick={() => onAddPreference(p.pcode, source.id, "n")}
                                     >👎</button>
                                 </div>
                             </div>
