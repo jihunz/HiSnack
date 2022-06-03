@@ -124,11 +124,19 @@
 .preferenceBtn {
     background: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 100%;
     font-size: 20px;
+    padding: 2px;
 }
 
 .preferenceBtn:hover {
     cursor: pointer;
-    background-color: rgb(255, 170, 59) !important;
+}
+
+.like:hover {
+    background-color: rgb(255, 137, 59);
+}
+
+.dislike:hover {
+    background-color: rgb(122, 145, 245);
 }

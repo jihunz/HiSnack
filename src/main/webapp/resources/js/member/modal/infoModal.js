@@ -100,12 +100,12 @@ class OrdersInfo extends React.Component {
                                 <div className="preferenceBtn-wrapper">
                                     <button 
                                         type="button" 
-                                        className="preferenceBtn"
+                                        className="preferenceBtn like"
                                         onClick={() => onAddPreference(p.pcode, source.id, "y")}
                                     >👍</button>
                                     <button 
                                         type="button" 
-                                        className="preferenceBtn"
+                                        className="preferenceBtn dislike"
                                         onClick={() => onAddPreference(p.pcode, source.id, "n")}
                                     >👎</button>
                                 </div>
