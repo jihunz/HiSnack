@@ -95,10 +95,9 @@ class OrdersInfo extends React.Component {
                 {source.products && source.products.length ? source.products.map(p =>
                     <tr key={p.code} className="op-tr">
                         <td>
-                            <div className="op-img-wrapper pointer">
-                                {/* {p.code} */}
+                            <div className="op-img-wrapper">
                                 {p.images && p.images.length ? <img src={p.images[0].fullpath} className="op-img"></img> : '이미지 없음'}
-                                <div>
+                                <div className="preferenceBtn-wrapper">
                                     <button 
                                         type="button" 
                                         className="preferenceBtn"

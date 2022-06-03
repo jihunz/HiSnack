@@ -89,8 +89,8 @@
 }
 
 .op-img {
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 110px;
     border-radius: 10px;
     object-fit: contain;
 }
@@ -110,13 +110,25 @@
     text-align: center;
 }
 
+.preferenceBtn-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 40px;
+    height: 80px;
+    /* border: 1px solid gray;
+    border-radius: 10px; */
+    align-items: center;
+}
+
 .preferenceBtn {
-    width: 35px;
-    height: 30px;
-    font-size: 25px;
-    line-height: 10px;
-    padding: 2px 5px;
+    background: none;
     border: none;
     border-radius: 5px;
-    background: #dfdfdf;
+    font-size: 20px;
+}
+
+.preferenceBtn:hover {
+    cursor: pointer;
+    background-color: rgb(255, 170, 59) !important;
 }
