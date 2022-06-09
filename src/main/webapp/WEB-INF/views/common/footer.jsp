@@ -31,7 +31,7 @@
 						<div class = "flexcenter">
 							<a href="https://github.com/tivmzk" class= "footerimgsize" target="_blank">
 							<img src="/re/img/github.png" class = "footerimg" alt="github-ojt"></a>
-							<p class = "gitname">O Jong Taek</p>
+							<p class = "gitname">Oh Jong Taek</p>
 						</div>
 						<div class = "flexcenter">
 							<a href="https://github.com/JJ001002" class= "footerimgsize" target="_blank">
