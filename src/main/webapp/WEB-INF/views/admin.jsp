@@ -15,6 +15,7 @@
 	<!-- admin.js에서 React를 이용하여 아래의 div에 페이지를 render -->
     <div id="app"></div>
 </body>
+	<!-- React cdn -->
 	<jsp:include page="/WEB-INF/views/common/react.jsp"></jsp:include>
 	<!-- chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>

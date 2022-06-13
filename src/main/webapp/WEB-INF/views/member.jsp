@@ -19,6 +19,7 @@
 </body>
 	<!-- Load bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<!-- React cdn -->
 	<jsp:include page="/WEB-INF/views/common/react.jsp"></jsp:include>
      <!-- Daum 우편번호 서비스 CDN-->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
